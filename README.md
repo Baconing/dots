@@ -12,10 +12,8 @@ darkest color - `#111111`
 
 red - `#d74a49`
 
-blue - `#183e4b`
+blue - `#428bca`
 
-light blue - `#1b4552`
-
-really light blue - `#8ba0a4`
+light blue - `#7fc4ff`
 
 whiteish `#eaeaea`
