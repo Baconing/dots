@@ -8,7 +8,11 @@ paste.sh - pastes (and overwrites) files from this folder to ~/.config, ~/.bin, 
 
 # color palette
 
-black - `#111111`
+black - `#0f0f0f`
+
+dark gray `#3a3a3a`
+
+light gray `#918a8a`
 
 red - `#d9534f`
 
@@ -16,10 +20,6 @@ green - `#5cb85c`
 
 blue - `#428bca`
 
-light blue - `#7fc4ff`
+cyan/aqua - `#7fc4ff`
 
-whiteish `#eaeaea`
-
-dark gray `#3a3a3a`
-
-light gray `#918a8a`
+white `#eaeaea`
