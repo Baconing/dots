@@ -19,3 +19,7 @@ blue - `#428bca`
 light blue - `#7fc4ff`
 
 whiteish `#eaeaea`
+
+dark gray `#3a3a3a`
+
+light gray `#918a8a`
