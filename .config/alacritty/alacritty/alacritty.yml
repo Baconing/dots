@@ -1,0 +1,36 @@
+font:
+  normal:
+    family: SauceCodePro Nerd Font
+    style: Medium
+  bold:
+    family: SauceCodePro Nerd Font
+    style: Bold
+  size: 10
+colors:
+  # hex #ff00ff is a wip color cuz my palette isnt finished lmao
+  primary:
+    background: '#0f0f0f'
+    foreground: '#eaeaea'
+  normal:
+    black: '#3a3a3a'
+    red: '#d9534f'
+    green: '#5cb85c'
+    yellow: '#ff00ff'
+    blue: '#428bca'
+    magenta: '#ff00ff'
+    cyan: '#7fc4ff'
+    white: '#eaeaea'
+  dim:
+    black: '#918a8a'
+    red: '#ff00ff'
+    green: '#ff00ff'
+    yellow: '#ff00ff'
+    blue: '#ff00ff'
+    magenta: '#ff00ff'
+    cyan: '#ff00ff'
+    white: '#ff00ff'
+
+window:
+  padding:
+    x: 50
+    y: 50
