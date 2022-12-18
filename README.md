@@ -14,6 +14,8 @@ dark gray `#3a3a3a`
 
 light gray `#918a8a`
 
+white `#eaeaea`
+
 red - `#d9534f`
 
 green - `#5cb85c`
@@ -22,4 +24,4 @@ blue - `#428bca`
 
 cyan/aqua - `#7fc4ff`
 
-white `#eaeaea`
+
