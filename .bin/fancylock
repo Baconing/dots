@@ -1,7 +1,7 @@
 # rm -rf /tmp/lock.png
 # scrot /tmp/lock.png
 # convert /tmp/lock.png -scale 5% -scale 2000% /tmp/lock.png
-i3lock -k -B=100 \
+i3lock -k -B=1000 \
 --inside-color=ffffff00 --ring-color=55555555 \
 --ringver-color=bd6900ff --ringwrong-color=bd2500ff \
 --insidever-color=ffffff00 --insidewrong-color=ffffff00 \

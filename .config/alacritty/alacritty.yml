@@ -32,5 +32,5 @@ colors:
 
 window:
   padding:
-    x: 50
-    y: 50
+    x: 25
+    y: 25
