@@ -1,6 +1,10 @@
 # dots
 My dot files (WIP).
 
+# install
+uh copy the repo
+not sure if the rofi submodule is actually right but use ur brain
+
 # scripts
 copy.sh - copies (and overwites) files from ~/.config, ~/.bin, etc to the folder containing repo.
 
