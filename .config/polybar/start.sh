@@ -2,7 +2,6 @@
 
 killall polybar
 
-MAINMON="DP-2"
 
 if type "xrandr"; then
 	  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do

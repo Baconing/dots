@@ -39,7 +39,7 @@
     scale = 0
 
     # Maximum number of notification (0 means no limit)
-    notification_limit = 0
+    notification_limit = 6
 
     ### Progress bar ###
 
@@ -67,7 +67,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 0
+    transparency = 40
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -310,7 +310,7 @@
     background = "#111111"
     foreground = "#eaeaea"
     frame_color = "#5cb85c"
-    timeout = 10
+    timeout = 4
     # Icon for notifications with low urgency, uncomment to enable
     #default_icon = /path/to/icon
 
@@ -318,7 +318,7 @@
     background = "#111111"
     foreground = "#eaeaea"
     frame_color = "#918a8a"
-    timeout = 10
+    timeout = 4
     # Icon for notifications with normal urgency, uncomment to enable
     #default_icon = /path/to/icon
 

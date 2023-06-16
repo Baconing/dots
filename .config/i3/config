@@ -1,8 +1,8 @@
 # Appearance
 font pango:monospace 8
 
-gaps outer 25
-gaps inner 35
+gaps outer 10
+gaps inner 10
 
 default_border none
 
@@ -43,9 +43,9 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+q kill
 bindsym $alt+F4 kill
 
-bindsym $mod+space exec --no-startup-id ~/.bin/launcher
+bindsym $mod+space exec --no-startup-id rofi -show drun
 
-bindsym $mod+Escape exec --no-startup-id ~/.bin/powermenu
+bindsym $mod+Escape exit
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -107,10 +107,9 @@ bindsym $mod+p move workspace to output right
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
-# idk why but pulseaudio just kinda sucks and i gotta restart it alot so im just gonna make it easy for me
-bindsym $mod+Shift+p exec systemctl --user restart pulseaudio.socket
+#bindsym $mod+l exec ~/.bin/fancylock
+bindsym $mod+l exec xscreensaver-command -lock
 
-bindsym $mod+l exec ~/.bin/fancylock
 
 # Workspaces
 set $ws1 "1"
@@ -127,14 +126,11 @@ set $ws10 "10"
 
 # Start Environment
 exec_always --no-startup-id dex --autostart --environment i3
-exec_always --no-startup-id xss-lock --transfer-sleep-lock -- fancylock
+exec_always --no-startup-id xss-lock --ignore-sleep -- xscreensaver-command -lock
+exec_always --no-startup-id xscreensaver --no-splash
 exec_always --no-startup-id picom
-exec_always --no-startup-id ~/.config/polybar/start.sh
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id killall dunst; dunst --config ~/.config/dunst/dunstrc
 exec_always --no-startup-id lxpolkit
-
-# Autolaunch Programs
-exec flatpak run com.discordapp.Discord
-exec flatpak run org.telegram.desktop
-exec flatpak run com.spotify.Client
+exec_always --no-startup-id pulseaudio -D
+exec_always --no-startup-id MAINMON="eDP1" ~/.config/polybar/start.sh
