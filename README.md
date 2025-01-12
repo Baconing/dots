@@ -1,3 +1,6 @@
+# notice
+i haven't edited these in a while mostly because i've moved over to nixos so my new dots will be [here](https://github.com/baconing/dots)
+
 # dots
 My dot files (WIP).
 
