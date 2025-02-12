@@ -62,7 +62,7 @@
     systemPackages = with pkgs;
       [
           git
-      ] ++ lib.optionals isInstall [
+      ] ++ lib.optionals (!isISO) [
         sops
       ];
 
@@ -70,7 +70,7 @@
       EDITOR = "vim";
       SYSTEMD_EDITOR = "vim";
       VISUAL = "vim";
-    }
+    };
   };
 
   nix =
@@ -108,10 +108,10 @@
       userPassword = {
           sopsFile = ../secrets/users/${username}.yaml;
           neededForUsers = true;
-      }
+      };
       luksEncryptionPassword = {
           sopsFile = ../secrets/${hostname}.yaml;
-      }
+      };
     };
   };
 

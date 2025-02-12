@@ -1,8 +1,8 @@
-{lib, pkgs, username, ...}:
+{lib, pkgs, username, config, isISO, ...}:
 {
   imports = [
-    ./root
-    ./{username}
+    #./root
+    ./${username}
   ];
 
   environment.localBinInPath = true;
@@ -16,7 +16,8 @@
     homeMode = "0755";
     isNormalUser = true;
     packages = [ pkgs.home-manager ];
-    #shell = pkgs.zsh;
-    hashedPasswordFile = config.sops.secrets.userPassword.path;
+    #shell = pkgs.zsh; 
+    hashedPasswordFile = lib.mkIf (!isISO) config.sops.secrets.userPassword.path;
+    initialHashedPassword = lib.mkForce null; # For some reason it's defaulting to ""
   };
-};
+}
