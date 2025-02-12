@@ -4,7 +4,7 @@
   inputs = {
     # NixOS
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixos-hardware.url = "github.com/nixos/nixos-hardware/master";
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     # Home Manager
     home-manager.url = "github:nix-community/home-manager/release-24.11";
