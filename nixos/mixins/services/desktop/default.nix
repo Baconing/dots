@@ -1,1 +1,7 @@
-{lib, ...}:{}
+{ desktop, ... }:
+{
+  import = [
+    ./${desktop}
+    ./dbus
+  ];
+}
