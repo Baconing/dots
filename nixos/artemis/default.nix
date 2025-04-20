@@ -4,6 +4,25 @@
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
   ];
 
+  fileSystems = {
+    "/" = {
+      device = "/dev/nvme0n1p4"; # todo
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
+    };
+    "/home" = {
+      device = "/dev/nvme0n1p3"; # todo
+      fsType = "btrfs";
+    };
+    "/boot" = {
+      device = "/dev/nvme0n1p5"; # todo
+      fsType = "vfat";
+      options = [ "umask=0077" ];
+    };
+  };
+
+# once encryption is done
+/*
   boot = {
     resumeDevice = "/dev/mapper/cryptswap";
     initrd.luks.devices = {
@@ -36,5 +55,5 @@
   };
 
   swapDevices = [{ device = "/dev/mapper/cryptswap"; }];
-
+*/
 }

@@ -8,26 +8,15 @@ in
   ];
 
   home = {
+    inherit stateVersion;
     inherit username;
-    home-manager.enable = true;
 
     homeDirectory = "/home/${username}";
+  };
 
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-      };
-    };
-
-    nix = {
-      package = pkgs.nixVersions.latest;
-      settings = {
-        experimental-features = "flakes nix-command";
-        trusted-users = [
-          "root"
-          "${username}"
-        ];
-      };
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
     };
   };
 }

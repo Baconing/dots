@@ -22,12 +22,10 @@
 
 keys:
  - &user_bacon age1jhvfrevgrv3rrxyy8sd3z2ks9eh4280fwaakm8hvvc5hf2vhhujs66tcgg
- # - &host_titan age1r2ksgrud7su3vmrmnn6ytex54ngycualf8nhra4yzh29zqthj3psetcn6g # no host keys have been generated
- # - &host_artemis age1r2ksgrud7su3vmrmnn6ytex54ngycualf8nhra4yzh29zqthj3psetcn6g
+ - &host_artemis age1edej98na0ldvngz35v9qzl0c5msz0yj7fztpz6h24vlhjqzdwvcsf87mpt
 creation_rules:
   - path_regex: secrets/(?:.*/)?[^/]+\.(yaml|yml|json|env|ini)$
     key_groups:
     - age:
       - *user_bacon
-      # - *host_titan
-      # - *host_artemis
+      - *host_artemis

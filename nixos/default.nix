@@ -36,6 +36,8 @@
         efiSysMountPoint = "/boot/efi";
       };
       grub = {
+        enable = true;
+        useOSProber = true;
         efiSupport = true;
         device = "nodev";
       };
@@ -51,6 +53,12 @@
   };
 
   # todo move?
+  networking = {
+    hostName = hostname;
+    useDHCP = lib.mkDefault true;
+  };
+
+  # todo same as above
   environment = {
     defaultPackages =
       with pkgs;
@@ -109,19 +117,19 @@
           sopsFile = ../secrets/users/${username}.yaml;
           neededForUsers = true;
       };
-      luksEncryptionPassword = {
-          sopsFile = ../secrets/${hostname}.yaml;
-      };
+      #luksEncryptionPassword = {
+      #    sopsFile = ../secrets/${hostname}.yaml;
+      #};
     };
   };
 
   system = {
-    activationScripts = {
-      nixos-needsreboot = lib.mkIf (!isISO) {
-        supportsDryActivation = true;
-        text = "${lib.getExe inputs.nixos-needsreboot.packages.${pkgs.system}.default} \"$systemConfig\" || true";
-      };
-    };
+#    activationScripts = {
+#      nixos-needsreboot = lib.mkIf (!isISO) {
+#        supportsDryActivation = true;
+#        text = "${lib.getExe inputs.nixos-needsreboot.packages.${pkgs.system}.default} \"$systemConfig\" || true";
+#      };
+#    };
     nixos.label = lib.mkIf (!isISO) "-";
     inherit stateVersion;
   };

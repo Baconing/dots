@@ -1,4 +1,4 @@
-{lib, ...}:
+{lib, pkgs, ...}: 
 {
   home.packages = with pkgs;
     [
@@ -6,5 +6,8 @@
       fd
       file
       iperf3
+      ripgrep
+      git
+      gnupg
     ];
 }

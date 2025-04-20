@@ -1,6 +1,6 @@
 { desktop, ... }:
 {
-  import = [
+  imports = [
     ./${desktop}
     ./dbus
   ];

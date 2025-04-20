@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 {
   services = {
-    displayManager = {
+    desktopManager = {
       plasma6 = {
         enable = true;
       };

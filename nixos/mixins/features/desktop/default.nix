@@ -1,1 +1,6 @@
-{lib, ...}:{}
+{ desktop, ... }:
+{
+  imports = [
+    ./${desktop}
+  ];
+}
