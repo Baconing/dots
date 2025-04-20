@@ -1,0 +1,2 @@
+# Nix builds generate a symlink in a file called result for some builds, not needed at all.
+result
