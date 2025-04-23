@@ -1,5 +1,9 @@
 {lib, pkgs, ...}: 
 {
+  imports = [
+    ./neovim
+  ]
+
   home.packages = with pkgs;
     [
       fastfetch
