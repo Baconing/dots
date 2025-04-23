@@ -13,5 +13,6 @@
       iperf3
       ripgrep
       gnupg
+      htop
     ];
 }
