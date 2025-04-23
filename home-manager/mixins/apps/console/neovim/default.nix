@@ -1,4 +1,4 @@
-{ config, pkgs, lib }:
+{ config, pkgs, lib, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -7,7 +7,7 @@
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
       {
-        plugin = copilot-lua
+        plugin = copilot-lua;
         config = /* lua */ ''
           require("copilot").setup({
             panel = {
@@ -79,6 +79,8 @@
             custom_server_filepath = nil,
           },
           server_opts_overrides = {},
-          })''
+          })'';
       }
+    ];
+  };
 }
