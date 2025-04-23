@@ -2,6 +2,7 @@
 {
   imports = [
     ./neovim
+    ./git
   ];
 
   home.packages = with pkgs;
