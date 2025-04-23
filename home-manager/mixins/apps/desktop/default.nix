@@ -6,7 +6,7 @@
 
   home.packages = with pkgs;
     [
-      firefox
+      google-chrome
       (discord.override {
         withOpenASAR = true;
         withVencord = true;
