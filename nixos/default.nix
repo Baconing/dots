@@ -69,7 +69,7 @@
 
     systemPackages = with pkgs;
       [
-          git
+        firefox
       ] ++ lib.optionals (!isISO) [
         sops
       ];

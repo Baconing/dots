@@ -11,7 +11,6 @@
       file
       iperf3
       ripgrep
-      git
       gnupg
     ];
 }
