@@ -32,17 +32,20 @@
           hostname = "iso-plasma";
           username = "nixos";
           desktop = "plasma";
+	  displayManager = "sddm";
         };
 
         "bacon@titan" = helper.makeDesktopHome {
           hostname = "titan";
           username = "bacon";
           desktop = "plasma";
+          displayManager = "sddm";
         };
         "bacon@artemis" = helper.makeDesktopHome {
           hostname = "artemis";
           username = "bacon";
           desktop = "plasma";
+          displayManager = "sddm";
         };
       };
 
@@ -54,17 +57,21 @@
         iso-plasma = helper.makeDesktopNixOSISO {
           hostname = "iso-plasma";
           username = "nixos";
+          desktop = "plasma";
+          displayManager = "sddm";
         };
 
         titan = helper.makeDesktopNixOS {
           hostname = "titan";
           username = "bacon";
           desktop = "plasma";
+          displayManager = "sddm";
         };
         artemis = helper.makeDesktopNixOS {
           hostname = "artemis";
           username = "bacon";
           desktop = "plasma";
+	  displayManager = "sddm";
         };
       };
 

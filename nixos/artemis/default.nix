@@ -2,7 +2,10 @@
 {
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
+    inputs.sops-nix.nixosModules.sops
   ];
+
+  boot.extraModulePackages = with config.boot.kernelPackages; [ apfs ];
 
   fileSystems = {
     "/" = {
@@ -18,6 +21,34 @@
       device = "/dev/nvme0n1p5"; # todo
       fsType = "vfat";
       options = [ "umask=0077" ];
+    };
+    "/mnt/macos" = {
+      device = "/dev/nvme0n1p2";
+      fsType = "apfs";
+    };
+    "/mnt/phoebe/vault" = {
+      device = "//10.10.5.20/vault";
+      fsType = "cifs";
+      options = let
+	credentialsFile = config.sops.secrets.phoebeCredentials.path;
+	uid = toString config.users.users.${username}.uid;
+      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid}" ];
+    };
+    "/mnt/phoebe/media" = {
+      device = "//10.10.5.20/media";
+      fsType = "cifs";
+      options = let
+	credentialsFile = config.sops.secrets.phoebeCredentials.path;
+	uid = toString config.users.users.${username}.uid;
+      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid}" ];
+    };
+    "/mnt/phoebe/isos" = {
+      device = "//10.10.5.20/isos";
+      fsType = "cifs";
+      options = let
+	credentialsFile = config.sops.secrets.phoebeCredentials.path;
+	uid = toString config.users.users.${username}.uid;
+      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid}" ];
     };
   };
 

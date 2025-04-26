@@ -117,6 +117,9 @@
           sopsFile = ../secrets/users/${username}.yaml;
           neededForUsers = true;
       };
+      phoebeCredentials = {
+          sopsFile = ../secrets/users/${username}.yaml;
+      };
       #luksEncryptionPassword = {
       #    sopsFile = ../secrets/${hostname}.yaml;
       #};

@@ -7,6 +7,7 @@
   home.packages = with pkgs;
     [
       google-chrome
+      spotify
       (discord.override {
         withOpenASAR = true;
         withVencord = true;

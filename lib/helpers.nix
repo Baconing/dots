@@ -2,7 +2,7 @@
 
 {
   # Makes a home manager environment with a desktop environment.
-  makeDesktopHome = { hostname, username, desktop, platform ? "x86_64-linux" }:
+  makeDesktopHome = { hostname, username, desktop, displayManager, platform ? "x86_64-linux" }:
     let 
       isDesktop = true;
       isISO = false;
@@ -14,6 +14,7 @@
           inputs
           outputs
           desktop
+	  displayManager
           hostname
           platform
           username
@@ -47,7 +48,7 @@
   };
 
   # Makes a home manager environment with a desktop environment for an ISO file.
-  makeDesktopISOHome = { hostname, username, desktop, platform ? "x86_64-linux" }:
+  makeDesktopISOHome = { hostname, username, desktop, displayManager, platform ? "x86_64-linux" }:
     let 
       isDesktop = true;
       isISO = true;
@@ -59,6 +60,7 @@
           inputs
           outputs
           desktop
+          displayManager
           hostname
           platform
           username
@@ -93,7 +95,7 @@
 
 
   # Makes a NixOS configuration with a destkop environment.
-  makeDesktopNixOS = { hostname, username, desktop, platform ? "x86_64-linux" }:
+  makeDesktopNixOS = { hostname, username, desktop, displayManager, platform ? "x86_64-linux" }:
     let
       isDesktop = true;
       isISO = false;
@@ -104,6 +106,7 @@
           inputs
           outputs
           desktop
+          displayManager
           hostname
           platform
           username
@@ -137,7 +140,7 @@
   };
 
   # Makes a NixOS bootable ISO installer with a destkop environment.
-  makeDesktopNixOSISO = { hostname, username, desktop, platform ? "x86_64-linux" }:
+  makeDesktopNixOSISO = { hostname, username, desktop, displayManager, platform ? "x86_64-linux" }:
     let
       isDesktop = true;
       isISO = true;
@@ -148,6 +151,7 @@
           inputs
           outputs
           desktop
+          displayManager
           hostname
           platform
           username
