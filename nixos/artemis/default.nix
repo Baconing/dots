@@ -32,7 +32,8 @@
       options = let
 	credentialsFile = config.sops.secrets.phoebeCredentials.path;
 	uid = toString config.users.users.${username}.uid;
-      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid}" ];
+	gid = toString config.users.groups.users.gid;
+      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid},gid=${gid}" ];
     };
     "/mnt/phoebe/media" = {
       device = "//10.10.5.20/media";
@@ -40,7 +41,8 @@
       options = let
 	credentialsFile = config.sops.secrets.phoebeCredentials.path;
 	uid = toString config.users.users.${username}.uid;
-      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid}" ];
+	gid = toString config.users.groups.users.gid;
+      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid},gid=${gid}" ];
     };
     "/mnt/phoebe/isos" = {
       device = "//10.10.5.20/isos";
@@ -48,7 +50,8 @@
       options = let
 	credentialsFile = config.sops.secrets.phoebeCredentials.path;
 	uid = toString config.users.users.${username}.uid;
-      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid}" ];
+	gid = toString config.users.groups.users.gid;
+      in [ "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5,credentials=${credentialsFile},uid=${uid},gid=${gid}" ];
     };
   };
 
