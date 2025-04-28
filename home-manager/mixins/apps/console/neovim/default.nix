@@ -8,6 +8,7 @@
       nvim-treesitter.withAllGrammars
       {
         plugin = copilot-lua;
+	type = "lua";
         config = /* lua */ ''
           require("copilot").setup({
             panel = {
@@ -53,7 +54,7 @@
             trace_lsp_progress = false,
             log_lsp_messages = false,
           },
-          copilot_node_command = 'node', -- Node.js version must be > 20
+          copilot_node_command = '${pkgs.nodejs}/bin/node', -- Node.js version must be > 20
           workspace_folders = {},
           copilot_model = "",  -- Current LSP default is gpt-35-turbo, supports gpt-4o-copilot
           root_dir = function()
@@ -79,7 +80,7 @@
             custom_server_filepath = nil,
           },
           server_opts_overrides = {},
-          })'';
+        })'';
       }
     ];
   };
