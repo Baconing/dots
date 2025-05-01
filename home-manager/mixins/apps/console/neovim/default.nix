@@ -3,7 +3,33 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    extraPackages = with pkgs; [
+      nil
+      lua-language-server
+      nodePackages.typescript-language-server
+      pyright
+      gopls
+      clang-tools
+      rust-analyzer
+      bash-language-server
+      yaml-language-server
+      nodePackages.vscode-json-languageserver
+      dockerfile-language-server-nodejs
+      marksman
+      kotlin-language-server
+      java-language-server
+
+      wl-clipboard
+    ];
     extraConfig = ''
+      set stc = "%r %l  "
+      set number
+      set relativenumber
+      set undofile
+      set backspace = ["indent", "eol", "start"]
+      set clipboard += "wl-copy, wl-paste"
+    '';
+    extraLuaConfig = ''
     '';
     plugins = with pkgs.vimPlugins; [
       #{
@@ -51,6 +77,11 @@
 
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      mason-nvim
+      mason-lspconfig-nvim
       {
         plugin = copilot-lua;
 	type = "lua";

@@ -63,6 +63,7 @@
     defaultPackages =
       with pkgs;
       lib.mkForce [
+	killall
         coreutils-full
         vim
       ];

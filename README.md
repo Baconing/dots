@@ -41,7 +41,7 @@ All my hardware is listed here regardless of their management state by this repo
 | 👴 - HDD (any) | 🛜 - Router                | 🪟 - Windows                         | 🟡 - Nixification in progress.                                |
 |                | 💾 - NAS/Storage Server    | 🐧 - Other Linux                     | 🤷 - Might use Nix in the future.                             |
 |                | ☁  - Miscellaneous Server  | 🔍 - Proxmox Host/Client             | ❌ - No plans to ever use Nix.                                |
-|                |                            | 🔎 - Other VM Host/Client (e.g. KVM) | ⏲ - Plans to build, waiting on parts, waiting to setup, etc. |
+|                |                            | 🔎 - Other VM Host/Client (e.g. KVM) | ⏲ - Plans to build, waiting on parts, waiting to setup, etc.  |
 |                |                            |                                      | 🚧 - No longer in service.                                    |
 
 
