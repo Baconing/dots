@@ -3,7 +3,52 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    extraConfig = ''
+    '';
     plugins = with pkgs.vimPlugins; [
+      #{
+      #  plugin = mini-icons;
+      #  type = "lua";
+      # config = /* lua */ ''
+      #   require("mini.icons").setup()
+      # '';
+      #}
+      {
+        plugin = mini-tabline;
+	type = "lua";
+	config = /* lua */ ''
+	  require("mini.tabline").setup()
+	'';
+      }
+      {
+        plugin = mini-statusline;
+	type = "lua";
+	config = /* lua */ ''
+	  require("mini.statusline").setup()
+	'';
+      }
+      {
+        plugin = mini-tabline;
+	type = "lua";
+	config = /* lua */ ''
+	  require("mini.tabline").setup()
+	'';
+      }
+      {
+        plugin = mini-cursorword;
+	type = "lua";
+	config = /* lua */ ''
+	  require("mini.cursorword").setup()
+	'';
+      }
+
+      {
+        plugin = chadtree;
+	config = ''
+	  autocmd VimEnter * CHADopen --nofocus
+	'';
+      }
+
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
       {
@@ -80,7 +125,8 @@
             custom_server_filepath = nil,
           },
           server_opts_overrides = {},
-        })'';
+          })
+	'';
       }
     ];
   };
