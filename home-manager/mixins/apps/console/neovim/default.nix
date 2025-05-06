@@ -1,44 +1,43 @@
 { config, pkgs, lib, ... }:
-{
+let
+  lspServers = with pkgs; [
+    { package = nil; name = "nil_ls"; }
+    { package = lua-language-server; name = "lua_ls"; }
+    { package = typescript-language-server; name = "ts_ls"; }
+    { package = pyright; name = "pyright"; }
+    { package = gopls; name = "gopls"; }
+    { package = clang-tools; name = "clangd"; }
+    { package = rust-analyzer; name = "rust-analyzer"; }
+    { package = bash-language-server; name = "bashls"; }
+    { package = yaml-language-server; name = "yamlls"; }
+    { package = nodePackages.vscode-json-languageserver; name = "jsonls"; }
+    { package = java-language-server; name = "java_language_server";}
+    { package = kotlin-language-server; name = "kotlin_language_server"; }
+  ];
+in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     extraPackages = with pkgs; [
-      nil
-      lua-language-server
-      nodePackages.typescript-language-server
-      pyright
-      gopls
-      clang-tools
-      rust-analyzer
-      bash-language-server
-      yaml-language-server
-      nodePackages.vscode-json-languageserver
-      dockerfile-language-server-nodejs
-      marksman
-      kotlin-language-server
-      java-language-server
-
       wl-clipboard
-    ];
+    ] ++ map (s: s.package) lspServers;
     extraConfig = ''
-      set stc = "%r %l  "
       set number
       set relativenumber
       set undofile
-      set backspace = ["indent", "eol", "start"]
-      set clipboard += "wl-copy, wl-paste"
+      set clipboard+=unnamedplus
     '';
     extraLuaConfig = ''
+      vim.opt.stc = "%r %l "
     '';
     plugins = with pkgs.vimPlugins; [
-      #{
-      #  plugin = mini-icons;
-      #  type = "lua";
-      # config = /* lua */ ''
-      #   require("mini.icons").setup()
-      # '';
-      #}
+      {
+        plugin = mini-icons;
+        type = "lua";
+	config = /* lua */ ''
+         require("mini.icons").setup()
+       '';
+      }
       {
         plugin = mini-tabline;
 	type = "lua";
@@ -75,17 +74,74 @@
 	'';
       }
 
-      nvim-lspconfig
       nvim-treesitter.withAllGrammars
-      nvim-cmp
-      cmp-nvim-lsp
+      nvim-ts-context-commentstring
+      nvim-treesitter-textobjects
+      
+      {
+        plugin = cmp-nvim-lsp;
+	type = "lua";
+	config = /* lua */ ''
+	  require("cmp_nvim_lsp").setup()
+	'';
+      }
       cmp-buffer
-      mason-nvim
+      
+      {
+        plugin = nvim-lspconfig;
+	type = "lua";
+	config = /* lua */ ''
+	  local lspconfig = require("lspconfig")
+          local capabilities = require("cmp_nvim_lsp").default_capabilities()
+          local servers = ${lib.generators.toLua {} (map (s: s.name) lspServers)}
+
+          for _, lsp in ipairs(servers) do
+            lspconfig[lsp].setup({ capabilities = capabilities })
+          end
+	'';
+      }
+      
+      {
+        plugin = nvim-cmp;
+	type = "lua";
+	config = /* lua */ ''
+	  local cmp = require("cmp")
+          cmp.setup({
+	    snippet = {
+	      expand = function(args)
+	        require("luasnip").lsp_expand(args.body)
+	      end,
+	    },
+	    mapping = cmp.mapping.preset.insert({
+	      ["<Tab>"] = cmp.mapping.select_next_item(),
+	      ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+	      ["<CR>"] = cmp.mapping.confirm({ select = true }),
+	      ["<C-Space>"] = cmp.mapping.complete(),
+	      ["<C-e>"] = cmp.mapping.complete(),
+	    }),
+	    sources = cmp.config.sources({
+	      { name = "nvim_lsp" },
+	      { name = "luasnip" },
+	      { name = "buffer" },
+	    }),
+	  })
+	'';
+      }
+
+      {
+        plugin = mason-nvim;
+	type = "lua";
+	config = /* lua */ ''
+	  require("mason").setup()
+	'';
+      }
       mason-lspconfig-nvim
+
+      /*
       {
         plugin = copilot-lua;
 	type = "lua";
-        config = /* lua */ ''
+        config = /* lua * / ''
           require("copilot").setup({
             panel = {
               enabled = true,
@@ -159,6 +215,7 @@
           })
 	'';
       }
+      */
     ];
   };
 }
