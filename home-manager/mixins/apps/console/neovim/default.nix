@@ -24,11 +24,18 @@ in {
     extraConfig = ''
       set number
       set relativenumber
+      let statuscolumn = "%r %l "
+      
       set undofile
+      
       set clipboard+=unnamedplus
+      
+      set showcmd
+      let mapleader = "<Space>"
+      
+      colorscheme retrobox
     '';
     extraLuaConfig = ''
-      vim.opt.stc = "%r %l "
     '';
     plugins = with pkgs.vimPlugins; [
       {
@@ -74,6 +81,17 @@ in {
 	'';
       }
 
+      {
+        plugin = which-key-nvim;
+	type = "lua";
+	config = /* lua */ ''
+	  require("which-key").register({
+	    {prefix = "<leader>" }
+	  })
+	'';
+      }
+
+
       nvim-treesitter.withAllGrammars
       nvim-ts-context-commentstring
       nvim-treesitter-textobjects
@@ -86,7 +104,7 @@ in {
 	'';
       }
       cmp-buffer
-      
+
       {
         plugin = nvim-lspconfig;
 	type = "lua";
