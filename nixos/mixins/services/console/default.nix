@@ -1,6 +1,0 @@
-{lib, ...}:
-{
-   imports = [
-      ./networkmanager
-   ];
-}

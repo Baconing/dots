@@ -1,6 +1,0 @@
-{ desktop, ... }:
-{
-  imports = [
-    ./${desktop}
-  ];
-}

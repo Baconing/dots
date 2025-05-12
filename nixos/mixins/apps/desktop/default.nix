@@ -1,7 +1,0 @@
-{lib, desktop, ...}:
-{
-#  imports = [
-#    ./${desktop}
-#  ];
-}
-

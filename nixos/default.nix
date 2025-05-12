@@ -18,7 +18,10 @@
     inputs.sops-nix.nixosModules.sops
     (modulesPath + "/installer/scan/not-detected.nix")
     ./${hostname}
-    ./mixins
+    
+    ./mixins/services/console/dbus
+    ./mixins/services/console/networkmanager
+    
   ];
 
   boot = {
