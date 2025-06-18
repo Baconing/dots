@@ -1,6 +1,6 @@
 {lib, ...}:
 {
   imports = [
-    ./gpg
+    ./gpg-agent
   ];
 }

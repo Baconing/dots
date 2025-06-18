@@ -3,6 +3,8 @@
   imports = [
     ./neovim
     ./git
+    ./gnupg
+    ./bash
   ];
 
   home.packages = with pkgs;
@@ -12,7 +14,6 @@
       file
       iperf3
       ripgrep
-      gnupg
       htop
       rclone
     ];

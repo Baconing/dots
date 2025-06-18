@@ -9,10 +9,11 @@
       google-chrome
       spotify
       termius
-      (discord.override {
-        withOpenASAR = true;
-        withVencord = true;
-      })
+      discord
+      #(discord.override {
+      #  withOpenASAR = true;
+      #  withVencord = true;
+      #})
     ]; 
 
 }

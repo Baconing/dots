@@ -4,5 +4,6 @@
     ./${desktop}
     ./dm/${displayManager}
     ./dbus
+    ./blueman
   ];
 }
