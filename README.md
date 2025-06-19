@@ -28,8 +28,8 @@ All my hardware is listed here regardless of their management state by this repo
 | `titan`    | [MSI MPG X570 GAMING PLUS]     | [AMD Ryzen 9 3900X]     | 32GB  | 512GB🏃+256GB🏃+2TB👴 | [NVIDIA RTX 2070 Super]  | 🖥      | 🎭(❄ + 🪟)       | 🟡    | Primary Desktop    |
 | `artemis`  | [ThinkPad X1 Carbon Gen 7]     | [Intel Core i7-8665U]   | 16GB  | 512GB🏃               | [Intel UHD Graphics 620] | 💻      | 🎭(❄ + 🪟)       | 🟡    | Primary Laptop     |
 | `dione`    | [Beelink EQR6 SEI]             | [AMD Ryzen 5 6600H]     | 16GB  | 512GB🏃               | [AMD Radeon 660M]        | ☁       | 🔍(🐧)           | 🤷    | Docker/VM Host     |
-| `hyperion` | [HP ProDesk 400 G3 SFF]        | [Intel Core i3-6100]    | 4GB   | 256GB🚶               | [Intel HD Graphics 530]  | 🛜      | 🔍(OPNSense)     | ❌    | Router             |
-| `phoebe`   | [Asus H81M-A]                  | [Intel Core i3-4150T]   | 16GB  | 64GB🚶+(4x8TB👴)      | [Intel HD Graphics 4400] | 💾      | 🔍(TrueNAS Core) | ⏲+❌  | NAS                |
+| `hyperion` | [HP ProDesk 400 G3 SFF]        | [Intel Core i3-6100]    | 4GB   | 256GB🚶               | [Intel HD Graphics 530]  | 🛜      | 🔍(OPNSense)     | 🤷    | Router             |
+| `phoebe`   | [Asus H81M-A]                  | [Intel Core i3-4150T]   | 16GB  | 64GB🚶+(4x8TB👴)      | [Intel HD Graphics 4400] | 💾      | 🔍(TrueNAS Core) | 🤷  | NAS                |
 | (unnamed)  | [Supermicro X8SAX] (modified?) | 2x [Intel Xeon X5670]   | 96GB  | None                  | None                     | None    | None             | 🚧    | [Themis RES-12XR3] |
 
 
