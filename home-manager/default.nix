@@ -1,9 +1,7 @@
-{ config, inputs, isDesktop, isISO, lib, outputs, pkgs, stateVersion, username, ... }:
-let
-  inherit (pkgs.stdenv) isLinux;
-in
+{ config, inputs, isDesktop, isISO, lib, stateVersion, username, ... }:
 {
   imports = [
+    inputs.sops-nix.homeManagerModule
     ./mixins
   ];
 
@@ -13,6 +11,15 @@ in
 
     homeDirectory = "/home/${username}";
   };
+
+
+  sops = lib.mkIf (!isISO) {
+    age = {
+      keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+      generateKey = false;
+    };
+  };
+
 
   nixpkgs = {
     config = {

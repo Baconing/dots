@@ -2,6 +2,7 @@
 {
   imports = [
     ./${desktop}
+    ./thunderbird
   ];
 
   home.packages = with pkgs;
