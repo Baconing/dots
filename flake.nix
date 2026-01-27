@@ -13,6 +13,8 @@
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     kubenix.url = "github:hall/kubenix";
+
+    colmena.url = "github:zhaofengli/colmena";
   };
 
   outputs = 
@@ -118,6 +120,56 @@
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "control";
+        };
+      };
+
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+          };
+        };
+
+        skoll = {
+          deployment.targetHost = "skoll.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.skoll;
+        };
+
+        aitne = {
+          deployment.targetHost = "aitne.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.aitne;
+        };
+
+        mneme = {
+          deployment.targetHost = "mneme.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.mneme;
+        };
+
+        eukelade = {
+          deployment.targetHost = "eukelade.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.eukelade;
+        };
+
+        harpalyke = {
+          deployment.targetHost = "harpalyke.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.harpalyke;
+        };
+
+        kore = {
+          deployment.targetHost = "kore.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.kore;
+        };
+
+        iocaste = {
+          deployment.targetHost = "iocaste.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.iocaste;
         };
       };
 
