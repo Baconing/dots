@@ -56,6 +56,10 @@
           username = "bacon";
         };
 
+        "bacon@callisto" = helper.makeConsoleHome {
+          hostname = "callisto";
+          username = "bacon";
+        };
         "bacon@mneme" = helper.makeConsoleHome {
           hostname = "mneme";
           username = "bacon";
@@ -91,35 +95,41 @@
             clusterRole = "node";
         };
 
+        callisto = helper.makeConsoleNixOS {
+            hostname = "callisto";
+            clustered = true;
+            clusterTemplate = "m73";
+            clusterRole = "control";
+        };
         mneme = helper.makeConsoleNixOS {
             hostname = "mneme";
             clustered = true;
             clusterTemplate = "m73";
-            clusterRole = "control";
+            clusterRole = "node";
         };
         eukelade = helper.makeConsoleNixOS {
             hostname = "eukelade";
             clustered = true;
             clusterTemplate = "m73";
-            clusterRole = "control";
+            clusterRole = "node";
         };
         harpalyke = helper.makeConsoleNixOS {
             hostname = "harpalyke";
             clustered = true;
             clusterTemplate = "m73";
-            clusterRole = "control";
+            clusterRole = "node";
         };
         kore = helper.makeConsoleNixOS {
             hostname = "kore";
             clustered = true;
             clusterTemplate = "m73";
-            clusterRole = "control";
+            clusterRole = "node";
         };
         iocaste = helper.makeConsoleNixOS {
             hostname = "iocaste";
             clustered = true;
             clusterTemplate = "m73";
-            clusterRole = "control";
+            clusterRole = "node";
         };
       };
 
@@ -140,6 +150,12 @@
           deployment.targetHost = "aitne.local";
           deployment.targetUser = "bacon";
           nixosConfiguration = self.nixosConfigurations.aitne;
+        };
+
+        callisto = {
+          deployment.targetHost = "callisto.local";
+          deployment.targetUser = "bacon";
+          nixosConfiguration = self.nixosConfigurations.callisto;
         };
 
         mneme = {
