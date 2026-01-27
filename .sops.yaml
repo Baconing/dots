@@ -1,0 +1,42 @@
+# Make a user key
+# mkdir -p ~/.config/sops/age
+# age-keygen -o ~/.config/sops/age/keys.txt
+
+# Display the user public key:
+# age-keygen -y ~/.config/sops/age/keys.txt
+
+# Make a host key:
+# sudo mkdir -p /var/lib/private/sops/age
+# sudo age-keygen -o /var/lib/private/sops/age/keys.txt
+
+# Display the host public key:
+# sudo age-keygen -y /var/lib/private/sops/age/keys.txt
+
+# Add secrets
+# sops secrets/somesecret.yaml
+
+# Rekey everything when changing keys.
+# find secrets -type f -print0 | while IFS= read -r -d '' file; do
+#   sops updatekeys -y $file 
+# done
+
+keys:
+  - &user_bacon age1jhvfrevgrv3rrxyy8sd3z2ks9eh4280fwaakm8hvvc5hf2vhhujs66tcgg
+
+creation_rules:
+  - path_regex: ^kubernetes/.*\.secret\.[^.]+$
+    key_groups:
+    - age:
+      - *user_bacon
+  - path_regex: ^nixos/cluster/.*\.secret\.[^.]+$
+    key_groups:
+    - age:
+      - *user_bacon
+  - path_regex: ^nixos/cluster/node/PUTMACHINEHERE/.*\.secret\.[^.]+$
+    key_groups:
+    - age:
+      - *user_bacon
+  - path_regex: ^nixos/PUTMACHINEHERE/.*\.secret\.[^.]+$
+    key_groups:
+    - age:
+      - *user_bacon
