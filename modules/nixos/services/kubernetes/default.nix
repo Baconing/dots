@@ -10,8 +10,8 @@ in {
             default = "node";
         };
 
-        token = lib.mkOption {
-            type = lib.types.str;
+        tokenFile = lib.mkOption {
+            type = lib.types.path;
         };
 
         masterAddress = lib.mkOption {
@@ -51,7 +51,7 @@ in {
         services.k3s = {
             enable = true;
 
-            token = cfg.token;
+            tokenFile = cfg.tokenFile;
 
             role =
               if cfg.role == "control"
