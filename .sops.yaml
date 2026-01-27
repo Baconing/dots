@@ -25,20 +25,9 @@ keys: &keys
   - &host_callisto age1uj6zl377wwvgysd0hn8n9h9dcvkuvxcu9948jsr5hxvjwcaguu5s8uxk92
 
 creation_rules:
-  - path_regex: ^kubernetes/.*\.secret\.[^.]+$
-    key_groups:
-    - age:
-      - *user_bacon
   - path_regex: ^(.*/)?[^/]+\.secret\..+$
     key_groups:
     - age:
       - *user_bacon
       - *host_callisto
-  - path_regex: ^nixos/cluster/node/PUTMACHINEHERE/.*\.secret\.[^.]+$
-    key_groups:
-    - age:
-      - *user_bacon
-  - path_regex: ^nixos/PUTMACHINEHERE/.*\.secret\.[^.]+$
-    key_groups:
-    - age:
-      - *user_bacon
+# todo: disallow specific keys to access specific paths, i.e. nobody should see kubernetes secrets (only the person uploading kubernetes manifests), nobody sohuld see another machine's secrets, and so on
