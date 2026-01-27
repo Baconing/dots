@@ -14,7 +14,7 @@
             fsType = "ext4";
         };
         "/boot" = {
-            device = "/dev/disk/by-label/EFI";
+            device = "/dev/disk/by-label/BOOT";
             fsType = "vfat";
             options = [ "umask=0077" ];
         };
