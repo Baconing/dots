@@ -54,7 +54,7 @@
             inherit
             hostname
             username
-            platform
+            platform;
         };
         modules = [ ../nixos ];
     };
