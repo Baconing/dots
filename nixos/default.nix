@@ -27,7 +27,7 @@
     kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
 
     # Don't install bootloader on ISO images.
-    loader = lib.mkIf (!isISO) {
+    loader = {
       systemd-boot.enable = false;
 
       efi = {
@@ -58,16 +58,13 @@
 
   # todo same as above
   environment = {
-    defaultPackages =
-      with pkgs;
-      lib.mkForce [
+    defaultPackages = with pkgs; lib.mkForce [
 	      killall
         coreutils-full
         vim
       ];
 
-    systemPackages = with pkgs;
-      lib.optionals (!isISO) [
+    systemPackages = with pkgs; [
         sops
       ];
 

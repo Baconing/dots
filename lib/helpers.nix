@@ -2,10 +2,6 @@
 {
     # Makes a console-only home manager configuration (e.g servers).
     makeConsoleHome = { hostname, username, platform ? "x86_64-linux" }:
-        let
-        isDesktop = false;
-        isISO = false;
-        in
         inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages.${platform};
         extraSpecialArgs = {
@@ -15,9 +11,7 @@
             hostname
             platform
             username
-            stateVersion
-            isDesktop
-            isISO;
+            stateVersion;
         };
         modules = [ ../home-manager ];
     };

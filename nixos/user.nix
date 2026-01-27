@@ -1,4 +1,4 @@
-{ lib, pkgs, config, isISO, ... }:
+{ lib, pkgs, config, ... }:
 {
   environment.localBinInPath = true;
 
