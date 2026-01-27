@@ -36,7 +36,7 @@
         services = {
             kubernetes = {
                 enable = true;
-                clusterRole = ${role};
+                clusterRole = role;
                 tokenFile = sops.secrets.kubernetes-token.path;
                 masterAddress = "10.10.254.253"; # todo
             };
