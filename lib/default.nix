@@ -4,13 +4,8 @@ let
 in
 {
   inherit (helpers)
-    makeDesktopHome
     makeConsoleHome
-    makeDesktopISOHome
-    makeConsoleISOHome
-    makeDesktopNixOS
     makeConsoleNixOS
-    makeDesktopNixOSISO
-    makeConsoleNixOSISO
+    makeClusterNixOS
     forAllSystems;
 }

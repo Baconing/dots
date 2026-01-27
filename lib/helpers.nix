@@ -1,29 +1,5 @@
 { inputs, outputs, stateVersion }:
 {
-    # Makes a home manager environment with a desktop environment.
-    makeDesktopHome = { hostname, username, desktop, displayManager, platform ? "x86_64-linux" }:
-        let 
-        isDesktop = true;
-        isISO = false;
-        in
-        inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.${platform};
-        extraSpecialArgs = {
-            inherit
-            inputs
-            outputs
-            desktop
-        displayManager
-            hostname
-            platform
-            username
-            stateVersion
-            isDesktop
-            isISO;
-        };
-        modules = [ ../home-manager ];
-    };
-
     # Makes a console-only home manager configuration (e.g servers).
     makeConsoleHome = { hostname, username, platform ? "x86_64-linux" }:
         let
@@ -45,77 +21,6 @@
         };
         modules = [ ../home-manager ];
     };
-
-    # Makes a home manager environment with a desktop environment for an ISO file.
-    makeDesktopISOHome = { hostname, username, desktop, displayManager, platform ? "x86_64-linux" }:
-        let 
-            isDesktop = true;
-            isISO = true;
-        in
-        inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = inputs.nixpkgs.legacyPackages.${platform};
-            extraSpecialArgs = {
-                inherit
-                inputs
-                outputs
-                desktop
-                displayManager
-                hostname
-                platform
-                username
-                stateVersion
-                isDesktop
-                isISO;
-            };
-            modules = [ ../home-manager ];
-    };
-
-    # Makes a console-only home manager configuration for an ISO file.
-    makeConsoleISOHome = { hostname, username, platform ? "x86_64-linux" }:
-        let
-        isDesktop = false;
-        isISO = true;
-        in
-        inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.${platform};
-        extraSpecialArgs = {
-            inherit
-            inputs
-            outputs
-            hostname
-            platform
-            username
-            stateVersion
-            isDesktop
-            isISO;
-        };
-        modules = [ ../home-manager ];
-    };
-
-
-    # Makes a NixOS configuration with a destkop environment.
-    makeDesktopNixOS = { hostname, username, desktop, displayManager, platform ? "x86_64-linux" }:
-        let
-        isDesktop = true;
-        isISO = false;
-        in
-        inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = {
-            inherit
-            inputs
-            outputs
-            desktop
-            displayManager
-            hostname
-            platform
-            username
-            stateVersion
-            isDesktop
-            isISO;
-        };
-        modules = [ ../nixos ];
-    };
-
 
     # Makes a console-only NixOS configuration (e.g servers).
     makeConsoleNixOS = { hostname, username, isCluster ? false, platform ? "x86_64-linux" }:
