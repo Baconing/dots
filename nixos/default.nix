@@ -11,7 +11,6 @@
   pkgs,
   platform,
   stateVersion,
-  username,
   ...
 }:
 {
@@ -90,7 +89,7 @@
         flake-registry = "";
         trusted-users = [
           "root"
-          "${username}"
+          "bacon"
         ];
         warn-dirty = false;
       };
