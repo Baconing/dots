@@ -13,7 +13,7 @@
             username
             stateVersion;
         };
-        modules = [ ../home-manager ];
+        modules = [ ../home ];
     };
 
     # Makes a console-only NixOS configuration (e.g servers).
