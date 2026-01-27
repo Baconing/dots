@@ -28,7 +28,7 @@
 
     sops.secrets.kubernetes-token = {
         sopsFile = ./kubernetes.secret.yaml;
-        owner = config.systemd.services.k3s.serviceConfig.user;
+        #owner = config.systemd.services.k3s.serviceConfig.user; #todo
         restartUnits = [ "k3s.service" ];
     };
 
