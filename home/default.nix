@@ -13,6 +13,7 @@
         homeDirectory = "/home/${username}";
     };
 
+    fonts.fontconfig.enable = true;
     home.packages = with pkgs; [
         fastfetch
         fd
@@ -21,10 +22,6 @@
         ripgrep
         htop
         rclone
-    ];
-
-    fonts.fontconfig.enable = true;
-    home.packages = with pkgs; [
         nerdfonts
     ];
 
