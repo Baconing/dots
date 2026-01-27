@@ -58,9 +58,9 @@ in {
               then "server"
               else "agent";
 
-            extraKubeletConfig = {
-                registerWithTaints = cfg.taints;
-            };
+            # extraKubeletConfig = {
+            #     registerWithTaints = cfg.taints;
+            # };
         };
 
         services.k3s.serverAddr = lib.mkIf (cfg.masterAddress != null) cfg.masterAddress;
