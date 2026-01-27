@@ -49,7 +49,7 @@
         let
         isCluster = true;
         in
-        makeConsoleNixOS {
+        outputs.makeConsoleNixOS {
         specialArgs = {
             inherit
             hostname
