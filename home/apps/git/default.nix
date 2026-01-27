@@ -9,7 +9,7 @@
     git = {
       enable = true;
       package = pkgs.gitFull;
-      extraConfig = {
+      settings = {
         pull.rebase = false;
         credential.helper = [
           "oauth"
