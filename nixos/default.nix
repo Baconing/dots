@@ -1,8 +1,6 @@
 {
   config,
   hostname,
-  isISO,
-  isDesktop,
   clustered,
   inputs,
   lib,
@@ -73,6 +71,11 @@
       SYSTEMD_EDITOR = "vim";
       VISUAL = "vim";
     };
+  };
+
+  sops.age = {
+    keyFile = "/var/lib/private/sops/age/keys.txt";
+    generateKey = false;
   };
 
   nix =
