@@ -51,7 +51,7 @@
             state = "BACKUP";
             virtualRouterId = 51;
             priority = 50;
-            virtualIps = [ { addr = "10.10.254.253/16" } ];
+            virtualIps = [ { addr = "10.10.254.253/16" }; ];
         };
     };
 
