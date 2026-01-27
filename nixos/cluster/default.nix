@@ -3,9 +3,9 @@
     imports = [
         inputs.sops-nix.nixosModules.sops
         inputs.nixos-hardware.nixosModules.common-pc
-        ./template/{template}
+        
         ../../../modules
-    ] ++ lib.optional (builtins.pathExists ./${hostname}) ./node/{hostname};
+    ] ++ lib.optional (template != null) ./template/{template} ++ lib.optional (builtins.pathExists ./${hostname}) ./node/{hostname};
   
     boot.loader.efi.efiSysMountPoint = "/boot";
 

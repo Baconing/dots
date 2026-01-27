@@ -23,7 +23,7 @@
     };
 
     # Makes a console-only NixOS configuration (e.g servers).
-    makeConsoleNixOS = { hostname, isCluster ? false, platform ? "x86_64-linux" }:
+    makeConsoleNixOS = { hostname, isCluster ? false, template ? null, platform ? "x86_64-linux" }:
         let
         isDesktop = false;
         isISO = false;
@@ -44,7 +44,7 @@
     };
 
     # Makes a kubernetes cluster node NixOS configuration.
-    makeClusterNixOS = { hostname, platform ? "x86_64-linux" }:
+    makeClusterNixOS = { hostname, template, platform ? "x86_64-linux" }:
         let
         isCluster = true;
         in
@@ -52,6 +52,7 @@
         specialArgs = {
             inherit
             hostname
+            template
             platform;
         };
         modules = [ ../nixos ];
