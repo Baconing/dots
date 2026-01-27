@@ -3,7 +3,7 @@
     imports = [
         inputs.sops-nix.nixosModules.sops
         inputs.nixos-hardware.nixosModules.common-pc
-        ../../../modules
+        ../../modules
     ] ++ lib.optional (clusterTemplate != "") ./template/${clusterTemplate} ++ lib.optional (builtins.pathExists ./${hostname}) ./node/${hostname};
   
     boot.loader.efi.efiSysMountPoint = "/boot";
