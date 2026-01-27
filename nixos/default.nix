@@ -60,6 +60,7 @@
 	      killall
         coreutils-full
         vim
+        git
       ];
 
     systemPackages = with pkgs; [
