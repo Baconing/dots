@@ -20,18 +20,20 @@
 #   sops updatekeys -y $file 
 # done
 
-keys:
-  - &user_bacon age1jhvfrevgrv3rrxyy8sd3z2ks9eh4280fwaakm8hvvc5hf2vhhujs66tcgg
+keys: &keys
+  - &user_bacon age1m3lajqjssue8jnuuhphxp3x0lxagksqpsecgnuxuy46wtag28c5spm5jyr
+  - &host_callisto age1uj6zl377wwvgysd0hn8n9h9dcvkuvxcu9948jsr5hxvjwcaguu5s8uxk92
 
 creation_rules:
   - path_regex: ^kubernetes/.*\.secret\.[^.]+$
     key_groups:
     - age:
       - *user_bacon
-  - path_regex: ^nixos/cluster/.*\.secret\.[^.]+$
+  - path_regex: ^(.*/)?[^/]+\.secret\..+$
     key_groups:
     - age:
       - *user_bacon
+      - *host_callisto
   - path_regex: ^nixos/cluster/node/PUTMACHINEHERE/.*\.secret\.[^.]+$
     key_groups:
     - age:
