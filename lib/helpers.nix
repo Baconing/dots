@@ -29,8 +29,8 @@
             inherit
             hostname
             platform
-            role
-            template
+            clusterRole
+            clusterTemplate
             clustered
             stateVersion
             inputs
