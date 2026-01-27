@@ -13,17 +13,15 @@
         homeDirectory = "/home/${username}";
     };
 
-    home.packages = with pkgs;
-        [
-            fastfetch
-            fd
-            file
-            iperf3
-            ripgrep
-            htop
-            rclone
-        ]
-    };
+    home.packages = with pkgs; [
+        fastfetch
+        fd
+        file
+        iperf3
+        ripgrep
+        htop
+        rclone
+    ];
 
     fonts.fontconfig.enable = true;
     home.packages = with pkgs; [
