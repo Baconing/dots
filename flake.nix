@@ -118,7 +118,7 @@
        
       };
 
-      kubenix = inputs.kubenix.packages.${pkgs.system}.default.override {
+      kubenix = inputs.kubenix.packages.${nixpkgs.system}.default.override {
         module = import ./kubernetes;
         specialArgs = { flake = self; };
       };
