@@ -1,11 +1,10 @@
-{ config, hostname, inputs, lib, role, template,  ... }: 
+{ config, hostname, inputs, lib, clusterRole, clusterTemplate,  ... }: 
 {
     imports = [
         inputs.sops-nix.nixosModules.sops
         inputs.nixos-hardware.nixosModules.common-pc
-        
         ../../../modules
-    ] ++ lib.optional (template != null) ./template/{template} ++ lib.optional (builtins.pathExists ./${hostname}) ./node/{hostname};
+    ] ++ lib.optional (clusterTemplate != null) ./template/{clusterTemplate} ++ lib.optional (builtins.pathExists ./${hostname}) ./node/{hostname};
   
     boot.loader.efi.efiSysMountPoint = "/boot";
 
@@ -37,14 +36,14 @@
         services = {
             kubernetes = {
                 enable = true;
-                role = ${role};
+                clusterRole = ${role};
                 tokenFile = sops.secrets.kubernetes-token.path;
                 masterAddress = "10.10.254.253"; # todo
             };
         };
     };
 
-    services.keepalived = lib.mkIf (role == "control") {
+    services.keepalived = lib.mkIf (clusterRole == "control") {
         enable = true;
 
         vrrpInstances.kube_api = {
@@ -58,7 +57,7 @@
 
 
     # todo: move to service or smth, also move servers to variable
-    services.haproxy = lib.mkIf (role == "control") {
+    services.haproxy = lib.mkIf (clusterRole == "control") {
         enable = true;
 
         config = ''
@@ -90,5 +89,5 @@
         '';
     };
 
-    boot.kernel.sysctl."net.ipv4.ip_nonlocal_bind" = lib.mkIf (role == "control") 1;
+    boot.kernel.sysctl."net.ipv4.ip_nonlocal_bind" = lib.mkIf (clusterRole == "control") 1;
 }

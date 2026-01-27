@@ -6,6 +6,5 @@ in
   inherit (helpers)
     makeConsoleHome
     makeConsoleNixOS
-    makeClusterNixOS
     forAllSystems;
 }

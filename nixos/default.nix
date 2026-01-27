@@ -3,7 +3,7 @@
   hostname,
   isISO,
   isDesktop,
-  isCluster,
+  clustered,
   inputs,
   lib,
   modulesPath,
@@ -18,7 +18,7 @@
     inputs.sops-nix.nixosModules.sops
     (modulesPath + "/installer/scan/not-detected.nix")
     ./user.nix
-  ] ++ lib.optional (builtins.pathExists ./${hostname}) ./{hostname} ++ lib.optional (isCluster) ./cluster;
+  ] ++ lib.optional (builtins.pathExists ./${hostname}) ./{hostname} ++ lib.optional (clustered) ./cluster;
 
   boot = {
     consoleLogLevel = lib.mkDefault 0;

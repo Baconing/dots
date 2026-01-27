@@ -79,43 +79,46 @@
       nixosConfigurations = {
         skoll = helper.makeClusterNixOS {
             hostname = "skoll";
-            template = null;
-            role = "control";
+            clustered = true;
+            clusterRole = "control";
         };
 
         aitne = helper.makeClusterNixOS {
             hostname = "aitne";
-            template = null;
-            role = "node";
+            clustered = true;
+            clusterRole = "node";
         };
 
-        mneme = helper.makeClusterNixOS {
+        mneme = helper.makeConsoleNixOS {
             hostname = "mneme";
-            template = "m73";
-            role = "control";
+            clustered = true;
+            clusterTemplate = "m73";
+            clusterRole = "control";
         };
-        eukelade = helper.makeClusterNixOS {
+        eukelade = helper.makeConsoleNixOS {
             hostname = "eukelade";
-            template = "m73";
-            role = "node";
+            clustered = true;
+            clusterTemplate = "m73";
+            clusterRole = "control";
         };
-        harpalyke = helper.makeClusterNixOS {
+        harpalyke = helper.makeConsoleNixOS {
             hostname = "harpalyke";
-            template = "m73";
-            role = "node";
+            clustered = true;
+            clusterTemplate = "m73";
+            clusterRole = "control";
         };
-        kore = helper.makeClusterNixOS {
+        kore = helper.makeConsoleNixOS {
             hostname = "kore";
-            template = "m73";
-            role = "node";
+            clustered = true;
+            clusterTemplate = "m73";
+            clusterRole = "control";
         };
-        iocaste = helper.makeClusterNixOS {
+        iocaste = helper.makeConsoleNixOS {
             hostname = "iocaste";
-            template = "m73";
-            role = "node";
+            clustered = true;
+            clusterTemplate = "m73";
+            clusterRole = "control";
         };
-
-       
       };
 
       kubenix = inputs.kubenix.packages.${nixpkgs.system}.default.override {
