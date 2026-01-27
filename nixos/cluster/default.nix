@@ -38,7 +38,7 @@
                 enable = true;
                 role = clusterRole;
                 tokenFile = config.sops.secrets.kubernetes-token.path;
-                masterAddress = "10.10.254.253"; # todo
+                masterAddress = "https://10.10.254.253:6443"; # todo
             };
         };
     };
