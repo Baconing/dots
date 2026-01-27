@@ -79,6 +79,14 @@
     generateKey = false;
   };
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
+
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
