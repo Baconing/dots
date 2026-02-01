@@ -4,7 +4,7 @@
         inputs.sops-nix.nixosModules.sops
         inputs.nixos-hardware.nixosModules.common-pc
         ../../modules/nixos
-    ] ++ lib.optional (clusterTemplate != "") ./template/${clusterTemplate} ++ lib.optional (builtins.pathExists ./${hostname}) ./node/${hostname};
+    ] ++ lib.optional (clusterTemplate != "") ./template/${clusterTemplate} ++ lib.optional (builtins.pathExists ./node/${hostname}) ./node/${hostname};
   
     boot.loader.efi.efiSysMountPoint = "/boot";
 
