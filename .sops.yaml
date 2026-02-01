@@ -22,12 +22,20 @@
 
 keys: &keys
   - &user_bacon age1m3lajqjssue8jnuuhphxp3x0lxagksqpsecgnuxuy46wtag28c5spm5jyr
+  - &host_skoll age1m3lajqjssue8jnuuhphxp3x0lxagksqpsecgnuxuy46wtag28c5spm5jyr
   - &host_callisto age1uj6zl377wwvgysd0hn8n9h9dcvkuvxcu9948jsr5hxvjwcaguu5s8uxk92
+  - &host_mneme age1qyt44szfs9tx7vdqkhlct5kdkl0jvxdryuvk3azhsml8g4zzp5asq7rc53
+  - &host_iocaste age1644z52qrljm8f04j6y6zuey26zj0d2w45yvxplh9ez4xkqqjec4qrkk3hd
+  - &host_kore age18u0mqjat6rnwkwmxa4xsg6z6czjgcx6pzgfphs2u7zzm0lz08d6sn36jp7
 
 creation_rules:
   - path_regex: ^(.*/)?[^/]+\.secret\..+$
     key_groups:
     - age:
       - *user_bacon
+      - *host_skoll
       - *host_callisto
+      - *host_mneme
+      - *host_iocaste
+      - *host_kore
 # todo: disallow specific keys to access specific paths, i.e. nobody should see kubernetes secrets (only the person uploading kubernetes manifests), nobody sohuld see another machine's secrets, and so on
