@@ -21,6 +21,9 @@
     { self, nixpkgs, ... }@inputs:
     let
       inherit (self) outputs;
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
       stateVersion = "25.11";
       helper = import ./lib { inherit inputs outputs stateVersion; };
@@ -83,13 +86,13 @@
       };
 
       nixosConfigurations = {
-        skoll = helper.makeClusterNixOS {
+        skoll = helper.makeConsoleNixOS {
             hostname = "skoll";
             clustered = true;
             clusterRole = "control";
         };
 
-        aitne = helper.makeClusterNixOS {
+        aitne = helper.makeConsoleNixOS {
             hostname = "aitne";
             clustered = true;
             clusterRole = "node";
@@ -135,9 +138,7 @@
 
       colmena = {
         meta = {
-          nixpkgs = import nixpkgs {
-            system = "x86_64-linux";
-          };
+          nixpkgs = pkgs;
         };
 
         skoll = {
@@ -189,7 +190,7 @@
         };
       };
 
-      kubenix = inputs.kubenix.packages.${nixpkgs.system}.default.override {
+      kubenix = inputs.kubenix.packages.${system}.default.override {
         module = import ./kubernetes;
         specialArgs = { flake = self; };
       };

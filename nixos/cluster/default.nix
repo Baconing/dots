@@ -45,6 +45,7 @@
 
     services.keepalived = lib.mkIf (clusterRole == "control") {
         enable = true;
+        openFirewall = true;
 
         vrrpInstances.kube_api = {
             state = "BACKUP";
@@ -82,9 +83,9 @@
                 mode tcp
                 balance roundrobin
                 option tcp-check
-                server skoll.local:6443 check
-                server callisto.local:6443 check
-                server mneme.local:6443 check
+                server skoll skoll.local:6443 check
+                server callisto callisto.local:6443 check
+                server mneme mneme.local:6443 check
         '';
     };
 
