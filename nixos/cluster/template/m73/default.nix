@@ -4,4 +4,6 @@
         inputs.nixos-hardware.nixosModules.common-gpu-intel
         inputs.nixos-hardware.nixosModules.common-pc-ssd
     ];
+
+    services.keepalived.vrrpInstances.kube_api.interface = "eno1";
 }

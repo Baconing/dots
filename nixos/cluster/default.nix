@@ -47,7 +47,6 @@
         enable = true;
 
         vrrpInstances.kube_api = {
-            interface = "enp1s0";
             state = "BACKUP";
             virtualRouterId = 51;
             priority = 50;
