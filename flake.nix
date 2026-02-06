@@ -190,14 +190,14 @@
         };
       };
 
-      kubenix = inputs.kubenix.packages.${system}.default.override {
+      packages.${system}."kubernetes" = (kubenix.evalModules.${system} {
         module = import ./modules/kubernetes {
           inherit (inputs) kubenix;
           inherit (pkgs) lib;
         } {
           module = ./kubernetes;
         };
-      };
+      }).config.kubernetes.result;
 
       # todo: stolen from wimpysworld, idk what these really mean tbh
       overlays = import ./overlays { inherit inputs; };
