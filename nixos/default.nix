@@ -14,7 +14,6 @@
 {
   imports = [
     inputs.sops-nix.nixosModules.sops
-    (modulesPath + "/installer/scan/not-detected.nix")
     ./user.nix
   ] ++ lib.optional (builtins.pathExists ./${hostname}) ./${hostname} ++ lib.optional (clustered) ./cluster;
 

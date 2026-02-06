@@ -1,8 +1,7 @@
 { inputs, outputs, stateVersion }:
 {
     # Makes a console-only home manager configuration (e.g servers).
-    makeConsoleHome = { hostname, username, platform ? "x86_64-linux" }:
-        inputs.home-manager.lib.homeManagerConfiguration {
+    makeConsoleHome = { hostname, username, platform ? "x86_64-linux" }: inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages.${platform};
         extraSpecialArgs = {
             inherit
@@ -17,8 +16,7 @@
     };
 
     # Makes a console-only NixOS configuration (e.g servers).
-    makeConsoleNixOS = { hostname, clustered ? false, clusterRole ? "", clusterTemplate ? "", platform ? "x86_64-linux" }:
-        inputs.nixpkgs.lib.nixosSystem {
+    makeConsoleNixOS = { hostname, clustered ? false, clusterRole ? "", clusterTemplate ? "", platform ? "x86_64-linux" }: inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
             inherit
             hostname

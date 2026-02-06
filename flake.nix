@@ -191,8 +191,11 @@
       };
 
       kubenix = inputs.kubenix.packages.${system}.default.override {
-        module = import ./kubernetes;
-        specialArgs = { flake = self; };
+        module = import ./modules/kubernetes {
+          inherit lib kubenix;
+        } {
+          module = ./kubernetes;
+        };
       };
 
       # todo: stolen from wimpysworld, idk what these really mean tbh

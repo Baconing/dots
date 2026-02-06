@@ -1,18 +1,18 @@
 { lib, kubenix, ... }:
 let
-    cfg = config.modules.longhorn;
+    cfg = config.addons.longhorn;
 in {
     imports = [ 
         ../kyverno
         kubenix.modules.k8s
     ];
 
-    options.modules.longhorn = {
+    options.addons.longhorn = {
         enable = lib.mkEnableOption "Longhorn Distributed Block Storage";
     };
 
     config = lib.mkIf cfg.enable {
-        modules.kyverno.enable = true;
+        addons.kyverno.enable = true;
 
         kubernetes.helm.releases.longhorn = {
             chart = kubenix.lib.helm.fetch {
