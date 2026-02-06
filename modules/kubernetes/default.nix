@@ -15,7 +15,7 @@ let
     map (n: ./${n}) moduleDirs;
 in
 {
-  imports = serviceModules ++ [ kubenix.modules.k8s ];
+  imports = serviceModules;
 
   config = userConfig;
 }
