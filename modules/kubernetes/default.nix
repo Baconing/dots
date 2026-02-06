@@ -1,4 +1,4 @@
-{ lib, kubenix }:
+{ lib, kubenix, ... }:
 
 { module }:
 
