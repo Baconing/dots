@@ -176,7 +176,7 @@ in {
                     spec = {
                         rules = [
                             {
-                                name = "jellyfin.awesomecooldomain.pp.ua";
+                                host = "jellyfin.awesomecooldomain.pp.ua";
                                 http.paths = [
                                     {
                                         path = "/";
@@ -204,7 +204,7 @@ in {
                     spec = {
                         rules = [
                             {
-                                name = "jellyfin.local";
+                                host = "jellyfin.local";
                                 http.paths = [
                                     {
                                         path = "/";
@@ -219,7 +219,7 @@ in {
                                 ];
                             }
                             {
-                                name = "jellyfin.homelab";
+                                host = "jellyfin.homelab";
                                 http.paths = [
                                     {
                                         path = "/";
