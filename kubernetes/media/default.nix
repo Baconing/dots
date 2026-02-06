@@ -71,7 +71,7 @@
                     accessModes = [ "ReadWriteMany" ];
                     selector = {
                         matchLabels = {
-                            name = mediaPersistentVolumeName
+                            name = mediaPersistentVolumeName;
                         };
                     };
                 };
