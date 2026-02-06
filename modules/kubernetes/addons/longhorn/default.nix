@@ -46,9 +46,35 @@ in {
                     rules = [
                         {
                             name = "add-env-vars";
-                            match.resources = {
-                                kinds = [ "Pod" ];
-                                namespaces = [ "longhorn-system" ];
+                            match.any.resources = [
+                                {
+                                    kinds = [ "Pod" ];
+                                    namespaces = [ "longhorn-system" ];
+                                }
+                            ];
+                            mutate.patchStrategicMerge = {
+                                spec = {
+                                    initContainers = [
+                                        {
+                                            "(name)" = "*";
+                                            envFrom = [
+                                                {
+                                                    configMapRef.name = configMapName;
+                                                }
+                                            ];
+                                        }
+                                    ];
+                                    containers = [
+                                        {
+                                            "(name)" = "*";
+                                            envFrom = [
+                                                {
+                                                    configMapRef.name = configMapName;
+                                                }
+                                            ];
+                                        }
+                                    ];
+                                };
                             };
                         }
                     ];
