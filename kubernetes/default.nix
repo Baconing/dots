@@ -15,14 +15,12 @@
             ipAddressPool.${homelabIPPoolName} =  {
                 apiVersion = "metallb.io/v1beta1";
                 kind = "IPAddressPool";
-                metadata.namespace = "metallb-system";
                 spec.addresses = "10.10.254.254-10.10.254.254";
             };
-            
+
             l2Advertisement."homelab-l2-advertisement" = {
                 apiVersion = "metallb.io/v1beta1";
                 kind = "L2Advertisement";
-                metadata.namespace = "metallb-system";
                 spec.ipAddressPools = homelabIPPoolName;
             };
         };
