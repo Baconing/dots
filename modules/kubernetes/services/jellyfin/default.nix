@@ -6,11 +6,11 @@
 
 { lib, kubenix, config, ... }:
 let
-    cfg = config.kubernetes.services.jellyfin;
+    cfg = config.services.jellyfin;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.kubernetes.services.jellyfin = {
+    options.services.jellyfin = {
         enable = lib.mkEnableOption "Jellyfin media server";
 
         kubernetes = {

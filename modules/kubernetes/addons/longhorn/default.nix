@@ -1,13 +1,13 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.kubernetes.addons.longhorn;
+    cfg = config.addons.longhorn;
 in {
     imports = [ 
         ../kyverno
         kubenix.modules.k8s
     ];
 
-    options.kubernetes.addons.longhorn = {
+    options.addons.longhorn = {
         enable = lib.mkEnableOption "Longhorn Distributed Block Storage";
     };
 

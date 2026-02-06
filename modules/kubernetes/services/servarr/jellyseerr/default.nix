@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.kubernetes.services.jellyseerr;
+    cfg = config.services.jellyseerr;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.kubernetes.services.jellyseerr = {
+    options.services.jellyseerr = {
         enable = lib.mkEnableOption "Jellyseerr Media Request Manager";
 
         kubernetes = {

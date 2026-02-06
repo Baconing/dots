@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.kubernetes.services.prowlarr;
+    cfg = config.services.prowlarr;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.kubernetes.services.prowlarr = {
+    options.services.prowlarr = {
         enable = lib.mkEnableOption "Prowlarr Tracker Indexer";
 
         kubernetes = {

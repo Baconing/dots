@@ -2,11 +2,11 @@
 
 { lib, kubenix, config, ... }:
 let
-    cfg = config.kubernetes.services.unpackerr;
+    cfg = config.services.unpackerr;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.kubernetes.services.unpackerr = {
+    options.services.unpackerr = {
         enable = lib.mkEnableOption "Unpackerr Automatic Unarchiver";
 
         global = {

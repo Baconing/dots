@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.kubernetes.addons.smb;
+    cfg = config.addons.smb;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.kubernetes.addons.smb = {
+    options.addons.smb = {
         enable = lib.mkEnableOption "SMB CSI Driver";
     };
 
