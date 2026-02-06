@@ -270,7 +270,7 @@ in {
                                 };
                             };
 
-                            volumes${appdataVolumeName}.persistentVolumeClaim.name = appdataClaimName;
+                            volumes.${appdataVolumeName}.persistentVolumeClaim.name = appdataClaimName;
                             volumes.${configVolumeName}.configMap.name = configMapName;
                             volumes.${mediaVolumeName}.persistentVolumeClaim.name = cfg.kubernetes.volumes.media.name;
                         };
