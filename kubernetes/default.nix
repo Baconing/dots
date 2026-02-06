@@ -21,7 +21,7 @@
             l2Advertisement."homelab-l2-advertisement" = {
                 apiVersion = "metallb.io/v1beta1";
                 kind = "L2Advertisement";
-                spec.ipAddressPools = homelabIPPoolName;
+                spec.ipAddressPools = [ homelabIPPoolName ];
             };
         };
     };
