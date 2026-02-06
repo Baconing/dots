@@ -1,4 +1,4 @@
-{ lib, kubenix, config, ... }:
+{ lib, kubenix, config, options, ... }:
 let
     cfg = config.addons.nvidia;
 in {

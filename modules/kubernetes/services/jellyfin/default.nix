@@ -4,7 +4,7 @@
 # this seems to not be possible due to the fundamental design of kubernetes
 # alternatives could be hashicorp nomad/consul
 
-{ lib, kubenix, config, ... }:
+{ lib, kubenix, config, options, ... }:
 let
     cfg = config.services.jellyfin;
 in {
