@@ -52,31 +52,6 @@ in {
                             };
                         }
                     ];
-
-                    mutate.patchStrategicMerge = {
-                        spec = {
-                            initContainers = [
-                                {
-                                    "(name)" = "*";
-                                    envFrom = [
-                                        {
-                                            configMapRef.name = configMapName;
-                                        }
-                                    ];
-                                }
-                            ];
-                            containers = [
-                                {
-                                    "(name)" = "*";
-                                    envFrom = [
-                                        {
-                                            configMapRef.name = configMapName;
-                                        }
-                                    ];
-                                }
-                            ];
-                        };
-                    };
                 };
             };
         };
