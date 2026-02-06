@@ -59,68 +59,14 @@ in {
                           configTemplatesVolumeName = "config-templates";
                           scriptsVolumeName = "scripts";
                         in {
-                            # TODO: find a way to use nix enums or something to make this more type safe
-                            affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution = [
-                                {
-                                    weight = 10;
-                                    preference.matchExpressions = [
-                                        {
-                                            key = "gpu.type";
-                                            operator = "In";
-                                            values = [ "nvidia" "amd" "intel" ];
-                                        }
-                                    ];
-                                }
-                                {
-                                    weight = 100;
-                                    preference.matchExpressions = [
-                                        {
-                                            key = "gpu.class";
-                                            operator = "In";
-                                            values = [ "high" ];
-                                        }
-                                    ];
-                                }
-                                {
-                                    weight = 50;
-                                    preference.matchExpressions = [
-                                        {
-                                            key = "gpu.class";
-                                            operator = "In";
-                                            values = [ "mid" ];
-                                        }
-                                    ];
-                                }
-                                {
-                                    weight = 10;
-                                    preference.matchExpressions = [
-                                        {
-                                            key = "gpu.class";
-                                            operator = "In";
-                                            values = [ "low" ];
-                                        }
-                                    ];
-                                }
-                            ];
-
                             containers.jellyfin = {
                                 image = cfg.kubernetes.image;
                                 ports = [ { containerPort = 8096; protocol = "TCP"; } ];
                                 volumeMounts = {
                                     "/config".name = configVolumeName;
                                     "/media".name = mediaVolumeName;
-                                    # "/templates".name = configTemplatesVolumeName;
-                                    # "scripts".name = scriptsVolumeName;
                                 };
                             };
-
-                            # initContainers.configure-encoding = {
-                            #     image = "busybox";
-                            #     command = [
-                            #       "sh"
-                            #       "/scripts/configure-encoding.sh"
-                            #     ];
-                            # };
 
                             volumes.${configVolumeName}.persistentVolumeClaim.claimName = configClaimName;
                             volumes.${mediaVolumeName}.persistentVolumeClaim.claimName = cfg.kubernetes.volumes.media.name;
@@ -139,16 +85,6 @@ in {
                     storageClassName = "longhorn"; # TODO ?
                 };
             };
-
-            # configMaps.${configTemplatesConfigMapName} = {
-            #     metadata.namespace = cfg.kubernetes.namespace;
-            #     data."encoding.xml.tpl" = builtins.readFile ./config/encoding.xml.tpl;
-            # };
-
-            # configMaps.${scriptsConfigMapName} = {
-            #     metadata.namespace = cfg.kubernetes.namespace;
-            #     data."configure-encoding.sh" = builtins.readFile ./scripts/configure-encoding.sh;
-            # };
 
             services.${serviceName} = {
                 metadata.namespace = cfg.kubernetes.namespace;
