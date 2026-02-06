@@ -2,7 +2,10 @@
 let
     cfg = config.addons.smb;
 in {
-    imports = [ kubenix.modules.k8s ];
+    imports = [
+        kubenix.modules.k8s
+        kubenix.modules.helm
+    ];
 
     options.addons.smb = {
         enable = lib.mkEnableOption "SMB CSI Driver";

@@ -2,9 +2,9 @@
 let
     cfg = config.addons.longhorn;
 in {
-    imports = [ 
-        ../kyverno
+    imports = [
         kubenix.modules.k8s
+        kubenix.modules.helm
     ];
 
     options.addons.longhorn = {

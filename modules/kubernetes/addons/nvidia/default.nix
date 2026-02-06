@@ -2,7 +2,10 @@
 let
     cfg = config.addons.nvidia;
 in {
-    imports = [ kubenix.modules.k8s ];
+    imports = [
+        kubenix.modules.k8s
+        kubenix.modules.helm
+    ];
 
     options.addons.nvidia = {
         enable = lib.mkEnableOption "NVIDIA GPU Operator";

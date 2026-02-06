@@ -2,7 +2,10 @@
 let
     cfg = config.addons.kyverno;
 in {
-    imports = [ kubenix.modules.k8s ];
+    imports = [ 
+        kubenix.modules.k8s
+        kubenix.modules.helm
+    ];
 
     options.addons.kyverno = {
         enable = lib.mkEnableOption "Kyverno Policy as Code Manager";
