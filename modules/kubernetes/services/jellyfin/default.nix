@@ -157,6 +157,7 @@ in {
                         {
                             port = 8096;
                             targetPort = 8096;
+                            protocol = "TCP";
                         }
                     ];
                 };
