@@ -134,6 +134,7 @@ in {
                     namespace = cfg.kubernetes.namespace;
                 };
                 spec = {
+                    resources.requests.storage = "1Gi";
                     accessModes = [ "ReadWriteOncePod" ];
                     storageClassName = "longhorn"; # TODO ?
                 };
