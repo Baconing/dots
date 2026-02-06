@@ -2,7 +2,7 @@
 {
     imports = [
         kubenix.modules.k8s
-        # ./jellyfin
+        ./jellyfin
         # ./qbittorrent
         # ./servarr
     ];
