@@ -11,6 +11,10 @@
         mediaPersistentVolumeName = "media";
         downloadsPersistentVolumeName = "media-downloads";
     in {
+        namespaces = {
+            "media" = {};
+        }
+
         persistentVolumes = {
             ${mediaPersistentVolumeName} = {
                 metadata = {
