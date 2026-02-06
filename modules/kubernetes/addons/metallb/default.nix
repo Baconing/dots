@@ -20,5 +20,20 @@ in {
                 sha256 = "KWdVaF6CjFjeHQ6HT1WvkI9JnSurt9emLVCpkxma0fg=";
             };
         };
+
+        kubernetes.customTypes = {
+            ipAddressPool = {
+                attrName = "ipAddressPool";
+                group = "metallb.io";
+                kind = "IPAddressPool";
+                version = "v1beta1";
+            };
+            l2Advertisement = {
+                attrName = "l2Advertisement";
+                group = "metallb.io";
+                kind = "L2Advertisement";
+                version = "v1beta1";
+            };
+        }
     };
 }
