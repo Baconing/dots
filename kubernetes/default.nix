@@ -2,7 +2,7 @@
 {
     imports = [
         ./media
-        ../modules/kubernetes
+        ../../modules/kubernetes
         kubenix.modules.k8s
     ];
 
