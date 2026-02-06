@@ -23,5 +23,5 @@ in
 
   imports = [ kubenix.modules.k8s ];
   
-  kubernetes = eval.kubernetes;
+  config.ubernetes = eval.kubernetes;
 }
