@@ -78,6 +78,7 @@
                 };
 
                 spec = {
+                    resources.storage.capacity = "1Ti";
                     accessModes = [ "ReadWriteMany" ];
                     selector = {
                         matchLabels = {
@@ -93,6 +94,7 @@
                 };
 
                 spec = {
+                    resources.storage.capacity = "1Ti";
                     accessModes = [ "ReadWriteMany" ];
                     selector = {
                         matchLabels = {
