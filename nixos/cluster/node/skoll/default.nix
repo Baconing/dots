@@ -1,13 +1,10 @@
 { config, hostname, inputs, lib, clusterRole, template,  ... }: {
     imports = [
         inputs.nixos-hardware.nixosModules.common-cpu-amd
-        inputs.nixos-hardware.nixosModules.common-gpu-nvidia
         inputs.nixos-hardware.nixosModules.common-pc-ssd
     ];
 
     homelab.services.kubernetes.masterAddress = lib.mkForce null;
-
-    hardware.nvidia.open = true;
 
     services.keepalived.vrrpInstances.kube_api = {
         interface = "enp42s0";
