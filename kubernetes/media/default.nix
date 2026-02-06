@@ -22,6 +22,7 @@
 
                 spec = {
                     accessModes = [ "ReadWriteMany" ];
+                    capacity.storage = "21Ti";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
                         volumeHandle = "smb-pv";
@@ -45,6 +46,7 @@
 
                 spec = {
                     accessModes = [ "ReadWriteMany" ];
+                    capacity.storage =  "21Ti";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
                         volumeHandle = "smb-pv";
