@@ -35,15 +35,8 @@ in {
             clusterPolicies."longhorn-add-nixos-path" = {
                 metadata = {
                     annotations = {
-                        "policies.kyverno.io/title" = "Add Environment Variables from ConfigMap";
                         "policies.kyverno.io/subject" = "Pod";
                         "policies.kyverno.io/category" = "Other";
-                        "policies.kyverno.io/description" = ''
-                            Longhorn invokes executables on the host system, and needs
-                            to be aware of the host systems PATH. This modifies all
-                            deployments such that the PATH is explicitly set to support
-                            NixOS based systems.
-                        '';
                     };
                 };
 
