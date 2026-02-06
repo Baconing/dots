@@ -7,6 +7,8 @@
 
     homelab.services.kubernetes.masterAddress = lib.mkForce null;
 
+    hardware.nvidia.open = true;
+
     services.keepalived.vrrpInstances.kube_api = {
         interface = "enp42s0";
         state = lib.mkForce "MASTER";
