@@ -20,6 +20,4 @@ let
 in
 {
   inherit (eval) config options;
-
-  imports = [ kubenix.modules.k8s ];
 }
