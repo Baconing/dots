@@ -20,6 +20,8 @@ in {
                     version = "0.15.3";
                     sha256 = "KWdVaF6CjFjeHQ6HT1WvkI9JnSurt9emLVCpkxma0fg=";
                 };
+
+                namespace = "metallb-system";
             };
 
             # https://github.com/hall/kubenix/issues/97#issuecomment-3702978320

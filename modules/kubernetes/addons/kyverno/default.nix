@@ -20,6 +20,8 @@ in {
                     version = "3.7.0-rc.1";
                     sha256 = "rH3qZRecYtPxlQQz/lumfOT+YHIU8ouEQqBQE3pEPlU=";
                 };
+
+                namespace = "kyverno";
             };
 
             customTypes = {
