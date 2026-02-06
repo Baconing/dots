@@ -190,7 +190,7 @@
         };
       };
 
-      packages.${system}."kubernetes" = (kubenix.evalModules.${system} {
+      packages.${system}."kubernetes" = (inputs.kubenix.evalModules.${system} {
         module = import ./modules/kubernetes {
           inherit (inputs) kubenix;
           inherit (pkgs) lib;
