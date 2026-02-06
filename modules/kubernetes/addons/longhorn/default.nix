@@ -29,7 +29,7 @@ in {
         kubernetes.resources = let 
             configMapName = "longhorn-nixos-path";
         in {
-            resources.namespaces = {
+            namespaces = {
                 "longhorn-system" = {
                     metadata = {
                         name = "longhorn-system";
