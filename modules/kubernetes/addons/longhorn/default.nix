@@ -46,10 +46,12 @@ in {
                     rules = [
                         {
                             name = "add-env-vars";
-                            match.any.resources = [
+                            match.any = [ 
                                 {
-                                    kinds = [ "Pod" ];
-                                    namespaces = [ "longhorn-system" ];
+                                    resources = {
+                                        kinds = [ "Pod" ];
+                                        namespaces = [ "longhorn-system" ];
+                                    };
                                 }
                             ];
                             mutate.patchStrategicMerge = {
