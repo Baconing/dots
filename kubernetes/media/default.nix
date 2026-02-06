@@ -22,7 +22,7 @@
         persistentVolumes = {
             ${mediaPersistentVolumeName} = {
                 metadata = {
-                    # namespace = "media"; # TODO
+                    namespace = "media"; # TODO
                     labels = {
                         name = mediaPersistentVolumeName;
                     };
@@ -46,7 +46,7 @@
             };
             ${downloadsPersistentVolumeName} = {
                 metadata = {
-                    # namespace = "media"; # TODO
+                    namespace = "media"; # TODO
                     labels = {
                         name = downloadsPersistentVolumeName;
                     };
@@ -74,7 +74,7 @@
         persistentVolumeClaims = {
             media = {
                 metadata = {
-                    # namespace = "media"; # TODO
+                    namespace = "media"; # TODO
                 };
 
                 spec = {
@@ -90,7 +90,7 @@
 
             media-downloads = {
                 metadata = {
-                    # namespace = "media"; # TODO
+                    namespace = "media"; # TODO
                 };
 
                 spec = {
