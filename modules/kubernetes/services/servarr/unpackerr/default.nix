@@ -3,7 +3,7 @@
 { lib, kubenix, config, ... }:
 let
     cfg = config.services.unpackerr;
-{
+in {
     imports = [ kubenix.modules.k8s ];
 
     options.services.unpackerr = {

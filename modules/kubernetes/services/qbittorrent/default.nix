@@ -1,7 +1,7 @@
 { lib, kubenix, config, ... }:
 let
     cfg = config.services.qbittorrent;
-{
+in {
     imports = [ kubenix.modules.k8s ];
 
     options.services.qbittorrent = {

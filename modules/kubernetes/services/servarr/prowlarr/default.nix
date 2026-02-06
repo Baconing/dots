@@ -1,7 +1,7 @@
 { lib, kubenix, config, ... }:
 let
     cfg = config.services.prowlarr;
-{
+in {
     imports = [ kubenix.modules.k8s ];
 
     options.services.prowlarr = {

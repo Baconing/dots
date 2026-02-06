@@ -11,7 +11,7 @@ let
     );
 
     configurationYaml = settingsFormat.generate "slskd.yml" confWithoutNullValues;
-{
+in {
     imports = [ kubenix.modules.k8s ];
 
     options.services.slskd = {

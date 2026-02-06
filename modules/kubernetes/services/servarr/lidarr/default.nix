@@ -1,7 +1,7 @@
 { lib, kubenix, config, ... }:
 let
     cfg = config.services.lidarr;
-{
+in {
     imports = [ kubenix.modules.k8s ];
 
     options.services.lidarr = {
