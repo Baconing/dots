@@ -32,9 +32,7 @@ in {
                 data."PATH" = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
             };
 
-            "longhorn-add-nixos-path" = {
-                apiVersion = "kyverno.io/v1";
-                kind = "ClusterPolicy";
+            clusterPolicies."longhorn-add-nixos-path" = {
                 metadata = {
                     annotations = {
                         "policies.kyverno.io/title" = "Add Environment Variables from ConfigMap";

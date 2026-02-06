@@ -132,10 +132,10 @@ in {
             persistentVolumeClaims.${configClaimName} = {
                 metadata = {
                     namespace = cfg.kubernetes.namespace;
-                    spec = {
-                        accessModes = [ "ReadWriteOncePod" ];
-                        storageClassName = "longhorn"; # TODO ?
-                    };
+                };
+                spec = {
+                    accessModes = [ "ReadWriteOncePod" ];
+                    storageClassName = "longhorn"; # TODO ?
                 };
             };
 

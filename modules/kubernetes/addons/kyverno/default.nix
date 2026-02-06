@@ -12,12 +12,23 @@ in {
     };
 
     config = lib.mkIf cfg.enable {
-        kubernetes.helm.releases.kyverno = {
-            chart = kubenix.lib.helm.fetch {
-                repo = "https://kyverno.github.io/kyverno/";
-                chart = "kyverno";
-                version = "3.7.0-rc.1";
-                sha256 = "37738661a2c69fd575a43d57a0833f56d9c59acdb7123911682ec3937d3de90d";
+        kubernetes = {
+            helm.releases.kyverno = {
+                chart = kubenix.lib.helm.fetch {
+                    repo = "https://kyverno.github.io/kyverno/";
+                    chart = "kyverno";
+                    version = "3.7.0-rc.1";
+                    sha256 = "37738661a2c69fd575a43d57a0833f56d9c59acdb7123911682ec3937d3de90d";
+                };
+            };
+
+            customTypes = {
+                clusterPolicies = {
+                    attrName = "clusterPolicies";
+                    group = "kyverno.io";
+                    kind = "ClusterPolicy";
+                    version = "v1";
+                };
             };
         };
     };
