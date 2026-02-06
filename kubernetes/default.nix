@@ -15,7 +15,7 @@
             ipAddressPool.${homelabIPPoolName} =  {
                 apiVersion = "metallb.io/v1beta1";
                 kind = "IPAddressPool";
-                spec.addresses = "10.10.254.254-10.10.254.254";
+                spec.addresses = [ "10.10.254.254" ];
             };
 
             l2Advertisement."homelab-l2-advertisement" = {
