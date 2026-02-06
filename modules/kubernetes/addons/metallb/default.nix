@@ -17,7 +17,7 @@ in {
                 repo = "https://metallb.github.io/metallb";
                 chart = "metallb";
                 version = "0.15.3";
-                sha256 = "27db761c5ad2525fd130c92fe2f2d4500f8870e402fefe3c9cb8d34d8a71a70c";
+                sha256 = "KWdVaF6CjFjeHQ6HT1WvkI9JnSurt9emLVCpkxma0fg=";
             };
         };
     };
