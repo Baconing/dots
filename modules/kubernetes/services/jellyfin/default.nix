@@ -48,7 +48,7 @@ in {
             deployments.jellyfin = {
                 metadata.namespace = cfg.kubernetes.namespace;
                 spec = {
-                    repliacs = 1;
+                    replicas = 1;
                     strategy.type = "Recreate";
                     selector.matchLabels.app = appName;
                     template = {
