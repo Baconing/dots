@@ -28,7 +28,7 @@ in {
             configMapName = "longhorn-nixos-path";
         in {
             configMaps.${configMapName} = {
-                namespace = "longhorn-system";
+                metadata.namespace = "longhorn-system";
                 data."PATH" = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
             };
 
