@@ -6,7 +6,7 @@
         kubenix.modules.k8s
     ];
 
-    helm.metallb.enable = true;
+    addons.metallb.enable = true;
 
     kubernetes = let
         homelabIPPoolName = "homelab-metallb-pool";
