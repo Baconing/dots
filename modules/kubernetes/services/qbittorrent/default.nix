@@ -117,7 +117,7 @@ in {
                             targetPort = cfg.torrentingPort;
                             protocol = "UDP";
                         }
-                    ]
+                    ];
                 };
             };
 

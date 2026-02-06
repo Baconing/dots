@@ -82,7 +82,7 @@ in {
                             port = httpPort;
                             targetPort = httpPort;
                         }
-                    ]
+                    ];
                 };
             };
 

@@ -302,7 +302,7 @@ in {
                             port = cfg.settings.web.port;
                             targetPort = cfg.settings.web.port;
                         }
-                    ]
+                    ];
                 };
             };
 
