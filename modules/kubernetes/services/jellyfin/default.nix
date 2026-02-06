@@ -158,8 +158,8 @@ in {
                             port = 8096;
                             targetPort = 8096;
                         }
-                    ]
-                }
+                    ];
+                };
             };
 
             # TODO: make constants for domain names and such
