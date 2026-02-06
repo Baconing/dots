@@ -80,5 +80,9 @@ in {
         ];
 
         virtualisation.containerd.enable = true;
+
+        environment.systemPackages = [
+            pkgs.openiscsi
+        ];
     };
 }
