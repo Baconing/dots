@@ -192,7 +192,8 @@
 
       kubenix = inputs.kubenix.packages.${system}.default.override {
         module = import ./modules/kubernetes {
-          inherit lib kubenix;
+          inherit (inputs) kubenix;
+          inherit (pkgs) lib;
         } {
           module = ./kubernetes;
         };
