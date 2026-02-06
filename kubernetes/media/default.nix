@@ -12,7 +12,11 @@
         downloadsPersistentVolumeName = "media-downloads";
     in {
         namespaces = {
-            "media" = {};
+            "media" = {
+                metadata = {
+                    name = "media";
+                };
+            };
         };
 
         persistentVolumes = {
