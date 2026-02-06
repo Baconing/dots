@@ -21,7 +21,7 @@ in {
         vip = lib.mkOption {
             type = lib.types.str;
             description = "The virtual IP that the server can be accessed from";
-        }
+        };
 
         # gpu = lib.mkOption {
         #     type = lib.types.nullOr (lib.types.submodule {
