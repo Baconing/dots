@@ -174,10 +174,23 @@ in {
                         };
                     };
                     spec = {
-                        rules."jellyfin.awesomecooldomain.pp.ua".http.paths."/" = {
-                            pathType = "Prefix";
-                            backend.service.${serviceName}.port.number = 8096;
-                        };
+                        rules = [
+                            {
+                                name = "jellyfin.awesomecooldomain.pp.ua";
+                                http.paths = [
+                                    {
+                                        path = "/";
+                                        pathType = "Prefix";
+                                        backend = {
+                                            service = {
+                                                name = serviceName;
+                                                port.number = 8096;
+                                            };
+                                        };
+                                    }
+                                ];
+                            }
+                        ];
                     };
                 };
 
@@ -189,14 +202,38 @@ in {
                         };
                     };
                     spec = {
-                        rules."jellyfin.local".http.paths."/" = {
-                            pathType = "Prefix";
-                            backend.service.${serviceName}.port.number = 8096;
-                        };
-                        rules."jellyfin.homelab".http.paths."/" = {
-                            pathType = "Prefix";
-                            backend.service.${serviceName}.port.number = 8096;
-                        };
+                        rules = [
+                            {
+                                name = "jellyfin.local";
+                                http.paths = [
+                                    {
+                                        path = "/";
+                                        pathType = "Prefix";
+                                        backend = {
+                                            service = {
+                                                name = serviceName;
+                                                port.number = 8096;
+                                            };
+                                        };
+                                    }
+                                ];
+                            }
+                            {
+                                name = "jellyfin.homelab";
+                                http.paths = [
+                                    {
+                                        path = "/";
+                                        pathType = "Prefix";
+                                        backend = {
+                                            service = {
+                                                name = serviceName;
+                                                port.number = 8096;
+                                            };
+                                        };
+                                    }
+                                ];
+                            }
+                        ];
                     };
                 };
             };
