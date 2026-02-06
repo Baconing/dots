@@ -122,8 +122,8 @@ in {
                             #     ];
                             # };
 
-                            volumes.${configVolumeName}.persistentVolumeClaim.name = configClaimName;
-                            volumes.${mediaVolumeName}.persistentVolumeClaim.name = cfg.kubernetes.volumes.media.name;
+                            volumes.${configVolumeName}.persistentVolumeClaim.claimName = configClaimName;
+                            volumes.${mediaVolumeName}.persistentVolumeClaim.claimName = cfg.kubernetes.volumes.media.name;
                         };
                     };
                 };
