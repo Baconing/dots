@@ -13,7 +13,7 @@
     in {
         namespaces = {
             "media" = {};
-        }
+        };
 
         persistentVolumes = {
             ${mediaPersistentVolumeName} = {
