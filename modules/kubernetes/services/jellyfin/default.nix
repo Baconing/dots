@@ -105,7 +105,7 @@ in {
 
                             containers.jellyfin = {
                                 image = cfg.kubernetes.image;
-                                ports = [ { containerPort = 8096; } ];
+                                ports = [ { containerPort = 8096; protocol = "TCP"; } ];
                                 volumeMounts = {
                                     "/config".name = configVolumeName;
                                     "/media".name = mediaVolumeName;
