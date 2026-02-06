@@ -3,6 +3,6 @@ _: {
         ./jellyfin
         ./qbittorrent
         ./servarr
-        ./slskd
+        # ./slskd
     ];
 }
