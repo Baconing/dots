@@ -10,7 +10,7 @@
     kubernetes.resources = let
         mediaPersistentVolumeName = "media";
         downloadsPersistentVolumeName = "media-downloads";
-     {
+    in {
         persistentVolumes = {
             ${mediaPersistentVolumeName} = {
                 metadata = {
