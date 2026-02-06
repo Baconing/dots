@@ -3,19 +3,20 @@
 { module }:
 
 let
-  userConfig =
-    if builtins.isPath module then import module else module;
+  normalizedConfig = if builtins.isPath module then import module else module;
 
-  moduleDirs =
-    builtins.filter
-      (n: n != "default.nix")
-      (builtins.attrNames (builtins.readDir ./.));
+  moduleDirs = builtins.readDir ./;
 
-  serviceModules =
-    map (n: ./${n}) moduleDirs;
+  modules = map (n: ./${n}) moduleDirs;
+
+  eval = lib.evalModules { 
+    modules = modules ++ [ kubenix.modules.k8s ];
+    specialArgs = { inherit kubenix; };
+    args = { config = normalizedConfig; };
+  };
 in
 {
-  imports = serviceModules;
-
-  config = userConfig;
+  inherit (eval) config options;
+  
+  kubernetes = eval.kubernetes;
 }
