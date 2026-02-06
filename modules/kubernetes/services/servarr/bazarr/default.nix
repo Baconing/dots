@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.services.bazarr;
+    cfg = config.kubernetes.services.bazarr;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.services.bazarr = {
+    options.kubernetes.services.bazarr = {
         enable = lib.mkEnableOption "Bazarr subtitles/closed-captions library manager";
 
         kubernetes = {

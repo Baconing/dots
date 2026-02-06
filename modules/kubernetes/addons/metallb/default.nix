@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.addons.metallb;
+    cfg = config.kubernetes.addons.metallb;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.addons.metallb = {
+    options.kubernetes.addons.metallb = {
         enable = lib.mkEnableOption "MetalLB load balancer (helm)";
     };
 

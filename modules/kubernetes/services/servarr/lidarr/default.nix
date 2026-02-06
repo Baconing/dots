@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.services.lidarr;
+    cfg = config.kubernetes.services.lidarr;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.services.lidarr = {
+    options.kubernetes.services.lidarr = {
         enable = lib.mkEnableOption "Lidarr music library manager";
 
         kubernetes = {

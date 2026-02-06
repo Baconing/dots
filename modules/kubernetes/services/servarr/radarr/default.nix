@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.services.radarr;
+    cfg = config.kubernetes.services.radarr;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.services.radarr = {
+    options.kubernetes.services.radarr = {
         enable = lib.mkEnableOption "Radarr movie library manager";
 
         kubernetes = {

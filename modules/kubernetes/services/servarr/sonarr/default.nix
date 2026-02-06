@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.services.sonarr;
+    cfg = config.kubernetes.services.sonarr;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.services.sonarr = {
+    options.kubernetes.services.sonarr = {
         enable = lib.mkEnableOption "Sonarr TV library manager";
 
         kubernetes = {

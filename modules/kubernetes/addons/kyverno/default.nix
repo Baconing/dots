@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.addons.kyverno;
+    cfg = config.kubernetes.addons.kyverno;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.addons.kyverno = {
+    options.kubernetes.addons.kyverno = {
         enable = lib.mkEnableOption "Kyverno Policy as Code Manager";
     };
 

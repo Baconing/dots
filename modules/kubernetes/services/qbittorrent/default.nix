@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.services.qbittorrent;
+    cfg = config.kubernetes.services.qbittorrent;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.services.qbittorrent = {
+    options.kubernetes.services.qbittorrent = {
         enable = lib.mkEnableOption "qBitTorrent Client";
         torrentingPort = lib.mkOption {
             type = lib.types.port;

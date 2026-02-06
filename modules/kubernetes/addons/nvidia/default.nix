@@ -1,10 +1,10 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.addons.nvidia;
+    cfg = config.kubernetes.addons.nvidia;
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.addons.nvidia = {
+    options.kubernetes.addons.nvidia = {
         enable = lib.mkEnableOption "NVIDIA GPU Operator";
     };
 

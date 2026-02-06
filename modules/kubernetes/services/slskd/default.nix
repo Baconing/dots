@@ -1,6 +1,6 @@
 { lib, kubenix, config, ... }:
 let
-    cfg = config.services.slskd;
+    cfg = config.kubernetes.services.slskd;
 
     settingsFormat = pkgs.formats.yaml { };
 
@@ -14,7 +14,7 @@ let
 in {
     imports = [ kubenix.modules.k8s ];
 
-    options.services.slskd = {
+    options.kubernetes.services.slskd = {
         enable = lib.mkEnableOption "slskd Soulseek Client";
 
         settings = 
