@@ -2,9 +2,9 @@
 {
     imports = [
         kubenix.modules.k8s
-        ./jellyfin
-        ./qbittorrent
-        ./servarr
+        # ./jellyfin
+        # ./qbittorrent
+        # ./servarr
     ];
 
     kubernetes.resources = let
