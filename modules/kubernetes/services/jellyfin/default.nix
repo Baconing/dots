@@ -67,7 +67,7 @@ in {
                                         {
                                             key = "gpu.type";
                                             operator = "In";
-                                            vaules = [ "nvidia" "amd" "intel" ];
+                                            values = [ "nvidia" "amd" "intel" ];
                                         }
                                     ];
                                 }
