@@ -18,7 +18,7 @@ in {
                     repo = "https://kyverno.github.io/kyverno/";
                     chart = "kyverno";
                     version = "3.7.0-rc.1";
-                    sha256 = "37738661a2c69fd575a43d57a0833f56d9c59acdb7123911682ec3937d3de90d";
+                    sha256 = "rH3qZRecYtPxlQQz/lumfOT+YHIU8ouEQqBQE3pEPlU=";
                 };
             };
 
