@@ -163,7 +163,7 @@ in {
             };
 
             # TODO: make constants for domain names and such
-            ingress = {
+            ingresses = {
                 jellyfin = {
                     metadata = {
                         namespace = cfg.kubernetes.namespace;
