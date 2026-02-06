@@ -29,6 +29,14 @@ in {
         kubernetes.resources = let 
             configMapName = "longhorn-nixos-path";
         in {
+            resources.namespaces = {
+                "longhorn-system" = {
+                    metadata = {
+                        name = "longhorn-system";
+                    };
+                };
+            };
+
             configMaps.${configMapName} = {
                 metadata.namespace = "longhorn-system";
                 data."PATH" = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";

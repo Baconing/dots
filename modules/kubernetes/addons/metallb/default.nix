@@ -24,8 +24,16 @@ in {
                 namespace = "metallb-system";
             };
 
-            # https://github.com/hall/kubenix/issues/97#issuecomment-3702978320
             resources = {
+                namespaces = {
+                    "metallb-system" = {
+                        metadata = {
+                            name = "metallb-system";
+                        };
+                    };
+                };
+
+                # https://github.com/hall/kubenix/issues/97#issuecomment-3702978320
                 services.metallb-webhook-service = {
                     spec = {
                         ports = lib.mkForce [{
