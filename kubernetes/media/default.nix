@@ -40,7 +40,7 @@
                     namespace = "media"; # TODO
                     labels = {
                         name = downloadsPersistentVolumeName;
-                    }
+                    };
                 };
 
                 spec = {
@@ -55,7 +55,7 @@
                         nodeStageSecretRef = {
                             name = "smb-credentials";  # TODO
                             namespace = "default"; # TODO
-                        }
+                        };
                     };
                 };
             };
