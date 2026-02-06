@@ -1,6 +1,6 @@
 # TODO: Native Prometheus Metrics (with webserver)
 
-{ lib, kubenix, ... }:
+{ lib, kubenix, config, ... }:
 let
     cfg = config.services.unpackerr;
 {

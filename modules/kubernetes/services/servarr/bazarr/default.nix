@@ -1,4 +1,4 @@
-{ lib, kubenix, ... }:
+{ lib, kubenix, config, ... }:
 let
     cfg = config.services.bazarr;
 {
