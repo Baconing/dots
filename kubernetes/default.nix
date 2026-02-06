@@ -7,6 +7,7 @@
     ];
 
     addons.metallb.enable = true;
+    addons.longhorn.enable = true;
 
     kubernetes = let
         homelabIPPoolName = "homelab-metallb-pool";
