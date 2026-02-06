@@ -5,7 +5,10 @@
 let
   normalizedConfig = if builtins.isPath module then import module else module;
 
-  moduleDirs = builtins.readDir ./;
+  moduleDirs =
+    builtins.filter
+      (n: n != "default.nix")
+      (builtins.attrNames (builtins.readDir ./.));
 
   modules = map (n: ./${n}) moduleDirs;
 
