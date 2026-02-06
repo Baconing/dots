@@ -34,6 +34,6 @@ in {
                 kind = "L2Advertisement";
                 version = "v1beta1";
             };
-        }
+        };
     };
 }
