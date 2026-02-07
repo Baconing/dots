@@ -17,7 +17,7 @@ in {
                 repo = "https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts";
                 chart = "csi-driver-smb";
                 version = "1.19.1";
-                sha256 = "55b855a16a5eabb63d7d08bf7632bb520836cf387d942847e0770b2e40600cc1";
+                sha256 = "3TWGwasCcimmMKE4yGvqvtqS/ag2ZqrhCJUVn0p9aq8=";
             };
         };
     };
