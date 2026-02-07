@@ -30,7 +30,7 @@
 
                 spec = {
                     accessModes = [ "ReadWriteMany" ];
-                    capacity.storage = "21Ti";
+                    capacity.storage = "1Pi";
                     storageClassName = "smb";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
@@ -55,7 +55,7 @@
 
                 spec = {
                     accessModes = [ "ReadWriteMany" ];
-                    capacity.storage =  "21Ti";
+                    capacity.storage =  "1Pi";
                     storageClassName = "smb";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
@@ -80,7 +80,7 @@
                 };
 
                 spec = {
-                    resources.requests.storage = "1Ti";
+                    resources.requests.storage = "1Pi";
                     accessModes = [ "ReadWriteMany" ];
                     storageClassName = "smb";
                     volumeName = mediaPersistentVolumeName;
@@ -93,7 +93,7 @@
                 };
 
                 spec = {
-                    resources.requests.storage = "1Ti";
+                    resources.requests.storage = "1Pi";
                     accessModes = [ "ReadWriteMany" ];
                     storageClassName = "smb";
                     volumeName = downloadsPersistentVolumeName;

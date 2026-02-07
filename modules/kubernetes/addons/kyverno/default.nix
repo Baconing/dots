@@ -24,6 +24,14 @@ in {
                 namespace = "kyverno";
             };
 
+            resources.namespaces = {
+                "kyverno" = {
+                    metadata = {
+                        name = "kyverno";
+                    };
+                };
+            };
+
             customTypes = {
                 clusterPolicies = {
                     attrName = "clusterPolicies";
