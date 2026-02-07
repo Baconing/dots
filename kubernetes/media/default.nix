@@ -33,7 +33,7 @@
                     capacity.storage = "21Ti";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
-                        volumeHandle = "smb-pv";
+                        volumeHandle = "phoebe.default.svc.cluster.local/media##";
                         volumeAttributes = {
                             source = "//phoebe-truenas.local/media"; # TODO
                         };
@@ -57,7 +57,7 @@
                     capacity.storage =  "21Ti";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
-                        volumeHandle = "smb-pv";
+                        volumeHandle = "phoebe.default.svc.cluster.local/media#downloads#";
                         volumeAttributes = {
                             source = "//phoebe-truenas.local/media"; # TODO
                             subDir = "downloads";
