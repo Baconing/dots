@@ -80,11 +80,8 @@
                 spec = {
                     resources.requests.storage = "1Ti";
                     accessModes = [ "ReadWriteMany" ];
-                    selector = {
-                        matchLabels = {
-                            name = mediaPersistentVolumeName;
-                        };
-                    };
+                    storageClassName = "smb";
+                    volumeName = mediaPersistentVolumeName;
                 };
             };
 
@@ -96,11 +93,8 @@
                 spec = {
                     resources.requests.storage = "1Ti";
                     accessModes = [ "ReadWriteMany" ];
-                    selector = {
-                        matchLabels = {
-                            name = downloadsPersistentVolumeName;
-                        };
-                    };
+                    storageClassName = "smb";
+                    volumeName = downloadsPersistentVolumeName;
                 };
             };
         };
