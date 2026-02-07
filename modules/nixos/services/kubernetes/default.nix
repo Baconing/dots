@@ -65,6 +65,7 @@ in {
 
             extraFlags = [
                 "--advertise-address=${cfg.vip}"
+                "--tls-san=${cfg.vip}"
             ];
 
             # extraKubeletConfig = {
@@ -93,5 +94,10 @@ in {
         environment.systemPackages = [
             pkgs.openiscsi
         ];
+
+        systemd.services.iscsid.serviceConfig = {
+            PrivateMounts = "yes";
+            BindPaths = "/run/current-system/sw/bin:/bin";
+        };
     };
 }
