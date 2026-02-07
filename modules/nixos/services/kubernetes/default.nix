@@ -98,7 +98,7 @@ in {
         services.openiscsi = {
             enable = true;
             name = "${config.networking.hostName}-initiatorhost";
-        }
+        };
 
         systemd.services.iscsid.serviceConfig = {
             PrivateMounts = "yes";
