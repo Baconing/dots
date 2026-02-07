@@ -31,6 +31,7 @@
                 spec = {
                     accessModes = [ "ReadWriteMany" ];
                     capacity.storage = "21Ti";
+                    storageClassName = "smb";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
                         volumeHandle = "phoebe.default.svc.cluster.local/media##";
@@ -55,6 +56,7 @@
                 spec = {
                     accessModes = [ "ReadWriteMany" ];
                     capacity.storage =  "21Ti";
+                    storageClassName = "smb";
                     csi = {
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
                         volumeHandle = "phoebe.default.svc.cluster.local/media#downloads#";
