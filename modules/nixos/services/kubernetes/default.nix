@@ -91,8 +91,9 @@ in {
 
         virtualisation.containerd.enable = true;
 
-        environment.systemPackages = [
-            pkgs.nfs-utils
+        environment.systemPackages = with pkgs; [
+            nfs-utils
+            cifs-utils
         ];
 
         services.openiscsi = {

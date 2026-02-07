@@ -35,7 +35,7 @@
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
                         volumeHandle = "smb-pv";
                         volumeAttributes = {
-                            source = "//server/media"; # TODO
+                            source = "//phoebe-truenas.local/media"; # TODO
                         };
                         nodeStageSecretRef = {
                             name = "smb-credentials";  # TODO
@@ -59,7 +59,7 @@
                         driver = "smb.csi.k8s.io"; # TODO add smb csi driver
                         volumeHandle = "smb-pv";
                         volumeAttributes = {
-                            source = "//server/media"; # TODO
+                            source = "//phoebe-truenas.local/media"; # TODO
                             subDir = "downloads";
                         };
                         nodeStageSecretRef = {
