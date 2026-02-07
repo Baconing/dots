@@ -12,7 +12,7 @@ in {
     };
 
     config = lib.mkIf cfg.enable {
-        # addons.kyverno.enable = true;
+        addons.kyverno.enable = true;
 
         kubernetes.helm.releases.longhorn = {
             chart = kubenix.lib.helm.fetch {
@@ -37,59 +37,59 @@ in {
                 };
             };
 
-            # configMaps.${configMapName} = {
-            #     metadata.namespace = "longhorn-system";
-            #     data."PATH" = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
-            # };
+            configMaps.${configMapName} = {
+                metadata.namespace = "longhorn-system";
+                data."PATH" = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+            };
 
-            # clusterPolicies."longhorn-add-nixos-path" = {
-            #     metadata = {
-            #         annotations = {
-            #             "policies.kyverno.io/subject" = "Pod";
-            #             "policies.kyverno.io/category" = "Other";
-            #         };
-            #     };
+            clusterPolicies."longhorn-add-nixos-path" = {
+                metadata = {
+                    annotations = {
+                        "policies.kyverno.io/subject" = "Pod";
+                        "policies.kyverno.io/category" = "Other";
+                    };
+                };
 
-            #     spec = {
-            #         rules = [
-            #             {
-            #                 name = "add-env-vars";
-            #                 match.any = [ 
-            #                     {
-            #                         resources = {
-            #                             kinds = [ "Pod" ];
-            #                             namespaces = [ "longhorn-system" ];
-            #                         };
-            #                     }
-            #                 ];
-            #                 mutate.patchStrategicMerge = {
-            #                     spec = {
-            #                         initContainers = [
-            #                             {
-            #                                 "(name)" = "*";
-            #                                 envFrom = [
-            #                                     {
-            #                                         configMapRef.name = configMapName;
-            #                                     }
-            #                                 ];
-            #                             }
-            #                         ];
-            #                         containers = [
-            #                             {
-            #                                 "(name)" = "*";
-            #                                 envFrom = [
-            #                                     {
-            #                                         configMapRef.name = configMapName;
-            #                                     }
-            #                                 ];
-            #                             }
-            #                         ];
-            #                     };
-            #                 };
-            #             }
-            #         ];
-            #     };
-            # };
+                spec = {
+                    rules = [
+                        {
+                            name = "add-env-vars";
+                            match.any = [ 
+                                {
+                                    resources = {
+                                        kinds = [ "Pod" ];
+                                        namespaces = [ "longhorn-system" ];
+                                    };
+                                }
+                            ];
+                            mutate.patchStrategicMerge = {
+                                spec = {
+                                    initContainers = [
+                                        {
+                                            "(name)" = "*";
+                                            envFrom = [
+                                                {
+                                                    configMapRef.name = configMapName;
+                                                }
+                                            ];
+                                        }
+                                    ];
+                                    containers = [
+                                        {
+                                            "(name)" = "*";
+                                            envFrom = [
+                                                {
+                                                    configMapRef.name = configMapName;
+                                                }
+                                            ];
+                                        }
+                                    ];
+                                };
+                            };
+                        }
+                    ];
+                };
+            };
         };
     };
 }
