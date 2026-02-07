@@ -92,8 +92,13 @@ in {
         virtualisation.containerd.enable = true;
 
         environment.systemPackages = [
-            pkgs.openiscsi
+            pkgs.nfs-utils
         ];
+
+        services.openiscsi = {
+            enable = true;
+            name = "${config.networking.hostName}-initiatorhost";
+        }
 
         systemd.services.iscsid.serviceConfig = {
             PrivateMounts = "yes";
