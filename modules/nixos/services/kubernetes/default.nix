@@ -63,10 +63,6 @@ in {
               then "server"
               else "agent";
 
-            extraFlags = [
-                "--tls-san=${cfg.vip}"
-            ] ++ lib.optional (cfg.role == "control") "--advertise-address=${cfg.vip}";
-
             # extraKubeletConfig = {
             #     registerWithTaints = cfg.taints;
             # };
@@ -83,6 +79,10 @@ in {
         #     };
         # };
 
+        services.k3s.extraFlags = lib.mkIf (cfg.role == "control") [
+            "--tls-san=${cfg.vip}"
+            "--advertise-address=${cfg.vip}"
+        ];      
 
         networking.firewall.allowedTCPPorts = [
             6443 10250
