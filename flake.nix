@@ -108,7 +108,7 @@
             hostname = "mneme";
             clustered = true;
             clusterTemplate = "m73";
-            clusterRole = "node";
+            clusterRole = "control";
         };
         eukelade = helper.makeConsoleNixOS {
             hostname = "eukelade";
