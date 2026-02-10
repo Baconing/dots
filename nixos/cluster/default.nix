@@ -84,9 +84,9 @@
                 mode tcp
                 balance roundrobin
                 option tcp-check
-                server skoll skoll.local:6443 check
-                server callisto callisto.local:6443 check
-                server mneme mneme.local:6443 check
+                server skoll 10.10.3.1:6443 check
+                server callisto 10.10.5.1:6443 check
+                server mneme 10.10.5.2:6443 check
         '';
     };
 
