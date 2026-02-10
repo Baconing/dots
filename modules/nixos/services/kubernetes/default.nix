@@ -64,9 +64,8 @@ in {
               else "agent";
 
             extraFlags = [
-                "--advertise-address=${cfg.vip}"
                 "--tls-san=${cfg.vip}"
-            ];
+            ] ++ lib.optional (cfg.role == "control") "--advertise-address=${cfg.vip}";
 
             # extraKubeletConfig = {
             #     registerWithTaints = cfg.taints;
