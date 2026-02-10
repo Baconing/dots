@@ -44,51 +44,7 @@
         };
     };
 
-    services.keepalived = lib.mkIf (clusterRole == "control") {
-        enable = true;
-        openFirewall = true;
-
-        vrrpInstances.kube_api = {
-            state = "BACKUP";
-            virtualRouterId = 51;
-            priority = 50;
-            virtualIps = [ { addr = "10.10.254.253/16"; } ];
-        };
-    };
-
-
     # todo: move to service or smth, also move servers to variable
-    services.haproxy = lib.mkIf (clusterRole == "control") {
-        enable = true;
-
-        config = ''
-            global
-                log /dev/log local0
-                log /dev/log local1 notice
-                daemon
-                maxconn 4096
-
-            defaults
-                log     global
-                mode    tcp
-                option  tcplog
-                timeout connect 5s
-                timeout client  1m
-                timeout server  1m
-
-            frontend kubernetes_api
-                bind 10.10.254.253:6443
-                default_backend kubernetes_api_backends
-
-            backend kubernetes_api_backends
-                mode tcp
-                balance roundrobin
-                option tcp-check
-                server skoll 10.10.3.1:6443 check
-                server callisto 10.10.5.1:6443 check
-                server mneme 10.10.5.2:6443 check
-        '';
-    };
 
     boot.kernel.sysctl."net.ipv4.ip_nonlocal_bind" = lib.mkIf (clusterRole == "control") 1;
 }

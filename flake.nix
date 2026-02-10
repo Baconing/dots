@@ -89,7 +89,7 @@
         skoll = helper.makeConsoleNixOS {
             hostname = "skoll";
             clustered = true;
-            clusterRole = "control";
+            clusterRole = "primary";
         };
 
         aitne = helper.makeConsoleNixOS {

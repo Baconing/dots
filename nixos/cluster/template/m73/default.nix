@@ -5,5 +5,5 @@
         inputs.nixos-hardware.nixosModules.common-pc-ssd
     ];
 
-    services.keepalived.vrrpInstances.kube_api.interface = "eno1";
+    homelab.services.kubernetes.netDev = "eno1";
 }
