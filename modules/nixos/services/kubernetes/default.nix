@@ -26,7 +26,7 @@ in {
         netDev = lib.mkOption {
             type = lib.types.str;
             description = "The primary network device. (to be used for virtual ip)";
-        }
+        };
 
         # gpu = lib.mkOption {
         #     type = lib.types.nullOr (lib.types.submodule {
