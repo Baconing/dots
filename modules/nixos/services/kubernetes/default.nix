@@ -23,6 +23,11 @@ in {
             description = "The virtual IP that the server can be accessed from";
         };
 
+        clusterInit = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+        }
+
         # gpu = lib.mkOption {
         #     type = lib.types.nullOr (lib.types.submodule {
         #         options = {
@@ -82,7 +87,7 @@ in {
         services.k3s.extraFlags = lib.mkIf (cfg.role == "control") [
             "--tls-san=${cfg.vip}"
             "--advertise-address=${cfg.vip}"
-        ];      
+        ] ++ lib.optional (cfg.clusterInit) "--cluster-init";
 
         networking.firewall.allowedTCPPorts = [
             6443 10250
