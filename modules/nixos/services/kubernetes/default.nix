@@ -115,7 +115,7 @@ in {
             openFirewall = true;
 
             vrrpInstances.kube_api = {
-                state = if cfg.role == "primary" then "PRIMARY" else "BACKUP";
+                state = if cfg.role == "primary" then "MASTER" else "BACKUP";
                 virtualRouterId = 51;
                 priority = if cfg.role == "primary" then 100 else 50;
                 virtualIps = [ 
