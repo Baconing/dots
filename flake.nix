@@ -110,14 +110,8 @@
             clusterTemplate = "m73";
             clusterRole = "control";
         };
-        eukelade = helper.makeConsoleNixOS {
-            hostname = "eukelade";
-            clustered = true;
-            clusterTemplate = "m73";
-            clusterRole = "node";
-        };
-        harpalyke = helper.makeConsoleNixOS {
-            hostname = "harpalyke";
+        iocaste = helper.makeConsoleNixOS {
+            hostname = "iocaste";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
@@ -128,8 +122,14 @@
             clusterTemplate = "m73";
             clusterRole = "node";
         };
-        iocaste = helper.makeConsoleNixOS {
-            hostname = "iocaste";
+        eukelade = helper.makeConsoleNixOS {
+            hostname = "eukelade";
+            clustered = true;
+            clusterTemplate = "m73";
+            clusterRole = "node";
+        };
+        harpalyke = helper.makeConsoleNixOS {
+            hostname = "harpalyke";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
