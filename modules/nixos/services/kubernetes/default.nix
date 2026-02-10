@@ -26,7 +26,7 @@ in {
         clusterInit = lib.mkOption {
             type = lib.types.bool;
             default = false;
-        };
+        }
 
         # gpu = lib.mkOption {
         #     type = lib.types.nullOr (lib.types.submodule {

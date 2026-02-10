@@ -5,7 +5,6 @@
     ];
 
     homelab.services.kubernetes.masterAddress = lib.mkForce null;
-    homelab.services.kubernetes.clusterInit = true;
 
     services.keepalived.vrrpInstances.kube_api = {
         interface = "enp42s0";
