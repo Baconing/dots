@@ -125,6 +125,7 @@ in {
                         label = "${cfg.netDev}:kube";
                     }
                 ];
+                interface = cfg.netDev;
             };
         };
 
