@@ -15,7 +15,7 @@ in {
         };
 
         masterAddress = lib.mkOption {
-            type = lib.types.nullOr (lib.types.str);
+            type = lib.types.str;
         };
 
         vip = lib.mkOption {
@@ -73,7 +73,7 @@ in {
             # };
         };
 
-        services.k3s.serverAddr = lib.mkIf (cfg.role != "primary" || cfg.masterAddress != null) cfg.masterAddress;
+        services.k3s.serverAddr = lib.mkIf (cfg.role != "primary") cfg.masterAddress;
 
         # services.k3s.extraKubeletConfig.nodeLabels = lib.mkIf (cfg.gpu != null) {
         #     gpu = {
