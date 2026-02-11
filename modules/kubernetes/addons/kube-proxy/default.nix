@@ -18,7 +18,7 @@ in {
                     repo = "https://stevehipwell.github.io/helm-charts/";
                     chart = "kube-proxy";
                     version = "0.0.8";
-                    sha256 = "rH3qZRecYtPxlQQz/lumfOT+YHIU8ouEQqBQE3pEPlU=";
+                    sha256 = "QSx97RgygZpyWq6W+++CtRQyKLe0hQe26VkHdvsMIqU=";
                 };
 
                 namespace = "kube-system";
