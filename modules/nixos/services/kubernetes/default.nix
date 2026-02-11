@@ -95,7 +95,7 @@ in {
 
         networking.firewall.allowedUDPPorts = [
             8472
-        ]
+        ];
 
         virtualisation.containerd.enable = true;
 
