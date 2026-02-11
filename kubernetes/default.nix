@@ -16,7 +16,10 @@
     #    cidr = "10.42.0.0/16";
     #};
 
-    addons.kube-proxy.enable = true;
+    addons.kube-proxy = {
+        enable = true;
+        masterAddress = "https://10.10.254.253:6443";
+    };
 
     kubernetes = let
         homelabIPPoolName = "homelab-metallb-pool";

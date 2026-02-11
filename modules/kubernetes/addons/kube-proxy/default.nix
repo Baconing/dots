@@ -9,6 +9,10 @@ in {
 
     options.addons.kube-proxy = {
         enable = lib.mkEnableOption "kube-proxy";
+        
+        masterAddress = lib.mkOption {
+            type = lib.types.str;
+        };
     };
 
     config = lib.mkIf cfg.enable {
@@ -22,6 +26,10 @@ in {
                 };
 
                 namespace = "kube-system";
+
+                values = {
+                    apiServer.endpoint = cfg.masterAddress;
+                }
             };
         };
     };
