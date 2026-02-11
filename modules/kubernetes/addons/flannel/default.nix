@@ -15,6 +15,7 @@ in {
         kubernetes = {
             helm.releases.flannel = {
                 chart = kubenix.lib.helm.fetch {
+                    chart = "flannel";
                     chartUrl = "https://github.com/flannel-io/flannel/releases/download/v0.28.1/flannel.tgz";
                     sha256 = "rH3qZRecYtPxlQQz/lumfOT+YHIU8ouEQqBQE3pEPlU=";
                 };
