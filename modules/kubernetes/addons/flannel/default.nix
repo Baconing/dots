@@ -18,7 +18,7 @@ in {
         backend = lib.mkOption {
             type = lib.types.enum [ "vxlan" "host-gw" "wireguard" "udp" ];
             default = "vxlan";
-        }
+        };
     };
 
     config = lib.mkIf cfg.enable {
