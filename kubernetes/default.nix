@@ -10,10 +10,13 @@
     addons.longhorn.enable = true;
     addons.smb.enable = true;
 
-    addons.flannel = {
-        enable = true;
-        cidr = "10.42.0.0/16";
-    };
+    #todo
+    #addons.flannel = {
+    #    enable = true;
+    #    cidr = "10.42.0.0/16";
+    #};
+
+    addons.kube-proxy.enable = true;
 
     kubernetes = let
         homelabIPPoolName = "homelab-metallb-pool";
