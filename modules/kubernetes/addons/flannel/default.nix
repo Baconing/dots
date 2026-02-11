@@ -16,11 +16,11 @@ in {
             helm.releases.flannel = {
                 chart = kubenix.lib.helm.fetch {
                     chart = "flannel";
-                    chartUrl = "https://github.com/flannel-io/flannel/releases/download/v0.28.1/flannel.tgz";
+                    chartUrl = "https://github.com/flannel-io/flannel/releases/download/v0.28.1/flannel.tgz"; # todo: chartUrl seems to be broken as of right now
                     sha256 = "rH3qZRecYtPxlQQz/lumfOT+YHIU8ouEQqBQE3pEPlU=";
                 };
 
-                namespace = "kube-system";
+                namespace = "kube-flannel";
             };
         };
     };
