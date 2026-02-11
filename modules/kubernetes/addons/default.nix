@@ -1,5 +1,6 @@
 _: {
     imports = [
+        ./flannel
         ./kyverno
         ./longhorn
         ./metallb
