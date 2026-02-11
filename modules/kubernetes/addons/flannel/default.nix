@@ -9,6 +9,16 @@ in {
 
     options.addons.flannel = {
         enable = lib.mkEnableOption "Flannel CNI";
+
+        cidr = lib.mkOption {
+            type = lib.types.str;
+            description = "The CIDR for pods to use";
+        };
+
+        backend = lib.mkOption {
+            type = lib.types.enum [ "vxlan" "host-gw" "wireguard" "udp" ];
+            default = "vxlan";
+        }
     };
 
     config = lib.mkIf cfg.enable {
@@ -21,6 +31,13 @@ in {
                 };
 
                 namespace = "kube-flannel";
+
+                values = {
+                    podCidr = cfg.cidr;
+                    flannel = {
+                        backend = cfg.backend;
+                    };
+                };
             };
         };
     };

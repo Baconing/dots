@@ -9,7 +9,11 @@
     addons.metallb.enable = true;
     addons.longhorn.enable = true;
     addons.smb.enable = true;
-    addons.flannel.enable = true;
+
+    addons.flannel = {
+        enable = true;
+        cidr = "10.42.0.0/16";
+    };
 
     kubernetes = let
         homelabIPPoolName = "homelab-metallb-pool";
