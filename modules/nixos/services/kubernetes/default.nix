@@ -130,6 +130,11 @@ in {
                     }
                 ];
                 interface = cfg.netDev;
+                extraConfig = ''
+                    notify_master "/run/current-system/sw/bin/systemctl start haproxy"
+                    notify_backup "/run/current-system/sw/bin/systemctl stop haproxy"
+                    notify_fault  "/run/current-system/sw/bin/systemctl stop haproxy"
+                '';
             };
         };
 
