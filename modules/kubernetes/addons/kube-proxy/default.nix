@@ -29,7 +29,7 @@ in {
 
                 values = {
                     apiServer.endpoint = cfg.masterAddress;
-                }
+                };
             };
         };
     };
