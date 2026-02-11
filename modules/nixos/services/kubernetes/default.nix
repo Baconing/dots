@@ -73,7 +73,7 @@ in {
             # };
         };
 
-        services.k3s.serverAddr = lib.mkIf (cfg.masterAddress != null || cfg.role != "primary") cfg.masterAddress;
+        services.k3s.serverAddr = lib.mkIf (cfg.role != "primary" || cfg.masterAddress != null) cfg.masterAddress;
 
         # services.k3s.extraKubeletConfig.nodeLabels = lib.mkIf (cfg.gpu != null) {
         #     gpu = {
@@ -84,7 +84,7 @@ in {
         #     };
         # };
 
-        services.k3s.extraFlags = lib.mkIf (cfg.role == "control") [
+        services.k3s.extraFlags = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
             "--advertise-address=${cfg.vip}"
         ];
