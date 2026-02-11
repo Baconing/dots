@@ -90,8 +90,12 @@ in {
         ];
 
         networking.firewall.allowedTCPPorts = [
-            6443 10250
+            2379 2380 6443 10250
         ];
+
+        networking.firewall.allowedUDPPorts = [
+            8472
+        ]
 
         virtualisation.containerd.enable = true;
 
