@@ -138,7 +138,7 @@ in {
             };
         };
 
-        services.haproxy = lib.mkIf (cfg.role == "control") {
+        services.haproxy = lib.mkIf (cfg.role == "primary" || cfg.role == "control") {
             enable = true;
 
             config = ''
