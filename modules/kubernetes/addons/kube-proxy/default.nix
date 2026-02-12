@@ -28,7 +28,7 @@ in {
                 namespace = "kube-system";
 
                 values = {
-                    image.tag = "1.35.1";
+                    image.tag = "v1.35.1";
                     apiServer.endpoint = cfg.masterAddress;
                 };
             };
