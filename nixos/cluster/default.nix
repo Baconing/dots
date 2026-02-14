@@ -1,4 +1,4 @@
-{ config, hostname, inputs, lib, clusterRole, clusterTemplate,  ... }: 
+{ config, hostname, inputs, lib, clusterRole, clusterTemplate, clusterIP,  ... }: 
 {
     imports = [
         inputs.sops-nix.nixosModules.sops
@@ -38,6 +38,7 @@
                 enable = true;
                 role = clusterRole;
                 tokenFile = config.sops.secrets.kubernetes-token.path;
+                nodeIP = clusterIP;
                 masterAddress = "https://10.10.254.253:6443"; # todo
                 vip = "10.10.254.253";
             };

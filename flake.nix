@@ -90,6 +90,7 @@
             hostname = "skoll";
             clustered = true;
             clusterRole = "primary";
+            clusterIP = "10.10.3.1";
         };
 
         aitne = helper.makeConsoleNixOS {
@@ -103,36 +104,42 @@
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "control";
+            clusterIP = "10.10.5.1";
         };
         mneme = helper.makeConsoleNixOS {
             hostname = "mneme";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "control";
+            clusterIP = "10.10.5.2";
         };
         iocaste = helper.makeConsoleNixOS {
             hostname = "iocaste";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
+            clusterIP = "10.10.5.3";
         };
         kore = helper.makeConsoleNixOS {
             hostname = "kore";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
+            clusterIP = "10.10.5.4";
         };
         eukelade = helper.makeConsoleNixOS {
             hostname = "eukelade";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
+            clusterIP = "10.10.5.5";
         };
         harpalyke = helper.makeConsoleNixOS {
             hostname = "harpalyke";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
+            clusterIP = "10.10.5.6";
         };
       };
 

@@ -18,6 +18,11 @@ in {
             type = lib.types.str;
         };
 
+        nodeIP = lib.mkOption {
+            type = lib.types.str;
+            description = "The node's IP address";
+        };
+
         vip = lib.mkOption {
             type = lib.types.str;
             description = "The virtual IP that the server can be accessed from";
@@ -69,6 +74,8 @@ in {
 
             tokenFile = cfg.tokenFile;
 
+            nodeIP = cfg.nodeIP;
+
             role =
               if cfg.role == "control" || cfg.role == "primary"
               then "server"
@@ -92,7 +99,6 @@ in {
 
         services.k3s.extraFlags = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
-            "--advertise-address=${cfg.vip}"
         ];
 
         services.k3s.clusterInit = lib.mkIf (cfg.role == "primary" && cfg.init) true;
@@ -179,5 +185,8 @@ in {
                     server mneme 10.10.5.2:6443 check
             '';
         };
+
+        # Do not autostart HAProxy, it will bind to 0.0.0.0:6443 and lock up k3s. Instead have keepalived start it when needed.
+        systemd.services.haproxy.wantedBy = lib.mkForce []; 
     };
 }
