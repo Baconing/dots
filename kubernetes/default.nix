@@ -9,18 +9,7 @@
     addons.metallb.enable = true;
     addons.longhorn.enable = true;
     addons.smb.enable = true;
-
-    #todo
-    #addons.flannel = {
-    #    enable = true;
-    #    cidr = "10.42.0.0/16";
-    #};
-
-    addons.kube-proxy = {
-        enable = true;
-        masterAddress = "https://10.10.254.253:6443";
-    };
-
+    
     kubernetes = let
         homelabIPPoolName = "homelab-metallb-pool";
     in {
