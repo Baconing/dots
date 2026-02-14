@@ -32,7 +32,7 @@ in {
             type = lib.types.bool;
             description = "Set this to true when initalizing a new cluster (primary node), or registering a new control plane node.";
             default = false;
-        }
+        };
 
         # gpu = lib.mkOption {
         #     type = lib.types.nullOr (lib.types.submodule {
