@@ -79,7 +79,7 @@ in {
             # };
         };
 
-        services.k3s.serverAddr = lib.mkIf (cfg.role != "primary" || (cfg.role == "control" && cfg.init) || cfg.role == "node") cfg.masterAddress;
+        services.k3s.serverAddr = lib.mkIf (cfg.role != "primary" && ((cfg.role == "control" && cfg.init) || cfg.role == "node")) cfg.masterAddress;
 
         # services.k3s.extraKubeletConfig.nodeLabels = lib.mkIf (cfg.gpu != null) {
         #     gpu = {
@@ -145,6 +145,8 @@ in {
                 '';
             };
         };
+
+        boot.kernel.sysctl."net.ipv4.ip_nonlocal_bind" = lib.mkIf (cfg.role == "primary" || cfg.role == "control") 1;
 
         services.haproxy = lib.mkIf (cfg.role == "primary" || cfg.role == "control") {
             enable = true;

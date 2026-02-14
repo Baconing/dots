@@ -43,8 +43,4 @@
             };
         };
     };
-
-    # todo: move to service or smth, also move servers to variable
-
-    boot.kernel.sysctl."net.ipv4.ip_nonlocal_bind" = lib.mkIf (clusterRole == "control") 1;
 }
