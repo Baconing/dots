@@ -18,7 +18,7 @@
   };
 
   outputs = 
-    { self, nixpkgs, ... }@inputs:
+    { self, nixpkgs, colmena, ... }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -136,7 +136,7 @@
         };
       };
 
-      colmena = {
+      colmenaHive = colmena.lib.makeHive {
         meta = {
           nixpkgs = pkgs;
         };
