@@ -28,6 +28,12 @@ in {
             description = "The primary network device. (to be used for virtual ip)";
         };
 
+        init = lib.mkOption {
+            type = lib.types.bool;
+            description = "Set this to true when initalizing a new cluster (primary node), or registering a new control plane node.";
+            default = false;
+        }
+
         # gpu = lib.mkOption {
         #     type = lib.types.nullOr (lib.types.submodule {
         #         options = {
@@ -73,7 +79,7 @@ in {
             # };
         };
 
-        services.k3s.serverAddr = lib.mkIf (cfg.role != "primary") cfg.masterAddress;
+        services.k3s.serverAddr = lib.mkIf (cfg.role != "primary" && (cfg.role == "control" && cfg.init)) cfg.masterAddress;
 
         # services.k3s.extraKubeletConfig.nodeLabels = lib.mkIf (cfg.gpu != null) {
         #     gpu = {
@@ -88,6 +94,8 @@ in {
             "--tls-san=${cfg.vip}"
             "--advertise-address=${cfg.vip}"
         ];
+
+        services.k3s.clusterInit = lib.mkIf (cfg.role == "primary" && cfg.init) true;
 
         networking.firewall.allowedTCPPorts = [
             2379 2380 6443 10250
