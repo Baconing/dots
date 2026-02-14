@@ -64,6 +64,7 @@
 
     systemPackages = with pkgs; [
         sops
+        colmena
       ];
 
     variables = {
