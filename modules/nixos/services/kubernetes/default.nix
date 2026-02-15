@@ -104,7 +104,7 @@ in {
         services.k3s.clusterInit = lib.mkIf (cfg.role == "primary" && cfg.init) true;
 
         networking.firewall.allowedTCPPorts = [
-            2379 2380 6443 10250
+            2379 2380 6443 7946 10250
         ];
 
         networking.firewall.allowedUDPPorts = [
