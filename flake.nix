@@ -12,8 +12,6 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    kubenix.url = "github:hall/kubenix";
-
     colmena.url = "github:zhaofengli/colmena";
   };
 
@@ -195,11 +193,6 @@
           deployment.targetUser = "bacon";
           nixosConfiguration = self.nixosConfigurations.iocaste;
         };
-      };
-
-      kubenix = inputs.kubenix.packages.${pkgs.system}.default.override {
-        module = import ./kubernetes;
-        specialArgs = { flake = self; };
       };
 
       # todo: stolen from wimpysworld, idk what these really mean tbh

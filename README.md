@@ -64,10 +64,10 @@ Nodes here are named based off the moons of Jupiter.
 | :---------: | :---------------------------: | :-------------------: | :--: | :-----: | :-----------------------------: | :------------------------------------: |
 | `callisto`  | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i7-4765T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4600]        |                                        |
 | `mneme`     | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i5-4460T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4600]        |                                        |
+| `iocaste`   | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i3-4130T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4400]        |                                        |
+| `kore`      | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i3-4130T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4400]        |                                        |
 | `eukelade`  | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i3-4130T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4400]        |                                        |
 | `harpalyke` | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i3-4130T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4400]        |                                        |
-| `kore`      | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i3-4130T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4400]        |                                        |
-| `iocaste`   | [Lenovo ThinkCentre M73 Tiny] | [Intel Core i3-4130T] | 8GB  | 500GB🚶 | [Intel HD Graphics 4400]        |                                        |
 | `aitne`     | [Beelink EQR6 SEI]            | [AMD Ryzen 7 5700U]   | 16GB | 512GB🏃 | AMD Radeon Graphics (@ 1.9 GHz) | Bad CPU (unstable at high frequencies) |
 
 </details>

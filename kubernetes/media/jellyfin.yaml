@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+        - name: jellyfin
+          ports:
+            - containerPort: 8096
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: jellyfin-config
+            - mountPath: media
+              name: media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-config
+  namespace: media
+spec:
+  resources:
+    requests:
+      storage: 2Gi # todo
+      accessModes:
+        - ReadWriteOncePod
+      storageClassName: longhorn
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  selector:
+    app: jellyfin
+  ports:
+    - port: 8096
+      targetPort: 8096
+      protocol: TCP
+---
+apiVersion: v1
+kind: Ingress
+metadata:
+  name: jellyfin
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+    "traefik.ingress.kubernetes.io/router.tls": "true"
+spec:
+  rules:
+    - host: "jellyfin.awesomecooldomain.pp.ua"
+      http.paths:
+        - path: "/"
+          pathType: "Prefix"
+          backend:
+            service:
+              name: jellyfin
+              port:
+                number: 8096
+---
+apiVersion: v1
+kind: Ingress
+metadata:
+  name: jellyfin-local
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+spec:
+  rules:
+    - host: "jellyfin.local"
+      http.paths:
+        - path: "/"
+          pathType: "Prefix"
+          backend:
+            service:
+              name: jellyfin
+              port:
+                number: 8096
+    - host: "jellyfin.homelab"
+      http.paths:
+        - path: "/"
+          pathType: "Prefix"
+          backend:
+            service:
+              name: jellyfin
+              port:
+                number: 8096
