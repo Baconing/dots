@@ -22,6 +22,7 @@
 
 keys: &keys
   - &user_bacon age1m3lajqjssue8jnuuhphxp3x0lxagksqpsecgnuxuy46wtag28c5spm5jyr
+  - &fluxcd age17v6mkt3sh9h5j90pgaehrhu0ntdvksh8dw0lc69y3hp508lxxycsd5dynl
   - &host_skoll age1fyrjkzn6w84yya2rkg2z2x5lss8q622faeen2wc4ckjnmecl230qh8sfey
   - &host_callisto age1uj6zl377wwvgysd0hn8n9h9dcvkuvxcu9948jsr5hxvjwcaguu5s8uxk92
   - &host_mneme age1qyt44szfs9tx7vdqkhlct5kdkl0jvxdryuvk3azhsml8g4zzp5asq7rc53
@@ -31,7 +32,13 @@ keys: &keys
   - &host_harpalyke age1fl9vgdt5q8k3vavv9pd7zya6dqcrq3lz4ecc5ucnndn0m67fup4svdglv5
 
 creation_rules:
-  - path_regex: ^(.*/)?[^/]+\.secret\..+$
+  - path_regex: ^kubernetes[/\\].*\.secret\.yaml$
+    encrypted_regex: '^(data|stringData)$'
+    key_groups:
+    - age:
+      - *user_bacon
+      - *fluxcd
+  - path_regex: ^(nixos|home|modules|lib)[/\\].*\.secret\..+$
     key_groups:
     - age:
       - *user_bacon
