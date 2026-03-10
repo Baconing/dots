@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: ./kubernetes/media/storage
+  path: kubernetes/media/storage
   prune: true
   sourceRef:
     kind: GitRepository

@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: ./kubernetes/helm
+  path: kubernetes/helm
   prune: true
   sourceRef:
     kind: GitRepository
