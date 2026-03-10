@@ -14,3 +14,4 @@ spec:
     provider: sops
     secretRef:
       name: sops-fluxcd
+      namespace: default
