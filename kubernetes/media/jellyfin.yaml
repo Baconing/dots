@@ -36,7 +36,7 @@ spec:
     requests:
       storage: 2Gi # todo
       accessModes:
-        - ReadWriteOncePod
+        - ReadWriteOnce
       storageClassName: longhorn
 ---
 apiVersion: v1
