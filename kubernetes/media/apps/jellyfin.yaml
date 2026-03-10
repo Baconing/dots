@@ -5,11 +5,11 @@ metadata:
   namespace: media
 spec:
   accessModes:
-    - ReadWriteOncePod 
+    - ReadWriteOncePod
+  storageClassName: longhorn
   resources:
     requests:
       storage: 2Gi
-      storageClassName: longhorn
 ---
 apiVersion: apps/v1
 kind: Deployment
