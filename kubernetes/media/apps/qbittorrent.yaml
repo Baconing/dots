@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+        - name: qbittorrent
+          image: linuxserver/qbittorrent:10.11.6
+          env:
+            - name: TORRENTING_PORT
+              value: 20006
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 20006
+              protocol: TCP
+            - containerPort: 20006
+              protocol: UDP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /downloads
+              name: downloads
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: qbittorrent-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+  namespace: media
+spec:
+  selector:
+    app: qbittorrent
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+    - port: 20006
+      targetPort: 20006
+      protocol: TCP
+    - port: 20006
+      targetPort: 20006
+      protocol: UDP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+    "traefik.ingress.kubernetes.io/router.tls": "true"
+spec:
+  rules:
+    - host: "torrent.awesomecooldomain.pp.ua"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: qbittorrent
+                port:
+                  number: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent-local
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+spec:
+  rules:
+    - host: "torrent.local"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: qbittorrent
+                port:
+                  number: 8080
+    - host: "torrent.homelab"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: qbittorrent
+                port:
+                  number: 8080
