@@ -7,7 +7,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: media-storage
-  namespace: media
+  namespace: flux-system
 spec:
   interval: 5m
   path: ./kubernetes/media/storage
@@ -15,7 +15,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-    namespace: flux-system
   decryption:
     provider: sops
     secretRef:
@@ -25,7 +24,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: media-apps
-  namespace: media
+  namespace: flux-system
 spec:
   interval: 5m
   path: ./kubernetes/media/apps
@@ -33,6 +32,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-    namespace: flux-system
   dependsOn:
     - name: media-storage
