@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: kubernetes/helm
+  path: ./kubernetes/helm
   prune: true
   sourceRef:
     kind: GitRepository
@@ -18,7 +18,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: kubernetes/media/namespace
+  path: ./kubernetes/media/namespace
   prune: true
   sourceRef:
     kind: GitRepository
@@ -31,7 +31,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: kubernetes/media/storage
+  path: ./kubernetes/media/storage
   prune: true
   sourceRef:
     kind: GitRepository
@@ -50,7 +50,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: kubernetes/media/apps
+  path: ./kubernetes/media/apps
   prune: true
   sourceRef:
     kind: GitRepository
