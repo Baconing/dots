@@ -1,0 +1,110 @@
+# TODO: This can be done with Kubernetes: https://docs.seerr.dev/getting-started/kubernetes
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seerr
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: seerr
+  template:
+    metadata:
+      labels:
+        app: seerr
+    spec:
+      containers:
+        - name: seerr
+          image: ghcr.io/seerr-team/seerr:latest
+          ports:
+            - containerPort: 5055
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/config
+              name: config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: seerr-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: seerr-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seerr
+  namespace: media
+spec:
+  selector:
+    app: seerr
+  ports:
+    - port: 5055
+      targetPort: 5055
+      protocol: TCP
+      name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seerr
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+    "traefik.ingress.kubernetes.io/router.tls": "true"
+spec:
+  rules:
+    - host: "seerr.awesomecooldomain.pp.ua"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: seerr
+                port:
+                  number: 5055
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seerr-local
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+spec:
+  rules:
+    - host: "seerr.local"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: seerr
+                port:
+                  number: 5055
+    - host: "seerr.homelab"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: seerr
+                port:
+                  number: 5055

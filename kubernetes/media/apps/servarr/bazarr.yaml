@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bazarr
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: bazarr
+  template:
+    metadata:
+      labels:
+        app: bazarr
+    spec:
+      containers:
+        - name: bazarr
+          image: linuxserver/bazarr:1.5.6
+          ports:
+            - containerPort: 6767
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /media
+              name: media
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: bazarr-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bazarr-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bazarr
+  namespace: media
+spec:
+  selector:
+    app: bazarr
+  ports:
+    - port: 6767
+      targetPort: 6767
+      protocol: TCP
+      name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bazarr
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+    "traefik.ingress.kubernetes.io/router.tls": "true"
+spec:
+  rules:
+    - host: "bazarr.awesomecooldomain.pp.ua"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: bazarr
+                port:
+                  number: 6767
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bazarr-local
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+spec:
+  rules:
+    - host: "bazarr.local"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: bazarr
+                port:
+                  number: 6767
+    - host: "bazarr.homelab"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: bazarr
+                port:
+                  number: 6767

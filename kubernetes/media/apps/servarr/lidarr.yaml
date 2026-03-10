@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      containers:
+        - name: lidarr
+          image: ghcr.io/hotio/lidarr:pr-plugins
+          ports:
+            - containerPort: 8686
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /media
+              name: media
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: lidarr-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lidarr-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lidarr
+  namespace: media
+spec:
+  selector:
+    app: lidarr
+  ports:
+    - port: 8686
+      targetPort: 8686
+      protocol: TCP
+      name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lidarr
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+    "traefik.ingress.kubernetes.io/router.tls": "true"
+spec:
+  rules:
+    - host: "lidarr.awesomecooldomain.pp.ua"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: lidarr
+                port:
+                  number: 8686
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lidarr-local
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+spec:
+  rules:
+    - host: "lidarr.local"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: lidarr
+                port:
+                  number: 8686
+    - host: "lidarr.homelab"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: lidarr
+                port:
+                  number: 8686
