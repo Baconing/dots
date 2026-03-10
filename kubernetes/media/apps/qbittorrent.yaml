@@ -20,7 +20,7 @@ spec:
           image: linuxserver/qbittorrent:10.11.6
           env:
             - name: TORRENTING_PORT
-              value: 20006
+              value: "20006"
           ports:
             - containerPort: 8080
               protocol: TCP
