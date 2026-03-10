@@ -8,7 +8,7 @@ spec:
     - ReadWriteOncePod 
   resources:
     requests:
-      storage: 2Gi # todo
+      storage: 2Gi
       storageClassName: longhorn
 ---
 apiVersion: apps/v1
@@ -30,6 +30,7 @@ spec:
     spec:
       containers:
         - name: jellyfin
+          image: linuxserver/jellyfin:10.11.6
           ports:
             - containerPort: 8096
               protocol: TCP
@@ -63,14 +64,15 @@ metadata:
 spec:
   rules:
     - host: "jellyfin.awesomecooldomain.pp.ua"
-      http.paths:
-        - path: "/"
-          pathType: "Prefix"
-          backend:
-            service:
-              name: jellyfin
-              port:
-                number: 8096
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -82,20 +84,22 @@ metadata:
 spec:
   rules:
     - host: "jellyfin.local"
-      http.paths:
-        - path: "/"
-          pathType: "Prefix"
-          backend:
-            service:
-              name: jellyfin
-              port:
-                number: 8096
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096
     - host: "jellyfin.homelab"
-      http.paths:
-        - path: "/"
-          pathType: "Prefix"
-          backend:
-            service:
-              name: jellyfin
-              port:
-                number: 8096
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096
