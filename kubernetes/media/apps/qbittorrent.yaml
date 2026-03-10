@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: qbittorrent
-          image: linuxserver/qbittorrent:10.11.6
+          image: linuxserver/qbittorrent:5.1.4
           env:
             - name: TORRENTING_PORT
               value: "20006"
