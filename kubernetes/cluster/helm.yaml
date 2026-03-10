@@ -1,0 +1,71 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: helm-kyverno
+  namespace: helm
+spec:
+  interval: 5m
+  path: ./kubernetes/helm/kyverno
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: helm-longhorn
+  namespace: helm
+spec:
+  interval: 5m
+  path: ./kubernetes/helm/longhorn
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  dependsOn:
+    - name: helm-kyverno
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: helm-metallb
+  namespace: helm
+spec:
+  interval: 5m
+  path: ./kubernetes/helm/metallb
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: helm-nvidia
+  namespace: helm
+spec:
+  interval: 5m
+  path: ./kubernetes/helm/nvidia
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: helm-smb
+  namespace: helm
+spec:
+  interval: 5m
+  path: ./kubernetes/helm/smb
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
