@@ -118,6 +118,10 @@ in {
             cifs-utils
         ];
 
+        environment.deafultPackages = with pkgs; [
+            fluxcd
+        ];
+
         services.openiscsi = {
             enable = true;
             name = "${config.networking.hostName}-initiatorhost";
