@@ -4,7 +4,7 @@ metadata:
   name: metallb
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 1m
   path: ./kubernetes/metallb
   prune: true
   sourceRef:

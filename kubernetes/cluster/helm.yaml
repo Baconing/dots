@@ -9,7 +9,7 @@ metadata:
   name: helm-kyverno
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 1m
   path: ./kubernetes/helm/kyverno
   prune: true
   sourceRef:
@@ -23,7 +23,7 @@ metadata:
   name: helm-longhorn
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 1m
   path: ./kubernetes/helm/longhorn
   prune: true
   sourceRef:
@@ -39,7 +39,7 @@ metadata:
   name: helm-metallb
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 1m
   path: ./kubernetes/helm/metallb
   prune: true
   sourceRef:
@@ -53,7 +53,7 @@ metadata:
   name: helm-nvidia
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 1m
   path: ./kubernetes/helm/nvidia
   prune: true
   sourceRef:
@@ -67,7 +67,7 @@ metadata:
   name: helm-smb
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 1m
   path: ./kubernetes/helm/smb
   prune: true
   sourceRef:
