@@ -15,7 +15,7 @@ spec:
     driver: smb.csi.k8s.io
     volumeHandle: phoebe.default.svc.cluster.local/media##
     volumeAttributes:
-      source: //phoebe-truenas.local/media
+      source: //10.10.2.2/media
     nodeStageSecretRef:
       name: phoebe-smb-credentials
       namespace: default
@@ -37,7 +37,7 @@ spec:
     driver: smb.csi.k8s.io
     volumeHandle: phoebe.default.svc.cluster.local/media#downloads#
     volumeAttributes:
-      source: //phoebe-truenas.local/media
+      source: //10.10.2.2/media
       subDir: downloads
     nodeStageSecretRef:
       name: phoebe-smb-credentials
