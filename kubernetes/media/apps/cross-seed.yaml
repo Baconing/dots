@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cross-seed
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cross-seed
+  template:
+    metadata:
+      labels:
+        app: cross-seed
+    spec:
+      containers:
+        - name: cross-seed
+          image: ghcr.io/cross-seed/cross-seed:6.13.6
+          command: ["daemon"]
+          ports:
+            - containerPort: 2468
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /downloads
+              name: downloads
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: cross-seed-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cross-seed-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cross-seed
+  namespace: media
+spec:
+  selector:
+    app: cross-seed
+  ports:
+    - port: 2468
+      targetPort: 2468
+      protocol: TCP
+      name: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cross-seed
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+    "traefik.ingress.kubernetes.io/router.tls": "true"
+spec:
+  rules:
+    - host: "cross-seed.awesomecooldomain.pp.ua"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: cross-seed
+                port:
+                  number: 2468
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cross-seed-local
+  namespace: media
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+spec:
+  rules:
+    - host: "cross-seed.local"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: cross-seed
+                port:
+                  number: 2468
+    - host: "cross-seed.homelab"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: cross-seed
+                port:
+                  number: 2468
