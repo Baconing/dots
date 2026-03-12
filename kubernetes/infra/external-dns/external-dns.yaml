@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cloudflare
+  name: external-dns
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
