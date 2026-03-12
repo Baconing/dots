@@ -28,3 +28,6 @@ spec:
         kind: HelmRepository
         name: cert-manager
         namespace: flux-system
+  values:
+    crds:
+      enabled: true
