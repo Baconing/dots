@@ -22,6 +22,8 @@ spec:
             secretKeyRef:
               name: cloudflare-api-token
               key: apiToken
+        - name: ZONE
+          value: "saturn.ong"
         - name: DOMAINS
           value: "direct.saturn.ong"
         - name: PROXIED
