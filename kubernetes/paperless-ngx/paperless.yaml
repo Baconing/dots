@@ -45,6 +45,8 @@ spec:
               mountPath: /usr/src/paperless/media
             - name: consume
               mountPath: /usr/src/paperless/consume
+            - name: export
+              mountPath: /usr/src/paperless/export
           readinessProbe:
             httpGet:
               path: /
@@ -67,6 +69,20 @@ spec:
         - name: consume
           persistentVolumeClaim:
             claimName: paperless-consume
+        - name: export
+          persistentVolumeClaim:
+            claimName: paperless-export
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+  namespace: paperless-ngx
+spec:
+  accessModes: [ReadWriteMany]
+  resources:
+    requests:
+      storage: 256Mi
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
