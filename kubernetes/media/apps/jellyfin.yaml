@@ -95,6 +95,7 @@ metadata:
     "kubernetes.io/ingress.class": traefik
     "traefik.ingress.kubernetes.io/router.tls": "true"
     "external-dns.alpha.kubernetes.io/hostname": jellyfin.saturn.ong
+    "external-dns.alpha.kubernetes.io/target": direct.saturn.ong
 spec:
   tls:
     - secretName: jellyfin.saturn.ong-tls
