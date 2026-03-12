@@ -17,15 +17,17 @@ spec:
       - name: ddns
         image: oznu/cloudflare-ddns:latest
         env:
-        - name: API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: cloudflare-api-token
-              key: apiToken
-        - name: ZONE
-          value: "saturn.ong"
+        - name: CLOUDFLARE_API_TOKEN_FILE
+          value: "/run/secret/cloudflare-api/apiToken"
         - name: DOMAINS
           value: "direct.saturn.ong"
         - name: PROXIED
           value: "true"
-      restartPolicy: Always
+        volumeMounts:
+          - name: apiKey
+            readOnly: true
+            mountPath: "/run/secret/cloudflare-api"
+      volumes:
+        - name: apiKey
+          secret:
+            secretName: cloudflare-api-token
