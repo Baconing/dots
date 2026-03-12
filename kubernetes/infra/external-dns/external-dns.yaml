@@ -22,18 +22,18 @@ spec:
         kind: HelmRepository
         name: external-dns
         namespace: flux-system
-      values:
-        provider:
-          name: cloudflare
+  values:
+    provider:
+      name: cloudflare
 
-        env:
-          - name: CF_API_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: cloudflare
-                key: apiToken
-          - name: CF_API_EMAIL
-            valueFrom:
-              secretKeyRef:
-                name: cloudflare
-                key: email
+    env:
+      - name: CF_API_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: cloudflare
+            key: apiToken
+      - name: CF_API_EMAIL
+        valueFrom:
+          secretKeyRef:
+            name: cloudflare
+            key: email
