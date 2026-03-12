@@ -17,7 +17,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 1.19.0
+      version: 1.20.0
       sourceRef:
         kind: HelmRepository
         name: external-dns
@@ -30,10 +30,10 @@ spec:
       - name: CF_API_TOKEN
         valueFrom:
           secretKeyRef:
-            name: cloudflare
+            name: cloudflare-api-token
             key: apiToken
       - name: CF_API_EMAIL
         valueFrom:
           secretKeyRef:
-            name: cloudflare
+            name: cloudflare-api-token
             key: email
