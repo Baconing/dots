@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloudflare-ddns
-  namespace: external-dns
+  namespace: cloudflare
 spec:
   replicas: 1
   selector:
