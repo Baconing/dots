@@ -9,8 +9,9 @@ metadata:
   name: cert-manager
   namespace: flux-system
 spec:
+  type: "oci"
   interval: 1h
-  url: https://charts.jetstack.io
+  url: oci://quay.io/jetstack
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
