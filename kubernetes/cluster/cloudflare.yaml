@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: media
+  name: cloudflare
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cloudflare
+  name: cloudflare-cred
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/cloudflare
+  path: ./kubernetes/cloudflare/cred
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,3 +20,17 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cloudflare-app
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./kubernetes/cloudflare/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
