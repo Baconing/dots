@@ -22,12 +22,8 @@ spec:
             secretKeyRef:
               name: cloudflare-api-token
               key: apiToken
-        - name: ZONE
-          value: "saturn.ong"
-        - name: RECORD
+        - name: DOMAINS
           value: "direct.saturn.ong"
         - name: PROXIED
           value: "true"
-        - name: INTERVAL
-          value: "300"
       restartPolicy: Always
