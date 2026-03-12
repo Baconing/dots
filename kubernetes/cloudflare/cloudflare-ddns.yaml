@@ -20,8 +20,8 @@ spec:
         - name: API_TOKEN
           valueFrom:
             secretKeyRef:
-              name: cloudflare-api
-              key: api-token
+              name: cloudflare-api-token
+              key: apiToken
         - name: ZONE
           value: "saturn.ong"
         - name: RECORD
