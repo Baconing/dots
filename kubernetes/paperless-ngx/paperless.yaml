@@ -84,27 +84,6 @@ spec:
     requests:
       storage: 256Mi
 ---
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: paperless-ngx
-  namespace: paperless-ngx
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: paperless-ngx
-  minReplicas: 1
-  maxReplicas: 4
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 70
-          # todo ^
----
 apiVersion: v1
 kind: Service
 metadata:
