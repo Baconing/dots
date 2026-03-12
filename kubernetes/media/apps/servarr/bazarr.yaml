@@ -61,6 +61,19 @@ spec:
       protocol: TCP
       name: http
 ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: bazarr
+  namespace: media
+spec:
+  secretName: bazarr.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - bazarr.saturn.ong
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -69,9 +82,12 @@ metadata:
   annotations:
     "kubernetes.io/ingress.class": traefik
     "traefik.ingress.kubernetes.io/router.tls": "true"
+    "external-dns.alpha.kubernetes.io/hostname": bazarr.saturn.ong
 spec:
+  tls:
+    - secretName: bazarr.saturn.ong-tls
   rules:
-    - host: "bazarr.awesomecooldomain.pp.ua"
+    - host: "bazarr.saturn.ong"
       http:
         paths:
           - path: "/"
@@ -81,27 +97,7 @@ spec:
                 name: bazarr
                 port:
                   number: 6767
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: bazarr-local
-  namespace: media
-  annotations:
-    "kubernetes.io/ingress.class": traefik
-spec:
-  rules:
-    - host: "bazarr.local"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: bazarr
-                port:
-                  number: 6767
-    - host: "bazarr.homelab"
+    - host: "bazarr.internal"
       http:
         paths:
           - path: "/"

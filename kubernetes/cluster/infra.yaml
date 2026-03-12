@@ -1,16 +1,11 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: helm
----
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: helm-kyverno
+  name: infra-cert-manager
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/helm/kyverno
+  path: ./kubernetes/cert-manager/kyverno
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,27 +15,59 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: helm-longhorn
+  name: infra-external-dns
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/helm/longhorn
+  path: ./kubernetes/infra/external-dns
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-kyverno
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./kubernetes/infra/kyverno
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-longhorn
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./kubernetes/infra/longhorn
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: helm-kyverno
+    - name: infra-kyverno
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: helm-metallb
+  name: infra-metallb
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/helm/metallb
+  path: ./kubernetes/infra/metallb
   prune: true
   sourceRef:
     kind: GitRepository
@@ -50,11 +77,11 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: helm-nvidia
+  name: infra-nvidia
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/helm/nvidia
+  path: ./kubernetes/infra/nvidia
   prune: true
   sourceRef:
     kind: GitRepository
@@ -64,11 +91,11 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: helm-smb
+  name: infra-smb
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/helm/smb
+  path: ./kubernetes/infra/smb
   prune: true
   sourceRef:
     kind: GitRepository

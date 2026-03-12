@@ -62,6 +62,19 @@ spec:
       protocol: TCP
       name: http
 ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cross-seed
+  namespace: media
+spec:
+  secretName: cross-seed.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - cross-seed.saturn.ong
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -70,9 +83,12 @@ metadata:
   annotations:
     "kubernetes.io/ingress.class": traefik
     "traefik.ingress.kubernetes.io/router.tls": "true"
+    "external-dns.alpha.kubernetes.io/hostname": cross-seed.saturn.ong
 spec:
+  tls:
+    - secretName: cross-seed.saturn.ong-tls
   rules:
-    - host: "cross-seed.awesomecooldomain.pp.ua"
+    - host: "cross-seed.saturn.ong"
       http:
         paths:
           - path: "/"
@@ -82,27 +98,7 @@ spec:
                 name: cross-seed
                 port:
                   number: 2468
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: cross-seed-local
-  namespace: media
-  annotations:
-    "kubernetes.io/ingress.class": traefik
-spec:
-  rules:
-    - host: "cross-seed.local"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: cross-seed
-                port:
-                  number: 2468
-    - host: "cross-seed.homelab"
+    - host: "cross-seed.internal"
       http:
         paths:
           - path: "/"

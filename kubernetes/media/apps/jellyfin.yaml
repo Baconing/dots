@@ -73,6 +73,19 @@ spec:
       protocol: UDP
       name: dnla-discovery
 ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  secretName: jellyfin.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - jellyfin.saturn.ong
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -81,9 +94,12 @@ metadata:
   annotations:
     "kubernetes.io/ingress.class": traefik
     "traefik.ingress.kubernetes.io/router.tls": "true"
+    "external-dns.alpha.kubernetes.io/hostname": jellyfin.saturn.ong
 spec:
+  tls:
+    - secretName: jellyfin.saturn.ong-tls
   rules:
-    - host: "jellyfin.awesomecooldomain.pp.ua"
+    - host: "jellyfin.saturn.ong"
       http:
         paths:
           - path: "/"
@@ -93,27 +109,7 @@ spec:
                 name: jellyfin
                 port:
                   number: 8096
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: jellyfin-local
-  namespace: media
-  annotations:
-    "kubernetes.io/ingress.class": traefik
-spec:
-  rules:
-    - host: "jellyfin.local"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: jellyfin
-                port:
-                  number: 8096
-    - host: "jellyfin.homelab"
+    - host: "jellyfin.internal"
       http:
         paths:
           - path: "/"

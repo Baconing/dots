@@ -56,6 +56,19 @@ spec:
       protocol: TCP
       name: http
 ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: autobrr
+  namespace: media
+spec:
+  secretName: autobrr.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - autobrr.saturn.ong
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -64,9 +77,12 @@ metadata:
   annotations:
     "kubernetes.io/ingress.class": traefik
     "traefik.ingress.kubernetes.io/router.tls": "true"
+    "external-dns.alpha.kubernetes.io/hostname": autobrr.saturn.ong
 spec:
+  tls:
+    - secretName: autobrr.saturn.ong-tls
   rules:
-    - host: "autobrr.awesomecooldomain.pp.ua"
+    - host: "autobrr.saturn.ong"
       http:
         paths:
           - path: "/"
@@ -76,27 +92,7 @@ spec:
                 name: autobrr
                 port:
                   number: 7474
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: autobrr-local
-  namespace: media
-  annotations:
-    "kubernetes.io/ingress.class": traefik
-spec:
-  rules:
-    - host: "autobrr.local"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: autobrr
-                port:
-                  number: 7474
-    - host: "autobrr.homelab"
+    - host: "autobrr.internal"
       http:
         paths:
           - path: "/"
