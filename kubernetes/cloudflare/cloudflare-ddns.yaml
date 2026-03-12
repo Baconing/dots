@@ -24,10 +24,10 @@ spec:
         - name: PROXIED
           value: "true"
         volumeMounts:
-          - name: apiKey
+          - name: api-key
             readOnly: true
             mountPath: "/run/secret/cloudflare-api"
       volumes:
-        - name: apiKey
+        - name: api-key
           secret:
             secretName: cloudflare-api-token
