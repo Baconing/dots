@@ -42,3 +42,7 @@ spec:
           secretKeyRef:
             name: cloudflare-api-token
             key: email
+    
+    extraArgs:
+      - --source=ingress
+      - --cloudflare-proxied
