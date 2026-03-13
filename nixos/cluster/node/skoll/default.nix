@@ -8,6 +8,7 @@
     hardware.nvidia = {
         open = false;
         modesetting.enable = true;
+        datacenter.enable = true;
     };
     hardware.nvidia-container-toolkit.enable = true;
 
