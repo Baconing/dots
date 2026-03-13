@@ -24,6 +24,8 @@ spec:
           env:
             - name: PAPERLESS_URL
               value: "https://paperless.saturn.ong"
+            - name: PAPERLESS_ALLOWED_HOSTS
+              value: "paperless.saturn.ong,paperless"
             - name: PAPERLESS_REDIS
               value: redis://redis:6379
             - name: PAPERLESS_DBHOST
