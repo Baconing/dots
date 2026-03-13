@@ -49,7 +49,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: paperless-data
+  name: paperless-ai-data
   namespace: paperless-ngx
 spec:
   accessModes: [ReadWriteMany]
