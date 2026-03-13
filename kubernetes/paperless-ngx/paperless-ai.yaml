@@ -75,7 +75,7 @@ metadata:
   name: paperless-ai
   namespace: paperless-ngx
 spec:
-  secretName: paperless.saturn.ong-tls
+  secretName: paperai.saturn.ong-tls
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
