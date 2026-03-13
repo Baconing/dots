@@ -16,7 +16,7 @@ spec:
         app: jellyfin
     spec:
       securityContext:
-        fsGroup: 1000
+        fsGroup: 911
       containers:
         - name: jellyfin
           image: linuxserver/jellyfin:10.11.6
