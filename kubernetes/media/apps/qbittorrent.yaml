@@ -116,7 +116,7 @@ spec:
             pathType: "Prefix"
             backend:
               service:
-                name: torrent
+                name: qbittorrent
                 port:
                   number: 8080
     - host: "torrent.internal"
@@ -126,6 +126,6 @@ spec:
             pathType: "Prefix"
             backend:
               service:
-                name: torrent
+                name: qbittorrent
                 port:
                   number: 8080
