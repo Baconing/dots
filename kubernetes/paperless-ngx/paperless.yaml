@@ -53,18 +53,6 @@ spec:
               mountPath: /usr/src/paperless/consume
             - name: export
               mountPath: /usr/src/paperless/export
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8000
-            initialDelaySeconds: 20
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8000
-            initialDelaySeconds: 60
-            periodSeconds: 30
       volumes:
         - name: data
           persistentVolumeClaim:
