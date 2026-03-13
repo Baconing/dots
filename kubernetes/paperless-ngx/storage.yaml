@@ -20,6 +20,11 @@ spec:
     nodeStageSecretRef:
       name: phoebe-smb-credentials
       namespace: default
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -43,6 +48,11 @@ spec:
     nodeStageSecretRef:
       name: phoebe-smb-credentials
       namespace: default
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -66,6 +76,11 @@ spec:
     nodeStageSecretRef:
       name: phoebe-smb-credentials
       namespace: default
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
 
 ---
 apiVersion: v1
