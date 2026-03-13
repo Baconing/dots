@@ -15,9 +15,16 @@ spec:
       labels:
         app: radarr
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: radarr
           image: linuxserver/radarr:6.0.4
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
           ports:
             - containerPort: 7878
               protocol: TCP

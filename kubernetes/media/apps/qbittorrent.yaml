@@ -15,10 +15,16 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: qbittorrent
           image: linuxserver/qbittorrent:5.1.4
           env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
             - name: TORRENTING_PORT
               value: "20006"
           ports:
