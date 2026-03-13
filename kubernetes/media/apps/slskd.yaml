@@ -24,14 +24,14 @@ spec:
             - containerPort: 50300
               protocol: TCP
           volumeMounts:
-            - mountPath: /config
-              name: config
+            - mountPath: /app
+              name: data
             - mountPath: /downloads
               name: downloads
       volumes:
-        - name: config
+        - name: data
           persistentVolumeClaim:
-            claimName: slskd-config
+            claimName: slskd-data
         - name: downloads
           persistentVolumeClaim:
             claimName: downloads
@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: slskd-config
+  name: slskd-data
   namespace: media
 spec:
   accessModes:
