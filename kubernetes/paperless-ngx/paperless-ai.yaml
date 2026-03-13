@@ -1,0 +1,118 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ai
+  namespace: paperless-ngx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-ai
+  template:
+    metadata:
+      labels:
+        app: paperless-ai
+    spec:
+      containers:
+        - name: paperless
+          image: clusterzx/paperless-ai:3.0.9
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PAPERLESS_AI_PORT
+              value: 3000
+            - name: RAG_SERVICE_URL
+              value: http://paperless-ngx:3000
+            - name: RAG_SERVICE_ENABLED
+              value: true
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 30
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: paperless-ai-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-data
+  namespace: paperless-ngx
+spec:
+  accessModes: [ReadWriteMany]
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paperless-ai
+  namespace: paperless-ngx
+spec:
+  selector:
+    app: paperless-ai
+  ports:
+    - port: 3000
+      targetPort: 3000
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: paperless-ai
+  namespace: paperless-ngx
+spec:
+  secretName: paperless.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - paperai.saturn.ong
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: paperless-ai
+  namespace: paperless-ngx
+  annotations:
+    "kubernetes.io/ingress.class": traefik
+    "traefik.ingress.kubernetes.io/router.tls": "true"
+    "external-dns.alpha.kubernetes.io/hostname": paperai.saturn.ong
+    "external-dns.alpha.kubernetes.io/target": direct.saturn.ong
+spec:
+  tls:
+    - secretName: paperai.saturn.ong-tls
+  rules:
+    - host: "paperai.saturn.ong"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: paperless-ai
+                port:
+                  number: 3000
+    - host: "paperai.internal"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: paperless-ai
+                port:
+                  number: 3000
