@@ -20,7 +20,7 @@ spec:
           image: vaultwarden/server:1.35.4
           env:
             - name: DOMAIN
-              value: vault.saturn.ong
+              value: "https://vault.saturn.ong"
             - name: ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:
