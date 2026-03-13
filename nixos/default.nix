@@ -42,6 +42,7 @@
   };
 
   nixpkgs = {
+    hostPlatform = lib.mkDefault "${platform}";
     config = {
       allowUnfree = true;
     };
@@ -108,9 +109,6 @@
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
-
-  nixpkgs.hostPlatform = lib.mkDefault "${platform}";
-  nixpkgs.config.allowUnfree = true;
 
   system = {
     inherit stateVersion;
