@@ -106,13 +106,3 @@ spec:
                 name: paperless-ai
                 port:
                   number: 3000
-    - host: "paperai.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: paperless-ai
-                port:
-                  number: 3000

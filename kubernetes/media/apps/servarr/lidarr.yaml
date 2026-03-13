@@ -105,13 +105,3 @@ spec:
                 name: lidarr
                 port:
                   number: 8686
-    - host: "lidarr.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: lidarr
-                port:
-                  number: 8686

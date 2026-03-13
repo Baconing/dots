@@ -133,13 +133,3 @@ spec:
                 name: paperless-ngx
                 port:
                   number: 8000
-    - host: "paperless.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: paperless-ngx
-                port:
-                  number: 8000

@@ -105,13 +105,3 @@ spec:
                 name: radarr
                 port:
                   number: 7878
-    - host: "radarr.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: radarr
-                port:
-                  number: 7878

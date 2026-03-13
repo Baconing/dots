@@ -117,13 +117,3 @@ spec:
                 name: jellyfin
                 port:
                   number: 8096
-    - host: "jellyfin.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: jellyfin
-                port:
-                  number: 8096

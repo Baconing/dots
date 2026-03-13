@@ -93,13 +93,3 @@ spec:
                 name: autobrr
                 port:
                   number: 7474
-    - host: "autobrr.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: autobrr
-                port:
-                  number: 7474

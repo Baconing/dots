@@ -119,13 +119,3 @@ spec:
                 name: qbittorrent
                 port:
                   number: 8080
-    - host: "torrent.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: qbittorrent
-                port:
-                  number: 8080

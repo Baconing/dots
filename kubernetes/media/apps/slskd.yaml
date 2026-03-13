@@ -108,13 +108,3 @@ spec:
                 name: slskd
                 port:
                   number: 5030
-    - host: "slskd.internal"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: slskd
-                port:
-                  number: 5030
