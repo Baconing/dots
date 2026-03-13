@@ -6,8 +6,8 @@
 
     boot.blacklistedKernelModules = [ "nouveau" ];
     hardware.nvidia = {
-        enable = true;
         open = false;
+        modesetting.enable = true;
     };
     hardware.nvidia-container-toolkit.enable = true;
 
