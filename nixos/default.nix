@@ -110,7 +110,7 @@
     };
 
   nixpkgs.hostPlatform = lib.mkDefault "${platform}";
-  nixpkgs.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   system = {
     inherit stateVersion;
