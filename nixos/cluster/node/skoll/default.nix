@@ -10,6 +10,7 @@
         modesetting.enable = true;
         datacenter.enable = true;
     };
+    nixpkgs.config.nvidia.acceptLicense = true;
     hardware.nvidia-container-toolkit.enable = true;
 
     homelab.services.kubernetes.netDev = "enp42s0";
