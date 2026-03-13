@@ -118,7 +118,7 @@ in {
             cifs-utils
         ];
 
-        environment.deafultPackages = with pkgs; [
+        environment.defaultPackages = with pkgs; [
             fluxcd
         ];
 
