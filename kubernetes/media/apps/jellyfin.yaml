@@ -71,6 +71,17 @@ spec:
       targetPort: 8096
       protocol: TCP
       name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin-discovery
+  namespace: media
+spec:
+  type: LoadBalancer
+  selector:
+    app: jellyfin
+  ports:
     - port: 7359
       targetPort: 7359
       protocol: UDP

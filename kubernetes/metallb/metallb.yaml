@@ -4,7 +4,7 @@ metadata:
   name: homelab-pool
   namespace: metallb-system
 spec:
-  addresses: [ "10.10.254.254/32" ]
+  addresses: [ "10.10.254.0/24" ]
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement

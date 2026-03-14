@@ -63,7 +63,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent-http
+  name: qbittorrent
   namespace: media
 spec:
   selector:
@@ -81,6 +81,7 @@ metadata:
   namespace: media
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.10.254.2
   selector:
     app: qbittorrent
   ports:
@@ -127,6 +128,6 @@ spec:
             pathType: "Prefix"
             backend:
               service:
-                name: qbittorrent-http
+                name: qbittorrent
                 port:
                   number: 8080
