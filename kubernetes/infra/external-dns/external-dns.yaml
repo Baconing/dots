@@ -44,4 +44,3 @@ spec:
     extraArgs:
       - --source=ingress
       - --cloudflare-proxied
-      - --no-dns-lookup
