@@ -44,4 +44,4 @@ spec:
     extraArgs:
       - --source=ingress
       - --cloudflare-proxied
-      - --default-targets=direct.saturn.ong
+      - --no-dns-lookup
