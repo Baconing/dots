@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+  namespace: syncthing
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: syncthing
+  template:
+    metadata:
+      labels:
+        app: syncthing
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: syncthing
+          image: linuxserver/syncthing:2.0.15
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          ports:
+            - containerPort: 8384
+              protocol: TCP
+            - containerPort: 22000
+              protocol: TCP
+            - containerPort: 22000
+              protocol: UDP
+            - containerPort: 21027
+              protocol: UDP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /vault
+              name: vault
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: syncthing-config
+        - name: vault
+          persistentVolumeClaim:
+            claimName: syncthing-vault
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing-config
+  namespace: syncthing
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing
+  namespace: syncthing
+spec:
+  selector:
+    app: syncthing
+  ports:
+    - port: 8384
+      targetPort: 8384
+      protocol: TCP
+      name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-alt
+  namespace: syncthing
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.10.254.4
+  selector:
+    app: syncthing
+  ports:
+    - port: 22000
+      targetPort: 22000
+      protocol: TCP
+      name: sync-tcp
+    - port: 22000
+      targetPort: 22000
+      protocol: UDP
+      name: sync-udp
+    - port: 21027
+      targetPort: 21027
+      protocol: UDP
+      name: local-discovery
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: syncthing
+  namespace: syncthing
+spec:
+  secretName: syncthing.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - syncthing.saturn.ong
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: syncthing
+  namespace: syncthing
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    external-dns.alpha.kubernetes.io/hostname: syncthing.saturn.ong
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+spec:
+  tls:
+    - secretName: syncthing.saturn.ong-tls
+  rules:
+    - host: "syncthing.saturn.ong"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: syncthing
+                port:
+                  number: 8384

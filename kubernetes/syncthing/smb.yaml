@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: syncthing-vault
+  namespace: syncthing
+  labels:
+    name: syncthing-vault
+spec:
+  accessModes: 
+    - ReadWriteMany
+  capacity:
+    storage: 21Ti
+  storageClassName: smb
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: phoebe.default.svc.cluster.local/vault##
+    volumeAttributes:
+      source: //10.10.2.2/vault
+    nodeStageSecretRef:
+      name: phoebe-smb-credentials
+      namespace: default
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing-vault
+  namespace: syncthing
+spec:
+  accessModes: 
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 21Ti
+  storageClassName: smb
+  volumeName: syncthing-vault
