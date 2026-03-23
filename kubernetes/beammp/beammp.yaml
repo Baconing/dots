@@ -26,6 +26,8 @@ spec:
                   key: authKey
             - name: BEAMMP_MAX_CARS
               value: "67"
+            - name: BEAMMP_PORT
+              value: "30814"
             - name: BEAMMP_MAP
               value: /levels/east_coast_usa/info.json
           ports:
