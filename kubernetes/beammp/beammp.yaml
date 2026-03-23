@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beammp
+  namespace: media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: beammp
+  template:
+    metadata:
+      labels:
+        app: beammp
+    spec:
+      containers:
+        - name: beammp
+          image: rouhim/beammp-server:latest
+          env:
+            - name: BEAMMP_AUTH_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: beammp-secret
+                  key: authKey
+            - name: BEAMMP_MAX_CARS
+              value: 67
+            - name: BEAMMP_MAP
+              value: /levels/east_coast_usa/info.json
+          ports:
+            - containerPort: 30814
+              protocol: TCP
+            - containerPort: 30814
+              protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beammp
+  namespace: media
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.10.254.20
+  selector:
+    app: beammp
+  ports:
+    - port: 30814
+      targetPort: 30814
+      protocol: TCP
+      name: game-tcp
+    - port: 30814
+      targetPort: 30814
+      protocol: UDP
+      name: game-udp
