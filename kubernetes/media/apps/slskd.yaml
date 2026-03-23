@@ -120,6 +120,6 @@ spec:
             pathType: "Prefix"
             backend:
               service:
-                name: slskd-http
+                name: slskd
                 port:
                   number: 5030

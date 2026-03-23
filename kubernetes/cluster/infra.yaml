@@ -77,20 +77,6 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infra-nvidia
-  namespace: flux-system
-spec:
-  interval: 1m
-  path: ./kubernetes/infra/nvidia
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: infra-smb
   namespace: flux-system
 spec:
