@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: beammp
-  namespace: media
+  namespace: beammp
 spec:
   replicas: 1
   strategy:
@@ -38,7 +38,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: beammp
-  namespace: media
+  namespace: beammp
 spec:
   type: LoadBalancer
   loadBalancerIP: 10.10.254.20
