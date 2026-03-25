@@ -17,6 +17,9 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+      resources:
+        requests:
+           "gpu.intel.com/i915": "1"
       containers:
         - name: jellyfin
           image: linuxserver/jellyfin:10.11.6

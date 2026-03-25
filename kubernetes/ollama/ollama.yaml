@@ -15,9 +15,15 @@ spec:
       labels:
         app: ollama
     spec:
+      resources:
+        requests:
+           "gpu.intel.com/i915": "1"
       containers:
         - name: ollama
           image: ollama/ollama:0.18.2
+          env:
+            - name: "OLLAMA_VULKAN"
+              value: "1"
           ports:
             - containerPort: 11434
               protocol: TCP
