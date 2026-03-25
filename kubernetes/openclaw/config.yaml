@@ -35,12 +35,12 @@ data:
             ]
           }
         }
-      }
+      },
       "agents": {
         "defaults": {
           "model": {
             "primary": "ollama/deepseek-r1:1.5b"
-          }
+          },
           "workspace": "~/.openclaw/workspace"
         },
         "list": [
@@ -60,7 +60,7 @@ data:
             "id": "DISCORD_BOT_TOKEN"
           }
         }
-      }
+      },
       "cron": { "enabled": false }
     }
   AGENTS.md: |
