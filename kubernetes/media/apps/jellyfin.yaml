@@ -42,9 +42,8 @@ spec:
               name: config
             - mountPath: /media
               name: media
-          volumeMounts:
-          - name: dri
-            mountPath: /dev/dri
+            - name: dri
+              mountPath: /dev/dri
       volumes:
         - name: config
           persistentVolumeClaim:
