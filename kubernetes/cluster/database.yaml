@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: database
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: database
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./kubernetes/database
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
