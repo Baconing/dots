@@ -19,12 +19,12 @@ spec:
         fsGroup: 1000
         supplementalGroups:
           - 303
-      resources:
-        requests:
-           "gpu.intel.com/i915": "1"
       containers:
         - name: jellyfin
           image: linuxserver/jellyfin:10.11.6
+          resources:
+            limits:
+              "gpu.intel.com/i915": "1"
           env:
             - name: PUID
               value: "1000"
