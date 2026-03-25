@@ -1,0 +1,172 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openclaw
+  namespace: openclaw
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: openclaw
+  template:
+    metadata:
+      labels:
+        app: openclaw
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: init-config
+          image: busybox:1.37
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              cp /config/openclaw.json /home/node/.openclaw/openclaw.json
+              mkdir -p /home/node/.openclaw/workspace
+              cp /config/AGENTS.md /home/node/.openclaw/workspace/AGENTS.md
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: openclaw-home
+              mountPath: /home/node/.openclaw
+            - name: config
+              mountPath: /config
+      containers:
+        - name: gateway
+          image: ghcr.io/openclaw/openclaw:2026.3.23-2
+          imagePullPolicy: IfNotPresent
+          command:
+            - node
+            - /app/dist/index.js
+            - gateway
+            - run
+          ports:
+            - containerPort: 18789
+              protocol: TCP
+          env:
+            - name: HOME
+              value: /home/node
+            - name: OPENCLAW_CONFIG_DIR
+              value: /home/node/.openclaw
+            - name: NODE_ENV
+              value: production
+            - name: OPENCLAW_GATEWAY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: openclaw-secret
+                  key: OPENCLAW_GATEWAY_TOKEN
+            - name: DISCORD_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: openclaw-secret
+                  key: DISCORD_BOT_TOKEN
+          volumeMounts:
+            - name: home
+              mountPath: /home/node/.openclaw
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: home
+          persistentVolumeClaim:
+            claimName: openclaw-home
+        - name: config
+          configMap:
+            name: openclaw-config
+      livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - "require('http').get('http://127.0.0.1:18789/healthz', r => process.exit(r.statusCode < 400 ? 0 : 1)).on('error', () => process.exit(1))"
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+      readinessProbe:
+        exec:
+          command:
+            - node
+            - -e
+            - "require('http').get('http://127.0.0.1:18789/readyz', r => process.exit(r.statusCode < 400 ? 0 : 1)).on('error', () => process.exit(1))"
+        initialDelaySeconds: 15
+        periodSeconds: 10
+        timeoutSeconds: 5
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: openclaw-home
+  namespace: openclaw
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 16Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openclaw
+  namespace: openclaw
+spec:
+  selector:
+    app: openclaw
+  ports:
+    - port: 18789
+      targetPort: 18789
+      protocol: TCP
+      name: http
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: openclaw
+  namespace: openclaw
+spec:
+  secretName: openclaw.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - openclaw.saturn.ong
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openclaw
+  namespace: openclaw
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # external-dns.alpha.kubernetes.io/hostname: openclaw.saturn.ong # todo: after authentik
+    # external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+spec:
+  tls:
+    - secretName: openclaw.saturn.ong-tls
+  rules:
+    - host: "openclaw.saturn.ong"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: openclaw
+                port:
+                  number: 18789
