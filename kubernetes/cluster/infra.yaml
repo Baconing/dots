@@ -44,7 +44,7 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - nfd
+    - name: infra-nfd
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
