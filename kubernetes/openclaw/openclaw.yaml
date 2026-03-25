@@ -71,6 +71,8 @@ spec:
           volumeMounts:
             - name: home
               mountPath: /home/node/.openclaw
+            - name: tmp
+              mountPath: /tmp
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000
@@ -87,6 +89,8 @@ spec:
         - name: config
           configMap:
             name: openclaw-config
+        - name: tmp
+          emptyDir: {}
       livenessProbe:
             exec:
               command:
