@@ -8,12 +8,16 @@
         enable = true;
         extraPackages = with pkgs; [
             intel-media-driver
+            intel-compute-runtime
             libvdpau-va-gl
             vpl-gpu-rt
         ];
     };
 
-    environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+    environment.systemPackages = with pkgs; [
+        intel-gpu-tools
+        libva-utils
+    ];
 
     homelab.services.kubernetes.netDev = "enp42s0";
 }
