@@ -35,7 +35,7 @@ spec:
             runAsUser: 1000
             runAsGroup: 1000
           volumeMounts:
-            - name: openclaw-home
+            - name: home
               mountPath: /home/node/.openclaw
             - name: config
               mountPath: /config
