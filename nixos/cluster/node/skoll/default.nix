@@ -4,6 +4,8 @@
         inputs.nixos-hardware.nixosModules.common-pc-ssd
     ];
 
+    hardware.enableRedistributableFirmware = true;
+
     hardware.graphics = {
         enable = true;
         extraPackages = with pkgs; [
