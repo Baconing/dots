@@ -33,8 +33,6 @@ spec:
       postgresql:
         host: postgres-rw.database.svc.cluster.local
         user: authentik
-    geoip:
-      enabled: true
     server:
       ingress:
         ingressClassName: traefik
@@ -56,3 +54,16 @@ spec:
       name: authentik-secret
       valuesKey: authentik-postgres-password
       targetPath: authentik.postgresql.password
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  secretName: sso.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - sso.saturn.ong
