@@ -10,3 +10,4 @@ spec:
     storageClass: longhorn
   superuserSecret:
     name: postgres-superuser
+  enableSuperuserAccess: true
