@@ -7,5 +7,6 @@ spec:
   instances: 3
   storage:
     size: 16Gi
+    storageClass: longhorn
   superuserSecret:
     name: postgres-superuser
