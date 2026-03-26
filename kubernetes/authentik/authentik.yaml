@@ -33,6 +33,8 @@ spec:
       postgresql:
         host: postgres-rw.database.svc.cluster.local
         user: authentik
+    redis:
+      enabled: true
     server:
       ingress:
         ingressClassName: traefik

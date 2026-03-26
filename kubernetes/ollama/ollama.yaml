@@ -83,6 +83,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: ollama-auth@kubernetescrd
     # external-dns.alpha.kubernetes.io/hostname: ollama.saturn.ong # todo: after authentik
     # external-dns.alpha.kubernetes.io/target: direct.saturn.ong
 spec:
