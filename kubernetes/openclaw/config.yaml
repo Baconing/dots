@@ -26,13 +26,13 @@ data:
             "api": "ollama",
             "models": [
               {
-                "id": "deepseek-r1:1.5b",
-                "name": "Deepseek R1 1.5B",
+                "id": "phi4-mini-reasoning:3.8b",
+                "name": "Phi 4 Mini Reasoning (3.8B/128K Context)",
                 "reasoning": true,
                 "input": ["text"],
-                cost: { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                "contextWindow": 16384,
-                "maxTokens": 163840
+                "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                "contextWindow": 131072,
+                "maxTokens": 131072*10
               }
             ]
           }
@@ -41,7 +41,7 @@ data:
       "agents": {
         "defaults": {
           "model": {
-            "primary": "ollama/deepseek-r1:1.5b"
+            "primary": "ollama/phi4-mini-reasoning:3.8b"
           },
           "workspace": "~/.openclaw/workspace"
         },
