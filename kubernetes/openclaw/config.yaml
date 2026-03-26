@@ -31,8 +31,8 @@ data:
                 "reasoning": true,
                 "input": ["text"],
                 cost: { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                "contextWindow": 8192,
-                "maxTokens": 81920
+                "contextWindow": 16384,
+                "maxTokens": 163840
               }
             ]
           }
