@@ -16,7 +16,7 @@ data:
         },
         "controlUi": {
           "enabled": true,
-          "allowedOrigins": ["10.42.*"]
+          "allowedOrigins": ["https://clawbot.saturn.ong"]
         }
       },
       "models": {
