@@ -61,19 +61,6 @@ spec:
         enabled: true
       livenessProbe:
         enabled: true
-
-      extraVolumes:
-        - name: unseal-key
-          secret:
-            secretName: openbao-unseal-key
-
-      extraVolumeMounts:
-        - name: unseal-key
-          mountPath: /vault/userconfig/unseal
-          readOnly: true
-
-      extraEnvironmentVars:
-        VAULT_SEAL_TYPE: shamir
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
