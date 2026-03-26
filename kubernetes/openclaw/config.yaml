@@ -16,7 +16,7 @@ data:
         },
         "controlUi": {
           "enabled": true,
-          "allowedOrigins": ["10.*"]
+          "allowedOrigins": ["10.42.*"]
         }
       },
       "models": {
