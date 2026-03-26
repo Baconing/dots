@@ -158,8 +158,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.tls: "true"
-    # external-dns.alpha.kubernetes.io/hostname: openclaw.saturn.ong # todo: after authentik
-    # external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: openclaw.saturn.ong
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
 spec:
   tls:
     - secretName: openclaw.saturn.ong-tls
