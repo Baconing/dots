@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: authentik
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: authentik
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://charts.goauthentik.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: authentik
+      version: 2026.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+  values:
+    authentik:
+      enabled: true
+      postgresql:
+        host: postgres-rw.database.svc.cluster.local
+        user: authentik
+    geoip:
+      enabled: true
+    server:
+      ingress:
+        ingressClassName: traefik
+        enabled: true
+        hosts:
+          - sso.saturn.ong
+        labels:
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          external-dns.alpha.kubernetes.io/hostname: sso.saturn.ong
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        tls:
+          - secretName: sso.saturn.ong-tls
+  valuesFrom:
+    - kind: Secret
+      name: authentik-secret
+      valuesKey: authentik-secret-key
+      targetPath: authentik.secret_key
+    - kind: Secret
+      name: authentik-secret
+      valuesKey: authentik-postgres-password
+      targetPath: authentik.postgresql.password

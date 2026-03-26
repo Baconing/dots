@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+  namespace: database
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      securityContext:
+      containers:
+        - name: pgadmin
+          image: dpage/pgadmin4:9.13.0
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin-creds
+                  key: defaultEmail
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin-creds
+                  key: defaultPassword
+          ports:
+            - containerPort: 80
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgadmin
+  namespace: database
+spec:
+  selector:
+    app: pgadmin
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pgadmin
+  namespace: database
+spec:
+  secretName: pgadmin.saturn.ong-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - pgadmin.saturn.ong
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pgadmin
+  namespace: database
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    external-dns.alpha.kubernetes.io/hostname: pgadmin.saturn.ong
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+spec:
+  tls:
+    - secretName: pgadmin.saturn.ong-tls
+  rules:
+    - host: "pgadmin.saturn.ong"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: pgadmin
+                port:
+                  number: 80

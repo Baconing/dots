@@ -1,0 +1,73 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: authentik-db-init
+  namespace: authentik
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: init-db
+          image: postgres:16
+          env:
+            - name: PGHOST
+              value: postgres-rw.database.svc.cluster.local
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-superuser
+                  namespace: database
+                  key: username
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-superuser
+                  namespace: database
+                  key: password
+            - name: APP_DB
+              value: authentik
+            - name: APP_USER
+              value: authentik
+            - name: APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secret
+                  key: authentik-postgres-password
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for Postgres..."
+              until pg_isready -h "$PGHOST" -U "$PGUSER"; do
+                sleep 2
+              done
+
+              echo "Creating role if not exists..."
+              psql -v ON_ERROR_STOP=1 <<EOF
+              DO \$\$
+              BEGIN
+                 IF NOT EXISTS (
+                    SELECT FROM pg_roles WHERE rolname = '$APP_USER'
+                 ) THEN
+                    CREATE ROLE "$APP_USER" LOGIN PASSWORD '$APP_PASSWORD';
+                 END IF;
+              END
+              \$\$;
+              EOF
+
+              echo "Creating database if not exists..."
+              psql -v ON_ERROR_STOP=1 <<EOF
+              SELECT 'CREATE DATABASE "$APP_DB" OWNER "$APP_USER"'
+              WHERE NOT EXISTS (
+                SELECT FROM pg_database WHERE datname = '$APP_DB'
+              )\gexec
+              EOF
+
+              echo "Granting privileges..."
+              psql -v ON_ERROR_STOP=1 <<EOF
+              GRANT ALL PRIVILEGES ON DATABASE "$APP_DB" TO "$APP_USER";
+              EOF
+
+              echo "Done."
