@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: authentik-db-init
-  namespace: authentik
+  namespace: database
 spec:
   backoffLimit: 3
   template:
@@ -18,13 +18,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-superuser
-                  namespace: database
                   key: username
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-superuser
-                  namespace: database
                   key: password
             - name: APP_DB
               value: authentik
