@@ -42,6 +42,7 @@ spec:
       tls:
         enabled: true
         secret: "sso.saturn.ong-tls"
+      # Ingress hostname is determined by configMap.cookies.domain and configMap.session.cookies.subdomain
 
     secret:
       disabled: false
