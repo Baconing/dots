@@ -259,7 +259,7 @@ spec:
 
         postgres:
           enabled: true
-          address: tcp://postgres-rw.database.svc.cluster.local:5432"
+          address: tcp://postgres-rw.database.svc.cluster.local:5432
           database: authelia
           schema: public
           username: authelia
