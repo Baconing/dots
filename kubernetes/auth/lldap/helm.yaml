@@ -10,7 +10,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://evantage-ws.github.io/lldap-kubernetes/
+  url: https://djjudas21.github.io/charts/
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -22,24 +22,22 @@ spec:
   chart:
     spec:
       chart: lldap
-      version: 0.4.0
+      version: 0.6.3
       sourceRef:
         kind: HelmRepository
         name: lldap
         namespace: flux-system
   values:
     image:
-      repository: nitnelave/lldap
+      repository: lldap/lldap
       tag: "2026-03-04"
-    env:
-      TZ: "America/Detroit"
-    persistence:
-      enabled: true
-      storageClassName: "longhorn"
-    service:
-      name: "lldap"
-    certmanager:
-      enabled: false
+      variant: ""
+
+    lldap:
+      baseDN: DC=saturn,DC=ong
+      secretName: lldap
+      ldapUserDN: "admin"
+
     ingress:
       enabled: true
       name: "lldap"
@@ -57,6 +55,18 @@ spec:
         - secretName: "ldap.saturn.ong-tls"
           hosts:
             - "ldap.saturn.ong"
+
+    externalPostgresql:
+      enabled: true
+      auth:
+        host: "postgres-rw.database.svc.cluster.local"
+        port: 5432
+        username: lldap
+        database: lldap
   valuesFrom:
     - kind: Secret
       name: lldap
+      valuesKey: externalPostgresql.auth.password
+      targetPath: externalPostgresql.auth.password
+    - kind: Secret
+      name: lldap-bootstrap

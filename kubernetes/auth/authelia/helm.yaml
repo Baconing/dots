@@ -107,7 +107,7 @@ spec:
         
         ldap:
           enabled: true
-          address: ldap://lldap:3890
+          address: ldap://lldap-ldap:3890
           implementation: lldap
           base_dn: DC=saturn,DC=ong
           user: CN=authelia,OU=people,DC=saturn,DC=ong
