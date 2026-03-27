@@ -289,7 +289,3 @@ spec:
       #         use: sig
       #         key:
       #           path: /secrets/jwks/odic.jwk.RS256.pem
-
-  valuesFrom:
-    - kind: Secret
-      name: authelia
