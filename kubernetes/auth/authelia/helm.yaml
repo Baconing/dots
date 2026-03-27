@@ -88,6 +88,11 @@ spec:
           private:
             - 10.0.0.0/8
 
+      identity_validation:
+        reset_password:
+          secret:
+            disabled: true
+
       authentication_backend:
         password_reset:
           disable: false
@@ -271,6 +276,8 @@ spec:
 
         smtp:
           enabled: false # todo
+          password:
+            disabled: true
         filesystem:
           enabled: false
 
