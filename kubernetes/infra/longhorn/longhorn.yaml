@@ -27,6 +27,9 @@ spec:
         kind: HelmRepository
         name: longhorn
         namespace: flux-system
+  values:
+    persistence:
+      reclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: ConfigMap
