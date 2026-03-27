@@ -100,6 +100,7 @@ spec:
           disable: true # todo
         
         ldap:
+          enabled: true
           address: ldap://lldap
           implementation: lldap
           base_dn: DC=saturn,DC=ong
