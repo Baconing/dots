@@ -292,4 +292,4 @@ spec:
 
   valuesFrom:
     - kind: Secret
-      name: authelia-secret
+      name: authelia
