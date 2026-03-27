@@ -65,7 +65,7 @@ spec:
           enabled: true
           port: 9959
           serviceMonitor:
-            enabled: true
+            enabled: false
       
       default_2fa_method: "totp"
 
