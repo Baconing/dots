@@ -91,13 +91,13 @@ spec:
       identity_validation:
         reset_password:
           secret:
-            disabled: true
+            disabled: true # todo
 
       authentication_backend:
         password_reset:
-          disable: false
+          disable: true # todo
         password_change:
-          disable: false
+          disable: true # todo
         
         ldap:
           address: 'ldap://lldap'
