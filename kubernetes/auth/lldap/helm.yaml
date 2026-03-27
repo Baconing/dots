@@ -63,8 +63,4 @@ spec:
       uriKey: postgresqlUri
   valuesFrom:
     - kind: Secret
-      name: lldap
-      valuesKey: externalPostgresql.auth.password
-      targetPath: externalPostgresql.auth.password
-    - kind: Secret
       name: lldap-bootstrap
