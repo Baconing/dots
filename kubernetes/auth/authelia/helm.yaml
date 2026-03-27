@@ -110,7 +110,7 @@ spec:
           address: ldap://lldap:3890
           implementation: lldap
           base_dn: DC=saturn,DC=ong
-          user: UID=authelia,OU=people,DC=saturn,DC=ong
+          user: CN=authelia,OU=people,DC=saturn,DC=ong
           password:
             path: authentication.ldap.password
       
