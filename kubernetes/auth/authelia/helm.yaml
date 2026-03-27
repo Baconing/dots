@@ -100,12 +100,12 @@ spec:
           disable: true # todo
         
         ldap:
-          address: 'ldap://lldap'
-          password:
-            path: "authentication.ldap.password"
+          address: ldap://lldap
           implementation: lldap
           base_dn: DC=saturn,DC=ong
           user: UID=authelia,OU=people,DC=saturn,DC=ong
+          password:
+            path: authentication.ldap.password
       
       password_policy:
         zxcvbn:
@@ -266,16 +266,11 @@ spec:
           password:
             path: "storage.postgres.password"
 
-        local:
-          enabled: false
-        mysql:
-          enabled: false
-
       notifier:
         disable_startup_check: true # todo: after smtp is enabled
 
         smtp:
-          enabled: false # todo
+          enabled: true # todo
           password:
             disabled: true
         filesystem:
