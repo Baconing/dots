@@ -246,6 +246,7 @@ spec:
         redis:
           deploy: true
           enabled: true
+          host: "authelia-redis-master"
           password:
             disabled: true
       
