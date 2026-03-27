@@ -44,6 +44,7 @@ spec:
       ingressClassName: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         external-dns.alpha.kubernetes.io/hostname: ldap.saturn.ong
         external-dns.alpha.kubernetes.io/target: direct.saturn.ong
       hosts:
@@ -58,11 +59,8 @@ spec:
 
     externalPostgresql:
       enabled: true
-      auth:
-        host: "postgres-rw.database.svc.cluster.local"
-        port: 5432
-        username: lldap
-        database: lldap
+      fromSecret: lldap
+      uriKey: postgresqlUri
   valuesFrom:
     - kind: Secret
       name: lldap
