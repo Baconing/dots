@@ -229,8 +229,8 @@ spec:
             policy: bypass
       
       session:
-        secret:
-          path: "session.secret"
+        encryption_key:
+          path: "session.encryption_key"
 
         same_site: strict
         cookies:
