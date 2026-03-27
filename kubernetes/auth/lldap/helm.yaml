@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: auth
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: lldap
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://evantage-ws.github.io/lldap-kubernetes/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: lldap
+  namespace: auth
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: lldap-chart
+      version: 0.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: lldap
+        namespace: flux-system
+  values:
+    image:
+      repository: nitnelave/lldap
+      tag: "2026-03-04"
+    env:
+      TZ: "America/Detroit"
+    persistence:
+      enabled: true
+      storageClassName: "longhorn"
+    service:
+      name: "lldap"
+    ingress:
+      enabled: true
+      name: "lldap"
+      ingressClassName: "traefik"
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        external-dns.alpha.kubernetes.io/hostname: ldap.saturn.ong
+        external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+      hosts:
+        - host: "ldap.saturn.ong"
+          paths:
+            - path: "/"
+              pathType: Prefix
+      tls:
+        - secretName: "ldap.saturn.ong-tls"
+          hosts:
+            - "ldap.saturn.ong"
+  valuesFrom:
+    - kind: Secret
+      name: lldap

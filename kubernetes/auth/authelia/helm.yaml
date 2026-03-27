@@ -1,0 +1,295 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: auth
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: authelia
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://charts.authelia.com
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: auth
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: authelia
+      version: 0.10.50
+      sourceRef:
+        kind: HelmRepository
+        name: authelia
+        namespace: flux-system
+  values:
+    image:
+      registry: ghcr.io
+      repository: authelia/authelia
+      tag: 4.39.16
+    ingress:
+      enabled: true
+      className: "traefik"
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        external-dns.alpha.kubernetes.io/hostname: sso.saturn.ong
+        external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+      hosts:
+        - host: "sso.saturn.ong"
+          paths:
+            - path: "/"
+              pathType: Prefix
+      tls:
+        enabled: true
+        secret: "sso.saturn.ong-tls"
+
+    secret:
+      disabled: false
+      mountPath: "/secrets"
+      existingSecret: "authelia"
+      # additionalSecrets:
+      #   authelia:
+      #     path: jwks
+      #     items:
+      #       - key: oidc.jwk.RS256.pem
+      #         path: oidc.jwk.RS256.pem
+      #       - key: oidc.jwk.RS256.crt
+      #         path: oidc.jwk.RS256.crt
+
+    configMap:
+      disabled: false
+
+      telemetry:
+        metrics:
+          enabled: true
+          port: 9959
+          serviceMonitor:
+            enabled: true
+      
+      default_2fa_method: "totp"
+
+      theme: dark
+
+      totp:
+        disable: false
+        issuer: saturn.ong
+
+      webauthn:
+        disable: false
+        display_name: saturn.ong
+        attestation_conveyance_preference: indirect
+
+      duo_api:
+        enabled: false
+
+      definitions:
+        network:
+          private:
+            - 10.0.0.0/8
+
+      authentication_backend:
+        password_reset:
+          disable: false
+        password_change:
+          disable: false
+        
+        ldap:
+          address: 'ldap://lldap'
+          password:
+            path: "authentication.ldap.password"
+          implementation: lldap
+          base_dn: DC=saturn,DC=ong
+          user: UID=authelia,OU=people,DC=saturn,DC=ong
+      
+      password_policy:
+        zxcvbn:
+          enabled: true
+          min_score: 2
+
+      access_control:
+        default_policy: deny
+        rules:
+          # Bypass Always: Secured & Authentication Related
+          - domain: 
+              - "sso.saturn.ong"
+              - "ldap.saturn.ong"
+              - "vault.saturn.ong"
+            policy: bypass
+
+          # Bypass Always: Webfinger
+          - domain_regex:
+              - 'saturn.ong$'
+            policy: bypass
+            resources:
+              - "^/.well-known(/.*)?$"
+
+          # Bypass Always: Zipline Uploads
+          - domain: "file.baconi.ng"
+            policy: bypass
+            resources:
+              - "^/u(/.*)?$"
+              - "^/raw(/.*)?$"
+              - "^/view(/.*)?$"
+
+          # Two Factor: Vaultwarden Admin Dashboard
+          - domain: "vault.saturn.ong"
+            resources:
+              - "^/admin(/.*)?$"
+            policy: two_factor
+            subject:
+              - "group:administrators"
+
+          # Two Factor: Secured Resources
+          - domain:
+              # infra
+              - "openbao.saturn.ong" # I haven't set it up and I'll need to expose its API routes (maybe not).
+              - "traefik.saturn.ong"
+              - "longhorn.saturn.ong"
+              - "pgadmin.saturn.ong"
+
+              # external services
+              - "router.saturn.ong"
+              - "truenas.saturn.ong"
+              - "hass.saturn.ong"
+
+              # media
+              - "autobrr.saturn.ong"
+              - "bazarr.saturn.ong"
+              - "cleanuparr.saturn.ong"
+              - "lidarr.saturn.ong"
+              - "prowlarr.saturn.ong"
+              - "radarr.saturn.ong"
+              - "sonarr.saturn.ong"
+              - "torrent.saturn.ong"
+              - "slskd.saturn.ong"
+
+              # other
+              - "paperless.saturn.ong" # I haven't set it up fully and it can contain sensitive information.
+              - "syncthing.saturn.ong"
+            policy: one_factor
+            subject:
+              - "group:administrators"
+
+          # Two Factor: Zipline Admin Dashboard
+          - domain: "file.baconi.ng"
+            resources:
+              - "^/dashboard/admin(/.*)?$"
+            policy: two_factor
+            subject:
+              - "group:administrators"
+
+          # Two Factor: Open-WebUI Admin Dashboard
+          - domain: "open-webui.saturn.ong"
+            resources:
+              -  "^/admin(/.*)?$"
+            policy: two_factor
+            subject:
+              - "group:administrators"
+
+          # Two Factor: Seerr Admin Dashboard
+          - domain: "seerr.saturn.ong"
+            resources:
+              - "^/requests(/.*)?$"
+              - "^/blocklist(/.*)?$"
+              - "^/issues(/.*)?$"
+              - "^/users(/.*)?$"
+              - "^/settings(/.*)?$"
+            policy: two_factor
+            subject:
+              - "group:administrators"
+            
+          # Two Factor: Jellyfin Admin Dashboard
+          - domain: "seerr.saturn.ong"
+            resources:
+              - "^/web/#/dashboard(/.*)?$"
+              - "^/web/#/configurationpage(/.*)?$"
+              - "^/web/#/metadata(/.*)?$"
+
+          # One Factor: Semi-Public Resources
+          - domain:
+              # media
+              - "seerr.saturn.ong"
+              - "jellyfin.saturn.ong"
+              - "navidrome.saturn.ong"
+
+              # ai
+              - "open-webui.saturn.ong"
+            policy: one_factor
+
+          # One Factor: Zipline User Dashboard
+          - domain: "file.baconi.ng"
+            policy: one_factor
+            resources:
+              - "^/dashboard(/.*)?$"
+
+          # Bypass: Fully Public Resources
+          - domain:
+              - "file.baconi.ng"
+            policy: bypass
+      
+      session:
+        secret:
+          path: "session.secret"
+
+        same_site: strict
+        cookies:
+          - domain: saturn.ong
+            authelia_url: https://sso.saturn.ong
+        redis:
+          deploy: true
+          enabled: true
+          password:
+            disabled: true
+      
+      regulation:
+        max_retries: 5
+        find_time: 2m
+        ban_time: 10m
+
+      storage:   
+        encryption_key:
+          path: "storage.encryption_key"
+
+        postgres:
+          enabled: true
+          address: tcp://postgres-rw.database.svc.cluster.local:5432"
+          database: authelia
+          schema: public
+          username: authelia
+          password:
+            path: "storage.postgres.password"
+
+        local:
+          enabled: false
+        mysql:
+          enabled: false
+
+      notifier:
+        disable_startup_check: true # todo: after smtp is enabled
+
+        smtp:
+          enabled: false # todo
+        filesystem:
+          enabled: false
+
+      # identity_providers:
+      #   odic:
+      #     enabled: true
+
+      #     enable_client_debug_messages: false
+
+      #     jwks:
+      #       - key_id: 'RS256'
+      #         algorithm: 'RS256'
+      #         use: sig
+      #         key:
+      #           path: /secrets/jwks/odic.jwk.RS256.pem
+
+  valuesFrom:
+    - kind: Secret
+      name: authelia-secret
