@@ -44,6 +44,12 @@ spec:
         secret: "sso.saturn.ong-tls"
       # Ingress hostname is determined by configMap.cookies.domain and configMap.session.cookies.subdomain
 
+    redis:
+      image:
+        registry: ""
+        repository: bitnami/redis
+        tag: latest
+
     secret:
       disabled: false
       mountPath: "/secrets"
