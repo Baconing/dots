@@ -21,7 +21,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: lldap-chart
+      chart: lldap
       version: 0.4.0
       sourceRef:
         kind: HelmRepository
@@ -38,6 +38,8 @@ spec:
       storageClassName: "longhorn"
     service:
       name: "lldap"
+    certmanager:
+      enabled: false
     ingress:
       enabled: true
       name: "lldap"
