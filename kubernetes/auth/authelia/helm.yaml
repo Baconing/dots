@@ -179,7 +179,7 @@ spec:
               # other
               - "paperless.saturn.ong" # I haven't set it up fully and it can contain sensitive information.
               - "syncthing.saturn.ong"
-            policy: one_factor
+            policy: two_factor
             subject:
               - "group:administrators"
 
