@@ -1,16 +1,16 @@
-apiVersion: 'traefik.containo.us/v1alpha1'
-kind: 'Middleware'
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
 metadata:
-  name: 'forwardauth-authelia'
-  namespace: 'traefik'
+  name: forwardauth-authelia
+  namespace: traefik
   labels:
-    app.kubernetes.io/instance: 'authelia'
-    app.kubernetes.io/name: 'authelia'
+    app.kubernetes.io/instance: authelia
+    app.kubernetes.io/name: authelia
 spec:
   forwardAuth:
-    address: 'http://authelia.auth.svc.cluster.local/api/authz/forward-auth'
+    address: http://authelia.auth.svc.cluster.local/api/authz/forward-auth
     authResponseHeaders:
-      - 'Remote-User'
-      - 'Remote-Groups'
-      - 'Remote-Email'
-      - 'Remote-Name'
+      - Remote-User
+      - Remote-Groups
+      - Remote-Email
+      - Remote-Name
