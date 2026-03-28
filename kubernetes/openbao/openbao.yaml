@@ -38,6 +38,7 @@ spec:
               - "/"
         labels:
           traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
           external-dns.alpha.kubernetes.io/hostname: openbao.saturn.ong
           external-dns.alpha.kubernetes.io/target: direct.saturn.ong
         tls:

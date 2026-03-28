@@ -31,3 +31,5 @@ spec:
     service:
       spec:
         loadBalancerIP: 10.10.254.0
+    api:
+      dashboard: true

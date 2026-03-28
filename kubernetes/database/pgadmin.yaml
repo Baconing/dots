@@ -69,6 +69,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: pgadmin.saturn.ong
     external-dns.alpha.kubernetes.io/target: direct.saturn.ong
 spec:
