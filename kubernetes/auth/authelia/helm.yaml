@@ -148,7 +148,7 @@ spec:
           - domain: "vault.saturn.ong"
             resources:
               - "^/admin(/.*)?$"
-            policy: two_factor
+            policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
 
@@ -179,7 +179,7 @@ spec:
               # other
               - "paperless.saturn.ong" # I haven't set it up fully and it can contain sensitive information.
               - "syncthing.saturn.ong"
-            policy: two_factor
+            policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources after 
             subject:
               - "group:administrators"
 
@@ -187,7 +187,7 @@ spec:
           - domain: "file.baconi.ng"
             resources:
               - "^/dashboard/admin(/.*)?$"
-            policy: two_factor
+            policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
 
@@ -195,7 +195,7 @@ spec:
           - domain: "open-webui.saturn.ong"
             resources:
               -  "^/admin(/.*)?$"
-            policy: two_factor
+            policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
 
@@ -207,7 +207,7 @@ spec:
               - "^/issues(/.*)?$"
               - "^/users(/.*)?$"
               - "^/settings(/.*)?$"
-            policy: two_factor
+            policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
             
@@ -217,6 +217,9 @@ spec:
               - "^/web/#/dashboard(/.*)?$"
               - "^/web/#/configurationpage(/.*)?$"
               - "^/web/#/metadata(/.*)?$"
+            policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+            subject:
+              - "group:administrators"
 
           # One Factor: Semi-Public Resources
           - domain:
