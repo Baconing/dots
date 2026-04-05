@@ -17,6 +17,11 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+      resources:
+        requests:
+          memory: "256Mi"
+        limits:
+          memory: "2Gi"
       containers:
         - name: qbittorrent
           image: linuxserver/qbittorrent:5.1.4
