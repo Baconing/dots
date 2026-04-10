@@ -33,15 +33,15 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: data
-            - mountPath: /media
-              name: media
+            - mountPath: /music
+              name: music
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: navidrome-data
-        - name: media
+        - name: music
           persistentVolumeClaim:
-            claimName: media
+            claimName: music
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

@@ -52,6 +52,33 @@ spec:
     - file_mode=0664
     - uid=1000
     - gid=1000
+---
+kind: PersistentVolume
+metadata:
+  name: music
+  namespace: media
+  labels:
+    name: music
+spec:
+  accessModes: 
+    - ReadWriteMany
+  capacity:
+    storage: 21Ti
+  storageClassName: smb
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: phoebe.default.svc.cluster.local/media#music#
+    volumeAttributes:
+      source: //10.10.2.2/media
+      subDir: music
+    nodeStageSecretRef:
+      name: phoebe-smb-credentials
+      namespace: default
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
     
 ---
 apiVersion: v1
@@ -81,3 +108,17 @@ spec:
       storage: 21Ti
   storageClassName: smb
   volumeName: downloads
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: music
+  namespace: media
+spec:
+  accessModes: 
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 21Ti
+  storageClassName: smb
+  volumeName: music
