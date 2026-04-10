@@ -22,7 +22,7 @@ spec:
         - name: DOMAINS
           value: "direct.saturn.ong"
         - name: PROXIED
-          value: "true"
+          value: "false"
         volumeMounts:
           - name: api-key
             readOnly: true
