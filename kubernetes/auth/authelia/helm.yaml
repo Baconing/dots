@@ -164,6 +164,7 @@ spec:
               - "router.saturn.ong"
               - "truenas.saturn.ong"
               - "hass.saturn.ong"
+              - "octoprint.saturn.ong"
 
               # media
               - "autobrr.saturn.ong"
