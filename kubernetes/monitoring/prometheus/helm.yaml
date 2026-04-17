@@ -62,8 +62,6 @@ spec:
           registry: quay.io
           repository: prometheus/alertmanager
           tag: v0.32.0
-          sha: ""
-          pullPolicy: IfNotPresent
         persistentVolumeClaimRetentionPolicy:
           whenDeleted: Retain
           whenScaled: Retain
@@ -75,7 +73,6 @@ spec:
               resources:
                 requests:
                   storage: 5Gi
-        
       podDisruptionBudget:
         enabled: true
       ingress:
@@ -92,6 +89,7 @@ spec:
         tls:
           - hosts: ["alerts.saturn.ong"]
             secretName: alerts.saturn.ong-tls
+
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -100,7 +98,6 @@ spec:
           enabled: true
           label: grafana_dashboard
           labelValue: "1"
-
           annotations: {}
           multicluster:
             global:
@@ -113,8 +110,8 @@ spec:
           enabled: true
           defaultDatasourceEnabled: true
           isDefaultDatasource: true
-    
           uid: prometheus
+
     prometheusOperator:
       enabled: true
       tls:
@@ -129,6 +126,7 @@ spec:
           enabled: false
       tlsProxy:
         enabled: false
+
     prometheus:
       enabled: true
       prometheusSpec:
