@@ -27,3 +27,28 @@ spec:
         kind: HelmRepository
         name: node-feature-discovery
         namespace: flux-system
+  values:
+    image:
+      repository: gcr.io/k8s-staging-nfd/node-feature-discovery
+      tag: v0.18.3
+    master:
+      config:
+        custom:
+          # PCIe Devices
+          - name: "arc-a750" # Intel ARC A750 GPU
+            matchOn:
+              - pciId:
+                  vendor: ["8086"]
+                  class: ["56a1"]
+          - name: "coral-tpu" # Google Coral TPU Accelerator (M.2 Version)
+            matchOn:
+              - pciId:
+                  vendor: ["1ac1"]
+                  class: ["809a"]
+
+        # USB Devices
+          - name: "ender-3" # Ender 3 Pro 3D Printer (Klipper)
+            matchOn:
+              - usbId:
+                  vendor: ["1a86"]
+                  class: ["7523"] # Technically this is just a CH340 USB to Serial adapter, but I don't think that'll be anywhere else on the cluster so...
