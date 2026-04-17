@@ -42,6 +42,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: vaultwarden-data
   namespace: vaultwarden
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

@@ -1,0 +1,13 @@
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: daily-backup
+  namespace: longhorn-system
+spec:
+  cron: "0 2 * * *"          # every day at 2 AM
+  task: backup              # snapshot | backup | filesystem-trim
+  groups:
+    - backup
+  retain: 7                 # keep last 7 backups
+  concurrency: 1
+  labels: {}

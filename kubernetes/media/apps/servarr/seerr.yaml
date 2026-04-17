@@ -38,6 +38,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: seerr-config
   namespace: media
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

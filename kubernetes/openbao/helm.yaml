@@ -61,6 +61,8 @@ spec:
         enabled: true
         size: 16Gi
         storageClass: longhorn
+        annotations:
+          recurring-job-group.longhorn.io/backup: enabled
 
       auditStorage:
         enabled: true

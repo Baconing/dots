@@ -115,6 +115,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: openclaw-home
   namespace: openclaw
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

@@ -34,6 +34,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: autobrr-config
   namespace: media
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

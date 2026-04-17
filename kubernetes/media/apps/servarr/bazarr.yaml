@@ -46,6 +46,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: bazarr-config
   namespace: media
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

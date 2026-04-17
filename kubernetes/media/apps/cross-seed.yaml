@@ -44,6 +44,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: cross-seed-config
   namespace: media
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

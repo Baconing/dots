@@ -52,6 +52,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: syncthing-config
   namespace: syncthing
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

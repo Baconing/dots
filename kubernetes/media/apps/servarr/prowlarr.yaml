@@ -34,6 +34,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: prowlarr-config
   namespace: media
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod

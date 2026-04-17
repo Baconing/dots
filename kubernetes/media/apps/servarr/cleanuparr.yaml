@@ -48,6 +48,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: cleanuparr-config
   namespace: media
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
     - ReadWriteOncePod
