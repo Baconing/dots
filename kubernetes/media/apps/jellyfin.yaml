@@ -62,7 +62,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: jellyfin-data
   namespace: media
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

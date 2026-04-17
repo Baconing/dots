@@ -36,7 +36,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: paperless-ai-data
   namespace: paperless-ngx
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes: [ReadWriteMany]

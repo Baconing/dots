@@ -52,7 +52,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: syncthing-config
   namespace: syncthing
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

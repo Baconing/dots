@@ -46,7 +46,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: bazarr-config
   namespace: media
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

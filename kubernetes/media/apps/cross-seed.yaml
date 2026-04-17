@@ -44,7 +44,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: cross-seed-config
   namespace: media
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

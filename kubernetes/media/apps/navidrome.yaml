@@ -48,7 +48,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: navidrome-data
   namespace: media
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

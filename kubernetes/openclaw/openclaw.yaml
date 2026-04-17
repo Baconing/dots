@@ -115,7 +115,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: openclaw-home
   namespace: openclaw
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

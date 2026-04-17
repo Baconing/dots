@@ -42,7 +42,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: vaultwarden-data
   namespace: vaultwarden
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

@@ -57,7 +57,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: qbittorrent-config
   namespace: media
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

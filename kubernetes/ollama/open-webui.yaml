@@ -34,7 +34,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: open-webui-data
   namespace: ollama
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
