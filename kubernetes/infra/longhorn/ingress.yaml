@@ -17,7 +17,7 @@ metadata:
   name: longhorn
   namespace: longhorn-system
   annotations:
-    kubernetes.io/ingress.class: longhorn
+    kubernetes.io/ingress.class: traefik
     longhorn.ingress.kubernetes.io/router.tls: "true"
     longhorn.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: longhorn.saturn.ong
