@@ -176,16 +176,16 @@ spec:
       # thanosServiceMonitor:
       #   enabled: true
       # thanosIngress:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-          external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ong
-          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
-        hosts: ["thanos.saturn.ong"]
-        paths: ['/']
-        pathType: Prefix
-        tls:
-          - hosts: ["thanos.saturn.ong"]
-            secretName: thanos.saturn.ong-tls
+        # enabled: true
+        # ingressClassName: "traefik"
+        # annotations:
+        #   traefik.ingress.kubernetes.io/router.tls: "true"
+        #   traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+        #   external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ong
+        #   external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        # hosts: ["thanos.saturn.ong"]
+        # paths: ['/']
+        # pathType: Prefix
+        # tls:
+        #   - hosts: ["thanos.saturn.ong"]
+        #     secretName: thanos.saturn.ong-tls
