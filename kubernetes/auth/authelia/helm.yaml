@@ -177,6 +177,11 @@ spec:
               - "torrent.saturn.ong"
               - "slskd.saturn.ong"
 
+              # monitoring
+              - "prometheus.saturn.ong"
+              - "grafana.saturn.ong"
+              - "alerts.saturn.ong"
+
               # other
               - "paperless.saturn.ong" # I haven't set it up fully and it can contain sensitive information.
               - "syncthing.saturn.ong"

@@ -1,0 +1,193 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: prometheus-community
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://prometheus-community.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus-operator-crds
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: prometheus-operator-crds
+      version: 27.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus-operator
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 82.4.3
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 5
+    crds: CreateReplace
+  upgrade:
+    remediation:
+      retries: 5
+    crds: CreateReplace
+  values:
+    alertmanager:
+      enabled: true
+      alertManagerSpec:
+        replicas: 3
+        retention: 120h
+        image:
+          registry: quay.io
+          repository: prometheus/alertmanager
+          tag: v0.32.0
+          sha: ""
+          pullPolicy: IfNotPresent
+        persistentVolumeClaimRetentionPolicy:
+          whenDeleted: Retain
+          whenScaled: Retain
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: longhorn
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 5Gi
+        
+      podDisruptionBudget:
+        enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/hostname: alerts.saturn.ong
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        hosts: ["alerts.saturn.ong"]
+        paths: ["/"]
+        pathType: Prefix
+        tls:
+          - hosts: ["alerts.saturn.ong"]
+            secretName: alerts.saturn.ong-tls
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          enabled: true
+          label: grafana_dashboard
+          labelValue: "1"
+
+          annotations: {}
+          multicluster:
+            global:
+              enabled: true
+            etcd:
+              enabled: true
+          provider:
+            allowUiUpdates: false
+        datasources:
+          enabled: true
+          defaultDatasourceEnabled: true
+          isDefaultDatasource: true
+    
+          uid: prometheus
+    prometheusOperator:
+      enabled: true
+      tls:
+        enabled: false
+      prometheusConfigReloader:
+        resources:
+          limits:
+            cpu: 200m
+      admissionWebhooks:
+        enabled: false 
+        patch:
+          enabled: false
+      tlsProxy:
+        enabled: false
+    prometheus:
+      enabled: true
+      prometheusSpec:
+        image:
+          registry: quay.io
+          repository: prometheus/prometheus
+          tag: v3.11.2
+        replicas: 3
+        shards: 1
+        retention: 0
+        retentionSize: 50GiB
+        enableAdminAPI: true
+        walCompression: true
+        enableFeatures:
+          - memory-snapshot-on-shutdown
+        persistentVolumeClaimRetentionPolicy:
+          whenDeleted: Retain
+          whenScaled: Retain
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: longhorn
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 50Gi
+      ingress:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/hostname: prometheus.saturn.ong
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        hosts: ["prometheus.saturn.ong"]
+        paths: ["/"]
+        pathType: Prefix
+        tls:
+          - hosts: ["prometheus.saturn.ong"]
+            secretName: prometheus.saturn.ong-tls
+      podDisruptionBudget:
+        enabled: true
+
+      # TODO: Setup Thanos after a local S3 is setup.
+      # thanosService:
+      #   enabled: true
+      # thanosServiceMonitor:
+      #   enabled: true
+      # thanosIngress:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ong
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        hosts: ["thanos.saturn.ong"]
+        paths: ['/']
+        pathType: Prefix
+        tls:
+          - hosts: ["thanos.saturn.ong"]
+            secretName: thanos.saturn.ong-tls
