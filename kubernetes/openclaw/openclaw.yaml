@@ -116,6 +116,7 @@ metadata:
   name: openclaw-home
   namespace: openclaw
   labels:
+    recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

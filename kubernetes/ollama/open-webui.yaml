@@ -35,6 +35,7 @@ metadata:
   name: open-webui-data
   namespace: ollama
   labels:
+    recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

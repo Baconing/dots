@@ -53,6 +53,7 @@ metadata:
   name: syncthing-config
   namespace: syncthing
   labels:
+    recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

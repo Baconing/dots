@@ -43,6 +43,7 @@ metadata:
   name: vaultwarden-data
   namespace: vaultwarden
   labels:
+    recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:

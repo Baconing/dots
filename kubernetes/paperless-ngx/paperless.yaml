@@ -73,6 +73,7 @@ metadata:
   name: paperless-data
   namespace: paperless-ngx
   labels:
+    recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes: [ReadWriteMany]
