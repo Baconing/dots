@@ -134,20 +134,20 @@ spec:
               - 'saturn.ong$'
             policy: bypass
             resources:
-              - "^/.well-known(/.*)?$"
+              - "^\/.well-known(\/.*)?$"
 
           # Bypass Always: Zipline Uploads
           - domain: "file.baconi.ng"
             policy: bypass
             resources:
-              - "^/u(/.*)?$"
-              - "^/raw(/.*)?$"
-              - "^/view(/.*)?$"
+              - "^\/u(\/.*)?$"
+              - "^\/raw(\/.*)?$"
+              - "^\/view(\/.*)?$"
 
           # Two Factor: Vaultwarden Admin Dashboard
           - domain: "vault.saturn.ong"
             resources:
-              - "^/admin(/.*)?$"
+              - "^\/admin(\/.*)?$"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
@@ -192,7 +192,7 @@ spec:
           # Two Factor: Zipline Admin Dashboard
           - domain: "file.baconi.ng"
             resources:
-              - "^/dashboard/admin(/.*)?$"
+              - "^\/dashboard\/admin(\/.*)?$"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
@@ -200,7 +200,7 @@ spec:
           # Two Factor: Open-WebUI Admin Dashboard
           - domain: "open-webui.saturn.ong"
             resources:
-              -  "^/admin(/.*)?$"
+              -  "^\/admin(\/.*)?$"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
@@ -208,11 +208,11 @@ spec:
           # Two Factor: Seerr Admin Dashboard
           - domain: "seerr.saturn.ong"
             resources:
-              - "^/requests(/.*)?$"
-              - "^/blocklist(/.*)?$"
-              - "^/issues(/.*)?$"
-              - "^/users(/.*)?$"
-              - "^/settings(/.*)?$"
+              - "^\/requests(\/.*)?$"
+              - "^\/blocklist(\/.*)?$"
+              - "^\/issues(\/.*)?$"
+              - "^\/users(\/.*)?$"
+              - "^\/settings(\/.*)?$"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
@@ -220,9 +220,9 @@ spec:
           # Two Factor: Jellyfin Admin Dashboard
           - domain: "jellyfin.saturn.ong"
             resources:
-              - "^/web/#/dashboard(/.*)?$"
-              - "^/web/#/configurationpage(/.*)?$"
-              - "^/web/#/metadata(/.*)?$"
+              - "^\/web\/#\/dashboard(\/.*)?$"
+              - "^\/web\/#\/configurationpage(\/.*)?$"
+              - "^\/web\/#\/metadata(\/.*)?$"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
             subject:
               - "group:administrators"
@@ -237,7 +237,7 @@ spec:
           - domain: "file.baconi.ng"
             policy: one_factor
             resources:
-              - "^/dashboard(/.*)?$"
+              - "^\/dashboard(\/.*)?$"
 
           # Bypass: Fully Public Resources
           - domain:
