@@ -229,10 +229,6 @@ spec:
 
           # One Factor: Semi-Public Resources
           - domain:
-              # media
-              - "seerr.saturn.ong"
-              - "jellyfin.saturn.ong"
-
               # ai
               - "open-webui.saturn.ong"
             policy: one_factor
@@ -245,8 +241,13 @@ spec:
 
           # Bypass: Fully Public Resources
           - domain:
+              # media
+              - "seerr.saturn.ong"
+              - "jellyfin.saturn.ong"
+              - "navidrome.saturn.ong"
+
+              # other
               - "file.baconi.ng"
-              - "navidrome.saturn.ong" # todo
             policy: bypass
       
       session:
