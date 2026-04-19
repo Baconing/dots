@@ -26,6 +26,9 @@ spec:
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
       tag: 2.20.14
+    envFrom:
+      - secretRef:
+          name: paperless-ngx
     env:
       TZ: "America/Detroit"
 
@@ -49,7 +52,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: paperless-secret
-              key: env.PAPERLESS_DBPASS
+              key: PAPERLESS_DBPASS
         - name: INIT_POSTGRES_SUPER_PASS
           valueFrom:
             secretKeyRef:
@@ -90,12 +93,3 @@ spec:
       tls:
         - secretName: paperless.saturn.ong-tls
           hosts: ["paperless.saturn.ong"]
-  valuesFrom:
-    - kind: Secret
-      name: paperless-ngx
-      valuesKey: env.PAPERLESS_SECRET_KEY
-      targetPath: env.PAPERLESS_SECRET_KEY
-    - kind: Secret
-      name: paperless-ngx
-      valuesKey: env.PAPERLESS_DBPASS
-      targetPath: env.PAPERLESS_DBPASS
