@@ -218,7 +218,7 @@ spec:
               - "group:administrators"
             
           # Two Factor: Jellyfin Admin Dashboard
-          - domain: "seerr.saturn.ong"
+          - domain: "jellyfin.saturn.ong"
             resources:
               - "^/web/#/dashboard(/.*)?$"
               - "^/web/#/configurationpage(/.*)?$"
