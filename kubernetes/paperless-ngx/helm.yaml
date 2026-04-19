@@ -1,0 +1,101 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: gabe565
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://charts.gabe565.com
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gabe565
+  namespace: paperless-ngx
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: paperless-ngx
+      version: 0.24.1
+      sourceRef:
+        kind: HelmRepository
+        name: gabe565
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/paperless-ngx/paperless-ngx
+      tag: 2.20.14
+    env:
+      TZ: "America/Detroit"
+
+      PAPERLESS_DBENGINE: postgresql
+      PAPERLESS_DBHOST: postgres
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: paperless
+    initContainers:
+      init-db:
+      image: 
+        repository: ghcr.io/onedr0p/postgres-init
+        tag: 17.4
+      env:
+        - name: INIT_POSTGRES_HOST
+          value: postgres-rw.database.svc.cluster.local
+        - name: INIT_POSTGRES_DBNAME
+          value: paperless
+        - name: INIT_POSTGRES_USER
+          value: paperless
+        - name: INIT_POSTGRES_PASS
+          valueFrom:
+            secretKeyRef:
+              name: paperless-secret
+              key: env.PAPERLESS_DBPASS
+        - name: INIT_POSTGRES_SUPER_PASS
+          valueFrom:
+            secretKeyRef:
+              name: postgres-superuser
+              key: password
+    persistence:
+      data:
+        enabled: true
+        retain: true
+        storageClass: longhorn
+        accessMode: ReadWriteOncePod
+        size: 512Mi
+      media:
+        enabled: true
+        existingClaim: paperless-media
+      consume:
+        enabled: true
+        existingClaim: paperless-consume
+      export:
+        enabled: true
+        existingClaim: paperless-export
+    redis:
+      enabled: true
+      metrics:
+        enabled: true
+    ingress:
+      main:
+        enabled: true
+      annotations:
+        kubernetes.io/ingress.class: traefik
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+        external-dns.alpha.kubernetes.io/hostname: paperless.saturn.ong
+        external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+      hosts:
+        - host: paperless.saturn.ong
+          paths: ["/"]
+      tls:
+        - secretName: paperless.saturn.ong-tls
+          hosts: ["paperless.saturn.ong"]
+  valuesFrom:
+    - kind: Secret
+      name: paperless-ngx
+      valuesKey: env.PAPERLESS_SECRET_KEY
+      targetPath: env.PAPERLESS_SECRET_KEY
+    - kind: Secret
+      name: paperless-ngx
+      valuesKey: env.PAPERLESS_DBPASS
+      targetPath: env.PAPERLESS_DBPASS
