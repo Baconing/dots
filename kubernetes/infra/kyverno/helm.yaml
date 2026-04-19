@@ -28,27 +28,7 @@ spec:
         name: kyverno
         namespace: flux-system
     values:
-      admissionController:
-        replicas: 3
-      backgroundController:
-        replicas: 3
-        serviceMonitor:
-          enabled: true
-          interval: 1m
-      cleanupController:
-        replicas: 3
-        serviceMonitor:
-          enabled: true
-          interval: 1m
       crds:
         install: true
       grafana:
         enabled: true
-      reportsController:
-        replicas: 3
-        serviceMonitor:
-          enabled: true
-          interval: 1m
-      serviceMonitor:
-        enabled: true
-        interval: 1m
