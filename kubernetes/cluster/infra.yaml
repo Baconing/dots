@@ -68,7 +68,7 @@ metadata:
 spec:
   interval: 1m
   path: ./kubernetes/infra/longhorn
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -112,7 +112,7 @@ metadata:
 spec:
   interval: 1m
   path: ./kubernetes/infra/postgres
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: flux-system
