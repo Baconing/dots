@@ -1,0 +1,70 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: hajimari
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://hajimari.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: hajimari
+  namespace: hajimari
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: hajimari
+      version: 2.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: hajimari
+        namespace: flux-system
+  values:
+    podLabels:
+      app: hajimari
+    image:
+      repository: ghcr.io/toboshii/hajimari
+      tag: v0.3.1
+    hajimari:
+      defaultEnable: false
+      lightTheme: paper
+      darkTheme: chalk
+      showGlobalBookmarks: true
+      showAppGroups: true
+      defaultSearchProvider: "Google"
+      namespaceSelector:
+        any: true
+    persistence:
+      data:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 512Gi
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/hostname: saturn.ong
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        hosts:
+          - host: saturn.ong
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts: ["saturn.ong"]
+            secretName: saturn.ong-tls
+    
