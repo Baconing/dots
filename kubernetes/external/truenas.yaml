@@ -46,10 +46,10 @@ metadata:
   namespace: external
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: NAS
-    hajimari.io/group: Storage
-    hajimari.io/icon: mdi:nas
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: NAS
+    gethomepage.dev/group: Storage
+    gethomepage.dev/icon: truenas
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: truenas.saturn.ong

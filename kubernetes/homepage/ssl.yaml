@@ -1,8 +1,8 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: hajimari
-  namespace: hajimari
+  name: homepage
+  namespace: homepage
 spec:
   secretName: saturn.ong-tls
   issuerRef:

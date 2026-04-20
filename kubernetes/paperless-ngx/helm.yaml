@@ -83,10 +83,10 @@ spec:
         enabled: true
       annotations:
         kubernetes.io/ingress.class: traefik
-        hajimari.io/enable: "true"
-        hajimari.io/appName: Paperless-ngx
-        hajimari.io/group: Home
-        hajimari.io/icon: simple-icons:paperlessngx
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: Paperless-ngx
+        gethomepage.dev/group: Home
+        gethomepage.dev/icon: paperless-ngx
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         external-dns.alpha.kubernetes.io/hostname: paperless.saturn.ong

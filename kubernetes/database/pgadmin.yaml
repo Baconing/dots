@@ -90,10 +90,10 @@ metadata:
   namespace: database
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: PGAdmin
-    hajimari.io/group: Cluster
-    hajimari.io/icon: simple-icons:postgresql
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: PGAdmin
+    gethomepage.dev/group: Cluster
+    gethomepage.dev/icon: pgadmin
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: pgadmin.saturn.ong

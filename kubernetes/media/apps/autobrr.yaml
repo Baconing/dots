@@ -79,9 +79,9 @@ metadata:
   namespace: media
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: Autobrr
-    hajimari.io/group: Media
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Autobrr
+    gethomepage.dev/group: Media
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: autobrr.saturn.ong

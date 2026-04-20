@@ -46,10 +46,10 @@ metadata:
   namespace: external
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: OctoPrint
-    hajimari.io/group: Home
-    hajimari.io/icon: simple-icons:octoprint
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: OctoPrint
+    gethomepage.dev/group: Home
+    gethomepage.dev/icon: octoprint
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: octoprint.saturn.ong

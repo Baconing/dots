@@ -91,10 +91,10 @@ metadata:
   namespace: media
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: Radarr
-    hajimari.io/group: Media
-    hajimari.io/icon: simple-icons:radarr
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Radarr
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: radarr
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: radarr.saturn.ong

@@ -109,10 +109,10 @@ metadata:
   namespace: media
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: slskd
-    hajimari.io/group: Media
-    hajimari.io/icon: material-symbols:p2p # Todo?
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: slskd
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: slskd
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: slskd.saturn.ong

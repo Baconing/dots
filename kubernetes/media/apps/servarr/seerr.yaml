@@ -83,10 +83,10 @@ metadata:
   namespace: media
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: Seerr
-    hajimari.io/group: Media
-    hajimari.io/icon: cbi:overseerr
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Seerr
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: seerr
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: seerr.saturn.ong

@@ -18,10 +18,10 @@ metadata:
   namespace: traefik
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: Traefik
-    hajimari.io/group: Cluster
-    hajimari.io/icon: simple-icons:traefikproxy
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Traefik
+    gethomepage.dev/group: Cluster
+    gethomepage.dev/icon: traefik-proxy
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: traefik.saturn.ong

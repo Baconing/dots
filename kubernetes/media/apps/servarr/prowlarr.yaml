@@ -79,10 +79,10 @@ metadata:
   namespace: media
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: Prowlarr
-    hajimari.io/group: Media
-    hajimari.io/icon: cbi:prowlarr
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Prowlarr
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: prowlarr
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: prowlarr.saturn.ong

@@ -46,10 +46,10 @@ metadata:
   namespace: external
   annotations:
     kubernetes.io/ingress.class: traefik
-    hajimari.io/enable: "true"
-    hajimari.io/appName: Home Assistant
-    hajimari.io/group: Home
-    hajimari.io/icon: mdi:home-assistant
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Home Assistant
+    gethomepage.dev/group: Home
+    gethomepage.dev/icon: home-assistant
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: hass.saturn.ong
