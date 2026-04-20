@@ -87,6 +87,10 @@ metadata:
   namespace: vaultwarden
   annotations:
     kubernetes.io/ingress.class: traefik
+    hajimari.io/enable: "true"
+    hajimari.io/appName: Vaultwarden
+    hajimari.io/group: Home
+    hajimari.io/icon: simple-icons:vaultwarden
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: vault.saturn.ong

@@ -18,6 +18,10 @@ metadata:
   namespace: longhorn-system
   annotations:
     kubernetes.io/ingress.class: traefik
+    hajimari.io/enable: "true"
+    hajimari.io/appName: Longhorn
+    hajimari.io/group: Storage
+    hajimari.io/icon: simple-icons:longhorn
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: longhorn.saturn.ong

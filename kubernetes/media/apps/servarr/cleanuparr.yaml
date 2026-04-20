@@ -93,6 +93,10 @@ metadata:
   namespace: media
   annotations:
     kubernetes.io/ingress.class: traefik
+    hajimari.io/enable: "true"
+    hajimari.io/appName: Cleanuparr
+    hajimari.io/group: Media
+    hajimari.io/icon: mdi:broom
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: cleanuparr.saturn.ong

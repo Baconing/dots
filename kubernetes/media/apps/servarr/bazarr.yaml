@@ -91,6 +91,10 @@ metadata:
   namespace: media
   annotations:
     kubernetes.io/ingress.class: traefik
+    hajimari.io/enable: "true"
+    hajimari.io/appName: Bazarr
+    hajimari.io/group: Media
+    hajimari.io/icon: cbi:bazarr
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: bazarr.saturn.ong
