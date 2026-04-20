@@ -7,3 +7,4 @@ data:
   default-resource.yaml: |
     "backup-target": "cifs://10.10.2.2/kubernetes-backup/longhorn"
     "backup-target-credential-secret": "backup-credential"
+    "replicaAutoBalance": "best-effort"
