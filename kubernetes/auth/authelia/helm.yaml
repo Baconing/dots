@@ -231,6 +231,8 @@ spec:
           - domain:
               # ai
               - "open-webui.saturn.ong"
+
+              - "saturn.ong" # Hajimari
             policy: one_factor
 
           # One Factor: Zipline User Dashboard
