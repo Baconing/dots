@@ -63,7 +63,7 @@ spec:
         enabled: true
         retain: true
         storageClass: longhorn
-        accessMode: ReadWriteOncePod
+        accessMode: ReadWriteOnce
         size: 512Mi
       media:
         enabled: true

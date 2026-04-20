@@ -62,7 +62,7 @@ metadata:
     recurring-job-group.longhorn.io/backup: enabled
 spec:
   accessModes:
-    - ReadWriteOncePod
+    - ReadWriteOnce
   storageClassName: longhorn
   resources:
     requests:
