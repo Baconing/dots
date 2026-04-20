@@ -101,6 +101,8 @@ metadata:
 spec:
   tls:
     - secretName: pgadmin.saturn.ong-tls
+      hosts:
+        - pgadmin.saturn.ong
   rules:
     - host: "pgadmin.saturn.ong"
       http:

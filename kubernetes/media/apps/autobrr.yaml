@@ -89,6 +89,8 @@ metadata:
 spec:
   tls:
     - secretName: autobrr.saturn.ong-tls
+      hosts:
+        - autobrr.saturn.ong
   rules:
     - host: "autobrr.saturn.ong"
       http:

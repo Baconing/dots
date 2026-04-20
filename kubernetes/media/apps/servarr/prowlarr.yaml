@@ -90,6 +90,8 @@ metadata:
 spec:
   tls:
     - secretName: prowlarr.saturn.ong-tls
+      hosts:
+        - prowlarr.saturn.ong
   rules:
     - host: "prowlarr.saturn.ong"
       http:

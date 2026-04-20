@@ -57,6 +57,8 @@ metadata:
 spec:
   tls:
     - secretName: hass.saturn.ong-tls
+      hosts:
+        - hass.saturn.ong
   rules:
     - host: "hass.saturn.ong"
       http:

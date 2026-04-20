@@ -29,6 +29,8 @@ metadata:
 spec:
   tls:
     - secretName: longhorn.saturn.ong-tls
+      hosts:
+        - longhorn.saturn.ong
   rules:
     - host: "longhorn.saturn.ong"
       http:

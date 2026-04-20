@@ -102,6 +102,8 @@ metadata:
 spec:
   tls:
     - secretName: lidarr.saturn.ong-tls
+      hosts:
+        - lidarr.saturn.ong
   rules:
     - host: "lidarr.saturn.ong"
       http:

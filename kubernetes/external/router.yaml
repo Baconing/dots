@@ -57,6 +57,8 @@ metadata:
 spec:
   tls:
     - secretName: router.saturn.ong-tls
+      hosts:
+        - router.saturn.ong
   rules:
     - host: "router.saturn.ong"
       http:

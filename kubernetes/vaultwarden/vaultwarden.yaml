@@ -98,6 +98,8 @@ metadata:
 spec:
   tls:
     - secretName: vault.saturn.ong-tls
+      hosts:
+        - vault.saturn.ong
   rules:
     - host: "vault.saturn.ong"
       http:

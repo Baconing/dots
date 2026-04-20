@@ -137,6 +137,8 @@ metadata:
 spec:
   tls:
     - secretName: jellyfin.saturn.ong-tls
+      hosts:
+        - jellyfin.saturn.ong
   rules:
     - host: "jellyfin.saturn.ong"
       http:

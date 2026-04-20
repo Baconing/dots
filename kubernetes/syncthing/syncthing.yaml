@@ -132,6 +132,8 @@ metadata:
 spec:
   tls:
     - secretName: syncthing.saturn.ong-tls
+      hosts:
+        - syncthing.saturn.ong
   rules:
     - host: "syncthing.saturn.ong"
       http:

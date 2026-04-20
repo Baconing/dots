@@ -102,6 +102,8 @@ metadata:
 spec:
   tls:
     - secretName: sonarr.saturn.ong-tls
+      hosts:
+        - sonarr.saturn.ong
   rules:
     - host: "sonarr.saturn.ong"
       http:

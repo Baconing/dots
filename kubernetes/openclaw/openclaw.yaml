@@ -171,6 +171,8 @@ metadata:
 spec:
   tls:
     - secretName: openclaw.saturn.ong-tls
+      hosts:
+        - openclaw.saturn.ong
   rules:
     - host: "openclaw.saturn.ong"
       http:

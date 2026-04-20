@@ -133,6 +133,8 @@ metadata:
 spec:
   tls:
     - secretName: torrent.saturn.ong-tls
+      hosts:
+        - torrent.saturn.ong
   rules:
     - host: "torrent.saturn.ong"
       http:

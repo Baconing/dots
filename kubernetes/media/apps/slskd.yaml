@@ -120,6 +120,8 @@ metadata:
 spec:
   tls:
     - secretName: slskd.saturn.ong-tls
+      hosts:
+        - slskd.saturn.ong
   rules:
     - host: "slskd.saturn.ong"
       http:

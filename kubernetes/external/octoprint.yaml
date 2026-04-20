@@ -57,6 +57,8 @@ metadata:
 spec:
   tls:
     - secretName: octoprint.saturn.ong-tls
+      hosts:
+        - octoprint.saturn.ong
   rules:
     - host: "octoprint.saturn.ong"
       http:

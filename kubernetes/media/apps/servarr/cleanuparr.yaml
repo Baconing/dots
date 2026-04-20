@@ -104,6 +104,8 @@ metadata:
 spec:
   tls:
     - secretName: cleanuparr.saturn.ong-tls
+      hosts:
+        - cleanuparr.saturn.ong
   rules:
     - host: "cleanuparr.saturn.ong"
       http:

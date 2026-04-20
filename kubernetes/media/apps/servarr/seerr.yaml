@@ -94,6 +94,8 @@ metadata:
 spec:
   tls:
     - secretName: seerr.saturn.ong-tls
+      hosts:
+        - seerr.saturn.ong
   rules:
     - host: "seerr.saturn.ong"
       http:

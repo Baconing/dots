@@ -104,6 +104,8 @@ metadata:
 spec:
   tls:
     - secretName: navidrome.saturn.ong-tls
+      hosts:
+        - navidrome.saturn.ong
   rules:
     - host: "navidrome.saturn.ong"
       http:

@@ -57,6 +57,8 @@ metadata:
 spec:
   tls:
     - secretName: truenas.saturn.ong-tls
+      hosts:
+        - truenas.saturn.ong
   rules:
     - host: "truenas.saturn.ong"
       http:

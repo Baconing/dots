@@ -90,6 +90,8 @@ metadata:
 spec:
   tls:
     - secretName: open-webui.saturn.ong-tls
+      hosts:
+        - open-webui.saturn.ong
   rules:
     - host: "open-webui.saturn.ong"
       http:
