@@ -17,7 +17,7 @@ spec:
   chart:
     spec:
       chart: homepage
-      version: 0.10.50
+      version: 2.1.0
       sourceRef:
         kind: HelmRepository
         name: jameswynn
@@ -74,7 +74,7 @@ spec:
         mode: cluster
         ingress: true
         traefik: true
-        
+
     env:
       - name: HOMEPAGE_ALLOWED_HOSTS
         value: "saturn.ong"
