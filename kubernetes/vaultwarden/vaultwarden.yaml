@@ -89,7 +89,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
     hajimari.io/enable: "true"
     hajimari.io/appName: Vaultwarden
-    hajimari.io/group: Home
+    hajimari.io/group: Security
     hajimari.io/icon: simple-icons:vaultwarden
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'

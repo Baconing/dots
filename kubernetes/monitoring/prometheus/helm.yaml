@@ -57,6 +57,10 @@ spec:
         enabled: true
         ingressClassName: "traefik"
         annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/appName: Alerts
+          hajimari.io/group: Monitoring
+          hajimari.io/icon: mdi:alert-outline
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
           external-dns.alpha.kubernetes.io/hostname: alerts.saturn.ong
@@ -135,6 +139,10 @@ spec:
         enabled: true
         ingressClassName: "traefik"
         annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/appName: Prometheus
+          hajimari.io/group: Monitoring
+          hajimari.io/icon: simple-icons:prometheus
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
           external-dns.alpha.kubernetes.io/hostname: prometheus.saturn.ong
@@ -157,6 +165,10 @@ spec:
         # enabled: true
         # ingressClassName: "traefik"
         # annotations:
+        #    hajimari.io/enable: "true"
+        #    hajimari.io/appName: Thanos
+        #    hajimari.io/group: Monitoring
+        #    hajimari.io/icon: simple-icons:thanos
         #   traefik.ingress.kubernetes.io/router.tls: "true"
         #   traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         #   external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ong
