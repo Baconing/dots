@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: hajimari
+  name: homepage
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: hajimari
+  name: homepage
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/hajimari
+  path: ./kubernetes/homepage
   prune: true
   sourceRef:
     kind: GitRepository
