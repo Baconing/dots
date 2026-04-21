@@ -113,9 +113,9 @@ metadata:
     gethomepage.dev/name: slskd
     gethomepage.dev/group: Downloads
     gethomepage.dev/icon: slskd
-    # gethomepage.dev/widget.type: slskd
-    # gethomepage.dev/widget.url: https://slskd.saturn.ong
-    # gethomepage.dev/widget.key: "${SLSKD_API_KEY}"
+    gethomepage.dev/widget.type: slskd
+    gethomepage.dev/widget.url: https://slskd.saturn.ong
+    gethomepage.dev/widget.key: "${SLSKD_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: slskd.saturn.ong

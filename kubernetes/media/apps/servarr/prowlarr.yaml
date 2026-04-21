@@ -83,9 +83,9 @@ metadata:
     gethomepage.dev/name: Prowlarr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: prowlarr
-    # gethomepage.dev/widget.type: prowlarr
-    # gethomepage.dev/widget.url: https://prowlarr.saturn.ong
-    # gethomepage.dev/widget.key: "${PROWLARR_API_KEY}"
+    gethomepage.dev/widget.type: prowlarr
+    gethomeage.dev/widget.url: https://prowlarr.saturn.ong
+    gethomepage.dev/widget.key: "${PROWLARR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: prowlarr.saturn.ong

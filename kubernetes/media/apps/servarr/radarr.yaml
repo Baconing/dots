@@ -95,10 +95,10 @@ metadata:
     gethomepage.dev/name: Radarr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: radarr
-    # gethomepage.dev/widget.type: radarr
-    # gethomepage.dev/widget.url: https://radarr.saturn.ong
-    # gethomepage.dev/widget.key: "${RADARR_API_KEY}"
-    # gethomepage.dev/widget.enableQueue: "true"
+    gethomepage.dev/widget.type: radarr
+    gethomepage.dev/widget.url: https://radarr.saturn.ong
+    gethomepage.dev/widget.key: "${RADARR_API_KEY}"
+    gethomepage.dev/widget.enableQueue: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: radarr.saturn.ong

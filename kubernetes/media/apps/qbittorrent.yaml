@@ -126,12 +126,12 @@ metadata:
     gethomepage.dev/name: qBittorrent
     gethomepage.dev/group: Downloads
     gethomepage.dev/icon: qbittorrent
-    # gethomepage.dev/widget.type: qbittorrent
-    # gethomepage.dev/widget.url: https://torrent.saturn.ong
-    # gethomepage.dev/widget.username: "${QBITTORRENT_USERNAME}"
-    # gethomepage.dev/widget.password: "${QBITTORRENT_PASSWORD}"
-    # gethomepage.dev/widget.enableLeechProgress: "true"
-    # gethomepage.dev/widget.enableLeechSize: "true"
+    gethomepage.dev/widget.type: qbittorrent
+    gethomepage.dev/widget.url: https://torrent.saturn.ong
+    gethomepage.dev/widget.username: "${QBITTORRENT_USERNAME}"
+    gethomepage.dev/widget.password: "${QBITTORRENT_PASSWORD}"
+    gethomepage.dev/widget.enableLeechProgress: "true"
+    gethomepage.dev/widget.enableLeechSize: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: torrent.saturn.ong
