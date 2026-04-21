@@ -108,21 +108,34 @@ metadata:
     # gethomepage.dev/widget.enableQueue: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: radarr.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: radarr.saturn.ci
       hosts:
         - radarr.saturn.ci
   rules:
-    - host: "radarr.saturn.ci"
+    - host: radarr.saturn.ci
       http:
         paths:
-          - path: "/"
-            pathType: "Prefix"
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: radarr
                 port:
                   number: 7878
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: radarr
+  namespace: media
+spec:
+  endpoints:
+    - dnsName: radarr.saturn.ci
+      recordType: CNAME
+      targets:
+        - direct.saturn.ci
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"

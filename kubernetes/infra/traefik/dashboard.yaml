@@ -24,8 +24,6 @@ metadata:
     gethomepage.dev/icon: traefik-proxy
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: traefik.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: traefik.saturn.ci
@@ -42,3 +40,18 @@ spec:
                 name: traefik
                 port:
                   number: 80
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  endpoints:
+    - dnsName: traefik.saturn.ci
+      recordType: CNAME
+      targets:
+        - direct.saturn.ci
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"

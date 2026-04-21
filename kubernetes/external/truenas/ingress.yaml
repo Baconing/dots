@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: truenas
+  namespace: external
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Router
+    gethomepage.dev/group: Network
+    gethomepage.dev/icon: opnsense
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+spec:
+  tls:
+    - secretName: nas.saturn.ci
+      hosts:
+        - nas.saturn.ci
+  rules:
+    - host: nas.saturn.ci
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: truenas
+                port:
+                  number: 80

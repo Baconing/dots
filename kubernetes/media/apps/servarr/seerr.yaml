@@ -99,21 +99,34 @@ metadata:
     # gethomepage.dev/widget.key: "${SEERR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: seerr.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: seerr.saturn.ci
       hosts:
         - seerr.saturn.ci
   rules:
-    - host: "seerr.saturn.ci"
+    - host: seerr.saturn.ci
       http:
         paths:
-          - path: "/"
-            pathType: "Prefix"
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: seerr
                 port:
                   number: 5055
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: seerr
+  namespace: media
+spec:
+  endpoints:
+    - dnsName: seerr.saturn.ci
+      recordType: CNAME
+      targets:
+        - direct.saturn.ci
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"

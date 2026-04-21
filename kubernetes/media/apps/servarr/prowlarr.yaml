@@ -95,21 +95,34 @@ metadata:
     # gethomepage.dev/widget.key: "${PROWLARR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: prowlarr.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: prowlarr.saturn.ci
       hosts:
         - prowlarr.saturn.ci
   rules:
-    - host: "prowlarr.saturn.ci"
+    - host: prowlarr.saturn.ci
       http:
         paths:
-          - path: "/"
-            pathType: "Prefix"
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: prowlarr
                 port:
                   number: 9696
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: prowlarr
+  namespace: media
+spec:
+  endpoints:
+    - dnsName: prowlarr.saturn.ci
+      recordType: CNAME
+      targets:
+        - direct.saturn.ci
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"

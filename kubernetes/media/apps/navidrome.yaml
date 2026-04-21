@@ -106,21 +106,34 @@ metadata:
     gethomepage.dev/icon: navidrome
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: navidrome.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: navidrome.saturn.ci
       hosts:
         - navidrome.saturn.ci
   rules:
-    - host: "navidrome.saturn.ci"
+    - host: navidrome.saturn.ci
       http:
         paths:
-          - path: "/"
-            pathType: "Prefix"
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: navidrome
                 port:
                   number: 4533
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: navidrome
+  namespace: media
+spec:
+  endpoints:
+    - dnsName: navidrome.saturn.ci
+      recordType: CNAME
+      targets:
+        - direct.saturn.ci
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"

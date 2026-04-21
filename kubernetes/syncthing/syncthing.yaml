@@ -127,19 +127,17 @@ metadata:
     gethomepage.dev/icon: syncthing
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: syncthing.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: syncthing.saturn.ci
       hosts:
         - syncthing.saturn.ci
   rules:
-    - host: "syncthing.saturn.ci"
+    - host: syncthing.saturn.ci
       http:
         paths:
-          - path: "/"
-            pathType: "Prefix"
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: syncthing

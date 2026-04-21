@@ -93,19 +93,17 @@ metadata:
     gethomepage.dev/icon: vaultwarden
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: vault.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: vault.saturn.ci
       hosts:
         - vault.saturn.ci
   rules:
-    - host: "vault.saturn.ci"
+    - host: vault.saturn.ci
       http:
         paths:
-          - path: "/"
-            pathType: "Prefix"
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: vaultwarden

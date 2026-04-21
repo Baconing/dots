@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: octoprint
+  namespace: external
+spec:
+  secretName: octoprint.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - octoprint.saturn.ci

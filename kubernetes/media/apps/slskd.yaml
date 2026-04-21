@@ -125,21 +125,34 @@ metadata:
     # gethomepage.dev/widget.key: "${SLSKD_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: slskd.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: slskd.saturn.ci
       hosts:
         - slskd.saturn.ci
   rules:
-    - host: "slskd.saturn.ci"
+    - host: slskd.saturn.ci
       http:
         paths:
-          - path: "/"
-            pathType: "Prefix"
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: slskd
                 port:
                   number: 5030
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: slskd
+  namespace: media
+spec:
+  endpoints:
+    - dnsName: slskd.saturn.ci
+      recordType: CNAME
+      targets:
+        - direct.saturn.ci
+      providerSpecific:
+        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+          value: "true"

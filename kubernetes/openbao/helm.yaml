@@ -43,8 +43,6 @@ spec:
           gethomepage.dev/icon: openbao
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-          external-dns.alpha.kubernetes.io/hostname: openbao.saturn.ci
-          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
         tls:
           - secretName: openbao.saturn.ci
             hosts:
