@@ -27,8 +27,8 @@ spec:
       repository: ghcr.io/gethomepage/homepage
       tag: v1.12.3
     envFrom:
-      secretRef:
-        name: homepage-widget
+      - secretRef:
+          name: homepage-widget
     enableRbac: true
     serviceAccount:
       create: true
