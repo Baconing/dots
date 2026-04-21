@@ -105,12 +105,10 @@ spec:
               memory: true
               showLabel: true
       bookmarks: []
-      services: []
       kubernetes:
         mode: cluster
         ingress: true
         traefik: true
-
     env:
       - name: HOMEPAGE_ALLOWED_HOSTS
         value: "saturn.ong"
