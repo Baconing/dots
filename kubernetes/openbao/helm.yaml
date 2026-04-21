@@ -33,7 +33,7 @@ spec:
         ingressClassName: traefik
         enabled: true
         hosts:
-          - host: openbao.saturn.ong
+          - host: openbao.saturn.ci
             paths: 
               - "/"
         labels:
@@ -43,12 +43,12 @@ spec:
           gethomepage.dev/icon: openbao
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-          external-dns.alpha.kubernetes.io/hostname: openbao.saturn.ong
-          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+          external-dns.alpha.kubernetes.io/hostname: openbao.saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
         tls:
-          - secretName: openbao.saturn.ong-tls
+          - secretName: openbao.saturn.ci
             hosts:
-              - openbao.saturn.ong
+              - openbao.saturn.ci
 
       standalone:
         config: |

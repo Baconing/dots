@@ -4,9 +4,9 @@ metadata:
   name: openbao
   namespace: openbao
 spec:
-  secretName: openbao.saturn.ong-tls
+  secretName: openbao.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - openbao.saturn.ong
+    - openbao.saturn.ci

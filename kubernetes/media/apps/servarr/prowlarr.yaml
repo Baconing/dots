@@ -72,12 +72,12 @@ metadata:
   name: prowlarr
   namespace: media
 spec:
-  secretName: prowlarr.saturn.ong-tls
+  secretName: prowlarr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - prowlarr.saturn.ong
+    - prowlarr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -91,19 +91,19 @@ metadata:
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: prowlarr
     # gethomepage.dev/widget.type: prowlarr
-    # gethomepage.dev/widget.url: https://prowlarr.saturn.ong
+    # gethomepage.dev/widget.url: https://prowlarr.saturn.ci
     # gethomepage.dev/widget.key: "${PROWLARR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: prowlarr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: prowlarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: prowlarr.saturn.ong-tls
+    - secretName: prowlarr.saturn.ci
       hosts:
-        - prowlarr.saturn.ong
+        - prowlarr.saturn.ci
   rules:
-    - host: "prowlarr.saturn.ong"
+    - host: "prowlarr.saturn.ci"
       http:
         paths:
           - path: "/"

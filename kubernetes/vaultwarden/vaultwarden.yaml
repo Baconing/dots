@@ -20,7 +20,7 @@ spec:
           image: vaultwarden/server:1.35.4
           env:
             - name: DOMAIN
-              value: "https://vault.saturn.ong"
+              value: "https://vault.saturn.ci"
             - name: ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -73,12 +73,12 @@ metadata:
   name: vaultwarden
   namespace: vaultwarden
 spec:
-  secretName: vault.saturn.ong-tls
+  secretName: vault.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - vault.saturn.ong
+    - vault.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -93,15 +93,15 @@ metadata:
     gethomepage.dev/icon: vaultwarden
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: vault.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: vault.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: vault.saturn.ong-tls
+    - secretName: vault.saturn.ci
       hosts:
-        - vault.saturn.ong
+        - vault.saturn.ci
   rules:
-    - host: "vault.saturn.ong"
+    - host: "vault.saturn.ci"
       http:
         paths:
           - path: "/"

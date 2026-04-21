@@ -76,12 +76,12 @@ metadata:
   name: seerr
   namespace: media
 spec:
-  secretName: seerr.saturn.ong-tls
+  secretName: seerr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - seerr.saturn.ong
+    - seerr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -95,19 +95,19 @@ metadata:
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: seerr
     # gethomepage.dev/widget.type: seerr
-    # gethomepage.dev/widget.url: https://seerr.saturn.ong
+    # gethomepage.dev/widget.url: https://seerr.saturn.ci
     # gethomepage.dev/widget.key: "${SEERR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: seerr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: seerr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: seerr.saturn.ong-tls
+    - secretName: seerr.saturn.ci
       hosts:
-        - seerr.saturn.ong
+        - seerr.saturn.ci
   rules:
-    - host: "seerr.saturn.ong"
+    - host: "seerr.saturn.ci"
       http:
         paths:
           - path: "/"

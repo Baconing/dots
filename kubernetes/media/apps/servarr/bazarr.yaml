@@ -84,12 +84,12 @@ metadata:
   name: bazarr
   namespace: media
 spec:
-  secretName: bazarr.saturn.ong-tls
+  secretName: bazarr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - bazarr.saturn.ong
+    - bazarr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -103,19 +103,19 @@ metadata:
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: bazarr
     # gethomepage.dev/widget.type: bazarr
-    # gethomepage.dev/widget.url: https://bazarr.saturn.ong
+    # gethomepage.dev/widget.url: https://bazarr.saturn.ci
     # gethomepage.dev/widget.key: "${BAZARR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: bazarr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: bazarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: bazarr.saturn.ong-tls
+    - secretName: bazarr.saturn.ci
       hosts:
-        - bazarr.saturn.ong
+        - bazarr.saturn.ci
   rules:
-    - host: "bazarr.saturn.ong"
+    - host: "bazarr.saturn.ci"
       http:
         paths:
           - path: "/"

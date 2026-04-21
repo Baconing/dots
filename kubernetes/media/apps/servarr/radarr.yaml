@@ -84,12 +84,12 @@ metadata:
   name: radarr
   namespace: media
 spec:
-  secretName: radarr.saturn.ong-tls
+  secretName: radarr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - radarr.saturn.ong
+    - radarr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -103,20 +103,20 @@ metadata:
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: radarr
     # gethomepage.dev/widget.type: radarr
-    # gethomepage.dev/widget.url: https://radarr.saturn.ong
+    # gethomepage.dev/widget.url: https://radarr.saturn.ci
     # gethomepage.dev/widget.key: "${RADARR_API_KEY}"
     # gethomepage.dev/widget.enableQueue: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: radarr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: radarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: radarr.saturn.ong-tls
+    - secretName: radarr.saturn.ci
       hosts:
-        - radarr.saturn.ong
+        - radarr.saturn.ci
   rules:
-    - host: "radarr.saturn.ong"
+    - host: "radarr.saturn.ci"
       http:
         paths:
           - path: "/"

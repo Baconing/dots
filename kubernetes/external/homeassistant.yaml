@@ -32,12 +32,12 @@ metadata:
   name: homeassistant-external
   namespace: external
 spec:
-  secretName: hass.saturn.ong-tls
+  secretName: hass.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - hass.saturn.ong
+    - hass.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -52,15 +52,15 @@ metadata:
     gethomepage.dev/icon: home-assistant
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: hass.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: hass.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: hass.saturn.ong-tls
+    - secretName: hass.saturn.ci
       hosts:
-        - hass.saturn.ong
+        - hass.saturn.ci
   rules:
-    - host: "hass.saturn.ong"
+    - host: "hass.saturn.ci"
       http:
         paths:
           - path: "/"

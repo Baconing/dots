@@ -41,11 +41,11 @@ spec:
         gethomepage.dev/group: Security
         gethomepage.dev/icon: authelia
         traefik.ingress.kubernetes.io/router.tls: "true"
-        external-dns.alpha.kubernetes.io/hostname: sso.saturn.ong
-        external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        external-dns.alpha.kubernetes.io/hostname: sso.saturn.ci
+        external-dns.alpha.kubernetes.io/target: direct.saturn.ci
       tls:
         enabled: true
-        secret: "sso.saturn.ong-tls"
+        secret: "sso.saturn.ci"
       # Ingress hostname is determined by configMap.cookies.domain and configMap.session.cookies.subdomain
 
     redis:
@@ -83,11 +83,11 @@ spec:
 
       totp:
         disable: false
-        issuer: saturn.ong
+        issuer: saturn.ci
 
       webauthn:
         disable: false
-        display_name: saturn.ong
+        display_name: saturn.ci
         attestation_conveyance_preference: indirect
 
       duo_api:
@@ -113,8 +113,8 @@ spec:
           enabled: true
           address: ldap://lldap-ldap:3890
           implementation: lldap
-          base_dn: DC=saturn,DC=ong
-          user: CN=authelia,OU=people,DC=saturn,DC=ong
+          base_dn: DC=saturn,DC=ci
+          user: CN=authelia,OU=people,DC=saturn,DC=ci
           password:
             path: authentication.ldap.password
       
@@ -128,14 +128,14 @@ spec:
         rules:
           # Bypass Always: Secured & Authentication Related
           - domain: 
-              - "sso.saturn.ong"
-              - "ldap.saturn.ong"
-              - "vault.saturn.ong"
+              - "sso.saturn.ci"
+              - "ldap.saturn.ci"
+              - "vault.saturn.ci"
             policy: bypass
 
           # Bypass Always: Webfinger
           - domain_regex:
-              - 'saturn.ong$'
+              - 'saturn.ci$'
             policy: bypass
             resources:
               - "^/.well-known(/.*)?$"
@@ -149,7 +149,7 @@ spec:
               - "^/view(/.*)?$"
 
           # Two Factor: Vaultwarden Admin Dashboard
-          - domain: "vault.saturn.ong"
+          - domain: "vault.saturn.ci"
             resources:
               - "^/admin(/.*)?$"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
@@ -159,36 +159,36 @@ spec:
           # Two Factor: Secured Resources
           - domain:
               # infra
-              - "openbao.saturn.ong" # I haven't set it up and I'll need to expose its API routes (maybe not).
-              - "traefik.saturn.ong"
-              - "longhorn.saturn.ong"
-              - "pgadmin.saturn.ong"
+              - "openbao.saturn.ci" # I haven't set it up and I'll need to expose its API routes (maybe not).
+              - "traefik.saturn.ci"
+              - "longhorn.saturn.ci"
+              - "pgadmin.saturn.ci"
 
               # external services
-              - "router.saturn.ong"
-              - "truenas.saturn.ong"
-              - "hass.saturn.ong"
-              - "octoprint.saturn.ong"
+              - "router.saturn.ci"
+              - "truenas.saturn.ci"
+              - "hass.saturn.ci"
+              - "octoprint.saturn.ci"
 
               # media
-              - "autobrr.saturn.ong"
-              - "bazarr.saturn.ong"
-              - "cleanuparr.saturn.ong"
-              - "lidarr.saturn.ong"
-              - "prowlarr.saturn.ong"
-              - "radarr.saturn.ong"
-              - "sonarr.saturn.ong"
-              - "torrent.saturn.ong"
-              - "slskd.saturn.ong"
+              - "autobrr.saturn.ci"
+              - "bazarr.saturn.ci"
+              - "cleanuparr.saturn.ci"
+              - "lidarr.saturn.ci"
+              - "prowlarr.saturn.ci"
+              - "radarr.saturn.ci"
+              - "sonarr.saturn.ci"
+              - "torrent.saturn.ci"
+              - "slskd.saturn.ci"
 
               # monitoring
-              - "prometheus.saturn.ong"
-              - "grafana.saturn.ong"
-              - "alerts.saturn.ong"
+              - "prometheus.saturn.ci"
+              - "grafana.saturn.ci"
+              - "alerts.saturn.ci"
 
               # other
-              - "paperless.saturn.ong" # I haven't set it up fully and it can contain sensitive information.
-              - "syncthing.saturn.ong"
+              - "paperless.saturn.ci" # I haven't set it up fully and it can contain sensitive information.
+              - "syncthing.saturn.ci"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources after 
             subject:
               - "group:administrators"
@@ -202,7 +202,7 @@ spec:
               - "group:administrators"
 
           # Two Factor: Open-WebUI Admin Dashboard
-          - domain: "open-webui.saturn.ong"
+          - domain: "open-webui.saturn.ci"
             resources:
               -  "^/admin(/.*)?$"
             policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
@@ -210,7 +210,7 @@ spec:
               - "group:administrators"
 
           # Two Factor: Seerr Admin Dashboard
-          - domain: "seerr.saturn.ong"
+          - domain: "seerr.saturn.ci"
             resources:
               - "^/requests(/.*)?$"
               - "^/blocklist(/.*)?$"
@@ -222,7 +222,7 @@ spec:
               - "group:administrators"
             
           # Two Factor: Jellyfin Admin Dashboard
-          - domain: "jellyfin.saturn.ong"
+          - domain: "jellyfin.saturn.ci"
             resources:
               - "^/web/#/dashboard(/.*)?$"
               - "^/web/#/configurationpage(/.*)?$"
@@ -234,9 +234,9 @@ spec:
           # One Factor: Semi-Public Resources
           - domain:
               # ai
-              - "open-webui.saturn.ong"
+              - "open-webui.saturn.ci"
 
-              - "saturn.ong" # Hajimari
+              - "saturn.ci" # Hajimari
             policy: one_factor
 
           # One Factor: Zipline User Dashboard
@@ -248,9 +248,9 @@ spec:
           # Bypass: Fully Public Resources
           - domain:
               # media
-              - "seerr.saturn.ong"
-              - "jellyfin.saturn.ong"
-              - "navidrome.saturn.ong"
+              - "seerr.saturn.ci"
+              - "jellyfin.saturn.ci"
+              - "navidrome.saturn.ci"
 
               # other
               - "file.baconi.ng"
@@ -262,9 +262,9 @@ spec:
 
         same_site: lax
         cookies:
-          - domain: saturn.ong
+          - domain: saturn.ci
             subdomain: sso
-            authelia_url: https://sso.saturn.ong
+            authelia_url: https://sso.saturn.ci
         redis:
           deploy: true
           enabled: true

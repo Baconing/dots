@@ -118,12 +118,12 @@ metadata:
   name: jellyfin
   namespace: media
 spec:
-  secretName: jellyfin.saturn.ong-tls
+  secretName: jellyfin.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - jellyfin.saturn.ong
+    - jellyfin.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -137,20 +137,20 @@ metadata:
     gethomepage.dev/group: Media
     gethomepage.dev/icon: jellyfin
     # gethomepage.dev/widget.type: jellyfin
-    # gethomepage.dev/widget.url: https://jellyfin.saturn.ong
+    # gethomepage.dev/widget.url: https://jellyfin.saturn.ci
     # gethomepage.dev/widget.key: "${JELLYFIN_API_KEY}"
     # gethomepage.dev/widget.enableBlocks: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: jellyfin.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: jellyfin.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: jellyfin.saturn.ong-tls
+    - secretName: jellyfin.saturn.ci
       hosts:
-        - jellyfin.saturn.ong
+        - jellyfin.saturn.ci
   rules:
-    - host: "jellyfin.saturn.ong"
+    - host: "jellyfin.saturn.ci"
       http:
         paths:
           - path: "/"

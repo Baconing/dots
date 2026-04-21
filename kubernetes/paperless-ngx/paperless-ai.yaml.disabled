@@ -63,12 +63,12 @@ metadata:
   name: paperless-ai
   namespace: paperless-ngx
 spec:
-  secretName: paperai.saturn.ong-tls
+  secretName: paperai.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - paperai.saturn.ong
+    - paperai.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -79,13 +79,13 @@ metadata:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: paperai.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: paperai.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: paperai.saturn.ong-tls
+    - secretName: paperai.saturn.ci
   rules:
-    - host: "paperai.saturn.ong"
+    - host: "paperai.saturn.ci"
       http:
         paths:
           - path: "/"

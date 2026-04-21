@@ -32,12 +32,12 @@ metadata:
   name: octoprint-external
   namespace: external
 spec:
-  secretName: octoprint.saturn.ong-tls
+  secretName: octoprint.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - octoprint.saturn.ong
+    - octoprint.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -52,15 +52,15 @@ metadata:
     gethomepage.dev/icon: octoprint
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: octoprint.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: octoprint.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: octoprint.saturn.ong-tls
+    - secretName: octoprint.saturn.ci
       hosts:
-        - octoprint.saturn.ong
+        - octoprint.saturn.ci
   rules:
-    - host: "octoprint.saturn.ong"
+    - host: "octoprint.saturn.ci"
       http:
         paths:
           - path: "/"

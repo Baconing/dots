@@ -86,12 +86,12 @@ metadata:
   name: navidrome
   namespace: media
 spec:
-  secretName: navidrome.saturn.ong-tls
+  secretName: navidrome.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - navidrome.saturn.ong
+    - navidrome.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -106,15 +106,15 @@ metadata:
     gethomepage.dev/icon: navidrome
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: navidrome.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: navidrome.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: navidrome.saturn.ong-tls
+    - secretName: navidrome.saturn.ci
       hosts:
-        - navidrome.saturn.ong
+        - navidrome.saturn.ci
   rules:
-    - host: "navidrome.saturn.ong"
+    - host: "navidrome.saturn.ci"
       http:
         paths:
           - path: "/"

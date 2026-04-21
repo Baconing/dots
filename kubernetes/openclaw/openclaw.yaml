@@ -146,12 +146,12 @@ metadata:
   name: openclaw
   namespace: openclaw
 spec:
-  secretName: openclaw.saturn.ong-tls
+  secretName: openclaw.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - openclaw.saturn.ong
+    - openclaw.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -166,15 +166,15 @@ metadata:
     gethomepage.dev/icon: openclaw
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: openclaw.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: openclaw.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: openclaw.saturn.ong-tls
+    - secretName: openclaw.saturn.ci
       hosts:
-        - openclaw.saturn.ong
+        - openclaw.saturn.ci
   rules:
-    - host: "openclaw.saturn.ong"
+    - host: "openclaw.saturn.ci"
       http:
         paths:
           - path: "/"

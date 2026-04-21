@@ -4,9 +4,9 @@ metadata:
   name: authelia
   namespace: auth
 spec:
-  secretName: sso.saturn.ong-tls
+  secretName: sso.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - sso.saturn.ong
+    - sso.saturn.ci

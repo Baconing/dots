@@ -16,7 +16,7 @@ data:
         },
         "controlUi": {
           "enabled": true,
-          "allowedOrigins": ["https://openclaw.saturn.ong"]
+          "allowedOrigins": ["https://openclaw.saturn.ci"]
         }
       },
       "models": {

@@ -65,12 +65,12 @@ metadata:
   name: open-webui
   namespace: ollama
 spec:
-  secretName: open-webui.saturn.ong-tls
+  secretName: open-webui.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - open-webui.saturn.ong
+    - open-webui.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -85,15 +85,15 @@ metadata:
     gethomepage.dev/icon: open-webui
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: open-webui.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: open-webui.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: open-webui.saturn.ong-tls
+    - secretName: open-webui.saturn.ci
       hosts:
-        - open-webui.saturn.ong
+        - open-webui.saturn.ci
   rules:
-    - host: "open-webui.saturn.ong"
+    - host: "open-webui.saturn.ci"
       http:
         paths:
           - path: "/"

@@ -84,12 +84,12 @@ metadata:
   name: lidarr
   namespace: media
 spec:
-  secretName: lidarr.saturn.ong-tls
+  secretName: lidarr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - lidarr.saturn.ong
+    - lidarr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -103,19 +103,19 @@ metadata:
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: lidarr
     # gethomepage.dev/widget.type: lidarr
-    # gethomepage.dev/widget.url: https://lidarr.saturn.ong
+    # gethomepage.dev/widget.url: https://lidarr.saturn.ci
     # gethomepage.dev/widget.key: "${LIDARR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: lidarr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: lidarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: lidarr.saturn.ong-tls
+    - secretName: lidarr.saturn.ci
       hosts:
-        - lidarr.saturn.ong
+        - lidarr.saturn.ci
   rules:
-    - host: "lidarr.saturn.ong"
+    - host: "lidarr.saturn.ci"
       http:
         paths:
           - path: "/"

@@ -4,9 +4,9 @@ metadata:
   name: pgadmin
   namespace: database
 spec:
-  secretName: pgadmin.saturn.ong-tls
+  secretName: pgadmin.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - pgadmin.saturn.ong
+    - pgadmin.saturn.ci

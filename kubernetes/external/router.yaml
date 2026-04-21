@@ -32,12 +32,12 @@ metadata:
   name: router-external
   namespace: external
 spec:
-  secretName: router.saturn.ong-tls
+  secretName: router.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - router.saturn.ong
+    - router.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -52,15 +52,15 @@ metadata:
     gethomepage.dev/icon: opnsense
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: router.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: router.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: router.saturn.ong-tls
+    - secretName: router.saturn.ci
       hosts:
-        - router.saturn.ong
+        - router.saturn.ci
   rules:
-    - host: "router.saturn.ong"
+    - host: "router.saturn.ci"
       http:
         paths:
           - path: "/"

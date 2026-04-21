@@ -72,12 +72,12 @@ metadata:
   name: autobrr
   namespace: media
 spec:
-  secretName: autobrr.saturn.ong-tls
+  secretName: autobrr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - autobrr.saturn.ong
+    - autobrr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -94,15 +94,15 @@ metadata:
     # gethomepage.dev/widget.key: "${AUTOBRR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: autobrr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: autobrr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: autobrr.saturn.ong-tls
+    - secretName: autobrr.saturn.ci
       hosts:
-        - autobrr.saturn.ong
+        - autobrr.saturn.ci
   rules:
-    - host: "autobrr.saturn.ong"
+    - host: "autobrr.saturn.ci"
       http:
         paths:
           - path: "/"

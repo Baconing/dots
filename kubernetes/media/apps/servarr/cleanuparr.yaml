@@ -86,12 +86,12 @@ metadata:
   name: cleanuparr
   namespace: media
 spec:
-  secretName: cleanuparr.saturn.ong-tls
+  secretName: cleanuparr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - cleanuparr.saturn.ong
+    - cleanuparr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -106,15 +106,15 @@ metadata:
     gethomepage.dev/icon: cleanuparr
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: cleanuparr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: cleanuparr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: cleanuparr.saturn.ong-tls
+    - secretName: cleanuparr.saturn.ci
       hosts:
-        - cleanuparr.saturn.ong
+        - cleanuparr.saturn.ci
   rules:
-    - host: "cleanuparr.saturn.ong"
+    - host: "cleanuparr.saturn.ci"
       http:
         paths:
           - path: "/"

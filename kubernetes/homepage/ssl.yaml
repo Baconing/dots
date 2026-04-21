@@ -4,9 +4,9 @@ metadata:
   name: homepage
   namespace: homepage
 spec:
-  secretName: saturn.ong-tls
+  secretName: saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - saturn.ong
+    - saturn.ci

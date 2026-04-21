@@ -4,12 +4,12 @@ metadata:
   name: prometheus-alert-manager
   namespace: monitoring
 spec:
-  secretName: alerts.saturn.ong-tls
+  secretName: alerts.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - alerts.saturn.ong
+    - alerts.saturn.ci
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -17,12 +17,12 @@ metadata:
   name: prometheus
   namespace: monitoring
 spec:
-  secretName: prometheus.saturn.ong-tls
+  secretName: prometheus.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - prometheus.saturn.ong
+    - prometheus.saturn.ci
 # ---
 # apiVersion: cert-manager.io/v1
 # kind: Certificate
@@ -30,9 +30,9 @@ spec:
 #   name: prometheus-thanos
 #   namespace: monitoring
 # spec:
-#   secretName: thanos.saturn.ong-tls
+#   secretName: thanos.saturn.ci
 #   issuerRef:
 #     name: letsencrypt
 #     kind: ClusterIssuer
 #   dnsNames:
-#     - thanos.saturn.ong
+#     - thanos.saturn.ci

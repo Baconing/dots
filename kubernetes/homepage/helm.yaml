@@ -40,21 +40,21 @@ spec:
           kubernetes.io/ingress.class: traefik
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-          external-dns.alpha.kubernetes.io/hostname: saturn.ong
-          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+          external-dns.alpha.kubernetes.io/hostname: saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
         hosts:
-          - host: "saturn.ong"
+          - host: "saturn.ci"
             paths:
               - path: "/"
                 pathType: Prefix
         tls:
-          - secretName: saturn.ong-tls
+          - secretName: saturn.ci
             hosts:
-              - saturn.ong
+              - saturn.ci
     config:
       settings:
         title: "Saturn"
-        startUrl: https://saturn.ong
+        startUrl: https://saturn.ci
       services:
         - Media:
             style: row
@@ -111,7 +111,7 @@ spec:
         traefik: true
     env:
       - name: HOMEPAGE_ALLOWED_HOSTS
-        value: "saturn.ong"
+        value: "saturn.ci"
     resources:
       requests:
         memory: 10Mi

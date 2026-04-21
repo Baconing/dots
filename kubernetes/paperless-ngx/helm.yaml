@@ -89,11 +89,11 @@ spec:
         gethomepage.dev/icon: paperless-ngx
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-        external-dns.alpha.kubernetes.io/hostname: paperless.saturn.ong
-        external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+        external-dns.alpha.kubernetes.io/hostname: paperless.saturn.ci
+        external-dns.alpha.kubernetes.io/target: direct.saturn.ci
       hosts:
-        - host: paperless.saturn.ong
+        - host: paperless.saturn.ci
           paths: ["/"]
       tls:
-        - secretName: paperless.saturn.ong-tls
-          hosts: ["paperless.saturn.ong"]
+        - secretName: paperless.saturn.ci
+          hosts: ["paperless.saturn.ci"]

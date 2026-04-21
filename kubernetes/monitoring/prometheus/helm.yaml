@@ -63,14 +63,14 @@ spec:
           gethomepage.dev/icon: alertmanager
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-          external-dns.alpha.kubernetes.io/hostname: alerts.saturn.ong
-          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
-        hosts: ["alerts.saturn.ong"]
+          external-dns.alpha.kubernetes.io/hostname: alerts.saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+        hosts: ["alerts.saturn.ci"]
         paths: ["/"]
         pathType: Prefix
         tls:
-          - hosts: ["alerts.saturn.ong"]
-            secretName: alerts.saturn.ong-tls
+          - hosts: ["alerts.saturn.ci"]
+            secretName: alerts.saturn.ci
 
     grafana:
       enabled: false
@@ -145,14 +145,14 @@ spec:
           gethomepage.dev/icon: prometheus
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-          external-dns.alpha.kubernetes.io/hostname: prometheus.saturn.ong
-          external-dns.alpha.kubernetes.io/target: direct.saturn.ong
-        hosts: ["prometheus.saturn.ong"]
+          external-dns.alpha.kubernetes.io/hostname: prometheus.saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+        hosts: ["prometheus.saturn.ci"]
         paths: ["/"]
         pathType: Prefix
         tls:
-          - hosts: ["prometheus.saturn.ong"]
-            secretName: prometheus.saturn.ong-tls
+          - hosts: ["prometheus.saturn.ci"]
+            secretName: prometheus.saturn.ci
       podDisruptionBudget:
         enabled: true
 
@@ -171,11 +171,11 @@ spec:
         #    gethomepage.dev/icon: simple-icons:thanos
         #   traefik.ingress.kubernetes.io/router.tls: "true"
         #   traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-        #   external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ong
-        #   external-dns.alpha.kubernetes.io/target: direct.saturn.ong
-        # hosts: ["thanos.saturn.ong"]
+        #   external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ci
+        #   external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+        # hosts: ["thanos.saturn.ci"]
         # paths: ['/']
         # pathType: Prefix
         # tls:
-        #   - hosts: ["thanos.saturn.ong"]
-        #     secretName: thanos.saturn.ong-tls
+        #   - hosts: ["thanos.saturn.ci"]
+        #     secretName: thanos.saturn.ci

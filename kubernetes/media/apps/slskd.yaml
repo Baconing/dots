@@ -102,12 +102,12 @@ metadata:
   name: slskd
   namespace: media
 spec:
-  secretName: slskd.saturn.ong-tls
+  secretName: slskd.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - slskd.saturn.ong
+    - slskd.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -121,19 +121,19 @@ metadata:
     gethomepage.dev/group: Downloads
     gethomepage.dev/icon: slskd
     # gethomepage.dev/widget.type: slskd
-    # gethomepage.dev/widget.url: https://slskd.saturn.ong
+    # gethomepage.dev/widget.url: https://slskd.saturn.ci
     # gethomepage.dev/widget.key: "${SLSKD_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: slskd.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: slskd.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: slskd.saturn.ong-tls
+    - secretName: slskd.saturn.ci
       hosts:
-        - slskd.saturn.ong
+        - slskd.saturn.ci
   rules:
-    - host: "slskd.saturn.ong"
+    - host: "slskd.saturn.ci"
       http:
         paths:
           - path: "/"

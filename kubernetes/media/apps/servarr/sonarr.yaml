@@ -84,12 +84,12 @@ metadata:
   name: sonarr
   namespace: media
 spec:
-  secretName: sonarr.saturn.ong-tls
+  secretName: sonarr.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - sonarr.saturn.ong
+    - sonarr.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -103,20 +103,20 @@ metadata:
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: sonarr
     # gethomepage.dev/widget.type: sonarr
-    # gethomepage.dev/widget.url: https://sonarr.saturn.ong
+    # gethomepage.dev/widget.url: https://sonarr.saturn.ci
     # gethomepage.dev/widget.key: "${SONARR_API_KEY}"
     # gethomepage.dev/widget.enableQueue: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: sonarr.saturn.ong
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ong
+    external-dns.alpha.kubernetes.io/hostname: sonarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: sonarr.saturn.ong-tls
+    - secretName: sonarr.saturn.ci
       hosts:
-        - sonarr.saturn.ong
+        - sonarr.saturn.ci
   rules:
-    - host: "sonarr.saturn.ong"
+    - host: "sonarr.saturn.ci"
       http:
         paths:
           - path: "/"
