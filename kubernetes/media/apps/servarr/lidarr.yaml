@@ -19,6 +19,13 @@ spec:
         fsGroup: 1000
       containers:
         - name: lidarr
+          resources:
+            requests:
+              cpu: 10m
+              memory: 256Mi
+            limits:
+              cpu: 300m
+              memory: 512Mi
           image: ghcr.io/hotio/lidarr:pr-plugins
           env:
             - name: PUID

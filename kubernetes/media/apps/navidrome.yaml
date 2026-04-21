@@ -21,6 +21,13 @@ spec:
         fsGroup: 1000
       containers:
         - name: navidrome
+          resources:
+            requests:
+              cpu: 10m
+              memory: 256Mi
+            limits:
+              cpu: 100m
+              memory: 512Mi
           image: deluan/navidrome:0.60.3
           env:
             - name: PUID

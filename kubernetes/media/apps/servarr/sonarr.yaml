@@ -19,6 +19,13 @@ spec:
         fsGroup: 1000
       containers:
         - name: sonarr
+          resources:
+            requests:
+              cpu: 10m
+              memory: 256Mi
+            limits:
+              cpu: 300m
+              memory: 640Mi
           image: linuxserver/sonarr:4.0.16
           env:
             - name: PUID

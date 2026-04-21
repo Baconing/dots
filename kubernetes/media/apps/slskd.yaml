@@ -21,6 +21,13 @@ spec:
         fsGroup: 1000
       containers:
         - name: slskd
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 640Mi
           image: slskd/slskd:0.24.5
           env:
             - name: SLSKD_REMOTE_CONFIGURATION

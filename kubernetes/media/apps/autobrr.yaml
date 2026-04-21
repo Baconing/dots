@@ -17,6 +17,13 @@ spec:
     spec:
       containers:
         - name: autobrr
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 256Mi
           image: ghcr.io/autobrr/autobrr:v1.74.0
           ports:
             - containerPort: 7474

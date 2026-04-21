@@ -18,12 +18,14 @@ spec:
       securityContext:
         fsGroup: 1000
       resources:
-        requests:
-          memory: "256Mi"
-        limits:
-          memory: "2Gi"
       containers:
         - name: qbittorrent
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 2Gi
           image: linuxserver/qbittorrent:5.1.4
           env:
             - name: PUID
