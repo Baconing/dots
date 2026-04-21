@@ -82,6 +82,9 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Autobrr
     gethomepage.dev/group: Media
+    gethomepage.dev/widget.type: autobrr
+    gethomeage.dev/widget.url: https://autobrr.saturn.ong
+    gethomepage.dev/widget.key: "${AUTOBRR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: autobrr.saturn.ong

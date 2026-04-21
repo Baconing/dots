@@ -95,7 +95,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Cleanuparr
-    gethomepage.dev/group: Media
+    gethomepage.dev/group: Servarr
     gethomepage.dev/icon: cleanuparr
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'

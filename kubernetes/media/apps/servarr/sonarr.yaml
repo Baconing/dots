@@ -93,8 +93,12 @@ metadata:
     kubernetes.io/ingress.class: traefik
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Sonarr
-    gethomepage.dev/group: Media
+    gethomepage.dev/group: Servarr
     gethomepage.dev/icon: sonarr
+    gethomepage.dev/widget.type: sonarr
+    gethomepage.dev/widget.url: https://sonarr.saturn.ong
+    gethomepage.dev/widget.key: "${SONARR_API_KEY}"
+    gethomepage.dev/widget.enableQueue: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/hostname: sonarr.saturn.ong

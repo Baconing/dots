@@ -26,6 +26,9 @@ spec:
     image:
       repository: ghcr.io/gethomepage/homepage
       tag: v1.12.3
+    envFrom:
+      secretRef:
+        name: homepage-widget
     enableRbac: true
     serviceAccount:
       create: true
@@ -56,6 +59,12 @@ spec:
           - Media:
             style: row
             columns: 4
+            Servarr:
+              style: row
+              columns: 4
+              Downloads:
+                style: row
+                columns: 4
           - Home:
             style: row
             columns: 4
