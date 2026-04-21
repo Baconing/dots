@@ -4,9 +4,9 @@ metadata:
   name: lldap
   namespace: auth
 spec:
-  secretName: lldap.saturn.ong-tls
+  secretName: ldap.saturn.ong-tls
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - lldap.saturn.ong
+    - ldap.saturn.ong
