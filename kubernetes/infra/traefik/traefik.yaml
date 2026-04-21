@@ -39,6 +39,6 @@ spec:
           middlewares:
             - traefik-forwardauth-authelia@kubernetescrd
       web:
-        redirectTo:
-          port: websecure
-          priority: 10
+        http:
+          middlewares:
+            - http-redirect@kubernetescrd
