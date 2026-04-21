@@ -49,30 +49,31 @@ spec:
             hosts:
               - saturn.ong
     config:
-      title: "Saturn"
-      startUrl: https://saturn.ong
-      layout:
-        - Media:
-          style: row
-          columns: 4
-        - Home:
-          style: row
-          columns: 4
-        - AI:
-          style: row
-          columns: 4
-        - Network:
-          style: row
-          columns: 4
-        - Storage:
-          style: row
-          columns: 4
-        - Security:
-          style: row
-          columns: 4
-        - Cluster:
-          style: row
-          columns: 4
+      settings:
+        title: "Saturn"
+        startUrl: https://saturn.ong
+        layout:
+          - Media:
+            style: row
+            columns: 4
+          - Home:
+            style: row
+            columns: 4
+          - AI:
+            style: row
+            columns: 4
+          - Network:
+            style: row
+            columns: 4
+          - Storage:
+            style: row
+            columns: 4
+          - Security:
+            style: row
+            columns: 4
+          - Cluster:
+            style: row
+            columns: 4
       widgets:
         - resources:
             backend: kubernetes
@@ -94,6 +95,8 @@ spec:
               cpu: true
               memory: true
               showLabel: true
+      bookmarks: []
+      services: []
       kubernetes:
         mode: cluster
         ingress: true
