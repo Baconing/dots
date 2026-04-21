@@ -56,7 +56,7 @@ spec:
         title: "Saturn"
         startUrl: https://saturn.ong
         layout:
-          - Media:
+          Media:
             style: row
             columns: 4
             Servarr:
@@ -65,22 +65,22 @@ spec:
               Downloads:
                 style: row
                 columns: 4
-          - Home:
+          Home:
             style: row
             columns: 4
-          - AI:
+          AI:
             style: row
             columns: 4
-          - Network:
+          Network:
             style: row
             columns: 4
-          - Storage:
+          Storage:
             style: row
             columns: 4
-          - Security:
+          Security:
             style: row
             columns: 4
-          - Cluster:
+          Cluster:
             style: row
             columns: 4
       widgets:
