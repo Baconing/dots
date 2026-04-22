@@ -166,7 +166,7 @@ spec:
 
               # external services
               - "router.saturn.ci"
-              - "truenas.saturn.ci"
+              - "nas.saturn.ci"
               - "hass.saturn.ci"
               - "octoprint.saturn.ci"
 

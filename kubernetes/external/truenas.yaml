@@ -32,12 +32,12 @@ metadata:
   name: truenas-external
   namespace: external
 spec:
-  secretName: truenas.saturn.ci
+  secretName: nas.saturn.ci
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - truenas.saturn.ci
+    - nas.saturn.ci
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -52,15 +52,15 @@ metadata:
     gethomepage.dev/icon: truenas
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-    external-dns.alpha.kubernetes.io/hostname: truenas.saturn.ci
+    external-dns.alpha.kubernetes.io/hostname: nas.saturn.ci
     external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
-    - secretName: truenas.saturn.ci
+    - secretName: nas.saturn.ci
       hosts:
-        - truenas.saturn.ci
+        - nas.saturn.ci
   rules:
-    - host: "truenas.saturn.ci"
+    - host: "nas.saturn.ci"
       http:
         paths:
           - path: "/"
