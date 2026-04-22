@@ -41,11 +41,5 @@ spec:
           secretKeyRef:
             name: cloudflare-api-token
             key: email
-    rbac:
-      create: true
-      additionalPermissions:
-        - apiGroups: ["externaldns.k8s.io"]
-          resources: ["dnsendpoints"]
-          verbs: ["get", "watch", "list"]
     extraArgs:
       - --cloudflare-proxied
