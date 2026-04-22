@@ -93,25 +93,6 @@ spec:
       protocol: TCP
       name: http
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: jellyfin-discovery
-  namespace: media
-spec:
-  type: LoadBalancer
-  selector:
-    app: jellyfin
-  ports:
-    - port: 7359
-      targetPort: 7359
-      protocol: UDP
-      name: jellyfin-discovery
-    - port: 1900
-      targetPort: 1900
-      protocol: UDP
-      name: dnla-discovery
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
