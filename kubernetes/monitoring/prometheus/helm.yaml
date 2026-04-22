@@ -63,6 +63,7 @@ spec:
           gethomepage.dev/icon: alertmanager
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/enabled: "true"
           external-dns.alpha.kubernetes.io/hostname: alerts.saturn.ci
           external-dns.alpha.kubernetes.io/target: direct.saturn.ci
         hosts: ["alerts.saturn.ci"]
@@ -145,6 +146,7 @@ spec:
           gethomepage.dev/icon: prometheus
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/enabled: "true"
           external-dns.alpha.kubernetes.io/hostname: prometheus.saturn.ci
           external-dns.alpha.kubernetes.io/target: direct.saturn.ci
         hosts: ["prometheus.saturn.ci"]
@@ -171,6 +173,7 @@ spec:
         #    gethomepage.dev/icon: simple-icons:thanos
         #   traefik.ingress.kubernetes.io/router.tls: "true"
         #   traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+        #   external-dns.alpha.kubernetes.io/enabled: "true"
         #   external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ci
         #   external-dns.alpha.kubernetes.io/target: direct.saturn.ci
         # hosts: ["thanos.saturn.ci"]

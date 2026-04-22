@@ -30,11 +30,13 @@ spec:
   values:
     sources:
       - ingress
+
+    annotationFilter: "external-dns.alpha.kubernetes.io/enabled=true"
+
     provider:
       name: cloudflare
     extraArgs:
       - --cloudflare-proxied
-      - --ignore-ingress-tls-spec
     env:
       - name: CF_API_TOKEN
         valueFrom:
