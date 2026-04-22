@@ -34,7 +34,7 @@ spec:
       name: cloudflare
     extraArgs:
       - --cloudflare-proxied
-
+      - --ignore-ingress-tls-spec
     env:
       - name: CF_API_TOKEN
         valueFrom:
