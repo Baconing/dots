@@ -28,8 +28,13 @@ spec:
         name: external-dns
         namespace: flux-system
   values:
+    sources:
+      - ingress
     provider:
       name: cloudflare
+    extraArgs:
+      - --cloudflare-proxied
+
     env:
       - name: CF_API_TOKEN
         valueFrom:
@@ -41,6 +46,3 @@ spec:
           secretKeyRef:
             name: cloudflare-api-token
             key: email
-    extraArgs:
-      - --source=ingress
-      - --cloudflare-proxied
