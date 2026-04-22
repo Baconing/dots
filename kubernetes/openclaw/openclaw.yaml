@@ -166,34 +166,21 @@ metadata:
     gethomepage.dev/icon: openclaw
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.alpha.kubernetes.io/hostname: openclaw.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: openclaw.saturn.ci
       hosts:
         - openclaw.saturn.ci
   rules:
-    - host: openclaw.saturn.ci
+    - host: "openclaw.saturn.ci"
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: "/"
+            pathType: "Prefix"
             backend:
               service:
                 name: openclaw
                 port:
                   number: 18789
----
-apiVersion: externaldns.k8s.io/v1alpha1
-kind: DNSEndpoint
-metadata:
-  name: openclaw
-  namespace: openclaw
-spec:
-  endpoints:
-    - dnsName: openclaw.saturn.ci
-      recordType: CNAME
-      targets:
-        - direct.saturn.ci
-      providerSpecific:
-        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-          value: "true"

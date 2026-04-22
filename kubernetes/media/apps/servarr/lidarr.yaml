@@ -107,34 +107,21 @@ metadata:
     # gethomepage.dev/widget.key: "${LIDARR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.alpha.kubernetes.io/hostname: lidarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: lidarr.saturn.ci
       hosts:
         - lidarr.saturn.ci
   rules:
-    - host: lidarr.saturn.ci
+    - host: "lidarr.saturn.ci"
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: "/"
+            pathType: "Prefix"
             backend:
               service:
                 name: lidarr
                 port:
                   number: 8686
----
-apiVersion: externaldns.k8s.io/v1alpha1
-kind: DNSEndpoint
-metadata:
-  name: lidarr
-  namespace: media
-spec:
-  endpoints:
-    - dnsName: lidarr.saturn.ci
-      recordType: CNAME
-      targets:
-        - direct.saturn.ci
-      providerSpecific:
-        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-          value: "true"

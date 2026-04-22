@@ -24,6 +24,8 @@ metadata:
     gethomepage.dev/icon: longhorn
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.alpha.kubernetes.io/hostname: longhorn.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: longhorn.saturn.ci

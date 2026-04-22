@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: open-webui
-  namespace: ai
+  namespace: ollama
 spec:
   replicas: 1
   strategy:
@@ -33,7 +33,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: open-webui-data
-  namespace: ai
+  namespace: ollama
   labels:
     recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
@@ -49,7 +49,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: open-webui
-  namespace: ai
+  namespace: ollama
 spec:
   selector:
     app: open-webui
@@ -63,7 +63,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: open-webui
-  namespace: ai
+  namespace: ollama
 spec:
   secretName: open-webui.saturn.ci
   issuerRef:
@@ -76,7 +76,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: open-webui
-  namespace: ai
+  namespace: ollama
   annotations:
     kubernetes.io/ingress.class: traefik
     gethomepage.dev/enabled: "true"
@@ -85,35 +85,21 @@ metadata:
     gethomepage.dev/icon: open-webui
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.alpha.kubernetes.io/hostname: open-webui.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: open-webui.saturn.ci
       hosts:
         - open-webui.saturn.ci
   rules:
-    - host: open-webui.saturn.ci
+    - host: "open-webui.saturn.ci"
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: "/"
+            pathType: "Prefix"
             backend:
               service:
                 name: open-webui
                 port:
                   number: 8080
----
----
-apiVersion: externaldns.k8s.io/v1alpha1
-kind: DNSEndpoint
-metadata:
-  name: open-webui
-  namespace: ai
-spec:
-  endpoints:
-    - dnsName: open-webui.saturn.ci
-      recordType: CNAME
-      targets:
-        - direct.saturn.ci
-      providerSpecific:
-        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-          value: "true"

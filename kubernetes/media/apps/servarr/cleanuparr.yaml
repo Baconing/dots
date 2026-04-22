@@ -106,34 +106,21 @@ metadata:
     gethomepage.dev/icon: cleanuparr
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.alpha.kubernetes.io/hostname: cleanuparr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: cleanuparr.saturn.ci
       hosts:
         - cleanuparr.saturn.ci
   rules:
-    - host: cleanuparr.saturn.ci
+    - host: "cleanuparr.saturn.ci"
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: "/"
+            pathType: "Prefix"
             backend:
               service:
                 name: cleanuparr
                 port:
                   number: 11011
----
-apiVersion: externaldns.k8s.io/v1alpha1
-kind: DNSEndpoint
-metadata:
-  name: cleanuparr
-  namespace: media
-spec:
-  endpoints:
-    - dnsName: cleanuparr.saturn.ci
-      recordType: CNAME
-      targets:
-        - direct.saturn.ci
-      providerSpecific:
-        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-          value: "true"

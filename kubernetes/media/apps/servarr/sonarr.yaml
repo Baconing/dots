@@ -108,34 +108,21 @@ metadata:
     # gethomepage.dev/widget.enableQueue: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.alpha.kubernetes.io/hostname: sonarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: sonarr.saturn.ci
       hosts:
         - sonarr.saturn.ci
   rules:
-    - host: sonarr.saturn.ci
+    - host: "sonarr.saturn.ci"
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: "/"
+            pathType: "Prefix"
             backend:
               service:
                 name: sonarr
                 port:
                   number: 8989
----
-apiVersion: externaldns.k8s.io/v1alpha1
-kind: DNSEndpoint
-metadata:
-  name: sonarr
-  namespace: media
-spec:
-  endpoints:
-    - dnsName: sonarr.saturn.ci
-      recordType: CNAME
-      targets:
-        - direct.saturn.ci
-      providerSpecific:
-        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-          value: "true"

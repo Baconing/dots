@@ -107,34 +107,21 @@ metadata:
     # gethomepage.dev/widget.key: "${BAZARR_API_KEY}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.alpha.kubernetes.io/hostname: bazarr.saturn.ci
+    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: bazarr.saturn.ci
       hosts:
         - bazarr.saturn.ci
   rules:
-    - host: bazarr.saturn.ci
+    - host: "bazarr.saturn.ci"
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: "/"
+            pathType: "Prefix"
             backend:
               service:
                 name: bazarr
                 port:
                   number: 6767
----
-apiVersion: externaldns.k8s.io/v1alpha1
-kind: DNSEndpoint
-metadata:
-  name: bazarr
-  namespace: media
-spec:
-  endpoints:
-    - dnsName: bazarr.saturn.ci
-      recordType: CNAME
-      targets:
-        - direct.saturn.ci
-      providerSpecific:
-        - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-          value: "true"

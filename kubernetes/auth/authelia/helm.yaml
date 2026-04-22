@@ -41,6 +41,8 @@ spec:
         gethomepage.dev/group: Security
         gethomepage.dev/icon: authelia
         traefik.ingress.kubernetes.io/router.tls: "true"
+        external-dns.alpha.kubernetes.io/hostname: sso.saturn.ci
+        external-dns.alpha.kubernetes.io/target: direct.saturn.ci
       tls:
         enabled: true
         secret: "sso.saturn.ci"
