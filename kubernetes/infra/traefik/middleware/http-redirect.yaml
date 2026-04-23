@@ -4,6 +4,6 @@ metadata:
   name: http-redirect
   namespace: traefik
 spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
+  redirectRegex:
+    regex: ^http://(?!.*\/\.well-known\/acme-challenge\/)(.*)
+    replacement: https://${1}
