@@ -256,6 +256,10 @@ spec:
               # other
               - "file.baconi.ng"
             policy: bypass
+          
+          # Bypass: Webfinger
+          - resources: "^/.well-known/[^/]+$"
+            policy: bypass
       
       session:
         encryption_key:
