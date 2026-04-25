@@ -38,7 +38,3 @@ spec:
         http:
           middlewares:
             - traefik-forwardauth-authelia@kubernetescrd
-      web:
-        http:
-          middlewares:
-            - http-redirect@kubernetescrd
