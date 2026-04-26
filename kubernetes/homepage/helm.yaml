@@ -52,16 +52,19 @@ spec:
       settings:
         title: "Saturn"
         startUrl: https://saturn.ci
+        background: 
+          image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+          blur: sm
         layout:
           - Media:
               style: row
               columns: 4
               Servarr:
                 style: row
-                columns: 4
+                columns: 8
                 Downloads:
                   style: row
-                  columns: 4
+                  columns: 2
           - Home:
               style: row
               columns: 4
@@ -80,6 +83,7 @@ spec:
           - Cluster:
               style: row
               columns: 4
+      services: []
       widgets:
         - resources:
             backend: kubernetes
