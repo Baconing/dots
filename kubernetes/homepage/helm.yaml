@@ -56,33 +56,15 @@ spec:
           image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
           blur: sm
         layout:
-          - Media:
-              style: row
-              columns: 4
-              Servarr:
-                style: row
-                columns: 8
-                Downloads:
-                  style: row
-                  columns: 2
-          - Home:
-              style: row
-              columns: 4
-          - AI:
-              style: row
-              columns: 4
-          - Network:
-              style: row
-              columns: 4
-          - Storage:
-              style: row
-              columns: 4
-          - Security:
-              style: row
-              columns: 4
-          - Cluster:
-              style: row
-              columns: 4
+          - Media
+          - Servarr
+          - Downloads
+          - Home
+          - AI
+          - Network
+          - Storage
+          - Security
+          - Cluster
       services: []
       widgets:
         - resources:
