@@ -52,34 +52,34 @@ spec:
       settings:
         title: "Saturn"
         startUrl: https://saturn.ci
-      services:
-        - Media:
-            style: row
-            columns: 4
-            Servarr:
+        layout:
+          - Media:
               style: row
               columns: 4
-              Downloads:
+              Servarr:
                 style: row
                 columns: 4
-        - Home:
-            style: row
-            columns: 4
-        - AI:
-            style: row
-            columns: 4
-        - Network:
-            style: row
-            columns: 4
-        - Storage:
-            style: row
-            columns: 4
-        - Security:
-            style: row
-            columns: 4
-        - Cluster:
-            style: row
-            columns: 4
+                Downloads:
+                  style: row
+                  columns: 4
+          - Home:
+              style: row
+              columns: 4
+          - AI:
+              style: row
+              columns: 4
+          - Network:
+              style: row
+              columns: 4
+          - Storage:
+              style: row
+              columns: 4
+          - Security:
+              style: row
+              columns: 4
+          - Cluster:
+              style: row
+              columns: 4
       widgets:
         - resources:
             backend: kubernetes
