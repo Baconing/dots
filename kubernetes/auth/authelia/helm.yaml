@@ -258,7 +258,10 @@ spec:
             policy: bypass
           
           # Bypass: Webfinger
-          - resources: "^/.well-known/[^/]+$"
+          - domain_regex:
+              - "saturn.ci$"
+            resources: 
+              - "^/.well-known/[^/]+$"
             policy: bypass
       
       session:
