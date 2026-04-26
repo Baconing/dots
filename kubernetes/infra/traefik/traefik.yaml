@@ -40,7 +40,7 @@ spec:
           kubernetes.io/ingress.class: traefik
           gethomepage.dev/enabled: "true"
           gethomepage.dev/name: Traefik
-          gethomepage.dev/group: Cluster
+          gethomepage.dev/group: Network
           gethomepage.dev/icon: traefik-proxy
           traefik.ingress.kubernetes.io/router.tls: "true"
           external-dns.alpha.kubernetes.io/enabled: "true"

@@ -55,7 +55,7 @@ spec:
         external-dns.alpha.kubernetes.io/target: direct.saturn.ci
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: pgAdmin
-        gethomepage.dev/group: Cluster
+        gethomepage.dev/group: Database
         gethomepage.dev/icon: pgadmin
       hosts:
         - host: "pgadmin.saturn.ci"
