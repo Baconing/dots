@@ -41,6 +41,9 @@ spec:
           MaintenanceDB: postgres
           SSLMode: prefer
     
+    envVarsFromSecrets: 
+      - pgadmin
+    
     ingress:
       enabled: true
       ingressClassName: "traefik"
@@ -74,6 +77,9 @@ spec:
     
     autoscaling:
       enabled: true
+
+    persistentVolume:
+      enabled: false
   valuesFrom:
     - kind: Secret
       name: postgres-superuser
