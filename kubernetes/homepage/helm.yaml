@@ -57,23 +57,23 @@ spec:
           blur: sm
         layout:
           - Media:
-              style: row
+              style: column
           - Servarr:
-              style: row
+              style: column
           - Downloads:
-              style: row
+              style: column
           - Home:
-              style: row
+              style: column
           - AI:
-              style: row
+              style: column
           - Network:
-              style: row
+              style: column
           - Storage:
-              style: row
+              style: column
           - Security:
-              style: row
+              style: column
           - Cluster:
-              style: row
+              style: column
       services: []
       widgets:
         - resources:
