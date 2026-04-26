@@ -58,15 +58,18 @@ spec:
         background: 
           image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
           blur: sm
+        useEqualHeights: true
         layout:
           - Media:
               style: column
-          - Servarr:
-              style: column
-          - Downloads:
-              style: column
+              Servarr:
+                style: row
+                columns: 8
+              Downloads:
+                style: column
           - Home:
-              style: column
+              style: row
+              columns: 4
           - AI:
               style: column
           - Network:
