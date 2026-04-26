@@ -39,6 +39,7 @@ spec:
         annotations: 
           kubernetes.io/ingress.class: traefik
           gethomepage.dev/enabled: "true"
+          gethomepage.dev/href: "https://traefik.saturn.ci" # Need this when using Traefik IngressRoutes
           gethomepage.dev/name: Traefik
           gethomepage.dev/group: Network
           gethomepage.dev/icon: traefik-proxy
