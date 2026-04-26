@@ -103,10 +103,10 @@ spec:
               memory: true
               showLabel: true
         - longhorn:
-          expanded: true
-          total: true
-          labels: true
-          nodes: true
+            expanded: true
+            total: true
+            labels: true
+            nodes: true
       bookmarks: []
       kubernetes:
         mode: cluster
