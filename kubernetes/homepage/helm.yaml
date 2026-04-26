@@ -58,13 +58,16 @@ spec:
         background: 
           image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
           blur: sm
+        target: _self
+        headerStyle: boxedWidgets
         useEqualHeights: true
         layout:
           - Media:
-              style: column
-              Servarr:
-                style: row
-                columns: 8
+              style: row
+              columns: 4
+          - Servarr:
+              style: row
+              columns: 4
               Downloads:
                 style: column
           - Home:
@@ -81,6 +84,12 @@ spec:
           - Database:
               style: column
       services: []
+      bookmarks:
+        - Network:
+            - name: "Speedtest"
+              url: https://speedtest.net
+              icon: speedtest
+
       widgets:
         - resources:
             backend: kubernetes
@@ -107,7 +116,6 @@ spec:
             total: true
             labels: true
             nodes: true
-      bookmarks: []
       kubernetes:
         mode: cluster
         ingress: true
