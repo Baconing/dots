@@ -102,10 +102,10 @@ metadata:
     gethomepage.dev/name: Sonarr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: sonarr
-    # gethomepage.dev/widget.type: sonarr
-    # gethomepage.dev/widget.url: https://sonarr.saturn.ci
-    # gethomepage.dev/widget.key: "${SONARR_API_KEY}"
-    # gethomepage.dev/widget.enableQueue: "true"
+    gethomepage.dev/widget.type: sonarr
+    gethomepage.dev/widget.url: http://sonarr.media.svc.cluster.local:8989
+    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
+    gethomepage.dev/widget.enableQueue: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/enabled: "true"

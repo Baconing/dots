@@ -94,9 +94,9 @@ metadata:
     gethomepage.dev/name: Seerr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: seerr
-    # gethomepage.dev/widget.type: seerr
-    # gethomepage.dev/widget.url: https://seerr.saturn.ci
-    # gethomepage.dev/widget.key: "${SEERR_API_KEY}"
+    gethomepage.dev/widget.type: seerr
+    gethomepage.dev/widget.url: http://seerr.media.svc.cluster.local:5055
+    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SEERR_API_KEY}}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/enabled: "true"

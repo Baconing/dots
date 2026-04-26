@@ -102,9 +102,9 @@ metadata:
     gethomepage.dev/name: Bazarr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: bazarr
-    # gethomepage.dev/widget.type: bazarr
-    # gethomepage.dev/widget.url: https://bazarr.saturn.ci
-    # gethomepage.dev/widget.key: "${BAZARR_API_KEY}"
+    gethomepage.dev/widget.type: bazarr
+    gethomepage.dev/widget.url: http://bazarr.media.svc.cluster.local:6767
+    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_BAZARR_API_KEY}}"
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/enabled: "true"
