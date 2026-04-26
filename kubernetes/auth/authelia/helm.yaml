@@ -256,13 +256,6 @@ spec:
               # other
               - "file.baconi.ng"
             policy: bypass
-          
-          # Bypass: Webfinger
-          - domain_regex:
-              - "saturn.ci$"
-            resources: 
-              - "^/.well-known/[^/]+$"
-            policy: bypass
       
       session:
         encryption_key:
