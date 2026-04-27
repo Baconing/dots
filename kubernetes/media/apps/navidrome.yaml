@@ -104,6 +104,7 @@ metadata:
     gethomepage.dev/name: Navidrome
     gethomepage.dev/group: Media
     gethomepage.dev/icon: navidrome
+    gethomepage.dev/weight: 100
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/enabled: "true"

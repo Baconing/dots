@@ -117,6 +117,7 @@ metadata:
     gethomepage.dev/name: Jellyfin
     gethomepage.dev/group: Media
     gethomepage.dev/icon: jellyfin
+    gethomepage.dev/weight: 1000
     gethomepage.dev/widget.type: jellyfin
     gethomepage.dev/widget.url: http://jellyfin.media.svc.cluster.local:8096
     gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_JELLYFIN_API_KEY}}"

@@ -94,6 +94,7 @@ metadata:
     gethomepage.dev/name: Seerr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: seerr
+    gethomepage.dev/weight: 1000
     gethomepage.dev/widget.type: seerr
     gethomepage.dev/widget.url: http://seerr.media.svc.cluster.local:5055
     gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SEERR_API_KEY}}"

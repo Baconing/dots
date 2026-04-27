@@ -102,6 +102,7 @@ metadata:
     gethomepage.dev/name: Lidarr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: lidarr
+    gethomepage.dev/weight: 98
     gethomepage.dev/widget.type: lidarr
     gethomepage.dev/widget.url: http://lidarr.media.svc.cluster.local:8686
     gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"

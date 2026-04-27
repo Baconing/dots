@@ -64,12 +64,13 @@ spec:
         layout:
           - Media:
               style: row
-              columns: 4
+              columns: 2
+          - Downloads:
+              style: row
+              columns: 2
           - Servarr:
               style: row
               columns: 4
-              Downloads:
-                style: column
           - Home:
               style: row
               columns: 4

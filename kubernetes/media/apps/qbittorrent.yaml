@@ -128,6 +128,7 @@ metadata:
     gethomepage.dev/name: qBittorrent
     gethomepage.dev/group: Downloads
     gethomepage.dev/icon: qbittorrent
+    gethomepage.dev/weight: 1000
     gethomepage.dev/widget.type: qbittorrent
     gethomepage.dev/widget.url: http://qbittorrent.media.svc.cluster.local:8080
     gethomepage.dev/widget.username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"

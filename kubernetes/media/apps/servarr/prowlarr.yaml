@@ -90,6 +90,7 @@ metadata:
     gethomepage.dev/name: Prowlarr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: prowlarr
+    gethomepage.dev/weight: 10
     gethomepage.dev/widget.type: prowlarr
     gethomepage.dev/widget.url: http://prowlarr.media.svc.cluster.local:9696
     gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
