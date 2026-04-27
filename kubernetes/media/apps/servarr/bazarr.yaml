@@ -102,7 +102,7 @@ metadata:
     gethomepage.dev/name: Bazarr
     gethomepage.dev/group: Servarr
     gethomepage.dev/icon: bazarr
-    gethomepage.dev/weight: 96
+    gethomepage.dev/weight: 16
     gethomepage.dev/widget.type: bazarr
     gethomepage.dev/widget.url: http://bazarr.media.svc.cluster.local:6767
     gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_BAZARR_API_KEY}}"

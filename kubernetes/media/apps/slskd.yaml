@@ -118,9 +118,9 @@ metadata:
     kubernetes.io/ingress.class: traefik
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: slskd
-    gethomepage.dev/group: Media
+    gethomepage.dev/group: Downloads
     gethomepage.dev/icon: slskd
-    gethomepage.dev/weight: 100
+    gethomepage.dev/weight: 10
     gethomepage.dev/widget.type: slskd
     gethomepage.dev/widget.url: http://slskd.media.svc.cluster.local:5030
     gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SLSKD_API_KEY}}"
