@@ -59,14 +59,17 @@ spec:
       disabled: false
       mountPath: "/secrets"
       existingSecret: "authelia"
-      # additionalSecrets:
-      #   authelia:
-      #     path: jwks
-      #     items:
-      #       - key: oidc.jwk.RS256.pem
-      #         path: oidc.jwk.RS256.pem
-      #       - key: oidc.jwk.RS256.crt
-      #         path: oidc.jwk.RS256.crt
+      additionalSecrets:
+        authelia:
+          path: jwks
+          items:
+            - key: oidc.jwk.RS256.pem
+              path: oidc.jwk.RS256.pem
+        odic-pgadmin:
+          path: odic
+          items:
+            - key: odic.client_secret
+              path: pgadmin.client_secret
 
     configMap:
       disabled: false
@@ -301,15 +304,30 @@ spec:
         filesystem:
           enabled: false
 
-      # identity_providers:
-      #   odic:
-      #     enabled: true
+      identity_providers:
+        oidc:
+          enabled: true
 
-      #     enable_client_debug_messages: false
+          enable_client_debug_messages: false
 
-      #     jwks:
-      #       - key_id: 'RS256'
-      #         algorithm: 'RS256'
-      #         use: sig
-      #         key:
-      #           path: /secrets/jwks/odic.jwk.RS256.pem
+          hmac_secret:
+            path: "identity_providers.oidc.hmac_secret"
+
+          jwks:
+            - key_id: RS256
+              algorithm: RS256
+              use: sig
+              key:
+                path: /secrets/jwks/odic.jwk.RS256.pem
+          
+          clients:
+            - client_id: pgadmin
+              client_name: PGAdmin
+              client_secret:
+                path: /secrets/odic/pgadmin.client_secret
+              public: false
+              authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+              
+          
+
+          
