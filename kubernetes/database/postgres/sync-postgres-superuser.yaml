@@ -20,7 +20,7 @@ spec:
           kinds: ["Namespace"]
       exclude:
         resources:
-          namespaces: ["databases"]
+          namespaces: ["database"]
       generate:
         generateExisting: true
         apiVersion: v1
@@ -29,5 +29,5 @@ spec:
         namespace: "{{request.object.metadata.name}}"
         synchronize: true
         clone:
-          namespace: databases
+          namespace: database
           name: postgres-superuser
