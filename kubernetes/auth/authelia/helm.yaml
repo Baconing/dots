@@ -171,6 +171,11 @@ spec:
               - "hass.saturn.ci"
               - "octoprint.saturn.ci"
 
+              # home
+              - "moonraker.saturn.ci"
+              - "mainsail.saturn.ci"
+              - "orcaslicer.saturn.ci"
+
               # media
               - "autobrr.saturn.ci"
               - "bazarr.saturn.ci"
