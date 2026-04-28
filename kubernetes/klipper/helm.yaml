@@ -229,6 +229,22 @@ spec:
             persistentVolumeClaim:
               claimName: moonraker-data
 
+        config:
+          file_manager:
+            check_klipper_config_path: false
+            enable_config_write_access: false
+          server:
+            host: 0.0.0.0
+            port: 7125
+            klippy_uds_address: /run/klipper/klipper.sock
+          machine:
+            provider: none
+            validate_service: false
+            validate_config: false
+          authorization:
+            trusted_clients: 0.0.0.0/0
+            cors_domains: "*"
+
         ingress:
           enabled: true
           className: "traefik"
