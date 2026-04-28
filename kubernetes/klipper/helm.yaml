@@ -1,12 +1,12 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: roobre
+  name: nadiamoe
   namespace: flux-system
 spec:
   type: "oci"
   interval: 1h
-  url: oci://ghcr.io/roobre/charts
+  url: oci://ghcr.io/nadiamoe/charts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -21,7 +21,7 @@ spec:
       version: v0.12.143
       sourceRef:
         kind: HelmRepository
-        name: roobre
+        name: nadiamoe
         namespace: flux-system
   values:
     klipper:
