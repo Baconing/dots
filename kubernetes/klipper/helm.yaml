@@ -17,14 +17,17 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: klipper
-      version: v0.12.143
+      chart: kubeklipper
+      version: 0.12.144
       sourceRef:
         kind: HelmRepository
         name: nadiamoe
         namespace: flux-system
   values:
     klipper:
+      nodeSelector:
+        "feature.node.kubernetes.io/ender3": "true"
+
       klipper:
         image:
           repository: mkuf/klipper
@@ -54,7 +57,7 @@ spec:
         config: |
           [mcu]
           name: mcu
-          serial: /dev/ttyACM0
+          serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
       moonraker:
         image:
           repository: mkuf/moonraker
@@ -169,4 +172,22 @@ spec:
         - secretName: orcaslicer.saturn.ci
           hosts:
             - orcaslicer.saturn.ci
-      
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: klipper
+            patch: |
+              - op: add
+                path: /spec/template/spec/volumes/-
+                value:
+                  name: serial-device
+                  hostPath:
+                    path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
+                    type: CharDevice
+              - op: add
+                path: /spec/template/spec/containers/0/volumeMounts/-
+                value:
+                  name: serial-device
+                  mountPath: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
