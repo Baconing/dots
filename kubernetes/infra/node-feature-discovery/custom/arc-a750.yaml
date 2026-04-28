@@ -1,0 +1,15 @@
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: arc-a750
+  namespace: node-feature-discovery
+spec:
+  rules:
+    - name: arc-a750
+      labels:
+        "feature.node.kubernetes.io/arc-a750": "true"
+      matchFeatures:
+        - feature: pci.device
+          matchExpressions:
+            vendor: {op: In, value: ["8086"]}
+            class: {op: In, value: ["56a1"]}

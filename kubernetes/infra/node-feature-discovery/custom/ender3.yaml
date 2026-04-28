@@ -1,0 +1,15 @@
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: ender3
+  namespace: node-feature-discovery
+spec:
+  rules:
+    - name: ender3
+      labels:
+        "feature.node.kubernetes.io/ender3": "true"
+      matchFeatures:
+        - feature: usb.device
+          matchExpressions:
+            vendor: {op: In, value: ["1a86"]}
+            class: {op: In, value: ["7523"]} # Technically this is just a CH340 USB to Serial adapter, but I don't think that'll be anywhere else on the cluster so...
