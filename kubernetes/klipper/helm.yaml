@@ -206,9 +206,6 @@ spec:
           sid_pin: PB15
           encoder_pins: ^PB14, ^PB10
           click_pin: ^!PB2
-
-          
-
       moonraker:
         image:
           repository: mkuf/moonraker
@@ -343,12 +340,12 @@ spec:
               - op: add
                 path: /spec/template/spec/volumes/-
                 value:
-                  name: serial-device
+                  name: serial-dir
                   hostPath:
-                    path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
-                    type: CharDevice
+                    path: /dev/serial/by-id/
+                    type: Directory
               - op: add
                 path: /spec/template/spec/containers/0/volumeMounts/-
                 value:
-                  name: serial-device
-                  mountPath: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
+                  name: serial-dir
+                  mountPath: /dev/serial/by-id/
