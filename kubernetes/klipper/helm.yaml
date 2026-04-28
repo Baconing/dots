@@ -76,6 +76,11 @@ spec:
             cpu: 500m
             memory: 512Mi
 
+        persistence:
+          data:
+            persistentVolumeClaim:
+              claimName: moonraker-data
+
         ingress:
           enabled: true
           className: "traefik"
@@ -148,6 +153,11 @@ spec:
         requests:
           cpu: 5m
           memory: 16Mi
+
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: orcaslicer-config
 
       ingress:
         enabled: true
