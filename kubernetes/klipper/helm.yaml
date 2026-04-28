@@ -68,51 +68,52 @@ spec:
           square_corner_velocity: 5
 
           [stepper_x]
-          step_pin: PD7
-          dir_pin: !PC5
-          enable_pin: !PD6
+          step_pin: PC2
+          dir_pin: PB9
+          enable_pin: !PC3
           microsteps: 16
           rotation_distance: 40
-          endstop_pin: ^PC2
+          endstop_pin: ^PA5
           position_endstop: 0
           position_max: 235
           homing_speed: 50
 
           [stepper_y]
-          step_pin: PC6
-          dir_pin: !PC7
-          enable_pin: !PD6
+          step_pin: PB8
+          dir_pin: PB7
+          enable_pin: !PC3
           microsteps: 16
           rotation_distance: 40
-          endstop_pin: ^PC3
+          endstop_pin: ^PA6
           position_endstop: 0
           position_max: 235
           homing_speed: 50
 
           [stepper_z]
-          step_pin: PB3
-          dir_pin: PB2
-          enable_pin: !PA5
+          step_pin: PB6
+          dir_pin: !PB5
+          enable_pin: !PC3
           microsteps: 16
           rotation_distance: 7.921
-          endstop_pin: ^PC4
-          position_endstop: 0.0
+          # endstop_pin: ^PA7
+          endstop_pin: probe:z_virtual_endstop
+          position_min: -5
           position_max: 250
 
           [extruder]
           max_extrude_only_distance: 100.0
-          step_pin: PB1
-          dir_pin: !PB0
-          enable_pin: !PD6
+          step_pin: PB4
+          dir_pin: PB3
+          enable_pin: !PC3
           microsteps: 16
           rotation_distance: 6.809
 
           nozzle_diameter: 0.400
           filament_diameter: 1.750
 
-          heater_pin: PD5
+          heater_pin: PC6
           sensor_type: EPCOS 100K B57560G104F
-          sensor_pin: PA7
+          sensor_pin: PC5
           min_temp: 0
           max_temp: 250
 
@@ -122,9 +123,9 @@ spec:
           pid_Kd: 66.64
 
           [heater_bed]
-          heater_pin: PD4
+          heater_pin: PA2
           sensor_type: EPCOS 100K B57560G104F
-          sensor_pin: PA6
+          sensor_pin: PC4
           min_temp: 0
           max_temp: 130
 
@@ -134,7 +135,7 @@ spec:
           pid_Kd: 680.25
 
           [fan]
-          pin: PB4
+          pin: PA0
 
           [heater_fan hotend_fan]
           pin: PC0
@@ -159,7 +160,7 @@ spec:
           samples_tolerance_retries: 3
 
           [safe_z_home]
-          home_xy_position: 155, 124
+          home_xy_position: 157, 143
           speed: 80
           z_hop: 10
           z_hop_speed: 10
@@ -177,25 +178,36 @@ spec:
 
           [bed_screws]
           screw1: 30.5, 37
+          screw1_name: front left
           screw2: 30.5, 207
+          screw2_name: rear left
           screw3: 204.5, 207
+          screw3_name: rear right
           screw4: 204.5, 37
+          screw4_name: front right
+
+          [screws_tilt_adjust]
+          screw1: 74.5, 42
+          screw1_name: front left
+          screw2: 74.5, 212
+          screw2_name: rear left
+          screw3: 248.5, 212
+          screw3_name: rear right
+          screw4: 248.5, 42
+          screw4_name: front right
+          horizontal_move_z: 10
+          speed: 80
+          screw_thread: CW-M4
 
           [display]
           lcd_type: st7920
-          cs_pin: PA3
-          sclk_pin: PA1
-          sid_pin: PC1
-          encoder_pins: ^PD2, ^PD3
-          click_pin: ^!PC0
+          cs_pin: PB12
+          sclk_pin: PB13
+          sid_pin: PB15
+          encoder_pins: ^PB14, ^PB10
+          click_pin: ^!PB2
 
-           
-          [output_pin beeper]
-          pin: PC6
-          value: 0
-          shutdown_value: 0
-
-
+          
 
       moonraker:
         image:
