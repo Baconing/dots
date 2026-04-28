@@ -1,0 +1,172 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: roobre
+  namespace: flux-system
+spec:
+  type: "oci"
+  interval: 1h
+  url: oci://ghcr.io/roobre/charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: klipper
+  namespace: klipper
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: klipper
+      version: v0.12.143
+      sourceRef:
+        kind: HelmRepository
+        name: roobre
+        namespace: flux-system
+  values:
+    klipper:
+      klipper:
+        image:
+          repository: mkuf/klipper
+          tag: "v0.13.0-tools"
+
+        # I don't want klipper to run out of resources. It's probably the number one priority on the cluster when printing.
+        #  That said, I don't know how much it actually needs, so these are worst case really.
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 4
+            memory: 4Gi
+
+        persistence:
+          virtualSDCard:
+            persistentVolumeClaim:
+              claimName: klipper-virtualsdcard
+
+        securityContext:
+          privileged: true
+          capabilities:
+            drop:
+            - ALL
+
+        config: |
+          [mcu]
+          name: mcu
+          serial: /dev/ttyACM0
+      moonraker:
+        image:
+          repository: mkuf/moonraker
+          tag: "v0.8.0"
+
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 16Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+
+        ingress:
+          enabled: true
+          className: "traefik"
+          annotations: 
+            kubernetes.io/ingress.class: traefik
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: Moonraker
+            gethomepage.dev/group: Home
+            gethomepage.dev/icon: moonraker
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            external-dns.alpha.kubernetes.io/enabled: "true"
+            external-dns.alpha.kubernetes.io/hostname: moonraker.saturn.ci
+            external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+          hosts:
+            - host: moonraker.saturn.ci
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+           - secretName: moonraker.saturn.ci
+             hosts:
+               - moonraker.saturn.ci
+    mainsail:
+      enabled: true
+
+      image:
+        repository: ghcr.io/mainsail-crew/mainsail
+        tag: "v2.14.0"
+
+      resources:
+        requests:
+          cpu: 5m
+          memory: 16Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
+
+      ingress:
+        enabled: true
+        className: "traefik"
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: Mainsail
+          gethomepage.dev/group: Home
+          gethomepage.dev/icon: mainsail
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/enabled: "true"
+          external-dns.alpha.kubernetes.io/hostname: mainsail.saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+        hosts:
+          - host: mainsail.saturn.ci
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+        - secretName: mainsail.saturn.ci
+          hosts:
+            - mainsail.saturn.ci
+    orcaslicer:
+      enabled: true
+
+      image:
+        repository: ghcr.io/linuxserver/orcaslicer
+        tag: "2.3.2"
+
+      resources:
+        requests:
+          cpu: 5m
+          memory: 16Mi
+
+      ingress:
+        enabled: true
+        className: "traefik"
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: OrcaSlicer
+          gethomepage.dev/group: Home
+          gethomepage.dev/icon: orcaslicer
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/enabled: "true"
+          external-dns.alpha.kubernetes.io/hostname: orcaslicer.saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+        hosts:
+          - host: orcaslicer.saturn.ci
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+        - secretName: orcaslicer.saturn.ci
+          hosts:
+            - orcaslicer.saturn.ci
+      
