@@ -55,157 +55,201 @@ spec:
             - ALL
 
         config: |
+          # Minimal dummy Klipper config (no real printer required)
+
           [mcu]
-          serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
-          restart_method: command
+          serial: /tmp/klipper_host_mcu
 
           [printer]
-          kinematics: cartesian
-          max_velocity: 300
-          max_accel: 3000
-          max_z_velocity: 5
-          max_z_accel: 100
-          square_corner_velocity: 5
+          kinematics: none
+          max_velocity: 1
+          max_accel: 1
 
-          [stepper_x]
-          step_pin: PC2
-          dir_pin: PB9
-          enable_pin: !PC3
-          microsteps: 16
-          rotation_distance: 40
-          endstop_pin: ^PA5
-          position_endstop: 0
-          position_max: 235
-          homing_speed: 50
+          # Required virtual components so Klipper doesn't error
 
-          [stepper_y]
-          step_pin: PB8
-          dir_pin: PB7
-          enable_pin: !PC3
-          microsteps: 16
-          rotation_distance: 40
-          endstop_pin: ^PA6
-          position_endstop: 0
-          position_max: 235
-          homing_speed: 50
+          [virtual_sdcard]
+          path: /tmp
 
-          [stepper_z]
-          step_pin: PB6
-          dir_pin: !PB5
-          enable_pin: !PC3
-          microsteps: 16
-          rotation_distance: 7.921
-          # endstop_pin: ^PA7
-          endstop_pin: probe:z_virtual_endstop
-          position_min: -5
-          position_max: 250
+          [display_status]
 
+          [pause_resume]
+
+          [gcode_arcs]
+
+          # Optional: allow safe testing commands
+
+          [force_move]
+          enable_force_move: True
+
+          # Dummy heater so temp commands don't crash
+          [heater_bed]
+          heater_pin: ar100:PA0
+          sensor_type: temperature_host
+          min_temp: 0
+          max_temp: 100
+
+          # Dummy extruder
           [extruder]
-          max_extrude_only_distance: 100.0
-          step_pin: PB4
-          dir_pin: PB3
-          enable_pin: !PC3
-          microsteps: 16
-          rotation_distance: 6.809
-
-          nozzle_diameter: 0.400
-          filament_diameter: 1.750
-
-          heater_pin: PC6
-          sensor_type: EPCOS 100K B57560G104F
-          sensor_pin: PC5
+          step_pin: ar100:PA1
+          dir_pin: ar100:PA2
+          enable_pin: ar100:PA3
+          heater_pin: ar100:PA4
+          sensor_type: temperature_host
           min_temp: 0
           max_temp: 250
 
-          control: pid
-          pid_Kp: 25.80
-          pid_Ki: 2.50
-          pid_Kd: 66.64
+        # config: |
+        #   [mcu]
+        #   serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
+        #   restart_method: command
 
-          [heater_bed]
-          heater_pin: PA2
-          sensor_type: EPCOS 100K B57560G104F
-          sensor_pin: PC4
-          min_temp: 0
-          max_temp: 130
+        #   [printer]
+        #   kinematics: cartesian
+        #   max_velocity: 300
+        #   max_accel: 3000
+        #   max_z_velocity: 5
+        #   max_z_accel: 100
+        #   square_corner_velocity: 5
 
-          control: pid
-          pid_Kp: 198.96
-          pid_Ki: 38.80
-          pid_Kd: 680.25
+        #   [stepper_x]
+        #   step_pin: PC2
+        #   dir_pin: PB9
+        #   enable_pin: !PC3
+        #   microsteps: 16
+        #   rotation_distance: 40
+        #   endstop_pin: ^PA5
+        #   position_endstop: 0
+        #   position_max: 235
+        #   homing_speed: 50
 
-          [fan]
-          pin: PA0
+        #   [stepper_y]
+        #   step_pin: PB8
+        #   dir_pin: PB7
+        #   enable_pin: !PC3
+        #   microsteps: 16
+        #   rotation_distance: 40
+        #   endstop_pin: ^PA6
+        #   position_endstop: 0
+        #   position_max: 235
+        #   homing_speed: 50
 
-          [heater_fan hotend_fan]
-          pin: PC0
-          heater: extruder
-          heater_temp: 50.0
+        #   [stepper_z]
+        #   step_pin: PB6
+        #   dir_pin: !PB5
+        #   enable_pin: !PC3
+        #   microsteps: 16
+        #   rotation_distance: 7.921
+        #   # endstop_pin: ^PA7
+        #   endstop_pin: probe:z_virtual_endstop
+        #   position_min: -5
+        #   position_max: 250
 
-          [bltouch]
-          sensor_pin: ^PB1
-          control_pin: PB0
+        #   [extruder]
+        #   max_extrude_only_distance: 100.0
+        #   step_pin: PB4
+        #   dir_pin: PB3
+        #   enable_pin: !PC3
+        #   microsteps: 16
+        #   rotation_distance: 6.809
+
+        #   nozzle_diameter: 0.400
+        #   filament_diameter: 1.750
+
+        #   heater_pin: PC6
+        #   sensor_type: EPCOS 100K B57560G104F
+        #   sensor_pin: PC5
+        #   min_temp: 0
+        #   max_temp: 250
+
+        #   control: pid
+        #   pid_Kp: 25.80
+        #   pid_Ki: 2.50
+        #   pid_Kd: 66.64
+
+        #   [heater_bed]
+        #   heater_pin: PA2
+        #   sensor_type: EPCOS 100K B57560G104F
+        #   sensor_pin: PC4
+        #   min_temp: 0
+        #   max_temp: 130
+
+        #   control: pid
+        #   pid_Kp: 198.96
+        #   pid_Ki: 38.80
+        #   pid_Kd: 680.25
+
+        #   [fan]
+        #   pin: PA0
+
+        #   [heater_fan hotend_fan]
+        #   pin: PC0
+        #   heater: extruder
+        #   heater_temp: 50.0
+
+        #   [bltouch]
+        #   sensor_pin: ^PB1
+        #   control_pin: PB0
           
-          x_offset: -46
-          y_offset: -26
+        #   x_offset: -46
+        #   y_offset: -26
           
-          z_offset: 0.52
+        #   z_offset: 0.52
           
-          speed: 10
-          samples: 2
-          sample_retract_dist: 3.0
-          lift_speed: 40
-          samples_result: median
-          samples_tolerance: 0.050
-          samples_tolerance_retries: 3
+        #   speed: 10
+        #   samples: 2
+        #   sample_retract_dist: 3.0
+        #   lift_speed: 40
+        #   samples_result: median
+        #   samples_tolerance: 0.050
+        #   samples_tolerance_retries: 3
 
-          [safe_z_home]
-          home_xy_position: 157, 143
-          speed: 80
-          z_hop: 10
-          z_hop_speed: 10
+        #   [safe_z_home]
+        #   home_xy_position: 157, 143
+        #   speed: 80
+        #   z_hop: 10
+        #   z_hop_speed: 10
 
-          [bed_mesh]
-          speed: 120
-          horizontal_move_z: 5
-          mesh_min: 51, 31
-          mesh_max: 230, 230
-          probe_count: 5, 5
-          algorithm: bicubic
-          fade_start: 1
-          fade_end: 10
-          fade_target: 0
+        #   [bed_mesh]
+        #   speed: 120
+        #   horizontal_move_z: 5
+        #   mesh_min: 51, 31
+        #   mesh_max: 230, 230
+        #   probe_count: 5, 5
+        #   algorithm: bicubic
+        #   fade_start: 1
+        #   fade_end: 10
+        #   fade_target: 0
 
-          [bed_screws]
-          screw1: 30.5, 37
-          screw1_name: front left
-          screw2: 30.5, 207
-          screw2_name: rear left
-          screw3: 204.5, 207
-          screw3_name: rear right
-          screw4: 204.5, 37
-          screw4_name: front right
+        #   [bed_screws]
+        #   screw1: 30.5, 37
+        #   screw1_name: front left
+        #   screw2: 30.5, 207
+        #   screw2_name: rear left
+        #   screw3: 204.5, 207
+        #   screw3_name: rear right
+        #   screw4: 204.5, 37
+        #   screw4_name: front right
 
-          [screws_tilt_adjust]
-          screw1: 74.5, 42
-          screw1_name: front left
-          screw2: 74.5, 212
-          screw2_name: rear left
-          screw3: 248.5, 212
-          screw3_name: rear right
-          screw4: 248.5, 42
-          screw4_name: front right
-          horizontal_move_z: 10
-          speed: 80
-          screw_thread: CW-M4
+        #   [screws_tilt_adjust]
+        #   screw1: 74.5, 42
+        #   screw1_name: front left
+        #   screw2: 74.5, 212
+        #   screw2_name: rear left
+        #   screw3: 248.5, 212
+        #   screw3_name: rear right
+        #   screw4: 248.5, 42
+        #   screw4_name: front right
+        #   horizontal_move_z: 10
+        #   speed: 80
+        #   screw_thread: CW-M4
 
-          [display]
-          lcd_type: st7920
-          cs_pin: PB12
-          sclk_pin: PB13
-          sid_pin: PB15
-          encoder_pins: ^PB14, ^PB10
-          click_pin: ^!PB2
+        #   [display]
+        #   lcd_type: st7920
+        #   cs_pin: PB12
+        #   sclk_pin: PB13
+        #   sid_pin: PB15
+        #   encoder_pins: ^PB14, ^PB10
+        #   click_pin: ^!PB2
       moonraker:
         image:
           repository: mkuf/moonraker
