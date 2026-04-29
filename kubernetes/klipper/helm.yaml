@@ -327,6 +327,10 @@ spec:
           persistentVolumeClaim:
             claimName: orcaslicer-config
 
+      volumeMounts:
+        - name: config
+          mountPath: /config
+
       ingress:
         enabled: true
         className: "traefik"
