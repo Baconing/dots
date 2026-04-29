@@ -58,7 +58,7 @@ spec:
 
         config: |
           [mcu]
-          serial: /dev/ttyUSB0
+          serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
           restart_method: command
 
           [printer]
@@ -232,9 +232,6 @@ spec:
               claimName: moonraker-data
 
         config:
-          file_manager:
-            check_klipper_config_path: false
-            enable_config_write_access: false
           server:
             host: 0.0.0.0
             port: 7125
@@ -365,10 +362,10 @@ spec:
                 value:
                   name: serial-file
                   hostPath:
-                    path: /dev/ttyUSB0
-                    type: CharDevice
+                    path: /dev/serial/by-id
+                    type: Directory
               - op: add
                 path: /spec/template/spec/containers/0/volumeMounts/-
                 value:
                   name: serial-file
-                  mountPath: /dev/ttyUSB0
+                  mountPath: /dev/serial/by-id
