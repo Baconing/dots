@@ -484,20 +484,20 @@ spec:
                 value:
                   name: serial-file
                   mountPath: /dev/serial/by-id
-          - target:
-              kind: Deployment
-              name: klipper-ustreamer
-            patch: |
-              - op: add
-                path: /spec/template/spec/volumes/-
-                value:
-                  name: devices
-                  hostPath:
-                    path: /dev
-                    type: Directory
-              - op: add
-                path: /spec/template/spec/containers/0/volumeMounts/-
-                value:
-                  name: devices
-                  mountPath: /dev/
+          # - target:
+          #     kind: Deployment
+          #     name: klipper-ustreamer
+          #   patch: |
+          #     - op: add
+          #       path: /spec/template/spec/volumes/-
+          #       value:
+          #         name: devices
+          #         hostPath:
+          #           path: /dev
+          #           type: Directory
+          #     - op: add
+          #       path: /spec/template/spec/containers/0/volumeMounts/-
+          #       value:
+          #         name: devices
+          #         mountPath: /dev/
           
