@@ -51,6 +51,7 @@ spec:
               claimName: klipper-virtualsdcard
 
         securityContext:
+          runAsUser: 0 # bruh
           supplementalGroups: 
             - 27 # dialout group, for serial access
           privileged: true
