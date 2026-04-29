@@ -31,7 +31,7 @@ spec:
       klipper:
         image:
           repository: mkuf/klipper
-          tag: "v0.13.0-tools"
+          tag: "v0.13.0"
 
         verbose: true
 
@@ -57,7 +57,7 @@ spec:
 
         config: |
           [mcu]
-          serial: /dev/ttyUSB0
+          serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
           restart_method: command
 
           [printer]
@@ -364,10 +364,10 @@ spec:
                 value:
                   name: serial-file
                   hostPath:
-                    path: /dev/ttyUSB0
-                    type: CharDevice
+                    path: /dev/serial
+                    type: Directory
               - op: add
                 path: /spec/template/spec/containers/0/volumeMounts/-
                 value:
                   name: serial-file
-                  mountPath: /dev/ttyUSB0
+                  mountPath: /dev/serial
