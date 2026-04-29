@@ -327,7 +327,7 @@ spec:
             validate_service: false
             validate_config: false
           authorization:
-            trusted_clients: 0.0.0.0/0
+            force_logins: True
             cors_domains: "https://mainsail.saturn.ci"
           file_manager:
             queue_gcode_uploads: True
