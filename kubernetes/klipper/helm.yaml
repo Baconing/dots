@@ -61,7 +61,7 @@ spec:
 
         config: |
           [mcu]
-          serial: /dev/ttyUSB0
+          serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
           restart_method: command
 
           [printer]
@@ -365,10 +365,10 @@ spec:
                 value:
                   name: serial-file
                   hostPath:
-                    path: /dev/ttyUSB0
-                    type: CharDevice
+                    path: /dev/serial/by-id/
+                    type: Directory
               - op: add
                 path: /spec/template/spec/containers/0/volumeMounts/-
                 value:
                   name: serial-file
-                  mountPath: /dev/ttyUSB0
+                  mountPath: /dev/serial/by-id
