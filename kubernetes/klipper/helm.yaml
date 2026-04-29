@@ -122,7 +122,7 @@ spec:
           [heater_bed]
           heater_pin: PA2
           sensor_type: EPCOS 100K B57560G104F
-          sensor_pin: PC4
+          sensor_pin: PC5
           min_temp: 0
           max_temp: 130
 
