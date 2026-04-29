@@ -56,7 +56,7 @@ spec:
 
         config: |
           [mcu]
-          serial: /dev/ender3
+          serial: /dev/ttyUSB0
           restart_method: command
 
           [printer]
@@ -360,10 +360,10 @@ spec:
                 value:
                   name: serial-file
                   hostPath:
-                    path: /dev/ender3
+                    path: /dev/ttyUSB0
                     type: CharDevice
               - op: add
                 path: /spec/template/spec/containers/0/volumeMounts/-
                 value:
                   name: serial-file
-                  mountPath: /dev/ender3
+                  mountPath: /dev/ttyUSB0
