@@ -149,6 +149,12 @@ spec:
               - "^/raw(/.*)?$"
               - "^/view(/.*)?$"
 
+          # Bypass Always: Moonraker Options Requests
+          - domain: "moonraker.saturn.ci"
+            methods:
+              - OPTIONS
+            policy: bypass
+
           # Two Factor: Vaultwarden Admin Dashboard
           - domain: "vault.saturn.ci"
             resources:
