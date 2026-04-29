@@ -178,6 +178,7 @@ spec:
               # home
               - "moonraker.saturn.ci"
               - "mainsail.saturn.ci"
+              - "printer-camera.saturn.ci"
               - "orcaslicer.saturn.ci"
 
               # media
