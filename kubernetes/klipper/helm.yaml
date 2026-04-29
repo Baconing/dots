@@ -246,7 +246,7 @@ spec:
               M106 S0
               M84
               BASE_CANCEL_PRINT
-              
+
           [gcode_macro START_PRINT]
           description: Called by OrcaSlicer start G-code
           gcode:
@@ -329,6 +329,8 @@ spec:
           authorization:
             trusted_clients: 0.0.0.0/0
             cors_domains: "*"
+          octoprint_compat:
+            enable_ufp: true
 
       ingress:
         enabled: true
