@@ -282,10 +282,9 @@ spec:
         defaultLocale: en
         defaultMode: dark
         defaultTheme: mainsail
-        instancesDB: json
-        instances:
-          - hostname: moonraker.saturn.ci
-            port: 443
+        hostname: moonraker.saturn.ci
+        port: 443
+        path: /
 
       ingress:
         enabled: true
