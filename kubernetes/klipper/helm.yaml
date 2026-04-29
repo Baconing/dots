@@ -108,9 +108,9 @@ spec:
           nozzle_diameter: 0.400
           filament_diameter: 1.750
 
-          heater_pin: PC6
+          heater_pin: PA1
           sensor_type: EPCOS 100K B57560G104F
-          sensor_pin: PC5
+          sensor_pin: PC0
           min_temp: 0
           max_temp: 250
 
