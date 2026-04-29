@@ -22,4 +22,9 @@
     ];
 
     homelab.services.kubernetes.netDev = "enp42s0";
+
+    services.udev.extraRules =
+        ''
+            SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ender3"
+        '';
 }
