@@ -149,10 +149,8 @@ spec:
               - "^/raw(/.*)?$"
               - "^/view(/.*)?$"
 
-          # Bypass Always: Moonraker Options Requests
+          # INCREDIBLY INSCURE: Bypass Always: Moonraker (i need to fix it, i've removed it from dns)
           - domain: "moonraker.saturn.ci"
-            methods:
-              - OPTIONS
             policy: bypass
 
           # Two Factor: Vaultwarden Admin Dashboard
