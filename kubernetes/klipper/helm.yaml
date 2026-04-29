@@ -212,6 +212,8 @@ spec:
           tag: "v0.8.0"
 
         securityContext:
+          securityContext:
+            runAsUser: 0 # whatever
           capabilities:
             drop:
             - ALL
