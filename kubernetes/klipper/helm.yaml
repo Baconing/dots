@@ -33,8 +33,6 @@ spec:
           repository: mkuf/klipper
           tag: "v0.13.0"
 
-        verbose: true
-
         # I don't want klipper to run out of resources. It's probably the number one priority on the cluster when printing.
         #  That said, I don't know how much it actually needs, so these are worst case really.
         resources:
