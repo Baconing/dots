@@ -328,7 +328,10 @@ spec:
             validate_config: false
           authorization:
             trusted_clients: 0.0.0.0/0
-            cors_domains: "*"
+            cors_domains: |
+              https://moonraker.saturn.ci
+              https://mainsail.saturn.ci
+              https://orcaslicer.saturn.ci
           file_manager:
             queue_gcode_uploads: True
             check_klipper_config_path: False
