@@ -28,6 +28,11 @@ spec:
       nodeSelector:
         "feature.node.kubernetes.io/ender3": "true"
 
+      podSecurityContext:
+        supplementalGroups: 
+          - 20 # dialout group, for serial access
+          - 27 # this lying bruh
+
       klipper:
         image:
           repository: mkuf/klipper
