@@ -160,8 +160,8 @@ spec:
           [bed_mesh]
           speed: 200
           horizontal_move_z: 5
-          mesh_min: 5, 5
-          mesh_max: 230, 230
+          mesh_min: 20, 20
+          mesh_max: 169, 189
           probe_count: 6, 6
           algorithm: bicubic
           fade_start: 1
