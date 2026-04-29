@@ -50,6 +50,7 @@ spec:
 
         securityContext:
           runAsUser: 0 # bruh
+          runAsGroup: 1000
           supplementalGroups: 
             - 27 # dialout group, for serial access
           privileged: true
@@ -214,6 +215,7 @@ spec:
         securityContext:
           securityContext:
             runAsUser: 0 # whatever
+            runAsGroup: 1000
           capabilities:
             drop:
             - ALL
