@@ -141,7 +141,7 @@ spec:
           x_offset: -46
           y_offset: -26
           
-          z_offset: 0.475
+          z_offset: 0.195
           
           speed: 10
           samples: 2
