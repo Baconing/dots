@@ -49,10 +49,8 @@ spec:
               claimName: klipper-virtualsdcard
 
         securityContext:
-          runAsUser: 0 # bruh
-          runAsGroup: 1000
           supplementalGroups: 
-            - 27 # dialout group, for serial access
+            - 20 # dialout group, for serial access
           privileged: true
 
         config: |
@@ -213,9 +211,6 @@ spec:
           tag: "v0.8.0"
 
         securityContext:
-          securityContext:
-            runAsUser: 0 # whatever
-            runAsGroup: 1000
           capabilities:
             drop:
             - ALL
