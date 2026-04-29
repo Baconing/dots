@@ -278,6 +278,15 @@ spec:
           cpu: 100m
           memory: 128Mi
 
+      config:
+        defaultLocale: en
+        defaultMode: dark
+        defaultTheme: mainsail
+        instancesDB: json
+        instances:
+          - hostname: moonraker.saturn.ci
+            port: 443
+
       ingress:
         enabled: true
         className: "traefik"
