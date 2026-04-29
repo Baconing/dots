@@ -436,6 +436,35 @@ spec:
         - secretName: orcaslicer.saturn.ci
           hosts:
             - orcaslicer.saturn.ci
+    ustreamer:
+      enabled: true
+
+      image:
+        repository: mkuf/ustreamer
+        tag: v6.55
+
+      securityContext:
+        privileged: true
+
+      ingress:
+        enabled: true
+        className: "traefik"
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+          external-dns.alpha.kubernetes.io/enabled: "true"
+          external-dns.alpha.kubernetes.io/hostname: printer-camera.saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+        hosts:
+          - host: printer-camera.saturn.ci
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+        - secretName: printer-camera.saturn.ci
+          hosts:
+            - printer-camera.saturn.ci
   postRenderers:
     - kustomize:
         patches:
@@ -455,3 +484,20 @@ spec:
                 value:
                   name: serial-file
                   mountPath: /dev/serial/by-id
+          - target:
+              kind: Deployment
+              name: klipper-ustreamer
+            patch: |
+              - op: add
+                path: /spec/template/spec/volumes/-
+                value:
+                  name: devices
+                  hostPath:
+                    path: /dev
+                    type: Directory
+              - op: add
+                path: /spec/template/spec/containers/0/volumeMounts/-
+                value:
+                  name: devices
+                  mountPath: /dev/
+          
