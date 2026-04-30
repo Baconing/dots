@@ -36,3 +36,16 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - orcaslicer.saturn.ci
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: camera
+  namespace: klipper
+spec:
+  secretName: printer-camera.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - printer-camera.saturn.ci
