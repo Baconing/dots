@@ -330,6 +330,12 @@ spec:
             enable_object_processing: true
           octoprint_compat:
             enable_ufp: true
+          "webcam printer":
+            enabled: true
+            target_fps: 60
+            target_fps_idle: 30
+            stream_url: https://printer-camera.saturn.ci/stream
+            snapshot_url: https://printer-camera.saturn.ci/snapshot
 
       ingress:
         enabled: true
