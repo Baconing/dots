@@ -38,7 +38,7 @@ spec:
               git clone --depth 1 "https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging" "/config/kamp"
           volumeMounts:
             - mountPath: /config
-              name: klipper-config
+              name: klipper-data
       containers:
         - name: klipper
           image: mkuf/klipper:v0.13.0
