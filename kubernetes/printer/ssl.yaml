@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: printer
+  namespace: printer
+spec:
+  secretName: printer.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - printer.saturn.ci
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: orcaslicer
+  namespace: printer
+spec:
+  secretName: orcaslicer.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - orcaslicer.saturn.ci

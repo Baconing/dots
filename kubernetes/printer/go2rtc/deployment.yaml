@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &appName go2rtc
+  namespace: printer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: *appName
+  template:
+    metadata:
+      labels:
+        app: *appName
+    spec:
+      containers:
+        - name: *appName
+          image: alexxit/go2rtc:1.9.14
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          securityContext:
+            capabilites:
+              drop: ["ALL"]
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          volumeMounts:
+            - mountPath: /config/go2rtc.yaml
+              name: config
+              subpath: go2rtc.yaml
+            - mountPath: /dev/v4l/by-id
+              name: v4l-devices
+          ports:
+            - containerPort: &apiPort 1984
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: *apiPort
+          readinessProbe:
+            httpGet:
+              path: /
+              port: *apiPort
+      volumes:
+        - name: config
+          configMap:
+            name: go2rtc-config
+        - name: v4l-devices
+          hostPath:
+            path: /dev/v4l/by-id
+            type: Directory
+      

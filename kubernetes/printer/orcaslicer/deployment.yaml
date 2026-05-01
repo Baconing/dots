@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &appName orcaslicer
+  namespace: printer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: *appName
+  template:
+    metadata:
+      labels:
+        app: *appName
+    spec:
+      containers:
+        - name: *appName
+          image: ghcr.io/linuxserver/orcaslicer:2.3.2
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 4
+              memory: 4Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          volumeMounts:
+            - mountPath: /config
+              name: data
+          ports:
+            - containerPort: &httpPort 3000
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: *httpPort
+          readinessProbe:
+            httpGet:
+              path: /
+              port: *httpPort
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: orcaslicer-data
+      

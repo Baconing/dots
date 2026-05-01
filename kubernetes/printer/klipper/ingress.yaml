@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &appName klipper
+  namespace: printer
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: &host printer.saturn.ci
+    http:
+      paths:
+      - pathType: Prefix
+        path: /moonraker
+        backend:
+          service:
+            name: *appName
+            port: 
+              name: moonraker-http
+  tls:
+    - secretName: *host
+      hosts:
+        - *host

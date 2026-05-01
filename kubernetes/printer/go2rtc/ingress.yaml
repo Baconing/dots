@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &appName go2rtc
+  namespace: printer
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: &host printer.saturn.ci
+      http:
+        paths:
+        - pathType: Exact
+          path: "/api/webrtc"
+          backend:
+            service:
+              name: *appName
+              port: 
+                name: http
+        - pathType: Exact
+          path: "/api/stream.mjpeg"
+          backend:
+            service:
+              name: *appName
+              port: 
+                name: http
+        - pathType: Exact
+          path: "/api/frame.jpeg"
+          backend:
+            service:
+              name: *appName
+              port: 
+                name: http
+  tls:
+    - secretName: *host
+      hosts:
+        - *host

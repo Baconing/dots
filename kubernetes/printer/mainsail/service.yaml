@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: &appName mainsail
+  namespace: printer
+spec:
+  selector:
+    app: *appName
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http

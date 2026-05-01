@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mainsail-config
+  namespace: printer
+data:
+  config.json: |
+    {
+      "defaultLocale": "en",
+      "defaultMode": "dark",
+      "defaultTheme": "mainsail",
+      "hostname": "printer.saturn.ci",
+      "port": 443,
+      "path": "/moonraker"
+    }

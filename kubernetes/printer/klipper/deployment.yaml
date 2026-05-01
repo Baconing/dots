@@ -1,0 +1,120 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &appName klipper
+  namespace: printer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: *appName
+  template:
+    metadata:
+      labels:
+        app: *appName
+    spec:
+      nodeSelector:
+        "feature.node.kubernetes.io/ender3": "true"
+      shareProcessNamespace: true
+      securityContext:
+        supplementalGroups:
+          - 27 # serial permissions
+      initContainers:
+        - name: init-kamp
+          image: alpine/git:2.52.0
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              
+              if [ -d "/config/kamp" ]; then
+                echo "KAMP directory already exists, skipping clone"
+                exit 0
+              fi
+
+              git clone --depth 1 "https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging" "/config/kamp"
+          volumeMounts:
+            - mountPath: /config
+              name: klipper-config
+      containers:
+        - name: klipper
+          image: mkuf/klipper:v0.13.0
+          args:
+            - "-a"
+            - "/run/klipper/klipper.sock"
+            - "-I"
+            - "/run/klipper/klipper.tty"
+          securityContext:
+            allowPrivilegeEscalation: false
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          volumeMounts:
+            - mountPath: /run/klipper
+              name: klipper-socket
+            - mountPath: /opt/printer_data
+              name: klipper-data
+            - mountPath: /opt/printer_data/config/printer.cfg
+              name: klipper-config
+              subPath: printer.cfg
+              readOnly: true
+            - mountPath: /dev/serial/by-id
+              name: serial-devices
+
+        - name: moonraker
+          image: mkuf/moonraker:v0.8.0
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          volumeMounts:
+            - mountPath: /opt/printer_data
+              name: klipper-data
+            - mountPath: /opt/printer_data/config/moonraker.conf
+              name: klipper-config
+              subPath: moonraker.conf
+              readOnly: true
+            - mountPath: /run/klipper/klipper.sock
+              name: klipper-socket
+            - mountPath: /tmp
+              name: moonraker-tmp
+          ports:
+            - containerPort: &httpPort 7125
+              name: moonraker-http
+          livenessProbe:
+            httpGet:
+              port: *httpPort
+          readinessProbe:
+            httpGet:
+              port: *httpPort
+      volumes:
+        - name: klipper-socket
+          emptyDir:
+            sizeLimit: 1Mi
+        - name: klipper-data
+          persistentVolumeClaim:
+            claimName: klipper-data
+        - name: klipper-config
+          configMap:
+            name: klipper-config
+        - name: moonraker-tmp
+          emptyDir:
+            sizeLimit: 500Mi
+        - name: serial-devices
+          hostPath:
+            path: /dev/serial/by-id
+            type: Directory

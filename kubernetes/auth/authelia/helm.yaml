@@ -149,10 +149,6 @@ spec:
               - "^/raw(/.*)?$"
               - "^/view(/.*)?$"
 
-          # INCREDIBLY INSCURE: Bypass Always: Moonraker (i need to fix it, i've removed it from dns)
-          - domain: "moonraker.saturn.ci"
-            policy: bypass
-
           # Two Factor: Vaultwarden Admin Dashboard
           - domain: "vault.saturn.ci"
             resources:
@@ -176,9 +172,7 @@ spec:
               - "octoprint.saturn.ci"
 
               # home
-              - "moonraker.saturn.ci"
-              - "mainsail.saturn.ci"
-              - "printer-camera.saturn.ci"
+              - "printer.saturn.ci"
               - "orcaslicer.saturn.ci"
 
               # media
