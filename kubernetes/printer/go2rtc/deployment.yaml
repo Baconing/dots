@@ -31,7 +31,7 @@ spec:
           volumeMounts:
             - mountPath: /config/go2rtc.yaml
               name: config
-              subpath: go2rtc.yaml
+              subPath: go2rtc.yaml
               readOnly: true
             - mountPath: /dev/v4l/by-id
               name: v4l-devices
