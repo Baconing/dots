@@ -11,5 +11,6 @@ data:
       "defaultTheme": "mainsail",
       "hostname": "printer.saturn.ci",
       "port": 443,
-      "path": "moonraker"
+      "path": "/moonraker/",
+      "instancesDB": "moonraker"
     }
