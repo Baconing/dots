@@ -30,7 +30,6 @@ spec:
               drop: ["ALL"]
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
-            runAsNonRoot: true
           volumeMounts:
             - mountPath: /config/go2rtc.yaml
               name: config

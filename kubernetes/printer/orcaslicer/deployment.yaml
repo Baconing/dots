@@ -28,7 +28,6 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
-            runAsNonRoot: true
           volumeMounts:
             - mountPath: /config
               name: data
