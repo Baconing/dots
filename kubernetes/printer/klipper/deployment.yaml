@@ -105,9 +105,11 @@ spec:
               name: moonraker-http
           livenessProbe:
             httpGet:
+              path: /moonraker
               port: *httpPort
           readinessProbe:
             httpGet:
+              path: /moonraker
               port: *httpPort
       volumes:
         - name: klipper-socket
