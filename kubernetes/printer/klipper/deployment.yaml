@@ -47,6 +47,7 @@ spec:
             - "/run/klipper/klipper.sock"
             - "-I"
             - "/run/klipper/klipper.tty"
+            - "/opt/printer_data/config/printer.cfg"
           securityContext:
             allowPrivilegeEscalation: false
           resources:
