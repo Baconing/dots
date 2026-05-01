@@ -26,10 +26,8 @@ spec:
               cpu: 200m
               memory: 256Mi
           securityContext:
-            capabilites:
-              drop: ["ALL"]
-            allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+            privileged: true
           volumeMounts:
             - mountPath: /config/go2rtc.yaml
               name: config

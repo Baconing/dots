@@ -55,7 +55,7 @@ spec:
             - "/opt/printer_data/config/printer.cfg"
           securityContext:
             runAsGroup: 1000
-            allowPrivilegeEscalation: false
+            privileged: true
           resources:
             requests:
               cpu: 50m

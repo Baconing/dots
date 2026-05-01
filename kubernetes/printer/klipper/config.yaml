@@ -271,6 +271,7 @@ data:
     validate_config: false
 
     [authorization]
+    trusted_clients: 0.0.0.0/0
     cors_domains: *
 
     [file_manager]
@@ -285,7 +286,6 @@ data:
     enabled: True
     service: webrtc-go2rtc
     target_fps: 60
-    webrtc_url: api/webrtc?src=webcam
     stream_url: api/stream.mjpeg?src=webcam
     snapshot_url: api/frame.jpeg?src=webcam
 
