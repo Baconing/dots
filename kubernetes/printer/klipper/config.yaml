@@ -255,6 +255,9 @@ data:
     variable_flow_rate: 12
 
     variable_smart_park_height: 50
+
+    gcode:
+        {action_respond_info(" Running the KAMP_Settings macro does nothing, it is only used for storing KAMP settings. ")}
   moonraker.conf: |
     [server]
     host: 0.0.0.0
