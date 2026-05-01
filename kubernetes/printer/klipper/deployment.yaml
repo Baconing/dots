@@ -19,11 +19,16 @@ spec:
         "feature.node.kubernetes.io/ender3": "true"
       shareProcessNamespace: true
       securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
         supplementalGroups:
           - 27 # serial permissions
       initContainers:
         - name: init-kamp
           image: alpine/git:2.52.0
+          securityContext:
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
           command:
             - /bin/sh
             - -c
@@ -49,6 +54,7 @@ spec:
             - "/run/klipper/klipper.tty"
             - "/opt/printer_data/config/printer.cfg"
           securityContext:
+            runAsGroup: 1000
             allowPrivilegeEscalation: false
           resources:
             requests:
@@ -70,8 +76,9 @@ spec:
               name: serial-devices
 
         - name: moonraker
-          image: mkuf/moonraker:v0.8.0
+          image: mkuf/moonraker:v0.10.0
           securityContext:
+            runAsGroup: 1000
             capabilities:
               drop:
                 - ALL
