@@ -244,7 +244,7 @@ data:
     variable_verbose_enable: False
 
     variable_mesh_margin: 0
-    fariable_fuzz_amount: 0
+    variable_fuzz_amount: 0
 
     variable_probe_dock_enable: False
 
