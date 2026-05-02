@@ -57,13 +57,14 @@ spec:
               name: klipper-data
       containers:
         - name: klipper
-          image: mkuf/klipper:v0.13.0
-          args:
-            - "-a"
-            - "/run/klipper/klipper.sock"
-            - "-I"
-            - "/run/klipper/klipper.tty"
-            - "/srv/printer_data/config/printer.cfg"
+          # image: mkuf/klipper:v0.13.0
+          image: mkuf/klipper:v0.13.0-tools
+          # args:
+          #   - "-a"
+          #   - "/run/klipper/klipper.sock"
+          #   - "-I"
+          #   - "/run/klipper/klipper.tty"
+          #   - "/srv/printer_data/config/printer.cfg"
           securityContext:
             runAsGroup: 1000
             privileged: true
