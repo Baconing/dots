@@ -21,10 +21,6 @@ spec:
       containers:
         - name: *appName
           image: mkuf/ustreamer:v6.56
-          args:
-            - --host=0.0.0.0 
-            - --port=8080
-            - -r 3840x2160
           resources:
             requests:
               cpu: 50m
