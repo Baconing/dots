@@ -15,9 +15,6 @@ data:
     serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
     restart_method: command
 
-    [mcu adxl]
-    serial: /dev/serial/by-id/usb-Klipper_rp2040_btt_acc-if00
-
     [printer]
     kinematics: cartesian
     max_velocity: 300
