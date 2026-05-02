@@ -65,9 +65,9 @@ spec:
           #   - "-I"
           #   - "/run/klipper/klipper.tty"
           #   - "/srv/printer_data/config/printer.cfg"
-          args:
-            - "-c"
-            - "sleep infinity"
+          command:
+            - "sleep"
+            - "infinity"
           securityContext:
             runAsGroup: 1000
             privileged: true
@@ -88,7 +88,6 @@ spec:
               readOnly: true
             - mountPath: /dev/serial/by-id
               name: serial-devices
-
         - name: moonraker
           image: mkuf/moonraker:v0.10.0
           args:
