@@ -52,7 +52,7 @@ spec:
             - "/run/klipper/klipper.sock"
             - "-I"
             - "/run/klipper/klipper.tty"
-            - "/opt/printer_data/config/printer.cfg"
+            - "/srv/printer_data/config/printer.cfg"
           securityContext:
             runAsGroup: 1000
             privileged: true
@@ -66,9 +66,9 @@ spec:
           volumeMounts:
             - mountPath: /run/klipper
               name: klipper-socket
-            - mountPath: /opt/printer_data
+            - mountPath: /srv/printer_data
               name: klipper-data
-            - mountPath: /opt/printer_data/config
+            - mountPath: /srv/printer_data/config
               name: klipper-config
               readOnly: true
             - mountPath: /dev/serial/by-id
@@ -76,6 +76,9 @@ spec:
 
         - name: moonraker
           image: mkuf/moonraker:v0.10.0
+          args:
+            - "-d"
+            - "/srv/printer_data"
           securityContext:
             runAsGroup: 1000
             capabilities:
@@ -89,9 +92,9 @@ spec:
               cpu: 200m
               memory: 256Mi
           volumeMounts:
-            - mountPath: /opt/printer_data
+            - mountPath: /srv/printer_data
               name: klipper-data
-            - mountPath: /opt/printer_data/config
+            - mountPath: /srv/printer_data/config
               name: klipper-config
               readOnly: true
             - mountPath: /run/klipper

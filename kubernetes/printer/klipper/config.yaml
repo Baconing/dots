@@ -159,7 +159,7 @@ data:
     click_pin: ^!PB2
   
     [virtual_sdcard]
-    path: /opt/printer_data/gcodes
+    path: /srv/printer_data/gcodes
 
     [pause_resume]
     recover_velocity: 50
@@ -299,4 +299,4 @@ data:
     origin: https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git
     primary_branch: main
     managed_services: klipper
-    path: /opt/printer_data/kamp
+    path: /srv/printer_data/kamp
