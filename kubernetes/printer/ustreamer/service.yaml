@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: &appName go2rtc
+  name: &appName ustreamer
   namespace: printer
 spec:
   selector:
     app: *appName
   ports:
-    - port: 1984
+    - port: 8080
       targetPort: http
       protocol: TCP
       name: http

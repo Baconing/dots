@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: &appName go2rtc
+  name: &appName ustreamer
   namespace: printer
 spec:
   replicas: 1
@@ -17,7 +17,11 @@ spec:
     spec:
       containers:
         - name: *appName
-          image: alexxit/go2rtc:1.9.14
+          image: mkuf/ustreamer:v6.56
+          args:
+            - --host=0.0.0.0 
+            - --port=8080
+            - -r 3840x2160
           resources:
             requests:
               cpu: 50m
@@ -28,31 +32,16 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             privileged: true
-          volumeMounts:
-            - mountPath: /config/go2rtc.yaml
-              name: config
-              subPath: go2rtc.yaml
-              readOnly: true
-            - mountPath: /dev/v4l/by-id
-              name: v4l-devices
           ports:
-            - containerPort: &apiPort 1984
+            - containerPort: &httpPort 8080
               name: http
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: *apiPort
+              port: *httpPort
           readinessProbe:
             httpGet:
               path: /
-              port: *apiPort
-      volumes:
-        - name: config
-          configMap:
-            name: go2rtc-config
-        - name: v4l-devices
-          hostPath:
-            path: /dev/v4l/by-id
-            type: Directory
+              port: *httpPort
       

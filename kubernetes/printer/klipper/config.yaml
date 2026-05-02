@@ -291,10 +291,10 @@ data:
     [webcam Default]
     location: printer
     enabled: True
-    service: webrtc-go2rtc
+    service: mjpegstreamer-adaptive
     target_fps: 60
-    stream_url: api/stream.mjpeg?src=webcam
-    snapshot_url: api/frame.jpeg?src=webcam
+    stream_url: /stream
+    snapshot_url: /snapshot
 
     [update_manager]
     enable_auto_refresh: true

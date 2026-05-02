@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: &appName go2rtc
+  name: &appName ustreamer
   namespace: printer
   annotations:
     kubernetes.io/ingress.class: traefik
@@ -12,21 +12,14 @@ spec:
       http:
         paths:
         - pathType: Exact
-          path: "/api/webrtc"
+          path: "/stream"
           backend:
             service:
               name: *appName
-              port: 
+              port:
                 name: http
         - pathType: Exact
-          path: "/api/stream.mjpeg"
-          backend:
-            service:
-              name: *appName
-              port: 
-                name: http
-        - pathType: Exact
-          path: "/api/frame.jpeg"
+          path: "/snapshot"
           backend:
             service:
               name: *appName
