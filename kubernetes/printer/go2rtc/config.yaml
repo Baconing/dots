@@ -6,4 +6,4 @@ metadata:
 data:
   go2rtc.yaml: |
     streams:
-      webcam: ffmpeg:device?video=/dev/v4l/by-id/usb-4K_USB_CAMERA_HD_USB_CAMERA_01.00.00-video-index0&video_size=3840x2160
+      webcam: ffmpeg:device?video=/dev/v4l/by-id/usb-4K_USB_CAMERA_HD_USB_CAMERA_01.00.00-video-index1&video_size=3840x2160
