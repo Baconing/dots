@@ -13,14 +13,35 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: /moonraker
+        path: /websocket
         backend:
           service:
             name: *appName
             port: 
               name: moonraker-http
       - pathType: Prefix
-        path: /websocket
+        path: /server
+        backend:
+          service:
+            name: *appName
+            port: 
+              name: moonraker-http
+      - pathType: Prefix
+        path: /printer
+        backend:
+          service:
+            name: *appName
+            port: 
+              name: moonraker-http
+      - pathType: Prefix
+        path: /machine
+        backend:
+          service:
+            name: *appName
+            port: 
+              name: moonraker-http
+      - pathType: Prefix
+        path: /access
         backend:
           service:
             name: *appName

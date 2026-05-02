@@ -262,7 +262,6 @@ data:
     [server]
     host: 0.0.0.0
     port: 7125
-    route_prefix: moonraker
     klippy_uds_address: /run/klipper/klipper.sock
     
     [machine]
