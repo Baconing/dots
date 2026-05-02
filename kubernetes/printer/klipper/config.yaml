@@ -297,12 +297,9 @@ data:
     axes_map: x,z,y
 
     [resonance_tester]
-    accel_chip: adxl345
+    accel_chip: lis2dw
     probe_points:
         147,154,20
-
-    [output_pin power_mode]
-    pin: adxl:gpio23
 
   moonraker.conf: |
     [server]
