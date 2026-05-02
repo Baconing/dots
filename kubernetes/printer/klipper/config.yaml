@@ -266,6 +266,25 @@ data:
 
     gcode:
         {action_respond_info(" Running the KAMP_Settings macro does nothing, it is only used for storing KAMP settings. ")}
+  
+    [gcode_macro SET_ACTIVE_SPOOL]
+    gcode:
+    {% if params.ID %}
+        {% set id = params.ID|int %}
+        {action_call_remote_method(
+        "spoolman_set_active_spool",
+        spool_id=id
+        )}
+    {% else %}
+        {action_respond_info("Parameter 'ID' is required")}
+    {% endif %}
+
+    [gcode_macro CLEAR_ACTIVE_SPOOL]
+    gcode:
+    {action_call_remote_method(
+        "spoolman_set_active_spool",
+        spool_id=None
+    )}
   moonraker.conf: |
     [server]
     host: 0.0.0.0
@@ -309,3 +328,6 @@ data:
     primary_branch: main
     managed_services: klipper
     path: /srv/printer_data/kamp
+
+    [spoolman]
+    server: http://spoolman:8000

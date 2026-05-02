@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &appName spoolman
+  namespace: printer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: *appName
+  template:
+    metadata:
+      labels:
+        app: *appName
+    spec:
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.database.svc.cluster.local
+            - name: INIT_POSTGRES_DBNAME
+              value: *appName
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-superuser
+                  key: password
+            - name: INIT_POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: *appName
+                  key: database.username
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: *appName
+                  key: database.password
+      containers:
+        - name: *appName
+          image: donkieyo/spoolman:0.23.1
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+          env:
+            - name: TZ
+              value: "America/Detroit"
+            - name: SPOOLMAN_DB_TYPE
+              value: postgres
+            - name: SPOOLMAN_DB_HOST
+              value: postgres-rw.database.svc.cluster.local
+            - name: SPOOLMAN_DB_PORT
+              value: "5432"
+            - name: SPOOLMAN_DB_NAME
+              value: spoolman
+            - name: SPOOLMAN_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: *appName
+                  key: database.username
+            - name: SPOOLMAN_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: *appName
+                  key: database.password
+          ports:
+            - containerPort: &httpPort 8000
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: *httpPort
+          readinessProbe:
+            httpGet:
+              path: /
+              port: *httpPort
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: spoolman-data
+      

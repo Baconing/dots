@@ -32,7 +32,7 @@ keys: &keys
   - &host_harpalyke age1fl9vgdt5q8k3vavv9pd7zya6dqcrq3lz4ecc5ucnndn0m67fup4svdglv5
 
 creation_rules:
-  - path_regex: ^kubernetes[/\\].*\.secret\.yaml$
+  - path_regex: ^kubernetes[/\\].*(?:\.secret|secret)\.yaml$
     encrypted_regex: '^(data|stringData)$'
     key_groups:
     - age:

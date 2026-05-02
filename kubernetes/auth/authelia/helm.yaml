@@ -169,10 +169,10 @@ spec:
               - "router.saturn.ci"
               - "nas.saturn.ci"
               - "hass.saturn.ci"
-              - "octoprint.saturn.ci"
 
               # home
               - "printer.saturn.ci"
+              - "spoolman.saturn.ci"
               - "orcaslicer.saturn.ci"
 
               # media
