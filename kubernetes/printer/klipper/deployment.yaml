@@ -96,7 +96,7 @@ spec:
               name: klipper-config
               subPath: moonraker.conf
               readOnly: true
-            - mountPath: /run/klipper/klipper.sock
+            - mountPath: /run/klipper
               name: klipper-socket
             - mountPath: /tmp
               name: moonraker-tmp
