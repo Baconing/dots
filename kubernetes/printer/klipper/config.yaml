@@ -159,7 +159,7 @@ data:
     click_pin: ^!PB2
   
     [virtual_sdcard]
-    path: /data/gcodes
+    path: /opt/printer_data/gcodes
 
     [pause_resume]
     recover_velocity: 50
