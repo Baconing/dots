@@ -292,9 +292,12 @@ data:
     serial: /dev/serial/by-id/usb-Klipper_rp2040_5044340410AF2C1C-if00
 
     [lis2dw]
-    cs_pin: s2dw:gpio1
-    spi_bus: spi0a
-    axes_map: x,z,y
+    cs_pin: s2dw:gpio9
+    #spi_bus: spi1a
+    spi_software_sclk_pin: s2dw:gpio10
+    spi_software_mosi_pin: s2dw:gpio11
+    spi_software_miso_pin: s2dw:gpio8
+    axes_map: -y,x,-z
 
     [resonance_tester]
     accel_chip: lis2dw
