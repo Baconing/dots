@@ -9,7 +9,7 @@ data:
     #[include ../kamp/Configuration/Line_Purge.cfg]
     #[include ../kamp/Configuration/Smart_Park.cfg]
 
-    [include adxl.cfg]
+    [include s2dw.cfg]
 
     [mcu]
     serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
@@ -287,12 +287,12 @@ data:
             "spoolman_set_active_spool",
             spool_id=None
         )}
-  adxl.cfg: |
-    [mcu adxl]
+  s2dw.cfg: |
+    [mcu s2dw]
     serial: /dev/serial/by-id/usb-Klipper_rp2040_5044340410AF2C1C-if00
 
-    [adxl345]
-    cs_pin: adxl:gpio1
+    [lis2dw]
+    cs_pin: lis:gpio1
     spi_bus: spi0a
     axes_map: x,z,y
 
