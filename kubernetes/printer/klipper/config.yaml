@@ -293,7 +293,11 @@ data:
 
     [lis2dw]
     cs_pin: s2dw:gpio9
-    spi_bus: spi1a
+    spi_software_sclk_pin: s2dw:gpio10
+    spi_software_mosi_pin: s2dw:gpio11
+    spi_software_miso_pin: s2dw:gpio8
+    spi_software_int1_pin: s2dw:gpio6
+    spi_software_int2_pin: s2dw:gpio7
     axes_map: -y,x,-z
 
     [resonance_tester]
