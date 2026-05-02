@@ -11,14 +11,14 @@ spec:
     - host: &host printer.saturn.ci
       http:
         paths:
-        - pathType: Exact
+        - pathType: Prefix
           path: "/stream"
           backend:
             service:
               name: *appName
               port:
                 name: http
-        - pathType: Exact
+        - pathType: Prefix
           path: "/snapshot"
           backend:
             service:
