@@ -9,9 +9,14 @@ data:
     #[include ../kamp/Configuration/Line_Purge.cfg]
     #[include ../kamp/Configuration/Smart_Park.cfg]
 
+    [include adxl.cfg]
+
     [mcu]
     serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
     restart_method: command
+
+    [mcu adxl]
+    serial: /dev/serial/by-id/usb-Klipper_rp2040_btt_acc-if00
 
     [printer]
     kinematics: cartesian
@@ -157,7 +162,7 @@ data:
     sid_pin: PB15
     encoder_pins: ^PB14, ^PB10
     click_pin: ^!PB2
-  
+
     [virtual_sdcard]
     path: /srv/printer_data/gcodes
 
@@ -285,6 +290,23 @@ data:
         "spoolman_set_active_spool",
         spool_id=None
     )}
+  adxl.cfg: |
+    [mcu adxl]
+    serial: /dev/serial/by-id/usb-Klipper_rp2040_btt_acc-if00
+
+    [adxl345]
+    cs_pin: adxl:gpio1
+    spi_bus: spi0a
+    axes_map: x,z,y
+
+    [resonance_tester]
+    accel_chip: adxl345
+    probe_points:
+        147,154,20
+
+    [output_pin power_mode]
+    pin: adxl:gpio23
+
   moonraker.conf: |
     [server]
     host: 0.0.0.0
