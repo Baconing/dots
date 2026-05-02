@@ -86,7 +86,7 @@ spec:
             - mountPath: /srv/printer_data/config
               name: klipper-config
               readOnly: true
-            - mountPath: /dev/serial/by-id
+            - mountPath: /dev/serial
               name: serial-devices
         - name: moonraker
           image: mkuf/moonraker:v0.10.0
@@ -141,5 +141,5 @@ spec:
             sizeLimit: 500Mi
         - name: serial-devices
           hostPath:
-            path: /dev/serial/by-id
+            path: /dev/serial
             type: Directory
