@@ -29,8 +29,8 @@ spec:
           securityContext:
             runAsUser: 0
           command: 
-            -"/bin/sh"
-            - "-c",
+            - "/bin/sh"
+            - "-c"
             - "chown -R 1000:1000 /config && chmod -R g=u /config"
           volumeMounts:
             - mountPath: /config
