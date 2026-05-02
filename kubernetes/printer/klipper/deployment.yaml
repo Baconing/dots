@@ -68,9 +68,8 @@ spec:
               name: klipper-socket
             - mountPath: /opt/printer_data
               name: klipper-data
-            - mountPath: /opt/printer_data/config/printer.cfg
+            - mountPath: /opt/printer_data/config
               name: klipper-config
-              subPath: printer.cfg
               readOnly: true
             - mountPath: /dev/serial/by-id
               name: serial-devices
@@ -92,9 +91,8 @@ spec:
           volumeMounts:
             - mountPath: /opt/printer_data
               name: klipper-data
-            - mountPath: /opt/printer_data/config/moonraker.conf
+            - mountPath: /opt/printer_data/config
               name: klipper-config
-              subPath: moonraker.conf
               readOnly: true
             - mountPath: /run/klipper
               name: klipper-socket
