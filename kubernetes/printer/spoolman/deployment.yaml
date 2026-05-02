@@ -83,8 +83,4 @@ spec:
             httpGet:
               path: /
               port: *httpPort
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: spoolman-data
       
