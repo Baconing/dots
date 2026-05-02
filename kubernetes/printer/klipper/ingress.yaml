@@ -19,6 +19,13 @@ spec:
             name: *appName
             port: 
               name: moonraker-http
+      - pathType: Prefix
+        path: /websocket
+        backend:
+          service:
+            name: *appName
+            port: 
+              name: moonraker-http
   tls:
     - secretName: *host
       hosts:
