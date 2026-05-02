@@ -65,6 +65,9 @@ spec:
           #   - "-I"
           #   - "/run/klipper/klipper.tty"
           #   - "/srv/printer_data/config/printer.cfg"
+          args:
+            - "-c"
+            - "sleep infinity"
           securityContext:
             runAsGroup: 1000
             privileged: true
