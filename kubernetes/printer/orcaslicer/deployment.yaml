@@ -10,6 +10,16 @@ spec:
   selector:
     matchLabels:
       app: *appName
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 10
+          preference:
+            matchExpressions:
+              - key: "feature.node.kubernetes.io/arc-a750"
+                operator: 
+                values:
+                  - "true"
   template:
     metadata:
       labels:
@@ -27,9 +37,14 @@ spec:
               memory: 4Gi
           securityContext:
             allowPrivilegeEscalation: false
+          env:
+            - name: PIXELFLUX_WAYLAND
+              value: "true"
           volumeMounts:
             - mountPath: /config
               name: data
+            - name: dri
+              mountPath: /dev/dri
           ports:
             - containerPort: &httpPort 3000
               name: http
@@ -46,4 +61,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: orcaslicer-data
-      
+        - name: dri
+          hostPath:
+            path: /dev/dri
