@@ -42,8 +42,8 @@ spec:
       difficulty: hard
       whitelist: "Baconing,Kamieo_"
       ops: "Baconing"
-      enableCommandBlock: "true"
-      spawnProtection: "-1"
+      enableCommandBlock: true
+      spawnProtection: -1
 
     persistence:
       storageClass: longhorn
