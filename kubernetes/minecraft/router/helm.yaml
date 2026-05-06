@@ -45,4 +45,4 @@ spec:
           enabled: true
         down:
           enabled: true
-          after: 2h
+          after: 7d
