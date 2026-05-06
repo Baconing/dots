@@ -18,13 +18,7 @@ spec:
       repository: itzg/minecraft-server
       tag: 2026.5.0-java25-jdk
       pullPolicy: IfNotPresent
-
-    services:
-      minecraft:
-        type: LoadBalancer
-        loadBalancerIP: 10.10.254.30
-        port: 25565
-    
+      
     resources:
       requests:
         cpu: 256m
