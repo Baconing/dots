@@ -18,7 +18,7 @@ spec:
       repository: itzg/minecraft-server
       tag: 2026.5.0-java25-jdk
       pullPolicy: IfNotPresent
-      
+
     resources:
       requests:
         cpu: 256m
@@ -28,6 +28,7 @@ spec:
         memory: 8192Mi
 
     workloadAsStatefulSet: true
+    strategyType: OnDelete
 
     minecraftServer:
       eula: "TRUE"
