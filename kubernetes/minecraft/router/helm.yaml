@@ -45,4 +45,4 @@ spec:
           enabled: true
         down:
           enabled: true
-          after: 7d
+          after: 336h # 2 weeks
