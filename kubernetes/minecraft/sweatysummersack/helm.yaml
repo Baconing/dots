@@ -22,10 +22,16 @@ spec:
     resources:
       requests:
         cpu: 256m
-        memory: 2048Mi
+        memory: 1024Mi
       limits:
         cpu: 2
         memory: 8192Mi
+
+    extraEnv:
+      - name: INIT_MEMORY
+        value: "1024M"
+      - name: MAX_MEMORY
+        value: "8192M"
 
     workloadAsStatefulSet: true
     strategyType: OnDelete

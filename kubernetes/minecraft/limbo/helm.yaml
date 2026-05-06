@@ -27,6 +27,12 @@ spec:
         cpu: 300m
         memory: 512Mi
 
+    extraEnv:
+      - name: INIT_MEMORY
+        value: "128M"
+      - name: MAX_MEMORY
+        value: "512M"
+
     minecraftServer:
       eula: "TRUE"
       type: LIMBO
