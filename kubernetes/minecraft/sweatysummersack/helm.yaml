@@ -32,8 +32,8 @@ spec:
 
     minecraftServer:
       eula: "TRUE"
-      version: 26.1.1
-      type: PURPUR
+      version: 26.1.2
+      type: PAPER
       difficulty: hard
       whitelist: "Baconing,Kamieo_"
       ops: "Baconing"
