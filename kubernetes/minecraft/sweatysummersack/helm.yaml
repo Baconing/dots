@@ -28,7 +28,7 @@ spec:
         memory: 8192Mi
 
     workloadAsStatefulSet: true
-    strategyType: RollingUpdate
+    strategyType: OnDelete
 
     minecraftServer:
       eula: "TRUE"
