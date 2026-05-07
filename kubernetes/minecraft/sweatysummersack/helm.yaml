@@ -55,4 +55,4 @@ spec:
           - ReadWriteOnce
 
     serviceAnnotations:
-      mc-router.itzg.me/externalServerName: sweatysummersack.saturn.ci
+      mc-router.itzg.me/externalServerName: sweatysummersack.saturn.ci,sweatysummersack.local
