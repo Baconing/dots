@@ -22,10 +22,16 @@ spec:
     resources:
       requests:
         cpu: 256m
-        memory: 1024Mi
+        memory: 256Mi
       limits:
         cpu: 2
         memory: 8192Mi
+
+    extraEnv:
+      - key: INIT_MEMORY
+        value: 256M
+      - key: MAX_MEMORY
+        value: 8192M
 
     workloadAsStatefulSet: true
     strategyType: OnDelete
@@ -39,9 +45,6 @@ spec:
       ops: "Baconing"
       enableCommandBlock: true
       spawnProtection: -1
-
-      memory: ""
-      jvmOpts: "-Xms1024M -Xmx8192M"
 
     persistence:
       storageClass: longhorn
