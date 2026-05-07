@@ -28,10 +28,8 @@ spec:
         memory: 512Mi
 
     extraEnv:
-      - key: INIT_MEMORY
-        value: 128M
-      - key: MAX_MEMORY
-        value: 512M
+      - INIT_MEMORY: 128M
+      - MAX_MEMORY: 512M
 
     minecraftServer:
       eula: "TRUE"
