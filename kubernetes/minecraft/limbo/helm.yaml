@@ -36,7 +36,9 @@ spec:
     minecraftServer:
       eula: "TRUE"
       type: LIMBO
-      LIMBO_BUILD: latest
+
+      memory: ""
+      jvmOpts: "-Xms128M -Xmx512M"
 
     persistence:
       dataDir:

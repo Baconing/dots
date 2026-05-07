@@ -27,12 +27,6 @@ spec:
         cpu: 2
         memory: 8192Mi
 
-    extraEnv:
-      - name: INIT_MEMORY
-        value: "1024M"
-      - name: MAX_MEMORY
-        value: "8192M"
-
     workloadAsStatefulSet: true
     strategyType: OnDelete
 
@@ -45,6 +39,9 @@ spec:
       ops: "Baconing"
       enableCommandBlock: true
       spawnProtection: -1
+
+      memory: ""
+      jvmOpts: "-Xms1024M -Xmx8192M"
 
     persistence:
       storageClass: longhorn
