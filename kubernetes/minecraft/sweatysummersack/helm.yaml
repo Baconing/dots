@@ -28,8 +28,8 @@ spec:
         memory: 8192Mi
 
     extraEnv:
-      - INIT_MEMORY: 256M
-      - MAX_MEMORY: 8192M
+      INIT_MEMORY: 256M
+      MAX_MEMORY: 8192M
 
     workloadAsStatefulSet: true
     strategyType: OnDelete
