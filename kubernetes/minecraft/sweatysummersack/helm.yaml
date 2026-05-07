@@ -44,6 +44,8 @@ spec:
       enableCommandBlock: true
       spawnProtection: -1
 
+      motd: "holy its the summer minecraft server called sweatysummersack hashtag sweaty summer time my sack is sweaty"
+
     persistence:
       storageClass: longhorn
       dataDir:
