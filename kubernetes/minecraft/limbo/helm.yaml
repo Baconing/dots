@@ -37,9 +37,6 @@ spec:
       eula: "TRUE"
       type: LIMBO
 
-      memory: ""
-      jvmOpts: "-Xms128M -Xmx512M"
-
     persistence:
       dataDir:
         enabled: false
