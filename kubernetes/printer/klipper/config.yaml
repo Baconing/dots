@@ -103,7 +103,7 @@ data:
     x_offset: -46
     y_offset: -26
     
-    z_offset: 0.035
+    z_offset: 0.535
     
     speed: 10
     samples: 2
