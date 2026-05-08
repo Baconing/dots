@@ -9,7 +9,7 @@ data:
     #[include ../kamp/Configuration/Line_Purge.cfg]
     #[include ../kamp/Configuration/Smart_Park.cfg]
 
-    [include s2dw.cfg]
+    #[include s2dw.cfg]
 
     [mcu]
     serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
@@ -17,8 +17,8 @@ data:
 
     [printer]
     kinematics: cartesian
-    max_velocity: 750
-    max_accel: 2500
+    max_velocity: 500
+    max_accel: 3000
     max_z_velocity: 5
     max_z_accel: 100
     square_corner_velocity: 5
@@ -114,11 +114,11 @@ data:
     samples_tolerance_retries: 3
 
     [input_shaper]
-    shaper_type_x: 2hump_ei
+    shaper_type_x: mzv
     shaper_type_y: mzv
     
-    shaper_freq_x: 39.0
-    shaper_freq_y: 31.0
+    shaper_freq_x: 41.8
+    shaper_freq_y: 31.4
 
     [safe_z_home]
     home_xy_position: 157, 143
