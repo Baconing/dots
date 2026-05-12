@@ -17,7 +17,7 @@ data:
 
     [printer]
     kinematics: cartesian
-    max_velocity: 500
+    max_velocity: 750
     max_accel: 3000
     max_z_velocity: 5
     max_z_accel: 100
@@ -103,7 +103,7 @@ data:
     x_offset: -46
     y_offset: -26
     
-    z_offset: 0.035
+    z_offset: 0.535
     
     speed: 10
     samples: 2
