@@ -10,7 +10,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./kubernetes/beammp
+  path: ./kubernetes/games/beammp
   prune: true
   sourceRef:
     kind: GitRepository

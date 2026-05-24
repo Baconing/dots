@@ -170,6 +170,9 @@ spec:
               - "nas.saturn.ci"
               - "hass.saturn.ci"
 
+              # games
+              - "asf.saturn.ci"
+
               # home
               - "printer.saturn.ci"
               - "spoolman.saturn.ci"

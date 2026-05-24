@@ -1,2 +1,4 @@
 result
-.decrypted~*.secret.*
+.decrypted~*
+*/.decrypted~*
+**/.decrypted~*
