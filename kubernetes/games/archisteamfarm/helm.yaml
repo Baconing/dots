@@ -4,8 +4,9 @@ metadata:
   name: juniorjpdj
   namespace: flux-system
 spec:
+  type: oci
   interval: 1h
-  url: https://juniorjpdj.github.io/charts
+  url: oci://juniorjpdj.github.io/charts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
