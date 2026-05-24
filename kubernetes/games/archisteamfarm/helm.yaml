@@ -60,8 +60,8 @@ spec:
     - kind: Secret
       name: archisteamfarm
       valuesKey: steamId
-      targetPath: secretConfigs."ASF.json".SteamOwnerID
+      targetPath: secretConfigs.ASF.json.SteamOwnerID
     - kind: Secret
       name: archisteamfarm
       valuesKey: ipcPassword
-      targetPath: secretConfigs."ASF.json".IPCPassword
+      targetPath: secretConfigs.ASF.json.IPCPassword
