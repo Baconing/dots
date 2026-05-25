@@ -22,7 +22,7 @@ spec:
         - name: *appName
           image: mkuf/ustreamer:v6.56
           args:
-            - --device=/dev/v4l/by-id/usb-4K_USB_CAMERA_HD_USB_CAMERA_01.00.00-video-index0
+            # - --device=/dev/v4l/by-id/usb-4K_USB_CAMERA_HD_USB_CAMERA_01.00.00-video-index0
             - -r 1920x1080
             - --desired-fps=30
           resources:
