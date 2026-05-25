@@ -96,12 +96,12 @@ data:
     [bltouch]
     sensor_pin: ^PB1
     control_pin: PB0
-    
-    x_offset: -46
-    y_offset: -26
-    
+
+    x_offset: -40.7
+    y_offset: -10
+
     z_offset: 0.535
-    
+
     speed: 10
     samples: 2
     sample_retract_dist: 3.0
@@ -113,12 +113,12 @@ data:
     [input_shaper]
     shaper_type_x: mzv
     shaper_type_y: mzv
-    
+
     shaper_freq_x: 41.8
     shaper_freq_y: 31.0
 
     [safe_z_home]
-    home_xy_position: 157, 143
+    home_xy_position: 158.2, 127.5
     speed: 80
     z_hop: 10
     z_hop_speed: 10
@@ -126,7 +126,7 @@ data:
     [bed_mesh]
     speed: 200
     horizontal_move_z: 5
-    mesh_min: 20, 20
+    mesh_min: 41, 20
     mesh_max: 169, 189
     probe_count: 6, 6
     algorithm: bicubic
