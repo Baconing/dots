@@ -51,6 +51,12 @@ spec:
             httpGet:
               path: /
               port: *httpPort
+          startupProbe:
+            httpGet:
+              path: /
+              port: *httpPort
+            failureThreshold: 30
+            periodSeconds: 10
       volumes:
         - name: video-devices
           hostPath: 
