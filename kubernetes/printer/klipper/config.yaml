@@ -245,7 +245,7 @@ data:
 
         ; raise Z — mirroring your original conditional raise logic
         G91
-        G1 Z{[2, printable_height - max_z]|min} F600
+        G1 Z{[8, printable_height - max_z]|min} F600
         G90
 
         G1 X5 Y{printable_height * 0.8} F9000   ; present print
