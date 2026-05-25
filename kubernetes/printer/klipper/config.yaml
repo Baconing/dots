@@ -17,8 +17,8 @@ data:
 
     [printer]
     kinematics: cartesian
-    max_velocity: 750
-    max_accel: 3000
+    max_velocity: 900
+    max_accel: 3750
     max_z_velocity: 5
     max_z_accel: 100
     square_corner_velocity: 5
@@ -115,7 +115,7 @@ data:
     shaper_type_y: mzv
     
     shaper_freq_x: 41.8
-    shaper_freq_y: 31.4
+    shaper_freq_y: 31.0
 
     [safe_z_home]
     home_xy_position: 157, 143
