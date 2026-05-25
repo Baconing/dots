@@ -52,4 +52,6 @@ spec:
               port: *httpPort
       volumes:
         - name: video-devices
-          hostPath: /dev/v4l
+          hostPath: 
+            path: /dev/v4l
+            type: Directory
