@@ -39,7 +39,7 @@ spec:
             - containerPort: &httpPort 8080
               name: http
               protocol: TCP
-          volumes:
+          volumeMounts:
             - mountPath: /dev/v4l
               name: video-devices
           livenessProbe:
