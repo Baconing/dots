@@ -17,8 +17,8 @@ data:
 
     [printer]
     kinematics: cartesian
-    max_velocity: 750
-    max_accel: 3000
+    max_velocity: 900
+    max_accel: 3750
     max_z_velocity: 5
     max_z_accel: 100
     square_corner_velocity: 5
@@ -71,7 +71,7 @@ data:
     sensor_type: ATC Semitec 104NT-4-R025H42G
     sensor_pin: PC5
     min_temp: 0
-    max_temp: 250
+    max_temp: 300
 
     control: pid
     pid_Kp: 25.80
@@ -96,12 +96,12 @@ data:
     [bltouch]
     sensor_pin: ^PB1
     control_pin: PB0
-    
-    x_offset: -46
-    y_offset: -26
-    
-    z_offset: 0.535
-    
+
+    x_offset: -40.7
+    y_offset: -10
+
+    z_offset: 0.805
+
     speed: 10
     samples: 2
     sample_retract_dist: 3.0
@@ -113,12 +113,12 @@ data:
     [input_shaper]
     shaper_type_x: mzv
     shaper_type_y: mzv
-    
+
     shaper_freq_x: 41.8
-    shaper_freq_y: 31.4
+    shaper_freq_y: 31.0
 
     [safe_z_home]
-    home_xy_position: 157, 143
+    home_xy_position: 158.2, 127.5
     speed: 80
     z_hop: 10
     z_hop_speed: 10
@@ -126,7 +126,7 @@ data:
     [bed_mesh]
     speed: 200
     horizontal_move_z: 5
-    mesh_min: 20, 20
+    mesh_min: 41, 20
     mesh_max: 169, 189
     probe_count: 6, 6
     algorithm: bicubic
@@ -223,7 +223,7 @@ data:
         BED_MESH_CALIBRATE                ; auto level (replaces G29)
 
         G1 Z50 F240
-        G1 X2 Y10 F3000
+        G1 X2 Y50 F3000
 
         M190 S{BED_TEMP}                  ; wait for bed
         M109 S{EXTRUDER_TEMP}             ; wait for hotend
@@ -234,7 +234,7 @@ data:
         G1 Y140 E10 F1500
         G1 X2.3 F5000
         G92 E0
-        G1 Y10 E10 F1200
+        G1 Y50 E10 F1200
         G92 E0
 
     [gcode_macro END_PRINT]
@@ -245,7 +245,7 @@ data:
 
         ; raise Z — mirroring your original conditional raise logic
         G91
-        G1 Z{[2, printable_height - max_z]|min} F600
+        G1 Z{[8, printable_height - max_z]|min} F600
         G90
 
         G1 X5 Y{printable_height * 0.8} F9000   ; present print
