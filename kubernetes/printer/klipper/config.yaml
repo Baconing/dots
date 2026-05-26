@@ -118,7 +118,7 @@ data:
     shaper_freq_y: 31.0
 
     [safe_z_home]
-    home_xy_position: 158.2, 127.5
+    home_xy_position: 158.2, 172.5
     speed: 80
     z_hop: 10
     z_hop_speed: 10
@@ -126,7 +126,7 @@ data:
     [bed_mesh]
     speed: 200
     horizontal_move_z: 5
-    mesh_min: 41, 20
+    mesh_min: 41, 65
     mesh_max: 169, 189
     probe_count: 6, 6
     algorithm: bicubic
