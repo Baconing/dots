@@ -26,6 +26,7 @@ spec:
             - -r 3840x2160
             - --desired-fps=30
             - --format=mjpeg
+            - --host=0.0.0.0
           resources:
             requests:
               cpu: 50m
@@ -51,12 +52,6 @@ spec:
             httpGet:
               path: /
               port: *httpPort
-          startupProbe:
-            httpGet:
-              path: /
-              port: *httpPort
-            failureThreshold: 30
-            periodSeconds: 10
       volumes:
         - name: video-devices
           hostPath: 
