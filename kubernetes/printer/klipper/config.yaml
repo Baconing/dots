@@ -126,8 +126,8 @@ data:
     [bed_mesh]
     speed: 200
     horizontal_move_z: 5
-    mesh_min: 41, 65
-    mesh_max: 169, 189
+    mesh_min: 75, 65
+    mesh_max: 220, 235
     probe_count: 6, 6
     algorithm: bicubic
     fade_start: 1
