@@ -1,39 +1,45 @@
 { inputs, outputs, stateVersion }:
 {
-    # Makes a console-only home manager configuration (e.g servers).
-    makeConsoleHome = { hostname, username, platform ? "x86_64-linux" }: inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.${platform};
-        extraSpecialArgs = {
-            inherit
-            inputs
-            outputs
-            hostname
-            platform
-            username
-            stateVersion;
-        };
-        modules = [ ../home ];
-    };
-
-    # Makes a console-only NixOS configuration (e.g servers).
-    makeConsoleNixOS = { hostname, clustered ? false, clusterRole ? "", clusterTemplate ? "", clusterIP ? "", platform ? "x86_64-linux" }: inputs.nixpkgs.lib.nixosSystem {
+    # Makes a console-only NixOS configuration.
+    makeNixOS = { hostname, desktop ? false, clustered ? false, clusterRole ? "", clusterTemplate ? "", clusterIP ? "", platform ? "x86_64-linux" }: inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
             inherit
             hostname
-            platform
-            clustered
+            desktop
+	    clustered
             clusterRole
             clusterTemplate
             clusterIP
+            platform
             stateVersion
             inputs
             outputs;
         };
-        modules = [ ../nixos ];
+        modules = [ 
+	    ../nixos
+	];
+    };
+
+    # Makes a  home manager configuration.
+    makeHome = { hostname, username, desktop ? false, platform ? "x86_64-linux" }: inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = inputs.nixpkgs.legacyPackages.${platform};
+        extraSpecialArgs = {
+            inherit
+            hostname
+            username
+            desktop
+            platform
+            inputs
+            outputs
+            stateVersion;
+        };
+        modules = [ 
+	    ../home 
+	];
     };
 
     forAllSystems = inputs.nixpkgs.lib.genAttrs [
-      "aarch64-linux"
       "x86_64-linux"
+      "aarch64-linux"
     ];
 }

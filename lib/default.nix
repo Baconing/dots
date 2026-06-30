@@ -4,7 +4,7 @@ let
 in
 {
   inherit (helpers)
-    makeConsoleHome
-    makeConsoleNixOS
+    makeHome
+    makeNixOS
     forAllSystems;
 }

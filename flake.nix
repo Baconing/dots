@@ -2,15 +2,18 @@
   description = "Bacon's NixOS & Home Manager Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+
+    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     colmena.url = "github:zhaofengli/colmena";
   };
@@ -23,116 +26,118 @@
       pkgs = import nixpkgs { inherit system; };
 
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-      stateVersion = "25.11";
+      stateVersion = "26.05";
       helper = import ./lib { inherit inputs outputs stateVersion; };
     in
     {
       homeConfigurations = {
-        "bacon@test1" = helper.makeDesktopHome {
-          hostname = "test1";
+        "bacon@tethys" = helper.makeHome {
+          hostname = "tethys";
           username = "bacon";
-        };
-        "bacon@test2" = helper.makeConsoleHome {
-          hostname = "test2";
-          username = "bacon";
+	  desktop = true;
         };
 
-        "bacon@skoll" = helper.makeConsoleHome {
+        "bacon@skoll" = helper.makeHome {
           hostname = "skoll";
           username = "bacon";
         };
 
-        "bacon@hyperion" = helper.makeConsoleHome {
+        "bacon@hyperion" = helper.makeHome {
           hostname = "hyperion";
           username = "bacon";
         };
 
-        "bacon@phoebe" = helper.makeConsoleHome {
+        "bacon@phoebe" = helper.makeHome {
           hostname = "phoebe";
           username = "bacon";
         };
 
-        "bacon@aitne" = helper.makeConsoleHome {
+        "bacon@aitne" = helper.makeHome {
           hostname = "aitne";
           username = "bacon";
         };
 
-        "bacon@callisto" = helper.makeConsoleHome {
+        "bacon@callisto" = helper.makeHome {
           hostname = "callisto";
           username = "bacon";
         };
-        "bacon@mneme" = helper.makeConsoleHome {
+        "bacon@mneme" = helper.makeHome {
           hostname = "mneme";
           username = "bacon";
         };
-        "bacon@eukelade" = helper.makeConsoleHome {
+        "bacon@eukelade" = helper.makeHome {
           hostname = "eukelade";
           username = "bacon";
         };
-        "bacon@harpalyke" = helper.makeConsoleHome {
+        "bacon@harpalyke" = helper.makeHome {
           hostname = "harpalyke";
           username = "bacon";
         };
-        "bacon@kore" = helper.makeConsoleHome {
+        "bacon@kore" = helper.makeHome {
           hostname = "kore";
           username = "bacon";
         };
-        "bacon@iocaste" = helper.makeConsoleHome {
+        "bacon@iocaste" = helper.makeHome {
           hostname = "iocaste";
           username = "bacon";
         };
       };
 
       nixosConfigurations = {
-        skoll = helper.makeConsoleNixOS {
+	tethys = helper.makeNixOS {
+	    hostname = "tethys";
+	    desktop = true;
+        };
+
+        skoll = helper.makeNixOS {
             hostname = "skoll";
             clustered = true;
             clusterRole = "primary";
             clusterIP = "10.10.3.1";
         };
 
-        aitne = helper.makeConsoleNixOS {
+        aitne = helper.makeNixOS {
             hostname = "aitne";
             clustered = true;
             clusterRole = "node";
         };
 
-        callisto = helper.makeConsoleNixOS {
+        callisto = helper.makeNixOS {
             hostname = "callisto";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "control";
             clusterIP = "10.10.5.1";
         };
-        mneme = helper.makeConsoleNixOS {
+        mneme = helper.makeNixOS {
             hostname = "mneme";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "control";
             clusterIP = "10.10.5.2";
         };
-        iocaste = helper.makeConsoleNixOS {
+        iocaste = helper.makeNixOS {
             hostname = "iocaste";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
             clusterIP = "10.10.5.3";
         };
-        kore = helper.makeConsoleNixOS {
+        kore = helper.makeNixOS {
             hostname = "kore";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
             clusterIP = "10.10.5.4";
         };
-        eukelade = helper.makeConsoleNixOS {
+        eukelade = helper.makeNixOS {
             hostname = "eukelade";
             clustered = true;
             clusterTemplate = "m73";
             clusterRole = "node";
             clusterIP = "10.10.5.5";
         };
-        harpalyke = helper.makeConsoleNixOS {
+        harpalyke = helper.makeNixOS {
             hostname = "harpalyke";
             clustered = true;
             clusterTemplate = "m73";
