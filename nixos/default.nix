@@ -30,13 +30,11 @@
     kernelModules = [ "vhost_vsock" ];
     kernelPackages = lib.mkForce pkgs.linuxPackages;
 
-    # Don't install bootloader on ISO images.
     loader = {
       systemd-boot.enable = false;
 
-      efi = {
-        canTouchEfiVariables = true;
-      };
+      efi.canTouchEfiVariables = true;
+
       grub = {
         enable = true;
         useOSProber = true;
