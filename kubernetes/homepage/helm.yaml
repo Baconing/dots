@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/gethomepage/homepage
-      tag: v1.12.3
+      tag: v1.13.2
     envFrom:
       - secretRef:
           name: homepage-widget
