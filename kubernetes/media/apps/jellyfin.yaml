@@ -21,7 +21,7 @@ spec:
           - 303
       containers:
         - name: jellyfin
-          image: linuxserver/jellyfin:10.11.6
+          image: linuxserver/jellyfin:10.11.11
           resources:
             requests:
               "gpu.intel.com/i915": "1"
