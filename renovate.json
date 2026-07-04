@@ -1,0 +1,42 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        "docker:enableMajor",
+        ":disableRateLimiting",
+        ":dependencyDashboard",
+        ":semanticCommitTypeAll(chore)",
+        ":label(dependencies)"
+    ],
+    "dependencyDashboardTitle": "Renovate Dashboard",
+    "ignorePaths": [
+        "**/*.secret.*",
+        ".sops.yaml"
+    ],
+    "flux": {
+        "managerFilePatterns": [
+            "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"
+        ]
+    },
+    "helm-values": {
+        "managerFilePatterns": [
+            "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"
+        ]
+    },
+    "helmfile": {
+        "managerFilePatterns": [
+            "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"
+        ]
+    },
+    "kubernetes": {
+        "managerFilePatterns": [
+            "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"
+        ]
+    },
+    "kustomize": {
+        "managerFilePatterns": [
+            "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"
+        ]
+    },
+    
+}
