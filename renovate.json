@@ -37,6 +37,5 @@
         "managerFilePatterns": [
             "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"
         ]
-    },
-    
+    }
 }
