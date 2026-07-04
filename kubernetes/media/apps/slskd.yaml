@@ -28,7 +28,7 @@ spec:
             limits:
               cpu: 200m
               memory: 640Mi
-          image: slskd/slskd:0.24.5
+          image: slskd/slskd:0.25.1
           env:
             - name: SLSKD_REMOTE_CONFIGURATION
               value: "true"
