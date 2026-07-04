@@ -16,7 +16,7 @@ spec:
   values:
     image:
       repository: itzg/mc-router
-      tag: 1.42.0
+      tag: 1.44.0
 
     services:
       minecraft:
