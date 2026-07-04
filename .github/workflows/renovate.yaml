@@ -3,6 +3,9 @@ on:
   schedule:
     # Run every 30 minutes:
     - cron: '0,30 * * * *'
+  push:
+    branches:
+      - master
 
 jobs:
   renovate:
