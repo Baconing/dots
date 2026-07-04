@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: ddns
-        image: timothyjmiller/cloudflare-ddns:2.0.1
+        image: timothyjmiller/cloudflare-ddns:2.1.2
         env:
         - name: CLOUDFLARE_API_TOKEN_FILE
           value: "/run/secret/cloudflare-api/apiToken"
