@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: open-webui
-          image: openwebui/open-webui:0.8.10-slim
+          image: openwebui/open-webui:0.10.2-slim
           ports:
             - containerPort: 8080
               protocol: TCP
