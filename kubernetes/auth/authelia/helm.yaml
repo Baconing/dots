@@ -15,7 +15,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: authelia
+  name: &appName authelia
   namespace: auth
 spec:
   interval: 5m
@@ -49,6 +49,31 @@ spec:
         secret: "sso.saturn.ci"
       # Ingress hostname is determined by configMap.cookies.domain and configMap.session.cookies.subdomain
 
+    pod:
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.database.svc.cluster.local
+            - name: INIT_POSTGRES_DBNAME
+              value: *appName
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-superuser
+                  key: password
+            - name: INIT_POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: *appName
+                  key: storage.postgres.username
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: *appName
+                  key: storage.postgres.password
+
     redis:
       image:
         registry: ""
@@ -58,7 +83,7 @@ spec:
     secret:
       disabled: false
       mountPath: "/secrets"
-      existingSecret: "authelia"
+      existingSecret: *appName
       additionalSecrets:
         authelia:
           path: jwks
