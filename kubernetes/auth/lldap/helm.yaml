@@ -15,7 +15,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: lldap
+  name: &appName lldap
   namespace: auth
 spec:
   interval: 5m
@@ -65,6 +65,31 @@ spec:
       enabled: true
       fromSecret: lldap
       uriKey: postgresqlUri
+
+    # todo
+    # extraInitContainers:
+    #   - name: init-db
+    #     image: ghcr.io/onedr0p/postgres-init:17.4
+    #     env:
+    #       - name: INIT_POSTGRES_HOST
+    #         value: postgres-rw.database.svc.cluster.local
+    #       - name: INIT_POSTGRES_DBNAME
+    #         value: *appName
+    #       - name: INIT_POSTGRES_SUPER_PASS
+    #         valueFrom:
+    #           secretKeyRef:
+    #             name: postgres-superuser
+    #             key: password
+    #       - name: INIT_POSTGRES_USER
+    #         valueFrom:
+    #           secretKeyRef:
+    #             name: *appName
+    #             key: storage.postgres.username
+    #       - name: INIT_POSTGRES_PASS
+    #         valueFrom:
+    #           secretKeyRef:
+    #             name: *appName
+    #             key: storage.postgres.password
   valuesFrom:
     - kind: Secret
       name: lldap-bootstrap
