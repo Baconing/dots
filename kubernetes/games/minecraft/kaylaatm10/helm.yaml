@@ -38,6 +38,9 @@ spec:
     livenessProbe:
       initialDelaySeconds: 300 # 5 minutes
 
+    readynessProbe:
+      initialDelaySeconds: 300 # 5 minutes
+
     workloadAsStatefulSet: true
     strategyType: OnDelete
 
