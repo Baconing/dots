@@ -75,6 +75,10 @@ spec:
     namespace: flux-system
   dependsOn:
     - name: infra-kyverno
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
