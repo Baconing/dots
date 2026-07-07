@@ -50,7 +50,7 @@ spec:
 
       autoCurseForge:
         apiKey:
-          name: curseforge-api-token
+          existingSecret: curseforge-api-token
         slug: all-the-mods-10
         fileId: "8323938"
 
