@@ -16,7 +16,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2026.7.0-java25-jdk
+      tag: 2026.7.0-java21-jdk
       pullPolicy: IfNotPresent
 
     resources:
@@ -34,6 +34,9 @@ spec:
     envFrom:
       - secretRef:
           name: curseforge-api-token
+
+    livenessProbe:
+      initialDelaySeconds: 300 # 5 minutes
 
     workloadAsStatefulSet: true
     strategyType: OnDelete
