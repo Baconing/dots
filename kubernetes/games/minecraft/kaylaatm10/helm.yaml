@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sweatysummersack
+  name: kaylaatm10
   namespace: minecraft
 spec:
   interval: 5m
@@ -21,30 +21,34 @@ spec:
 
     resources:
       requests:
-        cpu: 256m
-        memory: 256Mi
+        cpu: 1
+        memory: 2048Mi
       limits:
-        cpu: 2
-        memory: 8192Mi
+        cpu: 4
+        memory: 12288Mi
 
     extraEnv:
-      INIT_MEMORY: 256M
-      MAX_MEMORY: 8192M
+      INIT_MEMORY: 2048M
+      MAX_MEMORY: 12288M
+      CF_PAGE_URL: https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/8323938
+
+    envFrom:
+      - secretRef:
+          name: curseforge-api-token
 
     workloadAsStatefulSet: true
     strategyType: OnDelete
 
     minecraftServer:
       eula: "TRUE"
-      version: 26.1.2
-      type: PAPER
-      difficulty: hard
-      whitelist: "Baconing,Kamieo_"
+      type: AUTO_CURSEFORGE
+      difficulty: easy
+      whitelist: "Baconing,TickleKnees"
       ops: "Baconing"
       enableCommandBlock: true
       spawnProtection: -1
 
-      motd: "holy its the summer minecraft server called sweatysummersack hashtag sweaty summer time my sack is sweaty"
+      motd: "i love you so os sososo so soso so sos o much meow"
 
     persistence:
       storageClass: longhorn
@@ -55,8 +59,8 @@ spec:
           - ReadWriteOnce
 
     serviceAnnotations:
-      mc-router.itzg.me/externalServerName: sweatysummersack.saturn.ci,sweatysummersack.local
+      mc-router.itzg.me/externalServerName: kaylaatm10.saturn.ci,kaylaatm10.local
       external-dns.alpha.kubernetes.io/enabled: "true"
-      external-dns.alpha.kubernetes.io/hostname: sweatysummersack.saturn.ci
+      external-dns.alpha.kubernetes.io/hostname: kaylaatm10.saturn.ci
       external-dns.alpha.kubernetes.io/target: direct.saturn.ci
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
