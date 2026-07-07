@@ -52,7 +52,7 @@ spec:
         apiKey:
           name: curseforge-api-token
         slug: all-the-mods-10
-        fileId: 8323938
+        fileId: "8323938"
 
     persistence:
       storageClass: longhorn
