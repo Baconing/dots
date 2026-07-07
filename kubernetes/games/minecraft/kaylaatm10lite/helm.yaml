@@ -60,6 +60,8 @@ spec:
           existingSecret: curseforge-api-token
         slug: all-the-mods-10-lite
         fileId: "7420356"
+        includeMods:
+          - living-things
 
     persistence:
       storageClass: longhorn
