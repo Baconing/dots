@@ -30,7 +30,6 @@ spec:
     extraEnv:
       INIT_MEMORY: 2048M
       MAX_MEMORY: 12288M
-      CF_PAGE_URL: https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/8323938
 
     envFrom:
       - secretRef:
@@ -41,7 +40,6 @@ spec:
 
     minecraftServer:
       eula: "TRUE"
-      type: AUTO_CURSEFORGE
       difficulty: easy
       whitelist: "Baconing,TickleKnees"
       ops: "Baconing"
@@ -49,6 +47,12 @@ spec:
       spawnProtection: -1
 
       motd: "i love you so os sososo so soso so sos o much meow"
+
+      autoCurseForge:
+        apiKey:
+          name: curseforge-api-token
+        slug: all-the-mods-10
+        fileId: 8323938
 
     persistence:
       storageClass: longhorn
