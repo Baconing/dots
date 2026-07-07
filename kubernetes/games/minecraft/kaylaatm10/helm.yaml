@@ -40,6 +40,7 @@ spec:
 
     minecraftServer:
       eula: "TRUE"
+      type: AUTOCURSEFORGE
       difficulty: easy
       whitelist: "Baconing,TickleKnees"
       ops: "Baconing"
