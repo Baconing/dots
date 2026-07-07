@@ -120,7 +120,7 @@ spec:
         replicas: 3
         shards: 1
         retention: 0
-        retentionSize: 50GiB
+        retentionSize: 49GiB
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
