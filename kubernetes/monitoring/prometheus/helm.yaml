@@ -120,7 +120,7 @@ spec:
         replicas: 3
         shards: 1
         retention: 0
-        retentionSize: 49GiB
+        retentionSize: 14GiB
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
@@ -135,7 +135,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 50Gi
+                  storage: 15Gi
       ingress:
         enabled: true
         ingressClassName: "traefik"
