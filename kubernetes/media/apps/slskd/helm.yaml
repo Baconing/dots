@@ -137,7 +137,16 @@ spec:
 
     monitoring:
       enabled: true
-      type: ServiceMonitor      
+      type: ServiceMonitor
+
+    startupProbe:
+      initialDelaySeconds: 900 # 15 minutes, in case of cache rebuild
+
+    livenessProbe:
+      initialDelaySeconds: 900 # 15 minutes, in case of cache rebuild
+
+    readinessProbe:
+      initialDelaySeconds: 900 # 15 minutes, in case of cache rebuild
 
     ingress:
       enabled: true
