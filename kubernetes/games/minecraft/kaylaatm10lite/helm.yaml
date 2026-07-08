@@ -52,7 +52,7 @@ spec:
       ops: "Baconing"
       enableCommandBlock: true
       spawnProtection: -1
-      renderDistance: 32
+      viewDistance: 32
 
       motd: "i love you so os sososo so soso so sos o much meow"
 
