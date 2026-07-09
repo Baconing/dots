@@ -22,14 +22,14 @@ spec:
     resources:
       requests:
         cpu: 1
-        memory: 2048Mi
+        memory: 8096Mi
       limits:
         cpu: 4
-        memory: 8192Mi
+        memory: 16384Mi
 
     extraEnv:
-      INIT_MEMORY: 2048M
-      MAX_MEMORY: 8192M
+      INIT_MEMORY: 8096M
+      MAX_MEMORY: 16384M
 
     envFrom:
       - secretRef:
