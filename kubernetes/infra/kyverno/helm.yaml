@@ -27,3 +27,15 @@ spec:
         kind: HelmRepository
         name: kyverno
         namespace: flux-system
+  values:
+    admissionController:
+      replicas: 3
+    
+    backgroundController:
+      replicas: 3
+    
+    cleanupController:
+      replicas: 3
+
+    reportsController:
+      replicas: 3
