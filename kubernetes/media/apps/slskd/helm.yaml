@@ -139,11 +139,10 @@ spec:
       enabled: true
       type: ServiceMonitor
 
+    # 15 minute startup probe to allow for potential cache rebuilds
     startupProbe:
-      initialDelaySeconds: 900 # 15 minutes, in case of cache rebuild
-
-    livenessProbe:
-      initialDelaySeconds: 900 # 15 minutes, in case of cache rebuild
+      periodSeconds: 10
+      failureThreshold: 90
 
     ingress:
       enabled: true
