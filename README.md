@@ -95,8 +95,52 @@ Hardware that has been decommisioned, either temporarily or indefinitely.
 
 </details>
 
+## Setup
+
+### Kubernetes
+
+#### 1. NixOS Installation
+
+When installing the first ("master") node, before running `nixos-install`, go into the specific configuration for that node and set:
+
+```nix
+homelab.services.kubernetes.init = true;
+```
+
+Then, proceed with installation as normal and reboot. After the `k3s` service has started once, remove/uncomment this line and rebuild + reboot.
+
+A fresh K3s token will be created at `/var/lib/rancher/k3s/server/token`, add/replace this to the secret at `nixos/cluster/kubernetes.secret.yaml` and ensure it is the same on additional nodes before installing.
+
+Then, install NixOS on every other node as normal. Additional control plane nodes should automatically be added to the etcd cluster.
+
+#### 2. ArgoCD Bootstrap
+
+> [!NOTE]
+> The ArgoCD Application runs in high availability mode. If only one node is available, it might fail.
+> This is also true for many other required infrastructure applications (databases, Longhorn).
+
+After all (or just one) of the nodes have been setup, the next step is bootstrapping ArgoCD to start syncing resources in this GitHub repository.
+
+```
+# kubectl apply -f kubernetes/bootstrap/argocd.yaml
+# kubectl wait --for condition=established crd/applications.argoproj.io
+# kubectl apply -f kubernetes/bootstrap/app.yaml
+```
+
+> [!TIP]
+> Run as root on any control plane node to automatically find a valid kubeconfig.
+
+This will apply a temporary installation of ArgoCD and initalize the `cluster` Application.
+
+After bootstrap, ArgoCD will automatically install all of the resources and upgrade itself to a Application managed by the repository.
+
+That is all of the nessacary steps to start using Kubernetes. All that is left is to setup individual applications that don't have static configurations or that haven't been setup with a static configuration.
+Alternatively, start restoring data/configurations from backups.
+
+
 ## Inspiration
-[Wimpy's World] - README format, file structure, general introduction to Nix syntax
+[Wimpy's World] - README format, file structure, general introduction to Nix syntax.
+[talos-ops-prod] - Great file structure for Kubernetes, showed me some software I didn't know existed, convinced me on Helm. 
 
 <!-- Links -->
 
@@ -133,3 +177,4 @@ Hardware that has been decommisioned, either temporarily or indefinitely.
 
 <!-- Inspiration -->
 [Wimpy's World]: https://github.com/wimpysworld
+[talos-ops-prod]: https://github.com/lenaxia/talos-ops-prod
