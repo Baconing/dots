@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: archisteamfarm
-      version: 0.1.122
+      version: 0.1.124
       sourceRef:
         kind: HelmRepository
         name: juniorjpdj
