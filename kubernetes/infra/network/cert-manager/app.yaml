@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: master
-    path: kubernetes/infra/cert-manager
+    path: kubernetes/infra/network/cert-manager
 
   destination:
     server: https://kubernetes.default.svc
