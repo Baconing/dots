@@ -28,7 +28,7 @@ spec:
             limits:
               cpu: 100m
               memory: 512Mi
-          image: deluan/navidrome:0.62.0
+          image: deluan/navidrome:0.63.2
           env:
             - name: PUID
               value: "1000"
