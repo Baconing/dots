@@ -4,4 +4,3 @@ resources:
   - cross-seed/app.yaml
   - servarr/app.yaml
   - slskd/app.yaml
-  - storage/app.yaml

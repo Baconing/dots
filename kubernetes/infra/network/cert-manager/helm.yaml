@@ -9,7 +9,7 @@ spec:
   source:
     chart: cert-manager
     repoURL: oci://quay.io/jetstack/charts
-    targetRevision: v1.20.3
+    targetRevision: v1.21.0
     helm:
       valuesObject:
         crds:
