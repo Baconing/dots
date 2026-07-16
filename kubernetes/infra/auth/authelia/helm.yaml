@@ -41,7 +41,7 @@ spec:
                 - name: INIT_POSTGRES_HOST
                   value: postgres-rw.database.svc.cluster.local
                 - name: INIT_POSTGRES_DBNAME
-                  value: *appName
+                  value: authelia
                 - name: INIT_POSTGRES_SUPER_PASS
                   valueFrom:
                     secretKeyRef:
@@ -50,12 +50,12 @@ spec:
                 - name: INIT_POSTGRES_USER
                   valueFrom:
                     secretKeyRef:
-                      name: *appName
+                      name: authelia
                       key: storage.postgres.username
                 - name: INIT_POSTGRES_PASS
                   valueFrom:
                     secretKeyRef:
-                      name: *appName
+                      name: authelia
                       key: storage.postgres.password
 
         redis:
@@ -67,7 +67,7 @@ spec:
         secret:
           disabled: false
           mountPath: "/secrets"
-          existingSecret: *appName
+          existingSecret: authelia
           additionalSecrets:
             authelia:
               path: jwks

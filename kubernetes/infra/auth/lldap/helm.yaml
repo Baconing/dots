@@ -63,7 +63,7 @@ spec:
         #       - name: INIT_POSTGRES_HOST
         #         value: postgres-rw.database.svc.cluster.local
         #       - name: INIT_POSTGRES_DBNAME
-        #         value: *appName
+        #         value: lldap
         #       - name: INIT_POSTGRES_SUPER_PASS
         #         valueFrom:
         #           secretKeyRef:
@@ -72,12 +72,12 @@ spec:
         #       - name: INIT_POSTGRES_USER
         #         valueFrom:
         #           secretKeyRef:
-        #             name: *appName
+        #             name: lldap
         #             key: storage.postgres.username
         #       - name: INIT_POSTGRES_PASS
         #         valueFrom:
         #           secretKeyRef:
-        #             name: *appName
+        #             name: lldap
         #             key: storage.postgres.password
 
   destination:
