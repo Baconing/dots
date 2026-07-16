@@ -4,4 +4,3 @@ resources:
   - argocd/app.yaml
   - kyverno/app.yaml
   # - openbao/app.yaml # Not currently being used.
-  - scheduler/app.yaml
