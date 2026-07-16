@@ -63,6 +63,9 @@ spec:
               securityContext:
                 runAsUser: 999
                 runAsNonRoot: true
+              env:
+                - name: SOPS_AGE_KEY_FILE
+                  value: /keys/keys.txt
               volumeMounts:
                 - name: var-files
                   mountPath: /var/run/argocd
