@@ -119,7 +119,7 @@ in {
         ];
 
         environment.defaultPackages = with pkgs; [
-            fluxcd
+            argocd
         ];
 
         services.openiscsi = {

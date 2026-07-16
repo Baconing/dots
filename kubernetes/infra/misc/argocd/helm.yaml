@@ -49,6 +49,39 @@ spec:
           autoscaling:
             enabled: true
             minReplicas: 2
+          extraContainers:
+            - name: sops
+              image: ghcr.io/getsops/sops:v3.13.2
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  apt-get update && apt-get install --no-install-recommends -y findutils kustomize && \
+                  /var/run/argocd/argocd-cmp-server
+              securityContext:
+                runAsUser: 999
+                runAsNonRoot: true
+              volumeMounts:
+                - name: var-files
+                  mountPath: /var/run/argocd
+                - name: plugins
+                  mountPath: /home/argocd/cmp-server/plugins
+                - name: sops-plugin
+                  mountPath: /home/argocd/cmp-server/config/plugin.yaml
+                  subPath: plugin.yaml
+                - name: cmp-tmp
+                  mountPath: /tmp
+                - name: sops-age-key
+                  mountPath: /keys
+          extraVolumes:
+            - name: sops-plugin
+              configMap:
+                name: sops-cmp
+            - name: cmp-tmp
+              emptyDir: {}
+            - name: sops-age-key
+              secret:
+                secretName: sops-age-key
 
         applicationSet:
           replicas: 2
