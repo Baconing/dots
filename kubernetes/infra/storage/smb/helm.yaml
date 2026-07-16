@@ -4,6 +4,8 @@ metadata:
   name: smb-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: csi-driver-smb
     repoURL: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts

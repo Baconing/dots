@@ -122,9 +122,7 @@ Then, install NixOS on every other node as normal. Additional control plane node
 After all (or just one) of the nodes have been setup, the next step is bootstrapping ArgoCD to start syncing resources in this GitHub repository.
 
 ```
-# kubectl apply -f kubernetes/bootstrap/argocd.yaml
-# kubectl wait --for condition=established crd/applications.argoproj.io
-# kubectl apply -f kubernetes/bootstrap/app.yaml
+# kubectl apply --server-side -k kubernetes/bootstrap
 ```
 
 > [!TIP]

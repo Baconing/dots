@@ -12,6 +12,8 @@ metadata:
   name: pgadmin-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: pgadmin4
     repoURL: https://helm.runix.net/

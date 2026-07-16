@@ -4,6 +4,8 @@ metadata:
   name: minecraft-router-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: mc-router
     repoURL: https://itzg.github.io/minecraft-server-charts/

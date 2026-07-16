@@ -4,6 +4,8 @@ metadata:
   name: intel-device-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: intel-device-plugins-operator
     repoURL: https://intel.github.io/helm-charts
@@ -28,6 +30,8 @@ metadata:
   name: intel-gpu-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: intel-device-plugins-gpu
     repoURL: https://intel.github.io/helm-charts

@@ -4,6 +4,8 @@ metadata:
   name: traefik-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: traefik
     repoURL: https://traefik.github.io/charts

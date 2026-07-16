@@ -6,6 +6,8 @@ metadata:
   name: argocd-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm

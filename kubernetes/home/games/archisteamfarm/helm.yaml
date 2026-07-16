@@ -9,6 +9,8 @@ metadata:
   name: archisteamfarm-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: archisteamfarm
     repoURL: oci://ghcr.io/juniorjpdj/charts

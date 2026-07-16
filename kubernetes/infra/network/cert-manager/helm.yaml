@@ -4,6 +4,8 @@ metadata:
   name: cert-manager-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: cert-manager
     repoURL: oci://quay.io/jetstack/charts

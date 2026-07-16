@@ -4,6 +4,8 @@ metadata:
   name: authelia
   namespace: argocd
 spec:
+  project: default
+
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd

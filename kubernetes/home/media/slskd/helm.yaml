@@ -4,6 +4,8 @@ metadata:
   name: slskd-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: slskd
     repoURL: oci://ghcr.io/alexmorbo/helm-charts

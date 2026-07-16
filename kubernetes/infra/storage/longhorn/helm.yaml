@@ -4,6 +4,8 @@ metadata:
   name: longhorn-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: longhorn
     repoURL: https://charts.longhorn.io

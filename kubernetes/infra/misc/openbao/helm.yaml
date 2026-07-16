@@ -4,6 +4,8 @@ metadata:
   name: openbao-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: openbao
     repoURL: https://openbao.github.io/openbao-helm

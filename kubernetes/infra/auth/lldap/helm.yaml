@@ -9,6 +9,8 @@ metadata:
   name: lldap-helm
   namespace: argocd
 spec:
+  project: default
+
   source:
     chart: lldap
     repoURL: https://djjudas21.github.io/charts/
