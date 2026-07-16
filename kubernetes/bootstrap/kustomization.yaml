@@ -13,3 +13,11 @@ patches:
         value: argocd
     target:
       kind: ClusterRoleBinding
+  - patch: |-
+      - op: add
+        path: /data/kustomize.buildOptions
+        value: --load-restrictor LoadRestrictionsNone
+    target:
+      kind: ConfigMap
+      name: argocd-cm
+      namespace: argocd

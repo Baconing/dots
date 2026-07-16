@@ -23,6 +23,10 @@ spec:
 
           addPrometheusAnnotations: true
 
+        configs:
+          cm:
+            kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
+
         redis-ha:
           enabled: true
         
