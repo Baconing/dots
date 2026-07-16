@@ -6,7 +6,7 @@ metadata:
 spec:
   source:
     repoURL: https://github.com/baconing/dots.git
-    targetRevision: master
+    targetRevision: argocd
     path: kubernetes/home/printer
 
   destination:
@@ -17,7 +17,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
     automated:
-      prune: true
+      prune: false
       selfHeal: true
 
   plugin: {}
