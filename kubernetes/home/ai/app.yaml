@@ -12,7 +12,7 @@ spec:
     path: kubernetes/home/ai
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: ai
 
   syncPolicy:

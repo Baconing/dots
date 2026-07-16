@@ -17,7 +17,7 @@ spec:
           tag: v0.18.3
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: node-feature-discovery
 
   syncPolicy:

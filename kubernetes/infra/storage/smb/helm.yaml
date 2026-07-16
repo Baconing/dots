@@ -12,7 +12,7 @@ spec:
     targetRevision: 1.20.3
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: smb
 
   syncPolicy:

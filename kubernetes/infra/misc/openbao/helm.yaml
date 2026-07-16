@@ -67,7 +67,7 @@ spec:
             enabled: true
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: openbao
 
   syncPolicy:

@@ -345,7 +345,7 @@ spec:
                   authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: auth
 
   syncPolicy:

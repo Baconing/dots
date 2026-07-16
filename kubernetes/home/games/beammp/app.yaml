@@ -12,7 +12,7 @@ spec:
     path: kubernetes/home/games/beammp
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: beammp
 
   syncPolicy:

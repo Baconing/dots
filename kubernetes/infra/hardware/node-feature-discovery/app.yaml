@@ -12,7 +12,7 @@ spec:
     path: kubernetes/infra/hardware/node-feature-discovery
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: node-feature-discovery
 
   syncPolicy:

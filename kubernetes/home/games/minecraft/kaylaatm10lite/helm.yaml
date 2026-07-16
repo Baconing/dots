@@ -75,7 +75,7 @@ spec:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: minecraft
 
   syncPolicy:

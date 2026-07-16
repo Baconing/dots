@@ -81,7 +81,7 @@ spec:
         #             key: storage.postgres.password
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: auth
 
   syncPolicy:

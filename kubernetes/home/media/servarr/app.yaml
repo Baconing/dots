@@ -12,7 +12,7 @@ spec:
     path: kubernetes/home/media/servarr
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: media
 
   syncPolicy:

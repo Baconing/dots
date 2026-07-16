@@ -12,7 +12,7 @@ spec:
     path: kubernetes/infra/network/external-dns
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: external-dns
 
   syncPolicy:

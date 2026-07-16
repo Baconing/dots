@@ -46,7 +46,7 @@ spec:
             external-dns.alpha.kubernetes.io/target: direct.saturn.ci
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: longhorn-system
 
   syncPolicy:

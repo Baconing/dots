@@ -12,7 +12,7 @@ spec:
     path: kubernetes/home/media/cross-seed
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: media
 
   syncPolicy:

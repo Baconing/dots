@@ -34,7 +34,7 @@ spec:
                 key: email
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: external-dns
 
   syncPolicy:

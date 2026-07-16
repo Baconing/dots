@@ -46,7 +46,7 @@ spec:
               after: 336h # 2 weeks
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: minecraft
 
   syncPolicy:

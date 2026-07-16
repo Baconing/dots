@@ -12,7 +12,7 @@ spec:
     targetRevision: 0.36.0
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: intel
 
   syncPolicy:
@@ -44,7 +44,7 @@ spec:
         nodeFeatureRule: true
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: intel
 
   syncPolicy:

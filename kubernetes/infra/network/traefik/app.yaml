@@ -12,7 +12,7 @@ spec:
     path: kubernetes/infra/network/traefik
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: traefik
 
   syncPolicy:

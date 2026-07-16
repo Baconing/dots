@@ -12,7 +12,7 @@ spec:
     path: kubernetes/infra/network/cloudflare
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: cloudflare
 
   syncPolicy:

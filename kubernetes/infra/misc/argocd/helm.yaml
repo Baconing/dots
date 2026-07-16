@@ -89,7 +89,7 @@ spec:
           replicas: 2
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: argocd
 
   syncPolicy:

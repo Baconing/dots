@@ -89,7 +89,7 @@ spec:
               hosts: ["paperless.saturn.ci"]
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: paperless
 
   syncPolicy:

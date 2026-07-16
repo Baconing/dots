@@ -12,7 +12,7 @@ spec:
     path: kubernetes/infra/storage/longhorn
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: longhorn-system
 
   syncPolicy:

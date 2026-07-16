@@ -165,7 +165,7 @@ spec:
             #     secretName: thanos.saturn.ci
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: cert-manager
 
   syncPolicy:

@@ -49,7 +49,7 @@ spec:
                 - traefik-forwardauth-authelia@kubernetescrd
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: traefik
 
   syncPolicy:

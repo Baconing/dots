@@ -81,7 +81,7 @@ spec:
           enabled: false
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: database
 
   syncPolicy:

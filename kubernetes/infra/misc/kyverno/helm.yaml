@@ -25,7 +25,7 @@ spec:
           replicas: 3
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: kyverno
 
   syncPolicy:

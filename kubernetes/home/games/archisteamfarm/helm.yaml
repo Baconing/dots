@@ -54,7 +54,7 @@ spec:
                   - *host
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: archisteamfarm
 
   syncPolicy:

@@ -12,7 +12,7 @@ spec:
     path: kubernetes/infra/hardware/intel
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: intel
 
   syncPolicy:

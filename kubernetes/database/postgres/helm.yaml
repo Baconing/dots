@@ -12,7 +12,7 @@ spec:
     targetRevision: 0.29.0
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: cnpg-system
 
   syncPolicy:

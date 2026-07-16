@@ -12,7 +12,7 @@ spec:
     path: kubernetes/home/printer
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: printer
 
   syncPolicy:

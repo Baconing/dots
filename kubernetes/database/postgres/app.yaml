@@ -12,7 +12,7 @@ spec:
     path: kubernetes/database/postgres
 
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: database
 
   syncPolicy:
