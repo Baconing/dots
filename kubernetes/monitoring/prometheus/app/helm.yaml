@@ -11,6 +11,7 @@ spec:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 87.16.1
     helm:
+      releaseName: prometheus-operator
       valuesObject:
         alertmanager:
           enabled: true
@@ -166,7 +167,7 @@ spec:
 
   destination:
     name: in-cluster
-    namespace: cert-manager
+    namespace: monitoring
 
   syncPolicy:
     syncOptions:

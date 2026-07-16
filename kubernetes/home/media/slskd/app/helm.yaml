@@ -11,6 +11,7 @@ spec:
     repoURL: oci://ghcr.io/alexmorbo/helm-charts
     targetRevision: 0.3.0
     helm:
+      releaseName: slskd
       valuesObject:
         image:
           registry: ghcr.io

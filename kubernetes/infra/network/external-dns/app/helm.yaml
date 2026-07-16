@@ -11,6 +11,7 @@ spec:
     repoURL: https://kubernetes-sigs.github.io/external-dns/
     targetRevision: 1.21.1
     helm:
+      releaseName: external-dns
       valuesObject:
         sources:
           - ingress

@@ -10,6 +10,8 @@ spec:
     chart: metallb
     repoURL: https://metallb.github.io/metallb
     targetRevision: 0.16.1
+    helm:
+      releaseName: metallb
 
   destination:
     name: in-cluster

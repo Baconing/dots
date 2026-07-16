@@ -11,6 +11,7 @@ spec:
     repoURL: https://charts.gabe565.com
     targetRevision: 0.24.1
     helm:
+      releaseName: paperless-ngx
       valuesObject:
         image:
           repository: ghcr.io/paperless-ngx/paperless-ngx

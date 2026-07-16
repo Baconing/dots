@@ -19,6 +19,7 @@ spec:
     repoURL: https://helm.runix.net/
     targetRevision: 1.65.0
     helm:
+      releaseName: pgadmin4
       valuesObject:
         image:
           registry: docker.io

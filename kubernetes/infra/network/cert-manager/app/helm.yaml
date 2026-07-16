@@ -11,6 +11,7 @@ spec:
     repoURL: oci://quay.io/jetstack/charts
     targetRevision: v1.21.0
     helm:
+      releaseName: cert-manager
       valuesObject:
         crds:
           enabled: true

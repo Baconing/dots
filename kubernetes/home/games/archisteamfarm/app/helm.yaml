@@ -16,6 +16,7 @@ spec:
     repoURL: oci://ghcr.io/juniorjpdj/charts
     targetRevision: 0.1.125
     helm:
+      releaseName: archisteamfarm
       valuesObject:
         image:
           repository: ghcr.io/justarchinet/archisteamfarm

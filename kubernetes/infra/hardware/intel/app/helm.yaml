@@ -10,6 +10,8 @@ spec:
     chart: intel-device-plugins-operator
     repoURL: https://intel.github.io/helm-charts
     targetRevision: 0.36.0
+    helm:
+      releaseName: intel-device
 
   destination:
     name: in-cluster
@@ -23,8 +25,6 @@ spec:
     automated:
       prune: false
       selfHeal: true
-
-  
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -39,6 +39,7 @@ spec:
     repoURL: https://intel.github.io/helm-charts
     targetRevision: 0.36.0
     helm:
+      releaseName: intel-gpu
       valuesObject:
         sharedDevNum: 16
         nodeSelector:

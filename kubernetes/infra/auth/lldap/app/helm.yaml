@@ -16,6 +16,7 @@ spec:
     repoURL: https://djjudas21.github.io/charts/
     targetRevision: 0.6.4
     helm:
+      releaseName: lldap
       valuesObject:
         image:
           repository: lldap/lldap

@@ -11,6 +11,7 @@ spec:
     repoURL: https://kubernetes-sigs.github.io/node-feature-discovery/charts
     targetRevision: 0.18.3
     helm:
+      releaseName: node-feature-discovery
       valuesObject:
         image:
           repository: gcr.io/k8s-staging-nfd/node-feature-discovery

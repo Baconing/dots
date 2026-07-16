@@ -11,6 +11,7 @@ spec:
     repoURL: http://jameswynn.github.io/helm-charts
     targetRevision: 2.1.0
     helm:
+      releaseName: homepage
       valuesObject:
         image:
           repository: ghcr.io/gethomepage/homepage

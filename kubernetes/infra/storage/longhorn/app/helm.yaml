@@ -11,6 +11,7 @@ spec:
     repoURL: https://charts.longhorn.io
     targetRevision: 1.12.0
     helm:
+      releaseName: longhorn
       valuesObject:
         persistence:
           reclaimPolicy: Retain

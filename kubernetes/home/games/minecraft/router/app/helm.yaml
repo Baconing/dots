@@ -11,6 +11,7 @@ spec:
     repoURL: https://itzg.github.io/minecraft-server-charts/
     targetRevision: 1.5.0
     helm:
+      releaseName: router
       valuesObject:
         image:
           repository: itzg/mc-router

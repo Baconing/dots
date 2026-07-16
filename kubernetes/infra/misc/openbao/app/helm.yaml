@@ -11,6 +11,7 @@ spec:
     repoURL: https://openbao.github.io/openbao-helm
     targetRevision: 0.28.5
     helm:
+      releaseName: openbao
       valuesObject:
         server:
           ingress:
