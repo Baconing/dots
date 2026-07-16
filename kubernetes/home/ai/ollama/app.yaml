@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/home/ai/ollama
+    path: kubernetes/home/ai/ollama/app
 
   destination:
     name: in-cluster

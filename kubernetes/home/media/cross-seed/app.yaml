@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/home/media/cross-seed
+    path: kubernetes/home/media/cross-seed/app
 
   destination:
     name: in-cluster

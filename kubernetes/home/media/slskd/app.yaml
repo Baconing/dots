@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/home/media/slskd
+    path: kubernetes/home/media/slskd/app
 
   destination:
     name: in-cluster

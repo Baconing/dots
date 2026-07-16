@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/home/games/beammp
+    path: kubernetes/home/games/beammp/app
 
   destination:
     name: in-cluster

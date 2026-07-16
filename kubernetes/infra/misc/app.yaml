@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/infra/misc
+    path: kubernetes/infra/misc/apps
 
   destination:
     name: in-cluster

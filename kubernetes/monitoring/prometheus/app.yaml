@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/monitoring/prometheus
+    path: kubernetes/monitoring/prometheus/app
 
   destination:
     name: in-cluster

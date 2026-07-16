@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/infra/network/traefik/middleware
+    path: kubernetes/infra/network/traefik/middleware/app
 
   destination:
     name: in-cluster

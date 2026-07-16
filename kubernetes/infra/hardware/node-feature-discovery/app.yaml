@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/infra/hardware/node-feature-discovery
+    path: kubernetes/infra/hardware/node-feature-discovery/app
 
   destination:
     name: in-cluster

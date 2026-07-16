@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/home/paperless
+    path: kubernetes/home/paperless/app
 
   destination:
     name: in-cluster

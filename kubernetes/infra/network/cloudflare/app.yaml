@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/infra/network/cloudflare
+    path: kubernetes/infra/network/cloudflare/app
 
   destination:
     name: in-cluster

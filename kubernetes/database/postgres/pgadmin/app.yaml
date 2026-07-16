@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: argocd
-    path: kubernetes/database/postgres/pgadmin
+    path: kubernetes/database/postgres/pgadmin/app
 
   destination:
     name: in-cluster
