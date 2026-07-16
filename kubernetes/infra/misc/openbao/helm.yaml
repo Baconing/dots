@@ -79,4 +79,4 @@ spec:
       prune: false
       selfHeal: true
 
-  plugin: {}
+  
