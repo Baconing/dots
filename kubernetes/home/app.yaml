@@ -10,8 +10,8 @@ spec:
     path: kubernetes/home
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: default
 
   syncPolicy:
     automated:

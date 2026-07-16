@@ -1,48 +1,56 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: router
-  namespace: minecraft
+  name: minecraft-router-helm
+  namespace: argocd
 spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: mc-router
-      version: 1.5.0
-      sourceRef:
-        kind: HelmRepository
-        name: itzg
-        namespace: flux-system
-  values:
-    image:
-      repository: itzg/mc-router
-      tag: 1.44.0
+  source:
+    chart: mc-router
+    repoURL: https://itzg.github.io/minecraft-server-charts/
+    targetRevision: 1.5.0
+    helm:
+      valuesObject:
+        image:
+          repository: itzg/mc-router
+          tag: 1.44.0
 
-    services:
-      minecraft:
-        type: LoadBalancer
-        loadBalancerIP: 10.10.254.30
-        port: 25565
+        services:
+          minecraft:
+            type: LoadBalancer
+            loadBalancerIP: 10.10.254.30
+            port: 25565
+        
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 250m
+            memory: 128Mi
+
+        autoscaling:
+          enabled: true
+          minReplicas: 1
+          maxReplicas: 5
+          targetCPUUtilizationPercentage: 80
+          targetMemoryUtilizationPercentage: 80
+
+        minecraftRouter:
+          autoScale:
+            up:
+              enabled: true
+            down:
+              enabled: true
+              after: 336h # 2 weeks
+
+  destination:
+    server: in-cluster
+    namespace: minecraft
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
     
-    resources:
-      requests:
-        cpu: 100m
-        memory: 64Mi
-      limits:
-        cpu: 250m
-        memory: 128Mi
-
-    autoscaling:
-      enabled: true
-      minReplicas: 1
-      maxReplicas: 5
-      targetCPUUtilizationPercentage: 80
-      targetMemoryUtilizationPercentage: 80
-
-    minecraftRouter:
-      autoScale:
-        up:
-          enabled: true
-        down:
-          enabled: true
-          after: 336h # 2 weeks

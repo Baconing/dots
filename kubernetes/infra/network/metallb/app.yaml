@@ -10,10 +10,12 @@ spec:
     path: kubernetes/infra/network/metallb
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: metallb-system
 
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

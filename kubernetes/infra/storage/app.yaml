@@ -10,10 +10,12 @@ spec:
     path: kubernetes/infra/storage
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: default
 
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

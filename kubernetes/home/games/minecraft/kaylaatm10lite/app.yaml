@@ -10,10 +10,12 @@ spec:
     path: kubernetes/home/games/minecraft/kaylaatm10lite
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: minecraft
 
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

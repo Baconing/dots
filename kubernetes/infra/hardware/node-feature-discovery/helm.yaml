@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: node-feature-discovery-helm
+  namespace: argocd
+spec:
+  source:
+    chart: node-feature-discovery
+    repoURL: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+    targetRevision: 0.18.3
+    helm:
+      valuesObject:
+        image:
+          repository: gcr.io/k8s-staging-nfd/node-feature-discovery
+          tag: v0.18.3
+
+  destination:
+    server: in-cluster
+    namespace: node-feature-discovery
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+    

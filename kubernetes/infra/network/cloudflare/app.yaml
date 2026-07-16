@@ -10,10 +10,12 @@ spec:
     path: kubernetes/infra/network/cloudflare
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: cloudflare
 
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

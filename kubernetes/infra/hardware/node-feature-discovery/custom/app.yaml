@@ -10,10 +10,12 @@ spec:
     path: kubernetes/infra/nfd/custom
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: node-feature-discovery
 
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

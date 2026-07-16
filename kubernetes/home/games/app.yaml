@@ -10,8 +10,8 @@ spec:
     path: kubernetes/home/games
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: default
 
   syncPolicy:
     automated:

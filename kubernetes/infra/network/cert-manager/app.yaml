@@ -10,10 +10,12 @@ spec:
     path: kubernetes/infra/network/cert-manager
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: in-cluster
+    namespace: cert-manager
 
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
