@@ -60,7 +60,7 @@ spec:
             minReplicas: 2
           extraContainers:
             - name: sops
-              image: ghcr.io/baconing/argocd-sops-cmp:1.1.0
+              image: ghcr.io/baconing/argocd-sops-cmp:1.1.1
               securityContext:
                 runAsUser: 999
                 runAsNonRoot: true
