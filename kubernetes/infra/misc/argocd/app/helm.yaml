@@ -85,7 +85,7 @@ spec:
                   mountPath: /tmp
                 - name: sops-age-key
                   mountPath: /keys
-          extraVolumes:
+          volumes:
             - name: sops-plugin
               configMap:
                 name: sops-cmp

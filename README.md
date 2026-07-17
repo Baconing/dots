@@ -120,7 +120,7 @@ After all (or just one) of the nodes have been setup, the next step is bootstrap
 ```
 helm dependency update ./kubernetes/bootstrap
 
-helm template argocd-bootstrap ./kubernetes/bootstrap --namespace argocd | kubectl apply --server-side -f-
+helm template argocd ./kubernetes/bootstrap --namespace argocd | kubectl apply --server-side -f-
 ```
 
 TODO: age secret bootstrap
