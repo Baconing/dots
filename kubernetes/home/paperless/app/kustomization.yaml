@@ -2,4 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - helm.yaml
-  - ../custom/app.yaml
+  - paperless.secret.yaml
+  - storage-smb.yaml

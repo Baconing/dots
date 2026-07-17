@@ -1,5 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - backup.yaml
   - helm.yaml
-  - ../custom/app.yaml
+  - nas.secret.yaml
+  - nix.yaml
+  - ssl.yaml

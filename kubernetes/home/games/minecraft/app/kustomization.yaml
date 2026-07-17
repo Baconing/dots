@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - curseforge.secret.yaml
   - ../kaylaatm10lite/app.yaml
   - ../router/app.yaml
   - ../sweatysummersack/app.yaml
