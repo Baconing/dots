@@ -83,6 +83,9 @@ spec:
         applicationSet:
           replicas: 2
 
+        certificate:
+          enabled: true
+
   destination:
     name: in-cluster
     namespace: argocd
