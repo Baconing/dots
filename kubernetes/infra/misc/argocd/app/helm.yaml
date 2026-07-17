@@ -58,27 +58,27 @@ spec:
           autoscaling:
             enabled: true
             minReplicas: 2
-          # extraContainers:
-          #   - name: sops
-          #     image: ghcr.io/baconing/argocd-sops-cmp:1.1.1
-          #     securityContext:
-          #       runAsUser: 999
-          #       runAsNonRoot: true
-          #     volumeMounts:
-          #       - name: var-files
-          #         mountPath: /var/run/argocd
-          #       - name: plugins
-          #         mountPath: /home/argocd/cmp-server/plugins
-          #       - name: cmp-tmp
-          #         mountPath: /tmp
-          #       - name: sops-age-key
-          #         mountPath: /keys
-          # volumes:
-          #   - name: cmp-tmp
-          #     emptyDir: {}
-          #   - name: sops-age-key
-          #     secret:
-          #       secretName: sops-age-key
+          extraContainers:
+            - name: sops
+              image: ghcr.io/baconing/argocd-sops-cmp:1.2.0
+              securityContext:
+                runAsUser: 999
+                runAsNonRoot: true
+              volumeMounts:
+                - name: var-files
+                  mountPath: /var/run/argocd
+                - name: plugins
+                  mountPath: /home/argocd/cmp-server/plugins
+                - name: cmp-tmp
+                  mountPath: /tmp
+                - name: sops-age-key
+                  mountPath: /keys
+          volumes:
+            - name: cmp-tmp
+              emptyDir: {}
+            - name: sops-age-key
+              secret:
+                secretName: sops-age-key
 
         applicationSet:
           replicas: 2
