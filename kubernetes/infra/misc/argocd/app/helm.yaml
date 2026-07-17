@@ -46,6 +46,7 @@ spec:
             ingressClassName: traefik
             tls: true
             annotations:
+              traefik.ingress.kubernetes.io/router.tls: "true"
               gethomepage.dev/name: ArgoCD
               gethomepage.dev/group: Infrastructure
               gethomepage.dev/icon: argo-cd
