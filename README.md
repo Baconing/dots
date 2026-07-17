@@ -115,15 +115,15 @@ Then, install NixOS on every other node as normal. Additional control plane node
 
 #### 2. ArgoCD Bootstrap
 
-> [!NOTE]
-> The ArgoCD Application runs in high availability mode. If only one node is available, it might fail.
-> This is also true for many other required infrastructure applications (databases, Longhorn).
-
 After all (or just one) of the nodes have been setup, the next step is bootstrapping ArgoCD to start syncing resources in this GitHub repository.
 
 ```
-# kubectl apply --server-side -k kubernetes/bootstrap
+helm dependency update ./kubernetes/bootstrap
+
+helm template argocd-bootstrap ./kubernetes/bootstrap --namespace argocd | kubectl apply --server-side -f-
 ```
+
+TODO: age secret bootstrap
 
 > [!TIP]
 > Run as root on any control plane node to automatically find a valid kubeconfig.

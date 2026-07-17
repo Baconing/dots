@@ -1,0 +1,32 @@
+argo-cd:
+  global:
+    domain: argocd.saturn.ci
+    
+    image:
+      repository: quay.io/argoproj/argocd
+      tag: v3.4.5
+
+    addPrometheusAnnotations: true
+
+  configs:
+    cm:
+      kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
+
+  redis-ha:
+    enabled: true
+
+  controller:
+    replicas: 1
+
+  server:
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+    
+  repoServer:
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+
+  applicationSet:
+    replicas: 2
