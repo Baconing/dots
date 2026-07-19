@@ -68,7 +68,10 @@ spec:
             minReplicas: 2
           extraContainers:
             - name: sops
-              image: ghcr.io/baconing/argocd-sops-cmp:1.2.0
+              image: ghcr.io/baconing/argocd-sops-cmp:2.0.0
+              env:
+                - name: ACS_KUSTOMIZE_OPTIONS
+                  value: --load-restrictor LoadRestrictionsNone
               securityContext:
                 runAsUser: 999
                 runAsNonRoot: true
