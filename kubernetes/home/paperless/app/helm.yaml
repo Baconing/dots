@@ -69,8 +69,7 @@ spec:
           metrics:
             enabled: true
         ingress:
-          main:
-            enabled: true
+          enabled: true
           annotations:
             kubernetes.io/ingress.class: traefik
             gethomepage.dev/enabled: "true"
