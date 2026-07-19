@@ -22,7 +22,7 @@ spec:
               preference:
                 matchExpressions:
                   - key: "feature.node.kubernetes.io/arc-a750"
-                    operator: 
+                    operator: In
                     values:
                       - "true"
       containers:
