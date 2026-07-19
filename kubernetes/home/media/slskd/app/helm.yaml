@@ -8,7 +8,7 @@ spec:
 
   source:
     chart: slskd
-    repoURL: oci://ghcr.io/alexmorbo/helm-charts
+    repoURL: https://ghcr.io/alexmorbo/helm-charts
     targetRevision: 0.3.0
     helm:
       releaseName: slskd
