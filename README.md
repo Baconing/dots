@@ -128,11 +128,11 @@ TODO: age secret bootstrap
 > [!TIP]
 > Run as root on any control plane node to automatically find a valid kubeconfig.
 
-This will apply a temporary installation of ArgoCD and initalize the `cluster` Application.
+This will apply a temporary installation of ArgoCD and initialize the `cluster` Application.
 
-After bootstrap, ArgoCD will automatically install all of the resources and upgrade itself to a Application managed by the repository.
+After bootstrap, ArgoCD will automatically install all of the resources and upgrade itself to an Application managed by the repository.
 
-That is all of the nessacary steps to start using Kubernetes. All that is left is to setup individual applications that don't have static configurations or that haven't been setup with a static configuration.
+That is all of the necessary steps to start using Kubernetes. All that is left is to setup individual applications that don't have static configurations or that haven't been setup with a static configuration.
 Alternatively, start restoring data/configurations from backups.
 
 
