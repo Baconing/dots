@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kaylaatm10lite
+  name: minecraft-kaylaatm10lite
   namespace: argocd
 spec:
   project: default
