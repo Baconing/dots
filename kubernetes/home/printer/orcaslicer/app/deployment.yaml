@@ -10,21 +10,21 @@ spec:
   selector:
     matchLabels:
       app: *appName
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 10
-          preference:
-            matchExpressions:
-              - key: "feature.node.kubernetes.io/arc-a750"
-                operator: 
-                values:
-                  - "true"
   template:
     metadata:
       labels:
         app: *appName
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 10
+              preference:
+                matchExpressions:
+                  - key: "feature.node.kubernetes.io/arc-a750"
+                    operator: 
+                    values:
+                      - "true"
       containers:
         - name: *appName
           image: ghcr.io/linuxserver/orcaslicer:2.4.2
