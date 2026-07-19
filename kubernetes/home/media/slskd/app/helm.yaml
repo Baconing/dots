@@ -16,7 +16,7 @@ spec:
         image:
           registry: ghcr.io
           repository: slskd/slskd
-          tag: 0.25.1
+          tag: 0.26.0
 
         app:
           timezone: "America/Detroit"
