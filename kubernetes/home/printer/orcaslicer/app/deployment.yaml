@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &appName orcaslicer
+  namespace: printer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: *appName
+  template:
+    metadata:
+      labels:
+        app: *appName
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 10
+              preference:
+                matchExpressions:
+                  - key: "feature.node.kubernetes.io/arc-a750"
+                    operator: In
+                    values:
+                      - "true"
+      containers:
+        - name: *appName
+          image: ghcr.io/linuxserver/orcaslicer:2.4.2
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 4
+              memory: 4Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+          env:
+            - name: PIXELFLUX_WAYLAND
+              value: "true"
+          volumeMounts:
+            - mountPath: /config
+              name: data
+            - name: dri
+              mountPath: /dev/dri
+          ports:
+            - containerPort: &httpPort 3000
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: *httpPort
+          readinessProbe:
+            httpGet:
+              path: /
+              port: *httpPort
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: orcaslicer-data
+        - name: dri
+          hostPath:
+            path: /dev/dri

@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pgadmin
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/baconing/dots.git
+    targetRevision: argocd
+    path: kubernetes/database/postgres/pgadmin/app
+
+  destination:
+    name: in-cluster
+    namespace: database
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

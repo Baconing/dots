@@ -1,0 +1,138 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: homepage-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: homepage
+    repoURL: http://jameswynn.github.io/helm-charts
+    targetRevision: 2.1.0
+    helm:
+      releaseName: homepage
+      valuesObject:
+        image:
+          repository: ghcr.io/gethomepage/homepage
+          tag: v1.13.2
+        envFrom:
+          - secretRef:
+              name: homepage-widget
+        enableRbac: true
+        serviceAccount:
+          create: true
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: "traefik"
+            annotations:
+              kubernetes.io/ingress.class: traefik
+              traefik.ingress.kubernetes.io/router.tls: "true"
+              traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+              external-dns.alpha.kubernetes.io/hostname: saturn.ci
+              external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+            hosts:
+              - host: "saturn.ci"
+                paths:
+                  - path: "/"
+                    pathType: Prefix
+            tls:
+              - secretName: saturn.ci
+                hosts:
+                  - saturn.ci
+        config:
+          settings:
+            title: "Saturn"
+            startUrl: https://saturn.ci
+            background: 
+              image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+              blur: sm
+            target: _self
+            headerStyle: boxedWidgets
+            useEqualHeights: true
+            layout:
+              - Media:
+                  style: row
+                  columns: 2
+              - Downloads:
+                  style: row
+                  columns: 2
+              - Servarr:
+                  style: row
+                  columns: 4
+              - Home:
+                  style: row
+                  columns: 4
+              - AI:
+                  style: column
+              - Network:
+                  style: column
+              - Storage:
+                  style: column
+              - Security:
+                  style: column
+              - Database:
+                  style: column
+          services: []
+          bookmarks:
+            - Network:
+                - name: "Speedtest"
+                  url: https://speedtest.net
+                  icon: speedtest
+
+          widgets:
+            - resources:
+                backend: kubernetes
+                expanded: true
+                cpu: true
+                memory: true
+            - search:
+                provider: google
+                target: _blank
+            - kubernetes:
+                cluster:
+                  show: true
+                  cpu: true
+                  memory: true
+                  showLabel: true
+                  label: "cluster"
+                nodes:
+                  show: true
+                  cpu: true
+                  memory: true
+                  showLabel: true
+            - longhorn:
+                expanded: true
+                total: true
+                labels: true
+                nodes: true
+          kubernetes:
+            mode: cluster
+            ingress: true
+            traefik: true
+        env:
+          - name: HOMEPAGE_ALLOWED_HOSTS
+            value: "saturn.ci"
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 10m
+          limits:
+            memory: 512Mi
+            cpu: 500m
+
+  destination:
+    name: in-cluster
+    namespace: homepage
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

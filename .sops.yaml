@@ -1,28 +1,9 @@
-# Make a user key
-# mkdir -p ~/.config/sops/age
-# age-keygen -o ~/.config/sops/age/keys.txt
-
-# Display the user public key:
-# age-keygen -y ~/.config/sops/age/keys.txt
-
-# Make a host key:
-# sudo mkdir -p /var/lib/private/sops/age
-# sudo age-keygen -o /var/lib/private/sops/age/keys.txt
-
-# Display the host public key:
-# sudo age-keygen -y /var/lib/private/sops/age/keys.txt
-
-# Add secrets
-# sops secrets/somesecret.yaml
-
 # Rekey everything when changing keys.
-# find secrets -type f -print0 | while IFS= read -r -d '' file; do
-#   sops updatekeys -y $file 
-# done
+# find . -name '*secret*' -exec sops updatekeys -y {} \;
 
 keys: &keys
   - &user_bacon age1m3lajqjssue8jnuuhphxp3x0lxagksqpsecgnuxuy46wtag28c5spm5jyr
-  - &fluxcd age17v6mkt3sh9h5j90pgaehrhu0ntdvksh8dw0lc69y3hp508lxxycsd5dynl
+  - &argocd age17v6mkt3sh9h5j90pgaehrhu0ntdvksh8dw0lc69y3hp508lxxycsd5dynl
   - &host_skoll age1fyrjkzn6w84yya2rkg2z2x5lss8q622faeen2wc4ckjnmecl230qh8sfey
   - &host_callisto age1uj6zl377wwvgysd0hn8n9h9dcvkuvxcu9948jsr5hxvjwcaguu5s8uxk92
   - &host_mneme age1qyt44szfs9tx7vdqkhlct5kdkl0jvxdryuvk3azhsml8g4zzp5asq7rc53
@@ -37,7 +18,7 @@ creation_rules:
     key_groups:
     - age:
       - *user_bacon
-      - *fluxcd
+      - *argocd
   - path_regex: ^(nixos|home|modules|lib)[/\\].*\.secret\..+$
     key_groups:
     - age:

@@ -1,0 +1,361 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: authelia-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: authelia
+    repoURL: https://charts.authelia.com
+    targetRevision: 0.11.6
+    helm:
+      releaseName: authelia
+      valuesObject:
+        image:
+          registry: ghcr.io
+          repository: authelia/authelia
+          tag: 4.39.20
+        ingress:
+          enabled: true
+          className: "traefik"
+          annotations:
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: Authelia
+            gethomepage.dev/group: Security
+            gethomepage.dev/icon: authelia
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            external-dns.alpha.kubernetes.io/enabled: "true"
+            external-dns.alpha.kubernetes.io/hostname: sso.saturn.ci
+            external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+          tls:
+            enabled: true
+            secret: "sso.saturn.ci"
+          # Ingress hostname is determined by configMap.cookies.domain and configMap.session.cookies.subdomain
+
+        pod:
+          initContainers:
+            - name: init-db
+              image: ghcr.io/onedr0p/postgres-init:17.4
+              env:
+                - name: INIT_POSTGRES_HOST
+                  value: postgres-rw.database.svc.cluster.local
+                - name: INIT_POSTGRES_DBNAME
+                  value: authelia
+                - name: INIT_POSTGRES_SUPER_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-superuser
+                      key: password
+                - name: INIT_POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: authelia
+                      key: storage.postgres.username
+                - name: INIT_POSTGRES_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: authelia
+                      key: storage.postgres.password
+
+        redis:
+          image:
+            registry: ""
+            repository: bitnami/redis
+            tag: latest
+
+        secret:
+          disabled: false
+          mountPath: "/secrets"
+          existingSecret: authelia
+          additionalSecrets:
+            authelia:
+              path: jwks
+              items:
+                - key: oidc.jwk.RS256.pem
+                  path: oidc.jwk.RS256.pem
+            odic-pgadmin:
+              path: odic
+              items:
+                - key: odic.client_secret
+                  path: pgadmin.client_secret
+
+        configMap:
+          disabled: false
+
+          telemetry:
+            metrics:
+              enabled: true
+              port: 9959
+              serviceMonitor:
+                enabled: false
+          
+          default_2fa_method: "totp"
+
+          theme: dark
+
+          totp:
+            disable: false
+            issuer: saturn.ci
+
+          webauthn:
+            disable: false
+            display_name: saturn.ci
+            attestation_conveyance_preference: indirect
+
+          duo_api:
+            enabled: false
+
+          definitions:
+            network:
+              private:
+                - 10.0.0.0/8
+
+          identity_validation:
+            reset_password:
+              secret:
+                disabled: true # todo
+
+          authentication_backend:
+            password_reset:
+              disable: true # todo
+            password_change:
+              disable: true # todo
+            
+            ldap:
+              enabled: true
+              address: ldap://lldap-ldap:3890
+              implementation: lldap
+              base_dn: DC=saturn,DC=ci
+              user: CN=authelia,OU=people,DC=saturn,DC=ci
+              password:
+                path: authentication.ldap.password
+          
+          password_policy:
+            zxcvbn:
+              enabled: true
+              min_score: 2
+
+          access_control:
+            default_policy: deny
+            rules:
+              # Bypass Always: Secured & Authentication Related
+              - domain: 
+                  - "sso.saturn.ci"
+                  - "ldap.saturn.ci"
+                  - "vault.saturn.ci"
+                policy: bypass
+
+              # Bypass Always: Webfinger
+              - domain_regex:
+                  - 'saturn.ci$'
+                policy: bypass
+                resources:
+                  - "^/.well-known(/.*)?$"
+
+              # Bypass Always: Zipline Uploads
+              - domain: "file.baconi.ng"
+                policy: bypass
+                resources:
+                  - "^/u(/.*)?$"
+                  - "^/raw(/.*)?$"
+                  - "^/view(/.*)?$"
+
+              # Two Factor: Vaultwarden Admin Dashboard
+              - domain: "vault.saturn.ci"
+                resources:
+                  - "^/admin(/.*)?$"
+                policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                subject:
+                  - "group:administrators"
+
+              # Two Factor: Secured Resources
+              - domain:
+                  # infra
+                  - "openbao.saturn.ci" # I haven't set it up and I'll need to expose its API routes (maybe not).
+                  - "traefik.saturn.ci"
+                  - "longhorn.saturn.ci"
+                  - "pgadmin.saturn.ci"
+
+                  # external services
+                  - "router.saturn.ci"
+                  - "nas.saturn.ci"
+                  - "hass.saturn.ci"
+
+                  # games
+                  - "asf.saturn.ci"
+
+                  # home
+                  - "printer.saturn.ci"
+                  - "spoolman.saturn.ci"
+                  - "orcaslicer.saturn.ci"
+
+                  # media
+                  - "autobrr.saturn.ci"
+                  - "bazarr.saturn.ci"
+                  - "cleanuparr.saturn.ci"
+                  - "lidarr.saturn.ci"
+                  - "prowlarr.saturn.ci"
+                  - "radarr.saturn.ci"
+                  - "sonarr.saturn.ci"
+                  - "torrent.saturn.ci"
+                  - "slskd.saturn.ci"
+
+                  # monitoring
+                  - "prometheus.saturn.ci"
+                  - "grafana.saturn.ci"
+                  - "alerts.saturn.ci"
+
+                  # other
+                  - "paperless.saturn.ci" # I haven't set it up fully and it can contain sensitive information.
+                  - "syncthing.saturn.ci"
+                policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources after 
+                subject:
+                  - "group:administrators"
+
+              # Two Factor: Zipline Admin Dashboard
+              - domain: "file.baconi.ng"
+                resources:
+                  - "^/dashboard/admin(/.*)?$"
+                policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                subject:
+                  - "group:administrators"
+
+              # Two Factor: Open-WebUI Admin Dashboard
+              - domain: "open-webui.saturn.ci"
+                resources:
+                  -  "^/admin(/.*)?$"
+                policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                subject:
+                  - "group:administrators"
+
+              # Two Factor: Seerr Admin Dashboard
+              - domain: "seerr.saturn.ci"
+                resources:
+                  - "^/requests(/.*)?$"
+                  - "^/blocklist(/.*)?$"
+                  - "^/issues(/.*)?$"
+                  - "^/users(/.*)?$"
+                  - "^/settings(/.*)?$"
+                policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                subject:
+                  - "group:administrators"
+                
+              # Two Factor: Jellyfin Admin Dashboard
+              - domain: "jellyfin.saturn.ci"
+                resources:
+                  - "^/web/#/dashboard(/.*)?$"
+                  - "^/web/#/configurationpage(/.*)?$"
+                  - "^/web/#/metadata(/.*)?$"
+                policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                subject:
+                  - "group:administrators"
+
+              # One Factor: Semi-Public Resources
+              - domain:
+                  # ai
+                  - "open-webui.saturn.ci"
+
+                  - "saturn.ci" # Hajimari
+                policy: one_factor
+
+              # One Factor: Zipline User Dashboard
+              - domain: "file.baconi.ng"
+                policy: one_factor
+                resources:
+                  - "^/dashboard(/.*)?$"
+
+              # Bypass: Fully Public Resources
+              - domain:
+                  # media
+                  - "seerr.saturn.ci"
+                  - "jellyfin.saturn.ci"
+                  - "navidrome.saturn.ci"
+
+                  # other
+                  - "file.baconi.ng"
+                policy: bypass
+          
+          session:
+            encryption_key:
+              path: "session.encryption_key"
+
+            same_site: lax
+            cookies:
+              - domain: saturn.ci
+                subdomain: sso
+                authelia_url: https://sso.saturn.ci
+            redis:
+              deploy: true
+              enabled: true
+              host: "authelia-redis-master"
+              password:
+                disabled: true
+          
+          regulation:
+            max_retries: 5
+            find_time: 2m
+            ban_time: 10m
+
+          storage:   
+            encryption_key:
+              path: "storage.encryption_key"
+
+            postgres:
+              enabled: true
+              address: tcp://postgres-rw.database.svc.cluster.local:5432
+              database: authelia
+              schema: public
+              username: authelia
+              password:
+                path: "storage.postgres.password"
+
+          notifier:
+            disable_startup_check: true # todo: after smtp is enabled
+
+            smtp:
+              enabled: true # todo
+              password:
+                disabled: true
+            filesystem:
+              enabled: false
+
+          identity_providers:
+            oidc:
+              enabled: true
+
+              enable_client_debug_messages: false
+
+              hmac_secret:
+                path: "identity_providers.oidc.hmac_secret"
+
+              jwks:
+                - key_id: RS256
+                  algorithm: RS256
+                  use: sig
+                  key:
+                    path: /secrets/jwks/odic.jwk.RS256.pem
+              
+              clients:
+                - client_id: pgadmin
+                  client_name: PGAdmin
+                  client_secret:
+                    path: /secrets/odic/pgadmin.client_secret
+                  public: false
+                  authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+
+  destination:
+    name: in-cluster
+    namespace: auth
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

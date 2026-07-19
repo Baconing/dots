@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: longhorn
+    repoURL: https://charts.longhorn.io
+    targetRevision: 1.10.1
+    helm:
+      releaseName: longhorn
+      valuesObject:
+        persistence:
+          reclaimPolicy: Retain
+          defaultDataLocality: best-effort
+        
+        defaultSettings:
+          backupTarget: "cifs://10.10.2.2/kubernetes-backup/longhorn"
+          backupTargetCredentialSecret: longhorn-nas
+          replicaAutoBalance: best-effort
+          defaultDataLocality: best-effort
+          
+        metrics:
+          serviceMonitor:
+            enabled: true
+            interval: 30s
+            scrapeTimeout: 10s
+
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          tls: true
+          tlsSecret: longhorn.saturn.ci
+          secureBackends: true
+          annotations:
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: Longhorn
+            gethomepage.dev/group: Storage
+            gethomepage.dev/icon: longhorn
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            external-dns.alpha.kubernetes.io/enabled: "true"
+            external-dns.alpha.kubernetes.io/hostname: longhorn.saturn.ci
+            external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+
+  destination:
+    name: in-cluster
+    namespace: longhorn-system
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: false
+      selfHeal: true
+
+  

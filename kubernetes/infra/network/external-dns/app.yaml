@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/baconing/dots.git
+    targetRevision: argocd
+    path: kubernetes/infra/network/external-dns/app
+
+  destination:
+    name: in-cluster
+    namespace: external-dns
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

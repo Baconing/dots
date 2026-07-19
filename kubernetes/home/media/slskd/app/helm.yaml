@@ -1,0 +1,186 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: slskd-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: slskd
+    repoURL: oci://ghcr.io/alexmorbo/helm-charts/slskd
+    targetRevision: 0.3.0
+    helm:
+      releaseName: slskd
+      valuesObject:
+        image:
+          registry: ghcr.io
+          repository: slskd/slskd
+          tag: 0.25.1
+
+        app:
+          timezone: "America/Detroit"
+          existingSecret: slskd-soulseek
+
+          config: 
+            directories:
+              incomplete: /media/downloads/soulseek/incomplete
+              downloads: /media/downloads/soulseek/complete
+            
+            shares:
+              directories:
+                - /media/music
+              filters:
+                - album.nfo$
+                - artist.nfo$
+                - \.ini$
+                - Thumbs.db$
+                - \.DS_Store$
+                - "@eaDir"
+              cache:
+                storage_mode: memory
+                workers: 16
+                retention: ~
+            
+            transfers:
+              upload:
+                slots: 20
+                speed_limit: 1000 # KiB/s
+              download:
+                slots: 500
+                speed_limit: 1000
+              limits:
+                queued:
+                  files: 500
+                  megabytes: 5000
+                daily:
+                  files: 1000
+                  megabytes: 10000
+                  failures: 200
+                weekly:
+                  files: 5000
+                  megabytes: 50000
+                  failures: 1000
+              groups:
+                default:
+                  upload:
+                    priority: 500
+                    strategy: roundrobin
+                    slots: 10
+                  limits:
+                    queued:
+                      files: 150
+                      megabytes: 1500
+                    daily: ~ # no daily limits (weekly still apply)
+                    weekly:
+                      files: 1500
+                      megabytes: 15000
+                      failures: 150
+                leechers:
+                  thresholds:
+                    files: 1
+                    directories: 1
+                  upload:
+                    priority: 999
+                    strategy: roundrobin
+                    slots: 1
+                    speed_limit: 100
+                  limits:
+                    queued:
+                      files: 15
+                      megabytes: 150
+                    daily:
+                      files: 30
+                      megabytes: 300
+                      failures: 10
+                    weekly:
+                      files: 150
+                      megabytes: 1500
+                      failures: 30
+
+            soulseek:
+              description: |
+                https://baconi.ng
+                iam@baconi.ng
+
+        persistence:
+          enabled: true
+          storageClass: longhorn
+          size: 1Gi
+
+        volumes:
+          - name: media
+            persistentVolumeClaim:
+              claimName: media
+        
+        volumeMounts:
+          - name: media
+            mountPath: /media
+
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            cpu: 200m
+            memory: 640Mi
+
+        extraEnvFrom:
+          - secretRef:
+              name: slskd-env
+
+        p2pService:
+          type: LoadBalancer
+          annotations:
+            metallb.io/loadBalancerIPs: 10.10.254.3
+
+        monitoring:
+          enabled: true
+          type: ServiceMonitor
+
+        # 15 minute startup probe to allow for potential cache rebuilds
+        startupProbe:
+          periodSeconds: 10
+          failureThreshold: 90
+
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          annotations:
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: slskd
+            gethomepage.dev/group: Downloads
+            gethomepage.dev/icon: slskd
+            gethomepage.dev/weight: "10"
+            gethomepage.dev/widget.type: slskd
+            gethomepage.dev/widget.url: http://slskd.media.svc.cluster.local:5030
+            gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SLSKD_API_KEY}}"
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            external-dns.alpha.kubernetes.io/enabled: "true"
+            external-dns.alpha.kubernetes.io/hostname: slskd.saturn.ci
+            external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+          hosts:
+            - host: slskd.saturn.ci
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - secretName: slskd.saturn.ci
+              hosts:
+                - slskd.saturn.ci
+
+  destination:
+    name: in-cluster
+    namespace: media
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

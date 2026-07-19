@@ -13,7 +13,7 @@
         "**/*.secret.*",
         ".sops.yaml"
     ],
-    "flux": {
+    "argocd": {
         "managerFilePatterns": [
             "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"
         ]

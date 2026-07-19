@@ -1,0 +1,97 @@
+# TODO:
+
+# valuesFrom:
+#   - kind: Secret
+#     name: postgres-superuser
+#     valuesKey: password
+#     targetPath: serverDefinitions.servers.main.Password
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pgadmin-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: pgadmin4
+    repoURL: https://helm.runix.net/
+    targetRevision: 1.65.0
+    helm:
+      releaseName: pgadmin4
+      valuesObject:
+        image:
+          registry: docker.io
+          repository: dpage/pgadmin4
+          tag: 9.15.0
+
+        serverDefinitions:
+          enabled: true
+          resourceType: Secret
+          servers:
+            main:
+              Name: Main
+              Group: Servers
+              Username: postgres
+              Host: postgres-rw
+              Port: 5432
+              MaintenanceDB: postgres
+              SSLMode: prefer
+        
+        envVarsFromSecrets: 
+          - pgadmin
+        
+        ingress:
+          enabled: true
+          ingressClassName: "traefik"
+          annotations:
+            kubernetes.io/ingress.class: traefik
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            external-dns.alpha.kubernetes.io/enabled: "true"
+            external-dns.alpha.kubernetes.io/hostname: pgadmin.saturn.ci
+            external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: pgAdmin
+            gethomepage.dev/group: Database
+            gethomepage.dev/icon: pgadmin
+          hosts:
+            - host: "pgadmin.saturn.ci"
+              paths:
+                - path: "/"
+                  pathType: Prefix
+          tls:
+            - secretName: "pgadmin.saturn.ci"
+              hosts:
+                - "pgadmin.saturn.ci"
+        
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        
+        autoscaling:
+          enabled: true
+          minReplicas: 1
+          maxReplicas: 3
+
+        persistentVolume:
+          enabled: false
+
+  destination:
+    name: in-cluster
+    namespace: database
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

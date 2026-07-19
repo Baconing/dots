@@ -1,0 +1,83 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openbao-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: openbao
+    repoURL: https://openbao.github.io/openbao-helm
+    targetRevision: 0.28.5
+    helm:
+      releaseName: openbao
+      valuesObject:
+        server:
+          ingress:
+            ingressClassName: traefik
+            enabled: true
+            hosts:
+              - host: openbao.saturn.ci
+                paths: 
+                  - "/"
+            labels:
+              gethomepage.dev/enabled: "true"
+              gethomepage.dev/name: OpenBao
+              gethomepage.dev/group: Security
+              gethomepage.dev/icon: openbao
+              traefik.ingress.kubernetes.io/router.tls: "true"
+              traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+              external-dns.alpha.kubernetes.io/enabled: "true"
+              external-dns.alpha.kubernetes.io/hostname: openbao.saturn.ci
+              external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+            tls:
+              - secretName: openbao.saturn.ci
+                hosts:
+                  - openbao.saturn.ci
+
+          standalone:
+            config: |
+              ui = true
+
+              listener "tcp" {
+                tls_disable = 1
+                address = "[::]:8200"
+                cluster_address = "[::]:8201"
+              }
+              storage "file" {
+                path = "/openbao/data"
+              }
+
+          dataStorage:
+            enabled: true
+            size: 16Gi
+            storageClass: longhorn
+            labels:
+              recurring-job.longhorn.io/source: enabled
+              recurring-job-group.longhorn.io/backup: enabled
+
+          auditStorage:
+            enabled: true
+            size: 4Gi
+            storageClass: longhorn
+
+          readinessProbe:
+            enabled: true
+          livenessProbe:
+            enabled: true
+
+  destination:
+    name: in-cluster
+    namespace: openbao
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  
