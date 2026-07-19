@@ -40,6 +40,9 @@ spec:
           autoscaling:
             enabled: true
             minReplicas: 2
+
+          certificate:
+            enabled: true
           
           ingress:
             enabled: true
@@ -83,9 +86,6 @@ spec:
 
         applicationSet:
           replicas: 2
-
-        certificate:
-          enabled: true
 
   destination:
     name: in-cluster
