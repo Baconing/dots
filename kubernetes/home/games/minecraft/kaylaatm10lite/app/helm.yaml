@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minecraft-sweatysummersack-helm
+  name: minecraft-kaylaatm10lite-helm
   namespace: argocd
 spec:
   project: default
@@ -11,7 +11,7 @@ spec:
     repoURL: https://itzg.github.io/minecraft-server-charts/
     targetRevision: 5.1.3
     helm:
-      releaseName: sweatysummersack
+      releaseName: kaylaatm10lite
       valuesObject:
         image:
           repository: itzg/minecraft-server
