@@ -13,8 +13,8 @@ spec:
 
   source:
     chart: archisteamfarm
-    repoURL: oci://ghcr.io/juniorjpdj/charts
-    targetRevision: 0.1.125
+    repoURL: https://juniorjpdj.github.io/charts
+    targetRevision: 0.1.126
     helm:
       releaseName: archisteamfarm
       valuesObject:
