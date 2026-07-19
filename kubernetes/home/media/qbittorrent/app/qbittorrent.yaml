@@ -17,15 +17,15 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
-      resources:
       containers:
         - name: qbittorrent
-          requests:
-            cpu: 100m
-            memory: 256Mi
-          limits:
-            cpu: 500m
-            memory: 2Gi
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 2Gi
           image: linuxserver/qbittorrent:5.2.3
           env:
             - name: PUID
