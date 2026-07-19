@@ -43,6 +43,10 @@ spec:
 
           certificate:
             enabled: true
+
+            issuer:
+              name: letsencrypt
+              kind: ClusterIssuer
           
           ingress:
             enabled: true
