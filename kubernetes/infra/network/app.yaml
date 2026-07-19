@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: https://github.com/baconing/dots.git
-    targetRevision: argocd
+    targetRevision: master
     path: kubernetes/infra/network/apps
 
   destination:
