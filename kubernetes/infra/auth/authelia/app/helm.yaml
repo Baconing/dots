@@ -59,12 +59,6 @@ spec:
                       name: authelia
                       key: storage.postgres.password
 
-        redis:
-          image:
-            registry: ""
-            repository: bitnami/redis
-            tag: latest
-
         secret:
           disabled: false
           mountPath: "/secrets"
@@ -282,16 +276,17 @@ spec:
               path: "session.encryption_key"
 
             same_site: lax
-            cookies:
-              - domain: saturn.ci
-                subdomain: sso
-                authelia_url: https://sso.saturn.ci
+
             redis:
               deploy: true
               enabled: true
               host: "authelia-redis-master"
               password:
                 disabled: true
+
+            cookies:
+              - domain: saturn.ci
+                subdomain: sso
           
           regulation:
             max_retries: 5
