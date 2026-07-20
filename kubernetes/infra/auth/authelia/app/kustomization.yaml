@@ -4,4 +4,4 @@ resources:
   - authelia.secret.yaml
   - helm.yaml
   - ssl.yaml
-  - sync-odic-secret.yaml
+  # - sync-odic-secret.yaml
