@@ -15,7 +15,7 @@ spec:
       valuesObject:
         image:
           repository: itzg/minecraft-server
-          tag: 2026.7.0-java21-jdk
+          tag: 2026.7.2-java21-jdk
           pullPolicy: IfNotPresent
 
         resources:
