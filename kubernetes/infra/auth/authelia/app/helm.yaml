@@ -67,13 +67,13 @@ spec:
             authelia:
               path: jwks
               items:
-                - key: oidc.jwk.RS256.pem
-                  path: oidc.jwk.RS256.pem
-            odic-pgadmin:
-              path: odic
-              items:
-                - key: odic.client_secret
-                  path: pgadmin.client_secret
+                - key: odic.jwk.RS256.pem
+                  path: odic.jwk.RS256.pem
+            # odic-pgadmin:
+            #   path: odic
+            #   items:
+            #     - key: odic.client_secret
+            #       path: pgadmin.client_secret
 
         configMap:
           disabled: false
@@ -83,7 +83,7 @@ spec:
               enabled: true
               port: 9959
               serviceMonitor:
-                enabled: false
+                enabled: true
           
           default_2fa_method: "totp"
 
