@@ -310,35 +310,35 @@ spec:
             disable_startup_check: true # todo: after smtp is enabled
 
             smtp:
-              enabled: true # todo
+              enabled: false # todo
               password:
                 disabled: true
             filesystem:
-              enabled: false
-
-          identity_providers:
-            oidc:
               enabled: true
 
-              enable_client_debug_messages: false
+          # identity_providers:
+          #   oidc:
+          #     enabled: true
 
-              hmac_secret:
-                path: "identity_providers.oidc.hmac_secret"
+          #     enable_client_debug_messages: false
 
-              jwks:
-                - key_id: RS256
-                  algorithm: RS256
-                  use: sig
-                  key:
-                    path: /secrets/jwks/odic.jwk.RS256.pem
+          #     hmac_secret:
+          #       path: "identity_providers.oidc.hmac_secret"
+
+          #     jwks:
+          #       - key_id: RS256
+          #         algorithm: RS256
+          #         use: sig
+          #         key:
+          #           path: /secrets/jwks/odic.jwk.RS256.pem
               
-              clients:
-                - client_id: pgadmin
-                  client_name: PGAdmin
-                  client_secret:
-                    path: /secrets/odic/pgadmin.client_secret
-                  public: false
-                  authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+          #     clients:
+          #       - client_id: pgadmin
+          #         client_name: PGAdmin
+          #         client_secret:
+          #           path: /secrets/odic/pgadmin.client_secret
+          #         public: false
+          #         authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
 
   destination:
     name: in-cluster
