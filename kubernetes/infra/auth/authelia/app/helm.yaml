@@ -18,11 +18,11 @@ spec:
           repository: authelia/authelia
           tag: 4.39.20
         
-          redis:
-            image:
-              registry: ""
-              repository: bitnami/redis
-              tag: latest
+        redis:
+          image:
+            registry: ""
+            repository: bitnami/redis
+            tag: latest
         
         ingress:
           enabled: true
