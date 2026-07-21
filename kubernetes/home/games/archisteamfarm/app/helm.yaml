@@ -14,7 +14,7 @@ spec:
   source:
     chart: archisteamfarm
     repoURL: https://juniorjpdj.github.io/charts
-    targetRevision: 0.1.126
+    targetRevision: 0.1.127
     helm:
       releaseName: archisteamfarm
       valuesObject:
