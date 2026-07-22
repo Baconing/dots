@@ -40,7 +40,7 @@ spec:
                   key: database.password
       containers:
         - name: *appName
-          image: donkieyo/spoolman:0.24.0
+          image: donkieyo/spoolman:0.25.0
           resources:
             requests:
               cpu: 50m
