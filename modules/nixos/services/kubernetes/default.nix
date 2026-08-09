@@ -84,6 +84,10 @@ in {
             # extraKubeletConfig = {
             #     registerWithTaints = cfg.taints;
             # };
+
+	    disable = [
+	        "traefik"
+	    ];
         };
 
         services.k3s.serverAddr = lib.mkIf (cfg.role != "primary" && ((cfg.role == "control" && cfg.init) || cfg.role == "node")) cfg.masterAddress;
@@ -99,6 +103,7 @@ in {
 
         services.k3s.extraFlags = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
+	    "--disable-helm-controller"
         ];
 
         services.k3s.clusterInit = lib.mkIf (cfg.role == "primary" && cfg.init) true;
