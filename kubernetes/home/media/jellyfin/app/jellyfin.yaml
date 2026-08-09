@@ -48,6 +48,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - mountPath: /transcodes
+              name: transcodes
             - mountPath: /media
               name: media
             - name: dri
@@ -56,6 +58,8 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-data
+        - name: transcodes
+          emptyDir: {}
         - name: media
           persistentVolumeClaim:
             claimName: media
