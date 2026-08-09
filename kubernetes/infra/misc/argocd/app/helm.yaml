@@ -33,9 +33,9 @@ spec:
             oidc.config: |
               name: Authelia
               issuer: https://sso.saturn.ci
-              clientID: $oidc:oidc.client_id
+              clientID: argocd
               clientSecret: $oidc:oidc.client_secret
-              cliClientID: $oidc:oidc.cli.client_id
+              cliClientID: argocd-cli
               requestedScopes:
                 - openid
                 - email
