@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: homelamp-helm
+  name: headlamp-helm
   namespace: argocd
 spec:
   project: default
@@ -54,7 +54,7 @@ spec:
 
   destination:
     name: in-cluster
-    namespace: homelamp
+    namespace: headlamp
 
   syncPolicy:
     syncOptions:
