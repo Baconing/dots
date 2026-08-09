@@ -19,7 +19,9 @@ spec:
           tag: v0.44.0
 
         config:
-          inCuster: true
+          inCluster: true
+
+          unsafeUseServiceAccountToken: true
 
         resources:
           requests:
