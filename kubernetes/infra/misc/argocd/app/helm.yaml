@@ -41,8 +41,6 @@ spec:
             enabled: true
             minReplicas: 2
 
-          insecure: true
-
           certificate:
             enabled: true
 
