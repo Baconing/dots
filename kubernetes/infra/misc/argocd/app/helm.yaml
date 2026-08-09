@@ -30,6 +30,8 @@ spec:
           cm:
             kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
 
+            admin.enabled: "false"
+
             oidc.config: |
               name: Authelia
               issuer: https://sso.saturn.ci
