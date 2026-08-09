@@ -79,6 +79,10 @@ spec:
             oidc-argocd:
                 path: oidc
                 items:
+                  - key: oidc.client_id
+                    path: argocd.client_id
+                  - key: oidc.cli.client_id
+                    path: argocd.cli.client_id
                   - key: oidc.client_secret_digest
                     path: argocd.client_secret_digest
             # oidc-pgadmin:
@@ -347,8 +351,9 @@ spec:
                     path: /secrets/jwks/oidc.jwk.RS256.pem
               
               clients:
-                - client_id: argocd
-                  client_name: ArgoCD
+                - client_name: ArgoCD
+                  client_id:
+                    path: /secrets/oidc/argocd.client_id
                   client_secret:
                     path: /secrets/oidc/argocd.client_secret_digest
                   authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
@@ -366,8 +371,9 @@ spec:
                   userinfo_signed_response_alg: 'none'
                   token_endpoint_auth_method: "client_secret_post"
 
-                - client_id: argocd-cli
-                  client_name: ArgoCD (CLI)
+                - client_name: ArgoCD (CLI)
+                  client_id:
+                    path: argocd.cli.client_id
                   authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
                   redirect_uris:
                     - "http://localhost:8085/auth/callback"
