@@ -76,7 +76,7 @@ spec:
               items:
                 - key: oidc.jwk.RS256.pem
                   path: oidc.jwk.RS256.pem
-            oidc-argocd-argocd:
+            oidc-argocd:
                 path: oidc
                 items:
                   - key: oidc.client_secret_digest
