@@ -76,11 +76,16 @@ spec:
               items:
                 - key: odic.jwk.RS256.pem
                   path: odic.jwk.RS256.pem
+            odic-argocd-argocd:
+                path: odic
+                items:
+                  - key: odic.client_secret_digest
+                    path: argocd.client_secret_digest
             # odic-pgadmin:
             #   path: odic
             #   items:
-            #     - key: odic.client_secret
-            #       path: pgadmin.client_secret
+            #     - key: odic.client_secret_digest
+            #       path: pgadmin.client_secret_digest
 
         configMap:
           disabled: false
@@ -325,29 +330,58 @@ spec:
             filesystem:
               enabled: true
 
-          # identity_providers:
-          #   oidc:
-          #     enabled: true
+          identity_providers:
+            oidc:
+              enabled: true
 
-          #     enable_client_debug_messages: false
+              enable_client_debug_messages: false
 
-          #     hmac_secret:
-          #       path: "identity_providers.oidc.hmac_secret"
+              hmac_secret:
+                path: "identity_providers.oidc.hmac_secret"
 
-          #     jwks:
-          #       - key_id: RS256
-          #         algorithm: RS256
-          #         use: sig
-          #         key:
-          #           path: /secrets/jwks/odic.jwk.RS256.pem
+              jwks:
+                - key_id: RS256
+                  algorithm: RS256
+                  use: sig
+                  key:
+                    path: /secrets/jwks/odic.jwk.RS256.pem
               
-          #     clients:
-          #       - client_id: pgadmin
-          #         client_name: PGAdmin
-          #         client_secret:
-          #           path: /secrets/odic/pgadmin.client_secret
-          #         public: false
-          #         authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+              clients:
+                - client_id: argocd
+                  client_name: ArgoCD
+                  client_secret:
+                    path: /secrets/odic/argocd.client_secret_digest
+                  authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                  redirect_uris:
+                    - "https://argocd.saturn.ci/auth/callback"
+                  scopes:
+                    - "openid"
+                    - "groups"
+                    - "email"
+
+                - client_id: argocd-cli
+                  client_name: ArgoCD (CLI)
+                  authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                  redirect_uris:
+                    - "http://localhost:8085/auth/callback"
+                  scopes:
+                    - "openid"
+                    - "offline_access"
+                    - "groups"
+                    - "email"
+                  public: true
+                  require_pkce: true
+                  pkce_challenge_method: "S256"
+                  grant_types:
+                    - "authorization_code"
+                    - "refresh_token"
+                  token_endpoint_auth_method: "none"
+
+                # - client_id: pgadmin
+                #   client_name: PGAdmin
+                #   client_secret:
+                #     path: /secrets/odic/pgadmin.client_secret_digest
+                #   authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
 
   destination:
     name: in-cluster

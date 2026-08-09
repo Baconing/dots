@@ -30,6 +30,25 @@ spec:
           cm:
             kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
 
+            odic.config: |
+              name: Authelia
+              issuer: https://sso.saturn.ci
+              clientID: argocd
+              clientSecret: $odic-argocd:odic.client_secret
+              cliClientID: argocd-cli
+              requestedScopes:
+                - openid
+                - email
+                - groups
+              enableUserInfoGroups: true
+              userInfoPath: /api/odic/userinfo
+
+          rbac:
+            policy.default: role:user
+            policy.csv: |
+              g, argocd-admins, role:admin
+              p, role:user, *, *, *, deny
+
           params:
             server.insecure: true
 
