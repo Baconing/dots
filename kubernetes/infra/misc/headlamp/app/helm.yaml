@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: homelamp-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: headlamp
+    repoURL: https://kubernetes-sigs.github.io/headlamp/
+    targetRevision: 0.44.0
+    helm:
+      releaseName: headlamp
+      valuesObject:
+        image:
+          registry: ghcr.io
+          repository: headlamp-k8s/headlamp
+          tag: v0.44.0
+
+        config:
+          inCuster: true
+          inClusterContextName: default
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          annotations:
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            gethomepage.dev/name: Headlamp
+            gethomepage.dev/group: Infrastructure
+            gethomepage.dev/icon: headlamp
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            external-dns.alpha.kubernetes.io/enabled: "true"
+            external-dns.alpha.kubernetes.io/hostname: headlamp.saturn.ci
+            external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+          hosts:
+            - host: headlamp.saturn.ci
+              paths:
+                path: /
+                type: ImplementationSpecific
+          tls:
+            - secretName: headlamp.saturn.ci
+              hosts:
+                - headlamp.saturn.ci
+
+  destination:
+    name: in-cluster
+    namespace: homelamp
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
