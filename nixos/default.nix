@@ -23,15 +23,13 @@
     consoleLogLevel = lib.mkDefault 0;
     initrd.verbose = false;
     kernelModules = [ "vhost_vsock" ];
-    kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
+    kernelPackages = lib.mkForce pkgs.linuxPackages;
 
-    # Don't install bootloader on ISO images.
     loader = {
       systemd-boot.enable = false;
 
-      efi = {
-        canTouchEfiVariables = true;
-      };
+      efi.canTouchEfiVariables = true;
+
       grub = {
         enable = true;
         useOSProber = true;
