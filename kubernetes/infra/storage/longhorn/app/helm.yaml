@@ -32,6 +32,7 @@ spec:
         ingress:
           enabled: true
           ingressClassName: traefik
+          host: longhorn.saturn.ci
           tls: true
           tlsSecret: longhorn.saturn.ci
           secureBackends: true
