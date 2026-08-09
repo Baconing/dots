@@ -178,6 +178,8 @@ spec:
                   - "traefik.saturn.ci"
                   - "longhorn.saturn.ci"
                   - "pgadmin.saturn.ci"
+                  - "argocd.saturn.ci"
+                  - "headlamp.saturn.ci"
 
                   # external services
                   - "router.saturn.ci"
