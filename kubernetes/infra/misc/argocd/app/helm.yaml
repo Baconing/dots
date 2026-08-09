@@ -46,7 +46,7 @@ spec:
           rbac:
             policy.default: role:user
             policy.csv: |
-              g, argocd-admins, role:administrators
+              g, administrators, role:admin
               p, role:user, *, *, *, deny
 
           params:
