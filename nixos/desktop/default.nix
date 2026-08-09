@@ -3,6 +3,7 @@
     imports = [
 	./desktops
 	./services
+	./apps
     ] ++ lib.optional (builtins.pathExists ./hosts/${hostname}) ./hosts/${hostname};
   
     boot.loader.efi.efiSysMountPoint = "/boot";
