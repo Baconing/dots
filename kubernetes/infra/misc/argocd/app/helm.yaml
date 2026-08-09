@@ -42,7 +42,6 @@ spec:
                 - openid
                 - email
                 - groups
-              usernameClaim: preferred_username
               enableUserInfoGroups: true
               userInfoPath: /api/oidc/userinfo
 
