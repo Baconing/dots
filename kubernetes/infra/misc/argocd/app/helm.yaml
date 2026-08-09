@@ -53,6 +53,7 @@ spec:
 
           params:
             server.insecure: true
+            controller.diff.server.side: true
 
         redis-ha:
           enabled: true
