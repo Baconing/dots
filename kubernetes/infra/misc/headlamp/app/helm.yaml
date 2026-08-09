@@ -20,7 +20,6 @@ spec:
 
         config:
           inCuster: true
-          inClusterContextName: default
 
         resources:
           requests:
