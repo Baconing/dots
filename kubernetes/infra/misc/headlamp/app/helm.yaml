@@ -45,8 +45,8 @@ spec:
           hosts:
             - host: headlamp.saturn.ci
               paths:
-                path: /
-                type: ImplementationSpecific
+                - path: /
+                  type: ImplementationSpecific
           tls:
             - secretName: headlamp.saturn.ci
               hosts:
