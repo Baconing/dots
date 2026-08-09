@@ -41,8 +41,7 @@ spec:
             enabled: true
             minReplicas: 2
 
-          extraArgs:
-            - --insecure
+          insecure: true
 
           certificate:
             enabled: true
