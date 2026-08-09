@@ -373,7 +373,7 @@ spec:
 
                 - client_name: ArgoCD (CLI)
                   client_id:
-                    path: argocd.cli.client_id
+                    path: /secrets/oidc/argocd.cli.client_id
                   authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
                   redirect_uris:
                     - "http://localhost:8085/auth/callback"
