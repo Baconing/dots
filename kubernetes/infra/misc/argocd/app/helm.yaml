@@ -30,6 +30,9 @@ spec:
           cm:
             kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
 
+          params:
+            server.insecure: true
+
         redis-ha:
           enabled: true
         
@@ -41,13 +44,6 @@ spec:
             enabled: true
             minReplicas: 2
 
-          certificate:
-            enabled: true
-
-            issuer:
-              name: letsencrypt
-              kind: ClusterIssuer
-          
           ingress:
             enabled: true
             ingressClassName: traefik
