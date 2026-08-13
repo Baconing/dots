@@ -36,7 +36,7 @@ spec:
 
         prometheus:
           enabled: true
-          serviceMonitor:
+          servicemonitor:
             enabled: true
 
         webhook:
