@@ -110,6 +110,8 @@ spec:
             skip_org_role_sync: true
           users:
             allow_assign_grafana_admin: true
+          security:
+            disable_initial_admin_creation: true
           database:
             type: postgres
             host: postgres-rw.database.svc.cluster.local:5432
