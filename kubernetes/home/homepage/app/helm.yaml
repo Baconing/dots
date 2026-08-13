@@ -51,35 +51,35 @@ spec:
             target: _self
             headerStyle: boxedWidgets
             useEqualHeights: true
-            layout:
-              - Media:
-                  style: row
-                  columns: 2
-              - Downloads:
-                  style: row
-                  columns: 2
-              - Servarr:
-                  style: row
-                  columns: 4
-              - Home:
-                  style: row
-                  columns: 4
-              - AI:
-                  style: column
-              - Network:
-                  style: column
-              - Storage:
-                  style: column
-              - Security:
-                  style: column
-              - Database:
-                  style: column
+            # layout:
+            #   - Media:
+            #       style: row
+            #       columns: 2
+            #   - Downloads:
+            #       style: row
+            #       columns: 2
+            #   - Servarr:
+            #       style: row
+            #       columns: 4
+            #   - Home:
+            #       style: row
+            #       columns: 4
+            #   - AI:
+            #       style: column
+            #   - Network:
+            #       style: column
+            #   - Storage:
+            #       style: column
+            #   - Security:
+            #       style: column
+            #   - Database:
+            #       style: column
           services: []
-          bookmarks:
-            - Network:
-                - name: "Speedtest"
-                  url: https://speedtest.net
-                  icon: speedtest
+          # bookmarks:
+          #   - Network:
+          #       - name: "Speedtest"
+          #         url: https://speedtest.net
+          #         icon: speedtest
 
           widgets:
             - resources:
