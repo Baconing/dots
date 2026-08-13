@@ -91,7 +91,7 @@ spec:
             # client_secret: $__env{GRAFANA_OAUTH_CLIENT_SECRET}
             scopes: openid profile email groups
             empty_scopes: false
-            auth_url: https://sso.saturn.ci/api/oidc/authorize
+            auth_url: https://sso.saturn.ci/api/oidc/authorization
             token_url: https://sso.saturn.ci/api/oidc/token
             api_url: https://sso.saturn.ci/api/oidc/userinfo
             login_attribute_path: preferred_username
