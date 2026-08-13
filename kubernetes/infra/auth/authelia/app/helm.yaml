@@ -81,7 +81,7 @@ spec:
                 items:
                   - key: oidc.client_secret_digest
                     path: client_secret_digest
-            oidc-databases-pgadmin:
+            oidc-database-pgadmin:
                 path: oidc/pgadmin
                 items:
                   - key: oidc.client_secret_digest
