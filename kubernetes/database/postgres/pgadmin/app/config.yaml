@@ -7,11 +7,6 @@ data:
   config_distro.py: |
     LOG_FILE = '/dev/stderr'
 
-    client_secret = ""
-
-    with open('/var/secrets/oidc/oidc.client_secret', 'r') as f:
-        client_secret = f.read().strip()
-
     AUTHENTICATION_SOURCES = ['oauth2']
 
     OAUTH2_CONFIG = [{
