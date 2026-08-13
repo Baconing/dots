@@ -23,7 +23,7 @@ spec:
           enabled: true
           minReplicas: 1
 
-        envFrom:
+        envValueFrom:
           GRAFANA_OAUTH_CLIENT_SECRET:
             secretKeyRef:
               name: oidc-grafana
