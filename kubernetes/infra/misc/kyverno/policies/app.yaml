@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno-policies
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/baconing/dots.git
+    targetRevision: master
+    path: kubernetes/infra/misc/kyverno/policies/app
+
+  destination:
+    name: in-cluster
+    namespace: kyverno
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

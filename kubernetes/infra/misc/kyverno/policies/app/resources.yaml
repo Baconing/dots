@@ -1,0 +1,39 @@
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: require-pod-resources
+  annotations:
+    policies.kyverno.io/title: Require Pod Resources
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: Pod
+spec:
+  validationActions:
+    - Audit
+
+  evaluation:
+    background:
+      enabled: true
+
+  matchConstraints:
+    resourceRules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - pods
+
+  validations:
+    - expression: >-
+        object.spec.containers.all(container,
+          container.resources.?requests.orValue({}).?cpu.hasValue() &&
+          container.resources.?requests.orValue({}).?memory.hasValue() &&
+          container.resources.?limits.orValue({}).?cpu.hasValue() &&
+          container.resources.?limits.orValue({}).?memory.hasValue()
+        )
+      message: >-
+        All containers must define CPU and memory requests and limits.
