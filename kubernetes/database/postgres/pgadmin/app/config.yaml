@@ -5,7 +5,7 @@ metadata:
   namespace: database
 data:
   config_distro.py: |
-    import os
+    LOG_FILE = '/dev/stderr'
 
     client_secret = ""
 
