@@ -89,10 +89,11 @@ spec:
           maxReplicas: 3
 
         persistentVolume:
+          enabled: false
+        
+        VolumePermissions:
           enabled: true
-          size: 1Gi
-          storageClass: longhorn
-
+          
   destination:
     name: in-cluster
     namespace: database
