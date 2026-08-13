@@ -36,6 +36,14 @@ spec:
                 name: cloudflare-api-token
                 key: email
 
+        resources:
+          requests:
+            cpu: 50m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+
   destination:
     name: in-cluster
     namespace: external-dns
