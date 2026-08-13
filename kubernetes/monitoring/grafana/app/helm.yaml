@@ -107,6 +107,7 @@ spec:
             use_pkce: true
             auth_style: InHeader
             role_attribute_path: contains(roles[*], 'administrator') && 'GrafanaAdmin' || 'Viewer'
+            allow_assign_grafana_admin: true
             skip_org_role_sync: true
           database:
             type: postgres
