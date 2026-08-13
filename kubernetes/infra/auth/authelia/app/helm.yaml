@@ -402,6 +402,7 @@ spec:
                     - "openid"
                     - "profile"
                     - "email"
+                  public: true
                   require_pkce: true
                   pkce_challenge_method: "S256"
                   response_types:
@@ -410,7 +411,7 @@ spec:
                     - "authorization_code"
                   access_token_signed_response_alg: 'none'
                   userinfo_signed_response_alg: 'none'
-                  token_endpoint_auth_method: "client_secret_basic"
+                  token_endpoint_auth_method: "none"
 
   destination:
     name: in-cluster
