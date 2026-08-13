@@ -81,11 +81,6 @@ spec:
                 items:
                   - key: oidc.client_secret_digest
                     path: client_secret_digest
-            oidc-database-pgadmin:
-              path: oidc/pgadmin
-              items:
-                - key: oidc.client_secret_digest
-                  path: client_secret_digest
 
         configMap:
           disabled: false
@@ -400,8 +395,6 @@ spec:
 
                 - client_id: pgadmin
                   client_name: pgAdmin
-                  client_secret:
-                    path: /secrets/oidc/pgadmin/client_secret_digest
                   authorization_policy: admin # todo: two_factor after i setup email notifiactions to allow two factor sources
                   redirect_uris:
                     - "https://pgadmin.saturn.ci/oauth2/authorize"
