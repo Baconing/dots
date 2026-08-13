@@ -106,8 +106,7 @@ spec:
             name_attribute_path: name
             use_pkce: true
             auth_style: InHeader
-            role_attribute_path: GrafanaAdmin
-            # role_attribute_path: contains(roles[*], 'administrator') && 'GrafanaAdmin' || 'Viewer'
+            role_attribute_path: contains(roles[*], 'administrator') && 'GrafanaAdmin' || 'Viewer' # TODO: grafana doesnt give users admin
             skip_org_role_sync: true
           users:
             allow_assign_grafana_admin: true
