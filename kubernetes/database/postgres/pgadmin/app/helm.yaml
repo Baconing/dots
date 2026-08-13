@@ -24,7 +24,7 @@ spec:
         image:
           registry: docker.io
           repository: dpage/pgadmin4
-          tag: 9.15.0
+          tag: 9.17.0
 
         # serverDefinitions:
         #   enabled: true
