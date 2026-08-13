@@ -82,7 +82,10 @@ spec:
         
         grafana.ini:
           auth:
+            disable_login_form: true
             managed_service_accounts_enabled: true
+          auth.basic:
+            enabled: false
           auth.generic_oauth:
             enabled: true
             name: Authelia
