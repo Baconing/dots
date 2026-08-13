@@ -38,9 +38,19 @@ spec:
               Port: 5432
               MaintenanceDB: postgres
               SSLMode: prefer
-        
-        envVarsFromSecrets: 
-          - pgadmin
+
+        extraConfigmapMounts:
+          - name: pgadmin-config
+            configMap: pgadmin-config
+            mountPath: /pgadmin4/config_distro.py
+            subPath: config_distro.py
+            readOnly: true
+
+        extraSecretMounts:
+          - name: oidc-secret
+            secret: oidc-pgadmin
+            mountPath: /var/secrets/oidc
+            readOnly: true
         
         ingress:
           enabled: true

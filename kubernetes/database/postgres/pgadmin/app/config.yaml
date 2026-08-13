@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-config
+  namespace: database
+data:
+  config_distro.py: |
+    import os
+
+    client_secret = ""
+
+    with open('/var/secrets/oidc/oidc.client_secret', 'r') as f:
+        client_secret = f.read().strip()
+
+    AUTHENTICATION_SOURCES = ['oauth2']
+
+    OAUTH2_CONFIG = [{
+      'OAUTH2_NAME': 'Authelia',
+      'OAUTH2_DISPLAY_NAME': 'Authelia',
+      'OAUTH2_CLIENT_ID': 'pgadmin',
+      'OAUTH2_CLIENT_SECRET': client_secret,
+      'OAUTH2_SERVER_METADATA_URL': 'https://sso.saturn.ci/.well-known/openid-configuration',
+      'OAUTH2_SCOPE': 'openid profile email',
+      'OAUTH2_USERNAME_CLAIM': 'email',
+      'OAUTH2_CHALLENGE_METHOD': 'S256',
+      'OAUTH2_RESPONSE_TYPE': 'code',
+      'OAUTH2_ICON': 'fa-unlock',
+    }]
+
+    OAUTH2_AUTO_CREATE_USER = True
