@@ -402,6 +402,7 @@ spec:
                   grant_types:
                     - "authorization_code"
                   token_endpoint_auth_method: "client_secret_basic"
+                  require_pkce: false
 
   destination:
     name: in-cluster
