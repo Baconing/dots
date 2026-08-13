@@ -11,6 +11,8 @@ kind: Application
 metadata:
   name: pgadmin-helm
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
 
