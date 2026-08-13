@@ -103,7 +103,7 @@ in {
 
         services.k3s.extraFlags = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
-	    "--disable-helm-controller"
+	        "--disable-helm-controller"
         ];
 
         services.k3s.clusterInit = lib.mkIf (cfg.role == "primary" && cfg.init) true;
