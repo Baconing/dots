@@ -58,7 +58,7 @@ spec:
             memory: 128Mi
           limits:
             cpu: 500m
-            memory: 1GiB
+            memory: 1Gi
         
         autoscaling:
           enabled: true

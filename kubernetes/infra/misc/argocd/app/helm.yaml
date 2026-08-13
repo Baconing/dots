@@ -64,10 +64,10 @@ spec:
           resources:
             requests:
               cpu: 10m
-              memory: 64MiB
+              memory: 64Mi
             limits:
               cpu: 50m
-              memory: 256MiB
+              memory: 256Mi
 
         controller:
           replicas: 1
@@ -75,10 +75,10 @@ spec:
           resources:
             requests:
               cpu: 250m
-              memory: 1GiB
+              memory: 1Gi
             limits:
               cpu: 500m
-              memory: 2GiB 
+              memory: 2Gi 
         dex:
           enabled: false
 
@@ -93,10 +93,10 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 512MiB
+              memory: 512Mi
             limits:
               cpu: 200m
-              memory: 1GiB
+              memory: 1Gi
 
           extraContainers:
             - name: sops
@@ -131,10 +131,10 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 128MiB
+              memory: 128Mi
             limits:
               cpu: 500m
-              memory: 512MiB
+              memory: 512Mi
 
           ingress:
             enabled: true
