@@ -26,18 +26,18 @@ spec:
           repository: dpage/pgadmin4
           tag: 9.15.0
 
-        serverDefinitions:
-          enabled: true
-          resourceType: Secret
-          servers:
-            main:
-              Name: Main
-              Group: Servers
-              Username: postgres
-              Host: postgres-rw
-              Port: 5432
-              MaintenanceDB: postgres
-              SSLMode: prefer
+        # serverDefinitions:
+        #   enabled: true
+        #   resourceType: Secret
+        #   servers:
+        #     main:
+        #       Name: Main
+        #       Group: Servers
+        #       Username: postgres
+        #       Host: postgres-rw
+        #       Port: 5432
+        #       MaintenanceDB: postgres
+        #       SSLMode: prefer
 
         extraConfigmapMounts:
           - name: pgadmin-config

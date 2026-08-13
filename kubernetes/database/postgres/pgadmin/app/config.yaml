@@ -15,16 +15,18 @@ data:
     AUTHENTICATION_SOURCES = ['oauth2']
 
     OAUTH2_CONFIG = [{
-      'OAUTH2_NAME': 'Authelia',
+      'OAUTH2_NAME': 'authelia',
       'OAUTH2_DISPLAY_NAME': 'Authelia',
       'OAUTH2_CLIENT_ID': 'pgadmin',
       'OAUTH2_CLIENT_SECRET': client_secret,
+      'OAUTH2_API_BASE_URL': 'https://sso.saturn.ci/',
       'OAUTH2_SERVER_METADATA_URL': 'https://sso.saturn.ci/.well-known/openid-configuration',
+      'OAUTH2_TOKEN_URL': 'https://sso.saturn.ci/api/oidc/token',
+      'OAUTH2_AUTHORIZATION_URL': 'https://sso.saturn.ci/api/oidc/authorization',
+      'OAUTH2_USERINFO_ENDPOINT': 'https://sso.saturn.ci/api/oidc/userinfo",
       'OAUTH2_SCOPE': 'openid profile email',
       'OAUTH2_USERNAME_CLAIM': 'email',
-      'OAUTH2_CHALLENGE_METHOD': 'S256',
-      'OAUTH2_RESPONSE_TYPE': 'code',
-      'OAUTH2_ICON': 'fa-unlock',
+      'OAUTH2_ICON': 'keycdn',
     }]
 
     OAUTH2_AUTO_CREATE_USER = True
