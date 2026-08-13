@@ -13,6 +13,13 @@ spec:
       labels:
         app: cloudflare-ddns
     spec:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 16Mi
+        limits:
+          cpu: 100m
+          memory: 32Mi
       containers:
       - name: ddns
         image: timothyjmiller/cloudflare-ddns:2.1.2
