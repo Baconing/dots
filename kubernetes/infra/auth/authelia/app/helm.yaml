@@ -346,12 +346,24 @@ spec:
                   key:
                     path: /secrets/jwks/oidc.jwk.RS256.pem
               
+              authorization_policies:
+                admin_2fa:
+                  default_policy: 'deny'
+                  rules:
+                    - policy: 'two_factor'
+                      subject: 'group:administrators'
+                admin:
+                  default_policy: 'deny'
+                  rules:
+                    - policy: 'one_factor'
+                      subject: 'group:administrators'
+
               clients:
                 - client_name: ArgoCD
                   client_id: argocd
                   client_secret:
                     path: /secrets/oidc/argocd/client_secret_digest
-                  authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                  authorization_policy: admin # todo: two_factor after i setup email notifiactions to allow two factor sources
                   redirect_uris:
                     - "https://argocd.saturn.ci/auth/callback"
                   scopes:
@@ -368,7 +380,7 @@ spec:
 
                 - client_name: ArgoCD (CLI)
                   client_id: argocd-cli
-                  authorization_policy: one_factor # todo: two_factor after i setup email notifiactions to allow two factor sources
+                  authorization_policy: admin # todo: two_factor after i setup email notifiactions to allow two factor sources
                   redirect_uris:
                     - "http://localhost:8085/auth/callback"
                   scopes:
