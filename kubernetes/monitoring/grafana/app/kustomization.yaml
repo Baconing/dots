@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - helm.yaml
   - oauth.secret.yaml
+  - postgres.secret.yaml
   - ssl.yaml
