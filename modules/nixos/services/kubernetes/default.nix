@@ -84,10 +84,6 @@ in {
             # extraKubeletConfig = {
             #     registerWithTaints = cfg.taints;
             # };
-
-	    disable = [
-	        "traefik"
-	    ];
         };
 
         services.k3s.serverAddr = lib.mkIf (cfg.role != "primary" && ((cfg.role == "control" && cfg.init) || cfg.role == "node")) cfg.masterAddress;
@@ -100,6 +96,10 @@ in {
         #         decode = lib.strings.join "," cfg.gpu.decode;
         #     };
         # };
+
+        services.k3s.disable = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
+            "traefik"
+        ];
 
         services.k3s.extraFlags = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
