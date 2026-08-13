@@ -46,6 +46,12 @@ spec:
             subPath: config_distro.py
             readOnly: true
 
+        extraSecretMounts:
+          - name: oidc-secret
+            secret: oidc-pgadmin
+            mountPath: /var/secrets/oidc
+            readOnly: true
+        
         ingress:
           enabled: true
           ingressClassName: "traefik"
