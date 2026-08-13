@@ -30,6 +30,14 @@ spec:
           secretName: lldap
           ldapUserDN: "admin"
 
+        resources:
+          requests:
+            cpu: 50m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 32Mi
+
         ingress:
           enabled: true
           name: "lldap"
