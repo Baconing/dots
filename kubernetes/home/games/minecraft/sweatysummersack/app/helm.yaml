@@ -48,6 +48,8 @@ spec:
           motd: "holy its the summer minecraft server called sweatysummersack hashtag sweaty summer time my sack is sweaty"
 
         persistence:
+          labels:
+            recurring-job-group.longhorn.io/backup: enabled
           storageClass: longhorn
           dataDir:
             enabled: true

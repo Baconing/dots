@@ -63,6 +63,8 @@ spec:
               - living-things
 
         persistence:
+          labels:
+            recurring-job-group.longhorn.io/backup: enabled
           storageClass: longhorn
           dataDir:
             enabled: true
