@@ -24,7 +24,7 @@ spec:
           minReplicas: 1
 
         envFrom:
-          GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
+          GRAFANA_OAUTH_CLIENT_SECRET:
             secretKeyRef:
               name: oidc-grafana
               key: oidc.client_secret
@@ -95,7 +95,7 @@ spec:
             name: Authelia
             icon: signin
             client_id: grafana
-            # client_secret: $__env{GRAFANA_OAUTH_CLIENT_SECRET}
+            client_secret: $__env{GRAFANA_OAUTH_CLIENT_SECRET}
             scopes: openid profile email groups
             empty_scopes: false
             auth_url: https://sso.saturn.ci/api/oidc/authorization
