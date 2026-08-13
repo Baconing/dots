@@ -13,7 +13,7 @@ data:
       'OAUTH2_NAME': 'Authelia',
       'OAUTH2_DISPLAY_NAME': 'Authelia',
       'OAUTH2_CLIENT_ID': 'pgadmin',
-      'OAUTH2_CLIENT_SECRET': NONE,
+      'OAUTH2_CLIENT_SECRET': None,
       'OAUTH2_SERVER_METADATA_URL': 'https://sso.saturn.ci/.well-known/openid-configuration',
       'OAUTH2_SCOPE': 'openid email profile',
       'OAUTH2_USERNAME_CLAIM': 'preferred_username',
