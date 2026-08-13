@@ -23,7 +23,7 @@ data:
       'OAUTH2_SERVER_METADATA_URL': 'https://sso.saturn.ci/.well-known/openid-configuration',
       'OAUTH2_TOKEN_URL': 'https://sso.saturn.ci/api/oidc/token',
       'OAUTH2_AUTHORIZATION_URL': 'https://sso.saturn.ci/api/oidc/authorization',
-      'OAUTH2_USERINFO_ENDPOINT': 'https://sso.saturn.ci/api/oidc/userinfo",
+      'OAUTH2_USERINFO_ENDPOINT': 'https://sso.saturn.ci/api/oidc/userinfo',
       'OAUTH2_SCOPE': 'openid profile email',
       'OAUTH2_USERNAME_CLAIM': 'email',
       'OAUTH2_ICON': 'keycdn',
