@@ -1,0 +1,94 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minecraft-terrafermagreg-modern-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: minecraft
+    repoURL: https://itzg.github.io/minecraft-server-charts/
+    targetRevision: 5.1.3
+    helm:
+      releaseName: terrafermagreg-modern
+      valuesObject:
+        image:
+          repository: itzg/minecraft-server
+          tag: 2026.7.0-java21-jdk
+          pullPolicy: IfNotPresent
+
+        resources:
+          requests:
+            cpu: 1
+            memory: 8096Mi
+          limits:
+            cpu: 4
+            memory: 16384Mi
+
+        extraEnv:
+          INIT_MEMORY: 8096M
+          MAX_MEMORY: 16384M
+
+        envFrom:
+          - secretRef:
+              name: curseforge-api-token
+
+        livenessProbe:
+          initialDelaySeconds: 300 # 5 minutes
+
+        workloadAsStatefulSet: true
+        strategyType: OnDelete
+
+        minecraftServer:
+          eula: "TRUE"
+          type: AUTO_CURSEFORGE
+          whitelist: "Baconing,TickleKnees,Kamieo_"
+          ops: "Baconing"
+          enableCommandBlock: true
+          spawnProtection: -1
+          viewDistance: 16
+
+          motd: "terra fart craft modern mre like haha"
+
+          autoCurseForge:
+            apiKey:
+              existingSecret: curseforge-api-token
+            slug: terrafirmagreg-modern
+            fileId: "8601844"
+            includeMods:
+              - living-things
+
+        persistence:
+          labels:
+            recurring-job-group.longhorn.io/backup: enabled
+          storageClass: longhorn
+          dataDir:
+            enabled: true
+            Size: 16Gi
+            accessModes:
+              - ReadWriteOnce
+
+        serviceAnnotations:
+          mc-router.itzg.me/externalServerName: tfgm.saturn.ci,tfgm.local
+          external-dns.alpha.kubernetes.io/enabled: "true"
+          external-dns.alpha.kubernetes.io/hostname: tfgm.saturn.ci
+          external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+
+  destination:
+    name: in-cluster
+    namespace: minecraft
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

@@ -5,3 +5,4 @@ resources:
   - ../kaylaatm10lite/app.yaml
   - ../router/app.yaml
   - ../sweatysummersack/app.yaml
+  - ../terrafirmagreg-modern/app.yaml

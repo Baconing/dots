@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minecraft-terrafirmagreg-modern
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/baconing/dots.git
+    targetRevision: master
+    path: kubernetes/home/games/minecraft/terrafirmagreg-modern/app
+
+  destination:
+    name: in-cluster
+    namespace: minecraft
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  
