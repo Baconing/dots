@@ -9,6 +9,16 @@
          sops
          colmena
 	 python3
+
+  	 p7zip
+  	 unzip
+  	 zip
+  	 unrar
+  	 gnutar
+  	 gzip
+  	 bzip2
+  	 lz4
+  	 zstd
        ];
  
      variables = {
