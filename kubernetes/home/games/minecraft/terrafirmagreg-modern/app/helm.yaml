@@ -59,7 +59,10 @@ spec:
             slug: terrafirmagreg-modern
             fileId: "8601844"
             includeMods:
-              - living-things
+              - particular-reforged
+              - wakes-reforged
+          
+          modUrls: []
 
         persistence:
           labels:
