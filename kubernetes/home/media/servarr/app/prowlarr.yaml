@@ -24,7 +24,7 @@ spec:
             limits:
               cpu: 300m
               memory: 512Mi
-          image: linuxserver/prowlarr:2.4.0
+          image: linuxserver/prowlarr:2.5.2
           ports:
             - containerPort: 9696
               protocol: TCP
