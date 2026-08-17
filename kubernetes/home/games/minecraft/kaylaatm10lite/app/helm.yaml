@@ -83,11 +83,18 @@ spec:
     name: in-cluster
     namespace: minecraft
 
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      jsonPointers:
+        - /spec/replicas
+
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
       - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
     automated:
       prune: true
       selfHeal: true

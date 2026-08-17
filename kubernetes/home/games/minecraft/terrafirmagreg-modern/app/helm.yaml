@@ -81,6 +81,12 @@ spec:
           external-dns.alpha.kubernetes.io/target: direct.saturn.ci
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      jsonPointers:
+        - /spec/replicas
+
   destination:
     name: in-cluster
     namespace: minecraft
@@ -90,6 +96,7 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
       - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
     automated:
       prune: true
       selfHeal: true
