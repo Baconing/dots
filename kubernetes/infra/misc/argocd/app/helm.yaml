@@ -57,6 +57,11 @@ spec:
 
         redis-ha:
           enabled: true
+          exporter:
+            enabled: true
+          haproxy:
+            metrics:
+              enabled: true
         
         applicationSet:
           replicas: 2
@@ -69,6 +74,11 @@ spec:
               cpu: 50m
               memory: 256Mi
 
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+
         controller:
           replicas: 1
 
@@ -79,6 +89,12 @@ spec:
             limits:
               cpu: 500m
               memory: 2Gi 
+          
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+
         dex:
           enabled: false
 
@@ -97,6 +113,11 @@ spec:
             limits:
               cpu: 200m
               memory: 1Gi
+
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
 
           extraContainers:
             - name: sops
@@ -135,6 +156,11 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
+
+          metrics:
+            enabled: true
+            serviceMontitor:
+              enabled: true
 
           ingress:
             enabled: true
