@@ -22,7 +22,7 @@ spec:
       valuesObject:
         image:
           repository: ghcr.io/justarchinet/archisteamfarm
-          tag: 6.3.8.3
+          tag: 6.3.9.5
 
         persistence:
           data:
