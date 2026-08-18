@@ -122,12 +122,19 @@ spec:
           extraContainers:
             - name: sops
               image: ghcr.io/baconing/argocd-sops-cmp:2.0.0
-              env:
-                - name: ACS_KUSTOMIZE_OPTIONS
-                  value: --load-restrictor LoadRestrictionsNone
               securityContext:
                 runAsUser: 999
                 runAsNonRoot: true
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 8Mi
+                limits:
+                  cpu: 100m
+                  memory: 16Mi
+              env:
+                - name: ACS_KUSTOMIZE_OPTIONS
+                  value: --load-restrictor LoadRestrictionsNone
               volumeMounts:
                 - name: var-files
                   mountPath: /var/run/argocd
