@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: seaweedfs-helm
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    chart: seaweedfs
+    repoURL: https://seaweedfs.github.io/seaweedfs-operator/
+    targetRevision: 1.5.8
+    helm:
+      releaseName: seaweedfs
+      valuesObject:
+        image:
+        registry: chrislusf
+        repository: seaweedfs-operator
+        tag: 1.0.35
+
+      grafanaDashboard:
+        enabled: true
+        additionalLabels:
+          grafana_dashboard: "1"
+
+      serviceMonitor:
+        enabled: true
+
+
+  destination:
+    name: in-cluster
+    namespace: seaweedfs
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

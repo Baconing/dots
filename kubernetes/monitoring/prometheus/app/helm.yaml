@@ -15,6 +15,11 @@ spec:
     helm:
       releaseName: prometheus-operator
       valuesObject:
+        crds:
+          create: true
+          upgradeJob:
+            enabled: true
+
         alertmanager:
           enabled: true
           alertManagerSpec:
