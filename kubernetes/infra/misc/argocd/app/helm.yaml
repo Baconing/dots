@@ -159,7 +159,7 @@ spec:
 
           metrics:
             enabled: true
-            serviceMontitor:
+            serviceMonitor:
               enabled: true
 
           ingress:
