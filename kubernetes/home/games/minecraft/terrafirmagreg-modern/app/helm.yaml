@@ -32,7 +32,7 @@ spec:
           INIT_MEMORY: 4096M
           MAX_MEMORY: 8192M
           
-          GENERIC_PACK: https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.13.7/TerraFirmaGreg-Modern-0.13.7-serverpack.zip
+          GENERIC_PACK: "https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.13.7/TerraFirmaGreg-Modern-0.13.7-serverpack.zip"
 
         livenessProbe:
           initialDelaySeconds: 300 # 5 minutes
@@ -45,7 +45,6 @@ spec:
           type: FORGE
           version: 1.20.1
           forgeVersion: 47.4.13
-          downloadModpackUrl: "https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.13.7/"
           whitelist: "Baconing,TickleKnees,Kamieo_"
           ops: "Baconing"
           overrideServerProperties: false
