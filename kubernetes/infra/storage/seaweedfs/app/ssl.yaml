@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: seaweedfs
+  namespace: seaweedfs
+spec:
+  secretName: seaweed.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - seaweed.saturn.ci

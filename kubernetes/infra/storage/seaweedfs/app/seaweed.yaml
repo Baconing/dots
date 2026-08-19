@@ -1,0 +1,39 @@
+apiVersion: seaweed.seaweedfs.com/v1
+kind: Seaweed
+metadata:
+  name: seaweedfs
+  namespace: seaweedfs
+spec:
+  image: chrislusf/seaweedfs:4.42
+  master:
+    replicas: 3
+  volume:
+    replicas: 1
+    requests:
+      storage: 10Gi
+  filer:
+    replicas: 2
+    s3:
+      enabled: true
+    ingress:
+      enabled: true
+      className: traefik
+      host: seaweed.saturn.ci
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: SeaweedFS
+        gethomepage.dev/group: Infrastructure
+        gethomepage.dev/icon: seaweedfs
+        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+        external-dns.alpha.kubernetes.io/enabled: "true"
+        external-dns.alpha.kubernetes.io/hostname: seaweed.saturn.ci
+        external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+      tls:
+        - hosts:
+            - seaweed.saturn.ci
+          secretName: seaweed.saturn.ci
+    config: |
+      [leveldb2]
+      enabled = true
+      dir = "/data/filerldb2"
