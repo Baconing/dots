@@ -4,7 +4,7 @@ metadata:
   name: seaweedfs
   namespace: seaweedfs
 spec:
-  image: chrislusf/seaweedfs:4.42
+  image: chrislusf/seaweedfs:4.44
   master:
     replicas: 3
   volume:
