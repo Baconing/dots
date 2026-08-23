@@ -46,8 +46,12 @@ spec:
             tls:
               secretName: traefik.saturn.ci
         ports:
+          web:
+            http:
+              maxHeaderBytes: 4194304
           websecure:
             http:
+              maxHeaderBytes: 4194304
               middlewares:
                 - traefik-forwardauth-authelia@kubernetescrd
 
