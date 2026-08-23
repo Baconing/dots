@@ -26,11 +26,11 @@ spec:
             memory: 4096Mi
           limits:
             cpu: 4
-            memory: 8192Mi
+            memory: 18432Mi
 
         extraEnv:
           INIT_MEMORY: 4096M
-          MAX_MEMORY: 8192M
+          MAX_MEMORY: 16384M
           
           GENERIC_PACK: "https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.13.7/TerraFirmaGreg-Modern-0.13.7-serverpack.zip"
 
