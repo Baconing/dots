@@ -4,7 +4,7 @@ resources:
   - ../cross-seed/app.yaml
   - ../jellyfin/app.yaml
   - ../navidrome/app.yaml
-  - ../qbittorrent/app.yaml
+  # - ../qbittorrent/app.yaml
   - ../servarr/app.yaml
-  - ../slskd/app.yaml
+  # - ../slskd/app.yaml
   - ../smb/app.yaml
