@@ -30,6 +30,20 @@ spec:
           cm:
             kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
 
+            resource.inclusions: |
+              - apiGroups:
+                - "discovery.k8s.io"
+                kinds:
+                - "EndpointSlice"
+                clusters:
+                - "*"
+              - apiGroups:
+                - ""
+                kinds:
+                - "Endpoints"
+                clusters:
+                - "*"
+
             admin.enabled: "false"
 
             oidc.config: |
