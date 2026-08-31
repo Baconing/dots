@@ -2,7 +2,7 @@
 { pkgs, ... }:
 {
     imports = [
-        ./mathematica
+        # ./mathematica # TODO: does not detect installer files.
     ];
 
     home.packages = with pkgs; [
