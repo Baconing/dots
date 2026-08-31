@@ -2,6 +2,7 @@
 { pkgs, ... }:
 {
     imports = [
+    	./eclipse
         # ./mathematica # TODO: does not detect installer files.
     ];
 
