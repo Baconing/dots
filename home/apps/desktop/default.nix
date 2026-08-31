@@ -4,6 +4,7 @@
         ./discord
 	./games
 	./jetbrains
+	./joplin
 	./librewolf
 	./school
     ];
