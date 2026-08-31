@@ -3,6 +3,7 @@
     imports = [
         ./git
         ./gpg
+	./java
         ./neovim
     ];
 
@@ -12,8 +13,8 @@
         fd
         file
         iperf3
-        ripgrep
         htop
         rclone
+        ripgrep
     ];
 }
