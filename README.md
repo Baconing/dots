@@ -95,6 +95,19 @@ Hardware that has been decommisioned, either temporarily or indefinitely.
 
 </details>
 
+# Cloud Reliance
+This setup *(currently)* relies on cloud services for the following applications:
+
+<details>
+<summary>Tunneling</summary>
+As a college student with access only to restricted networks, tunneling is nessacary for certain applications such as email.
+</details>
+
+<details>
+<summary>Cloud Backup</summary>
+Cloud backup is currently needed until a "buddy-backup" system with friends and/or family can be put into place.
+</details>
+
 ## Setup
 
 ### Kubernetes
@@ -134,6 +147,8 @@ After bootstrap, ArgoCD will automatically install all of the resources and upgr
 
 That is all of the necessary steps to start using Kubernetes. All that is left is to setup individual applications that don't have static configurations or that haven't been setup with a static configuration.
 Alternatively, start restoring data/configurations from backups.
+
+### Cloud
 
 
 ## Inspiration
