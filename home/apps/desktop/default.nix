@@ -2,8 +2,9 @@
 {
     imports = [
         ./discord
-	./librewolf
 	./games
+	./librewolf
+	./school
     ];
 
     home.packages = with pkgs; [
