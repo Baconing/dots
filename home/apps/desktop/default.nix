@@ -3,6 +3,7 @@
     imports = [
         ./discord
 	./games
+	./jetbrains
 	./librewolf
 	./school
     ];
