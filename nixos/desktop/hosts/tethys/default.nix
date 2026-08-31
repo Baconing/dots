@@ -11,7 +11,17 @@
         open = true;
         prime = {
             intelBusId = "PCI:0@0:2:0";
-	    nvidiaBusId = "PCI:1@0:0:0";
-	};
+     	    nvidiaBusId = "PCI:1@0:0:0";
+
+	    offload = {
+	        enable = true;
+		enableOffloadCmd = true;
+	    };
+    	};
     };
+
+    boot.kernelParams = [
+        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+	"nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    ];
 }
