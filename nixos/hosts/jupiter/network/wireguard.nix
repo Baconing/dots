@@ -5,7 +5,7 @@
     };
 
     networking.wireguard = {
-        enabled = true;
+        enable = true;
         interfaces.wg0 = {
             ips = ["192.168.10.2/24"];
 
