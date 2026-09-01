@@ -28,8 +28,7 @@
 
                     presharedKeyFile = config.sops.secrets.wireguard.preshared-key;
                 }
-            ]
-
+            ];
         };
     };
 
