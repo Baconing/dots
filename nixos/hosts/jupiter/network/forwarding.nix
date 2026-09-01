@@ -6,7 +6,7 @@ _:
     };
 
     networking.nftables = {
-        enabled = true;
+        enable = true;
         ruleset = ''
             table ip nat {
                 chain prerouting {
