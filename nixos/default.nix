@@ -15,7 +15,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     ./user.nix
-  ] ++ lib.optional (builtins.pathExists ./${hostname}) ./${hostname} ++ lib.optional (clustered) ./cluster;
+  ] ++ lib.optional (builtins.pathExists ./hosts/${hostname}) ./hosts/${hostname} ++ lib.optional (clustered) ./cluster;
 
   boot = {
     consoleLogLevel = lib.mkDefault 0;
