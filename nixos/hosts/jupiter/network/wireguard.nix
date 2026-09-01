@@ -16,7 +16,7 @@
             listenPort = 51820;
 
             # public key: lC874VXfC9NDZ00l9Zlje4tAoLkz0pyQq3Woa8J1ugo=
-            privateKeyFile = config.sops.secrets.wireguard-private-key;
+            privateKeyFile = config.sops.secrets.wireguard-private-key.path;
 
             peers = [
                 {
@@ -30,7 +30,7 @@
 
                     persistentKeepalive = 25;
 
-                    presharedKeyFile = config.sops.secrets.wireguard-preshared-key;
+                    presharedKeyFile = config.sops.secrets.wireguard-preshared-key.path;
                 }
             ];
         };
