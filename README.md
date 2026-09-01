@@ -73,6 +73,15 @@ Nodes here are named based off the moons of Jupiter.
 </details>
 
 <details>
+<summary>Cloud Hardware</summary>
+
+| Hostname  | Provider   | CPU     | RAM | Storage | Bandwidth | OS  | Location | Purpose | Comments          |
+| :-------: | :--------: | :-----: | :-: | :-----: | :-------: | :-: | :------: | :-----: | :---------------: |
+| `jupiter` | [OVHCloud] | 2 vCore | 4GB | 40GB🏃  | 500 Mbps  | ❄  | Vinthill | Tunnel  | [OVHCloud VPS-1]  |
+
+</details>
+
+<details>
 <summary>Decomissioned Hardware</summary>
 Hardware that has been decommisioned, either temporarily or indefinitely.
 
@@ -187,6 +196,10 @@ Alternatively, start restoring data/configurations from backups.
 
 <!-- Hardware: Other -->
 [Themis RES-12XR3]: https://www.mrcy.com/legacy_assets/siteassets/product-datasheets/rugged-servers/res12xr3_ds-0221-0003.pdf
+
+<!-- Cloud -->
+[OVHCloud]: https://ovhcloud.com/
+[OVHCloud VPS-1]: https://us.ovhcloud.com/vps/
 
 <!-- Inspiration -->
 [Wimpy's World]: https://github.com/wimpysworld

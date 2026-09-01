@@ -28,15 +28,6 @@
     in
     {
       homeConfigurations = {
-        "bacon@test1" = helper.makeDesktopHome {
-          hostname = "test1";
-          username = "bacon";
-        };
-        "bacon@test2" = helper.makeConsoleHome {
-          hostname = "test2";
-          username = "bacon";
-        };
-
         "bacon@skoll" = helper.makeConsoleHome {
           hostname = "skoll";
           username = "bacon";
@@ -79,6 +70,11 @@
         };
         "bacon@iocaste" = helper.makeConsoleHome {
           hostname = "iocaste";
+          username = "bacon";
+        };
+
+        "bacon@jupiter" = helper.makeConsoleHome {
+          hostname = "jupiter";
           username = "bacon";
         };
       };
@@ -138,6 +134,10 @@
             clusterTemplate = "m73";
             clusterRole = "node";
             clusterIP = "10.10.5.6";
+        };
+
+        jupiter = helper.makeConsoleNixOS {
+            hostname = "jupiter";
         };
       };
 
