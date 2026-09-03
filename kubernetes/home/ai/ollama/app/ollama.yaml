@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: ollama
-          image: ollama/ollama:0.32.14
+          image: ollama/ollama:0.33.3
           resources:
             limits:
               "gpu.intel.com/i915": "1"
