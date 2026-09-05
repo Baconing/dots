@@ -70,7 +70,7 @@ spec:
             database: stalwart
             username: stalwart
             existingSecret: stalwart-database
-            existingSecretKey: STALWART_STORE_PG_PASSWORD
+            existingSecretKey: POSTGRES_PASSWORD
 
         podDisruptionBudget:
           enabled: true
