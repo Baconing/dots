@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - database.secret.yaml
+  - helm.yaml
+  - hooks/postgres/init-job.yaml
+  # - hooks/jmap-apply/apply-job.yaml # TODO
+  # - hooks/jmap-apply/configmap.yaml # TODO

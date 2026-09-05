@@ -1,0 +1,111 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stalwart-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: stalwart-mail-ha
+    repoURL: https://l4gdev.github.io/helm-charts
+    targetRevision: 0.1.2
+    helm:
+      releaseName: stalwart
+      valuesObject:
+        image:
+          repository: docker.io/stalwartlabs/stalwart
+          tag: v0.16.20
+
+        # TODO: Come back to this after about a month of metrics collection after deployment.
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+          limits:
+            cpu: 2
+            memory: 2Gi
+
+        listen:
+          managesieve:
+            enabled: false
+
+        service:
+          mail:
+            type: LoadBalancer
+
+        ingress:
+          enabled: true
+          className: traefik
+          annotations:
+            kubernetes.io/ingress.class: traefik
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: Stalwart
+            gethomepage.dev/group: Mail
+            gethomepage.dev/icon: Stalwart
+            gethomepage.dev/weight: 1
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            external-dns.alpha.kubernetes.io/enabled: "true"
+            external-dns.alpha.kubernetes.io/hostname: stalwart.saturn.ci
+            external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+          hosts:
+            - host: stalwart.saturn.ci
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - secretName: stalwart.saturn.ci
+              hosts:
+                - stalwart.saturn.ci
+        
+        dataStore:
+          type: postgres
+          postgres:
+            host: postgres-rw.database.svc.cluster.local
+            port: 5432
+            database: stalwart
+            username: stalwart
+            existingSecret: stalwart-database
+            existingSecretKey: STALWART_STORE_PG_PASSWORD
+
+        podDisruptionBudget:
+          enabled: true
+          minAvailable: 1
+
+        autoScalinig:
+          enabled: true
+          minReplicas: 1
+          maxReplicas: 6
+          targetCPUUtilizationPercentage: 80
+        
+        metrics:
+          enabled: true
+          serviceMonitor:
+            enabled: true
+            interval: 30s
+            scrapeTimeout: 10s
+            labels:
+              release: prometheus-stack
+            # TODO
+            # bearerTokenSecret:
+            #   name:
+            #   key:
+          
+
+  destination:
+    name: in-cluster
+    namespace: homepage
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

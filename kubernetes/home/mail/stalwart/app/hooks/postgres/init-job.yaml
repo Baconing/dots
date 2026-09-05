@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: stalwart-init-database
+  namespace: mail
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.database.svc.cluster.local
+            - name: INIT_POSTGRES_DBNAME
+              value: stalwart
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-superuser
+                  key: password
+            - name: INIT_POSTGRES_USER
+              value: stalwart
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: stalwart-database
+                  key: POSTGRES_PASSWORD
