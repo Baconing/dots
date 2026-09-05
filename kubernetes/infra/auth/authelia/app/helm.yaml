@@ -205,10 +205,13 @@ spec:
                   - "nas.saturn.ci"
                   - "hass.saturn.ci"
 
+                  # mail
+                  - "stalwart.saturn.ci"
+
                   # games
                   - "asf.saturn.ci"
 
-                  # home
+                  # printer
                   - "printer.saturn.ci"
                   - "spoolman.saturn.ci"
                   - "orcaslicer.saturn.ci"
