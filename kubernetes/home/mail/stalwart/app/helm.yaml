@@ -83,7 +83,7 @@ spec:
           targetCPUUtilizationPercentage: 80
         
         metrics:
-          enabled: true
+          # enabled: true # todo: https://github.com/l4gdev/helm-charts/issues/9
           serviceMonitor:
             enabled: true
             interval: 30s
