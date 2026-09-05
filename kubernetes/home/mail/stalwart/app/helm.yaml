@@ -98,7 +98,7 @@ spec:
 
   destination:
     name: in-cluster
-    namespace: homepage
+    namespace: mail
 
   syncPolicy:
     syncOptions:
