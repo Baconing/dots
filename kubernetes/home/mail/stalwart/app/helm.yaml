@@ -103,10 +103,10 @@ spec:
             #   key:
 
         # change password right away and once we have hooks to just import stuff this should be better lol
-        recovery:
-          enabled: true
-          adminUser: admin
-          adminPassword: "admin"
+        # recovery:
+        #   enabled: false
+        #   adminUser: admin
+        #   adminPassword: "admin"
           
 
   destination:
