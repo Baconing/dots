@@ -177,7 +177,10 @@ spec:
                   memory: 64Mi
               env:
                 - name: ACS_KUSTOMIZE_OPTIONS
-                  value: --load-restrictor LoadRestrictionsNone
+                  valueFrom:
+                    configMapKeyRef:
+                      name: argocd-cm
+                      key: kustomize.buildOptions
               volumeMounts:
                 - name: var-files
                   mountPath: /var/run/argocd
