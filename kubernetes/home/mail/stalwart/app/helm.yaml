@@ -72,11 +72,18 @@ spec:
             existingSecret: stalwart-database
             existingSecretKey: POSTGRES_PASSWORD
 
+        extraEnv:
+          - name: STALWART_OIDC_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oidc-stalwart
+                key: oidc.client_secret
+
         podDisruptionBudget:
           enabled: true
           minAvailable: 1
 
-        autoScalinig:
+        autoScaling:
           enabled: true
           minReplicas: 1
           maxReplicas: 6
