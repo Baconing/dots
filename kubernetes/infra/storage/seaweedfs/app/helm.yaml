@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    chart: seaweedfs
+    chart: seaweedfs-operator
     repoURL: oci://ghcr.io/seaweedfs/seaweedfs-operator
     targetRevision: 1.0.38
     helm:
