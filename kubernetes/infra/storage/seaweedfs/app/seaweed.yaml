@@ -4,7 +4,6 @@ metadata:
   name: seaweedfs
   namespace: seaweedfs
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   image: chrislusf/seaweedfs:4.46
