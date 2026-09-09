@@ -8,7 +8,6 @@ metadata:
 spec:
   image: chrislusf/seaweedfs:4.46
   admin:
-    enabled: true
     ingress:
       enabled: true
       className: traefik
