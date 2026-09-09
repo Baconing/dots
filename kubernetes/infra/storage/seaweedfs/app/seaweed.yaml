@@ -9,7 +9,18 @@ spec:
   image: chrislusf/seaweedfs:4.46
   admin:
     extraArgs:
-      - "-ip.bind=0.0.0.0"
+      - "-ip=0.0.0.0"
+    env:
+      - name: WEED_ADMIN_USER
+        valueFrom:
+          secretKeyRef:
+            name: seaweed-admin
+            key: WEED_ADMIN_USER
+      - name: WEED_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: seaweed-admin
+            key: WEED_ADMIN_PASSWORD
     ingress:
       enabled: true
       className: traefik
