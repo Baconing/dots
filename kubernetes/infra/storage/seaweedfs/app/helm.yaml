@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: seaweedfs-helm
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
 
@@ -16,17 +14,17 @@ spec:
       releaseName: seaweedfs
       valuesObject:
         image:
-        registry: chrislusf
-        repository: seaweedfs-operator
-        tag: 1.0.35
+          registry: chrislusf
+          repository: seaweedfs-operator
+          tag: 1.0.35
 
-      grafanaDashboard:
-        enabled: true
-        additionalLabels:
-          grafana_dashboard: "1"
+        grafanaDashboard:
+          enabled: true
+          additionalLabels:
+            grafana_dashboard: "1"
 
-      serviceMonitor:
-        enabled: true
+        serviceMonitor:
+          enabled: true
 
 
   destination:
