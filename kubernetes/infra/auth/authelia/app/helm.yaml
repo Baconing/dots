@@ -197,11 +197,17 @@ spec:
 
               # Two Factor: Secured Resources
               - domain:
-                  # infra
-                  - "openbao.saturn.ci" # I haven't set it up and I'll need to expose its API routes (maybe not).
+                  # network
                   - "traefik.saturn.ci"
+
+                  # storage
                   - "longhorn.saturn.ci"
+                  - "seaweed.saturn.ci"
+
+                  # database
                   - "pgadmin.saturn.ci"
+
+                  # infra misc
                   - "argocd.saturn.ci"
                   - "headlamp.saturn.ci"
 
