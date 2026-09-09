@@ -10,8 +10,8 @@ spec:
 
   source:
     chart: seaweedfs
-    repoURL: https://seaweedfs.github.io/seaweedfs-operator/
-    targetRevision: 1.5.8
+    repoURL: oci://ghcr.io/seaweedfs/seaweedfs-operator
+    targetRevision: 1.0.38
     helm:
       releaseName: seaweedfs
       valuesObject:
