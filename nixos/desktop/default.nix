@@ -27,10 +27,16 @@
         }
     ];
 
-    boot.initrd.luks.devices."root" = {
-        device = "/dev/disk/by-label/ROOT";
-    };
+    boot.initrd = {
+        luks.devices."root" = {
+            device = "/dev/disk/by-label/ROOT";
+	};
 
+	unl0kr = {
+	    enable = true;
+	    allowVendorDrivers = true;
+	};
+    };
 
     networking.networkmanager.enable = true;
     users.users.bacon.extraGroups = [ "networkmanager" ];
