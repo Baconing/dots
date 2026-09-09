@@ -11,14 +11,14 @@ spec:
   source:
     chart: seaweedfs-operator
     repoURL: https://seaweedfs.github.io/seaweedfs-operator/
-    targetRevision: 1.0.41
+    targetRevision: 0.1.41
     helm:
       releaseName: seaweedfs
       valuesObject:
         image:
           registry: chrislusf
           repository: seaweedfs-operator
-          tag: 1.0.35
+          tag: 1.0.38
 
         grafanaDashboard:
           enabled: true
