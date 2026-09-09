@@ -9,7 +9,6 @@ spec:
   image: chrislusf/seaweedfs:4.46
   admin:
     enabled: true
-    replicas: 3
     ingress:
       enabled: true
       className: traefik
