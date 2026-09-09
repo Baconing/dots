@@ -23,7 +23,7 @@
     consoleLogLevel = lib.mkDefault 0;
     initrd.verbose = false;
     kernelModules = [ "vhost_vsock" ];
-    kernelPackages = lib.mkForce pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages;
 
     loader = {
       systemd-boot.enable = false;
