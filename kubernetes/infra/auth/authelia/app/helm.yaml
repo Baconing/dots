@@ -203,6 +203,7 @@ spec:
                   # storage
                   - "longhorn.saturn.ci"
                   - "seaweed.saturn.ci"
+                  - "filer.seaweed.saturn.ci"
 
                   # database
                   - "pgadmin.saturn.ci"
@@ -308,6 +309,9 @@ spec:
                   - "seerr.saturn.ci"
                   - "jellyfin.saturn.ci"
                   - "navidrome.saturn.ci"
+
+                  # storage
+                  - "s3.seaweed.saturn.ci"
 
                   # other
                   - "file.baconi.ng"

@@ -10,3 +10,29 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - seaweed.saturn.ci
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: seaweedfs-filer
+  namespace: seaweedfs
+spec:
+  secretName: filer.seaweed.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - filer.seaweed.saturn.ci
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: seaweedfs-s3
+  namespace: seaweedfs
+spec:
+  secretName: s3.seaweed.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - s3.seaweed.saturn.ci
