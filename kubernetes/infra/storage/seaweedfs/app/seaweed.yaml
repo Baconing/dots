@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  image: chrislusf/seaweedfs:4.42
+  image: chrislusf/seaweedfs:4.46
   master:
     replicas: 3
   volume:
