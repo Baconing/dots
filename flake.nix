@@ -34,7 +34,13 @@
         "bacon@tethys" = helper.makeHome {
           hostname = "tethys";
           username = "bacon";
-	  desktop = true;
+	        desktop = true;
+        };
+
+        "bacon@tarvos" = helper.makeHome {
+          hostname = "tarvos";
+          username = "bacon";
+          desktop = true;
         };
 
         "bacon@skoll" = helper.makeHome {
@@ -84,9 +90,14 @@
       };
 
       nixosConfigurations = {
-	tethys = helper.makeNixOS {
-	    hostname = "tethys";
-	    desktop = true;
+        tethys = helper.makeNixOS {
+            hostname = "tethys";
+            desktop = true;
+        };
+
+        tarvos = helper.makeNixOS {
+            hostname = "tarvos";
+            desktop = true;
         };
 
         skoll = helper.makeNixOS {

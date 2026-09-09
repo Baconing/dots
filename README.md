@@ -49,6 +49,7 @@ All my hardware is listed here regardless of their management state by this repo
 | :-------:  | :----------------------------: | :---------------------: | :---: | :-------------------: | :-----------------------------------------------------------------------------: | :----: | :--------------: | :---: | :----------------------------------------------------: |
 | `titan`    | [MSI MPG X570 GAMING PLUS]     | [AMD Ryzen 9 3900X]     | 32GB  | 2TB🏃+512GB🏃+2TB👴   | [NVIDIA RTX 2070 Super]                                                         | 🖥      | 🎭(❄+🪟)        | 🤷    | Primary Desktop                                        |
 | `tethys`   | [ThinkPad P17 Gen 1]           | [Intel Core i7-10850H]  | 32GB  | 512GB🏃+256GB🏃       | [NVIDIA Quadro T2000 Mobile / Max-Q] + 10th Gen Intel UHD Graphics (@ 1.15 GHz) | 💻      | 🎭(🐧+🪟)        | 🤷    | Primary Laptop                                         |
+| `tarvos`   | [Microsoft Surface Pro 7]      | [Intel Core i7-1065G7]  | 12GB  | 256GB🏃               | Intel Iris Plus Graphics (@ 1.10 GHz)                                           | 💻      | ❄              | ✅     | Secondary/Portable Laptop                             |
 | `skoll`    | [MSI MPG B550 GAMING PLUS]     | [AMD Ryzen 7 2700X]     | 32GB  | 500GB🚶               | TBA                                                                             | ☁     | ❄               | ⏲    | Primary Compute                                        |
 | `hyperion` | [HP ProDesk 400 G3 SFF]        | [Intel Core i3-6100]    | 4GB   | 256GB🚶               | [Intel HD Graphics 530]                                                         | 🛜     | 🔍(OPNSense)     | 🤷    | Router                                                 |
 | `phoebe`   | [Asus H81M-A]                  | [Intel Core i3-4150T]   | 16GB  | 64GB🚶+(4x8TB👴)      | [Intel HD Graphics 4400]                                                        | 💾     | 🔍(TrueNAS Core) | 🤷    | NAS                                                    |
@@ -107,6 +108,7 @@ Hardware that has been decommisioned, either temporarily or indefinitely.
 <!-- Hardware: Boards -->
 [MSI MPG X570 GAMING PLUS]: https://www.msi.com/Motherboard/MPG-X570-GAMING-PLUS/Specification
 [ThinkPad X1 Carbon Gen 7]: https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_X1_Carbon_7th_Gen/ThinkPad_X1_Carbon_7th_Gen_Spec.pdf
+[Microsoft Surface Pro 7]: https://support.microsoft.com/en-us/surface/models/surface-pro-7-specs-and-features
 [Beelink EQR6 SEI]: https://www.amazon.com/dp/B0CKQD5HC9
 [HP ProDesk 400 G3 SFF]: https://www.amazon.com/dp/B0849SH3XK
 [Asus H81M-A]: https://www.asus.com/us/supportonly/h81ma/
@@ -115,6 +117,7 @@ Hardware that has been decommisioned, either temporarily or indefinitely.
 <!-- Hardware: CPU -->
 [AMD Ryzen 9 3900X]: https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-3000-series/amd-ryzen-9-3900x.html
 [Intel Core i7-10850H]: https://www.intel.com/content/www/us/en/products/sku/201897/intel-core-i710850h-processor-12m-cache-up-to-5-10-ghz/specifications.html
+[Intel Core i7-1065G7]: https://www.intel.com/content/www/us/en/products/sku/196597/intel-core-i71065g7-processor-8m-cache-up-to-3-90-ghz/specifications.html
 [AMD Ryzen 7 5700U]: https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-7-5700u.html#amd_support_product_spec
 [Intel Core i3-6100]: https://www.intel.com/content/www/us/en/products/sku/90729/intel-core-i36100-processor-3m-cache-3-70-ghz/specifications.html
 [Intel Core i3-4150T]: https://www.intel.com/content/www/us/en/products/sku/77487/intel-core-i34150t-processor-3m-cache-3-00-ghz/specifications.html
