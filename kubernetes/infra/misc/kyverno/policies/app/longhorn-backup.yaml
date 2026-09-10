@@ -1,0 +1,48 @@
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: require-pvc-backup
+  annotations:
+    policies.kyverno.io/title: Require PVC Backup Labels
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: critical
+    policies.kyverno.io/subject: PersistentVolumeClaim
+spec:
+  validationActions:
+    - Deny
+
+  matchConstraints:
+    resourceRules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+          - DELETE
+        resources:
+          - persistentvolumeclaims
+
+  validations:
+    - expression: >-
+        (
+          has(object.metadata.labels) && 
+          'recurring-job.longhorn.io/source' in object.metadata.labels && 
+          object.metadata.labels['recurring-job.longhorn.io/source'] == 'enabled' &&
+          'recurring-job-group.longhorn.io/backup' in object.metadata.labels && 
+          object.metadata.labels['recurring-job-group.longhorn.io/backup'] == 'enabled'
+        ) || (
+          has(object.metadata.labels) && 
+          'backup.kyverno.io/exclude' in object.metadata.labels && 
+          object.metadata.labels['backup.kyverno.io/exclude'] == 'true'
+        ) || (
+          has(object.metadata.annotations) && 
+          'backup.kyverno.io/exclude' in object.metadata.annotations && 
+          object.metadata.annotations['backup.kyverno.io/exclude'] == 'true'
+        )
+      message: >-
+        PVCs must be configured for Longhorn backups. Please add the labels
+        'recurring-job.longhorn.io/source: enabled' and 'recurring-job-group.longhorn.io/backup: enabled'.
+        If this PVC does not need backups, explicitly acknowledge this by adding the label or annotation 
+        'backup.kyverno.io/exclude: "true"'.

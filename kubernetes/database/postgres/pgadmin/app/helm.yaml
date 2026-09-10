@@ -67,8 +67,9 @@ spec:
           minReplicas: 1 # todo: 2
           maxReplicas: 3
 
-        commonLabels:
-          recurring-job-group.longhorn.io/backup: enabled # persistentVolume.labels doesn't exist.
+        commonLabels: # persistentVolume.labels doesn't exist.
+          recurring-job.longhorn.io/source: enabled
+          recurring-job-group.longhorn.io/backup: enabled
 
         persistentVolume:            
           enabled: true
