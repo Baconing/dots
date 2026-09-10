@@ -47,6 +47,9 @@ spec:
       - "-disk=ssd"
     requests:
       storage: 10Gi
+    storageClassName: longhorn
+    storageLabels:
+      backup.kyverno.io/exclude: "true"
   filer:
     replicas: 2
     s3:

@@ -29,6 +29,8 @@ spec:
 
   validations:
     - expression: >-
+        !has(object.spec.storageClassName) || 
+        object.spec.storageClassName != 'longhorn' || 
         (
           has(object.metadata.labels) && 
           'recurring-job.longhorn.io/source' in object.metadata.labels && 
