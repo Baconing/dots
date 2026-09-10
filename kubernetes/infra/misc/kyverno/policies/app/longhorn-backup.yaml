@@ -11,6 +11,10 @@ spec:
   validationActions:
     - Deny
 
+  evaluation:
+    background:
+      enabled: true
+
   matchConstraints:
     resourceRules:
       - apiGroups:
@@ -20,7 +24,6 @@ spec:
         operations:
           - CREATE
           - UPDATE
-          - DELETE
         resources:
           - persistentvolumeclaims
 
