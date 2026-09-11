@@ -89,7 +89,7 @@ spec:
             - mountPath: /dev/serial
               name: serial-devices
         - name: moonraker
-          image: mkuf/moonraker:v0.10.0
+          image: mkuf/moonraker:v0.11.0
           args:
             - "-d"
             - "/srv/printer_data"
