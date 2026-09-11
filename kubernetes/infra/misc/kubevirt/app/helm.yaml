@@ -37,17 +37,17 @@ spec:
 
               featureGates: []
               
-              cpuModel: "host-passthrough"
+            cpuModel: "host-passthrough"
 
-              cpuRequest: "1" # 1 core by default
+            cpuRequest: "1" # 1 core by default
 
-              vmStateStorageClass: "longhorn"
+            vmStateStorageClass: "longhorn"
 
-              smbios:
-                manufacturer: "saturn.ci"
-                product: "Generic Virtual Machine"
-                version: "1.0"
-                sku: "SAT-GEN-###"
+            smbios:
+              manufacturer: "saturn.ci"
+              product: "Generic Virtual Machine"
+              version: "1.0"
+              sku: "SAT-GEN-###"
 
         monitoring:
           enabled: true
