@@ -10,8 +10,8 @@ spec:
 
   source:
     chart: cdi
-    repoURL: 
-    targetRevision: 
+    repoURL: https://encircle360-oss.github.io/helm-charts/ 
+    targetRevision: 0.1.1
     helm:
       releaseName: kubevirt-cdi
       valuesObject:
