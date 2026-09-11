@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubevirt-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: kubevirt
+    repoURL: https://encircle360-oss.github.io/helm-charts/
+    targetRevision: 0.2.1
+    helm:
+      releaseName: kubevirt
+      valuesObject:
+        image:
+          registry: quay.io
+          repository: kubevirt/virt-operator
+          tag: "v1.9.0"
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 256Mi
+          limits:
+            cpu: 1
+            memory: 512Mi
+
+        kubevirt:
+          deploy: true
+
+          configuration:
+            developerConfiguration:
+              useEmulation: false
+
+              featureGates: []
+              
+              cpuModel: "host-passthrough"
+
+              cpuRequest: "1" # 1 core by default
+
+              vmStateStorageClass: "longhorn"
+
+              smbios:
+                manufacturer: "saturn.ci"
+                product: "Generic Virtual Machine"
+                version: "1.0"
+                sku: "SAT-GEN-###"
+
+        monitoring:
+          enabled: true
+
+  destination:
+    name: in-cluster
+    namespace: kubevirt
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true

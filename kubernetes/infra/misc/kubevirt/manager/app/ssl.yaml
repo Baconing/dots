@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kubevirt-manager
+  namespace: kubevirt
+spec:
+  secretName: kubevirt.saturn.ci
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - kubevirt.saturn.ci
