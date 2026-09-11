@@ -51,7 +51,7 @@ spec:
           maxReplicas: 6
 
         prometheus:
-          enabled: true
+          enabled: false # TODO
 
   destination:
     name: in-cluster
