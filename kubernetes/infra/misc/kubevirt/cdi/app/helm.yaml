@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubevirt-cdi-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: cdi
+    repoURL: 
+    targetRevision: 
+    helm:
+      releaseName: kubevirt-cdi
+      valuesObject:
+        image:
+          registry: quay.io
+          repository: kubevirt/cdi-operator
+          tag: "v1.66.1"
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 2
+            memory: 768Mi
+
+  destination:
+    name: in-cluster
+    namespace: kubevirt
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
