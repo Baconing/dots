@@ -10,8 +10,8 @@ spec:
 
   source:
     chart: kubevirt-manager
-    repoURL: 
-    targetRevision: 
+    repoURL: https://charts.christianhuth.de 
+    targetRevision: 0.7.0
     helm:
       releaseName: kubevirt-manager
       valuesObject:
