@@ -17,7 +17,7 @@ spec:
       valuesObject:
         image:
           repository: docker.io/stalwartlabs/stalwart
-          tag: v0.16.20
+          tag: v0.16.21
 
         # TODO: Come back to this after about a month of metrics collection after deployment.
         resources:
