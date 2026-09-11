@@ -37,7 +37,7 @@ spec:
             - host: kubevirt.saturn.ci
               paths:
                 - path: /
-                  type: ImplementationSpecific
+                  pathType: ImplementationSpecific
           tls:
             - secretName: kubevirt.saturn.ci
               hosts:
