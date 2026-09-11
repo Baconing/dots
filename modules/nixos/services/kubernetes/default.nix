@@ -125,6 +125,7 @@ in {
 
         environment.defaultPackages = with pkgs; [
             argocd
+	    kubevirt
         ];
 
         services.openiscsi = {

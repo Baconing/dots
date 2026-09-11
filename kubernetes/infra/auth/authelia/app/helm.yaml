@@ -211,6 +211,7 @@ spec:
                   # infra misc
                   - "argocd.saturn.ci"
                   - "headlamp.saturn.ci"
+                  - "kubevirt.saturn.ci"
 
                   # external services
                   - "router.saturn.ci"
