@@ -18,7 +18,7 @@ spec:
         image:
           registry: chrislusf
           repository: seaweedfs-operator
-          tag: 1.0.38
+          tag: 1.0.39
 
         grafanaDashboard:
           enabled: true
