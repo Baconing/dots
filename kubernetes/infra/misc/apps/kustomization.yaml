@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - ../argocd/app.yaml
   - ../headlamp/app.yaml
+  - ../kubevirt/app.yaml
   - ../kyverno/app.yaml

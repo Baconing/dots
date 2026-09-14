@@ -46,6 +46,9 @@ spec:
               - name: kyverno
                 source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_kyverno
                 version: 0.1.0
+              - name: kubevirt
+                source: https://artifacthub.io/packages/headlamp/stianfro-headlamp-kubevirt/headlamp_kubevirt
+                version: 0.1.0
 
         resources:
           requests:
