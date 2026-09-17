@@ -13,5 +13,6 @@
         google-chrome
 	termius
 	freelens-bin
+	slack
     ];
 }
