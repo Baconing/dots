@@ -159,6 +159,32 @@ Alternatively, start restoring data/configurations from backups.
 
 ### Cloud
 
+#### Jupiter
+
+Jupiter is the OVHcloud VPS responsible for tunneling traffic. Installing NixOS is fairly easy using nixos-anywhere:
+
+1. Install a operating system with `kexec` support from the OVHcloud image repository (Debian 12).
+2. Create a temporary working directories:
+```bash
+export JUPITER_DIR=$(mktemp)
+mkdir $JUPITER_DIR/ssh
+mkdir $JUPITER_DIR/sops
+```
+2. Generate a temporary SSH key using `ssh-keygen`:
+```bash
+ssh-keygen -q -t ed25519 -N "" -f $JUPITER_DIR/ssh/id_ed25519
+```
+3. Add `cat $JUPITER_DIR/ssh/id_ed25519` to `/root/.ssh/authorized_keys` on the VPS using your prefered method.
+4. Write the Jupiter SOPS key to a temporary directory:
+```bash
+mkdir -p $JUPITER_DIR/sops/var/lib/private/sops/age/
+vim $JUPITER_KEY_DIR/sops/var/lib/private/sops/age/keys.txt
+```
+4. Use nixos-anywhere to install the system (replacing \<VPS-IP\> with the actual VPS IP):
+```bash
+nix run github:nix-community/nixos-anywhere -- --flake .#jupiter root@<VPS IP> -i $JUPITER_DIR/ssh/id_ed25519 --extra-files $JUPITER_DIR/sops
+```
+
 
 ## Inspiration
 [Wimpy's World] - README format, file structure, general introduction to Nix syntax.
