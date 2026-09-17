@@ -29,7 +29,10 @@
             inputs
             outputs;
         };
-        modules = [ ../nixos ];
+        modules = [
+	    inputs.disko.nixosModules.disko
+	    ../nixos
+	];
     };
 
     forAllSystems = inputs.nixpkgs.lib.genAttrs [

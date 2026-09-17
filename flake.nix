@@ -12,11 +12,14 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     colmena.url = "github:zhaofengli/colmena";
   };
 
   outputs = 
-    { self, nixpkgs, colmena, ... }@inputs:
+    { self, nixpkgs, disko, colmena, ... }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
