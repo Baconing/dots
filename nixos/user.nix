@@ -4,12 +4,12 @@
 
   sops.secrets.root-password = {
     sopsFile = ./user.secret.yaml;
-    requiredForUsers = true;
+    neededForUsers = true;
   };
 
   sops.secrets.bacon-password = {
     sopsFile = ./user.secret.yaml;
-    requiredForUsers = true;
+    neededForUsers = true;
   };
 
   users.users.root = {
