@@ -33,7 +33,7 @@ spec:
               traefik.ingress.kubernetes.io/router.tls: "true"
               traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
               external-dns.alpha.kubernetes.io/hostname: saturn.ci
-              external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+              external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
             hosts:
               - host: "saturn.ci"
                 paths:

@@ -54,7 +54,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.alpha.kubernetes.io/enabled: "true"
     external-dns.alpha.kubernetes.io/hostname: nas.saturn.ci
-    external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+    external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
 spec:
   tls:
     - secretName: nas.saturn.ci

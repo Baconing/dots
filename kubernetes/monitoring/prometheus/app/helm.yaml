@@ -54,7 +54,7 @@ spec:
               traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
               external-dns.alpha.kubernetes.io/enabled: "true"
               external-dns.alpha.kubernetes.io/hostname: alerts.saturn.ci
-              external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+              external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
             hosts: ["alerts.saturn.ci"]
             paths: ["/"]
             pathType: Prefix
@@ -137,7 +137,7 @@ spec:
               traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
               external-dns.alpha.kubernetes.io/enabled: "true"
               external-dns.alpha.kubernetes.io/hostname: prometheus.saturn.ci
-              external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+              external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
             hosts: ["prometheus.saturn.ci"]
             paths: ["/"]
             pathType: Prefix
@@ -164,7 +164,7 @@ spec:
             #   traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
             #   external-dns.alpha.kubernetes.io/enabled: "true"
             #   external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ci
-            #   external-dns.alpha.kubernetes.io/target: direct.saturn.ci
+            #   external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
             # hosts: ["thanos.saturn.ci"]
             # paths: ['/']
             # pathType: Prefix
