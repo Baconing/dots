@@ -26,6 +26,7 @@
 
                     allowedIPs = [
                         "192.168.10.0/24"
+                        "10.0.0.0/8"
                     ];
 
                     persistentKeepalive = 25;

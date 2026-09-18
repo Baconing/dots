@@ -15,7 +15,7 @@ _:
                     iifname "eth0" tcp dport 2222 return
                     iifname "eth0" udp dport 51820 return
                     iifname "eth0" ip protocol icmp return
-                    iifname "eth0" dnat to 10.254.0.1
+                    iifname "eth0" dnat to 192.168.10.1
                 }
 
                 chain postrouting {
