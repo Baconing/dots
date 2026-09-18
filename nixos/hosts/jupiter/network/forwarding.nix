@@ -12,16 +12,16 @@ _:
                 chain prerouting {
                     type nat hook prerouting priority dstnat;
 
-                    iifname "eth0" tcp dport 2222 return
-                    iifname "eth0" udp dport 51820 return
-                    iifname "eth0" ip protocol icmp return
-                    iifname "eth0" dnat to 192.168.10.1
+                    iifname "ens3" tcp dport 2222 return
+                    iifname "ens3" udp dport 51820 return
+                    iifname "ens3" ip protocol icmp return
+                    iifname "ens3" dnat to 192.168.10.1
                 }
 
                 chain postrouting {
                     type nat hook postrouting priority srcnat;
 
-                    oifname "eth0" iifname "wg0" masquerade
+                    oifname "ens3" iifname "wg0" masquerade
                 }
             }
 
@@ -47,8 +47,8 @@ _:
 
                     ct state established,related accept
 
-                    iifname "eth0" oifname "wg0" accept
-                    iifname "wg0" oifname "eth0" accept
+                    iifname "ens3" oifname "wg0" accept
+                    iifname "wg0" oifname "ens3" accept
                 }
 
                 chain output {
