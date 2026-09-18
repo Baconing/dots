@@ -22,10 +22,10 @@
                 {
                     name = "router";
                     publicKey = "6GFSjg8oL/fwBft9tCccaJLATDhtJaPiS4+hRY2GHRg=";
-                    endpoint = "direct.saturn.ci";
+                    endpoint = "direct.saturn.ci:51820";
 
                     allowedIPs = [
-                        "192.168.10.1/24"
+                        "192.168.10.1/32"
                     ];
 
                     persistentKeepalive = 25;
