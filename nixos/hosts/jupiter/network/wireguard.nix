@@ -25,7 +25,7 @@
                     endpoint = "direct.saturn.ci:51820";
 
                     allowedIPs = [
-                        "192.168.10.1/32"
+                        "192.168.10.0/24"
                     ];
 
                     persistentKeepalive = 25;
