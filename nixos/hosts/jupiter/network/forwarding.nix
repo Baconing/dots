@@ -13,6 +13,7 @@ _:
                     type nat hook prerouting priority dstnat;
 
                     iifname "eth0" tcp dport 2222 return
+                    iifname "eth0" tcp dport 51820 return
                     iifname "eth0" dnat to 10.254.0.1
                 }
 
@@ -33,6 +34,7 @@ _:
                     ct state established,related accept
 
                     tcp dport 2222 accept
+                    tcp dport 51820 accept
 
                     iifname "wg0" accept
                 }
