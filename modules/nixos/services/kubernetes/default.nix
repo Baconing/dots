@@ -81,6 +81,12 @@ in {
               then "server"
               else "agent";
 
+            gracefulNodeShutdown = {
+                enable = true;
+                shutdownGracePeriod = "1m";
+                shutdownGracePeriodCriticalPods = "10s";
+            };
+
             # extraKubeletConfig = {
             #     registerWithTaints = cfg.taints;
             # };
