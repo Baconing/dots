@@ -105,7 +105,7 @@ in {
             "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
             "--flannel-backend=none"
             "--disable-network-policy"
-        ] ++ lib.optional (cfg.role == "primary" || cfg.role == "control") [
+        ] ++ lib.optionals (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
 	        "--disable-helm-controller"
         ];
