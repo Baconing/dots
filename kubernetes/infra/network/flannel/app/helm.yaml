@@ -26,7 +26,7 @@ spec:
               repository: ghcr.io/flannel-io/flannel-cni-plugin
               tag: v1.9.1-flannel3
           
-          cniBinDir: "/var/lib/rancher/k3s/data/cni"
+          cniBinDir: "/opt/cni/bin"
           cniConfDir: "/var/lib/rancher/k3s/agent/etc/cni/net.d"
           
           backend: "vxlan"

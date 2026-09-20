@@ -104,6 +104,10 @@ in {
         services.k3s.extraFlags = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
 	        "--disable-helm-controller"
+        ];
+
+        services.k3s.extraFlags = [
+            "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
             "--flannel-backend=none"
             "--disable-network-policy"
         ];
@@ -118,9 +122,32 @@ in {
             8472
         ];
 
-        virtualisation.containerd.enable = true;
+        virtualisation.containerd = {
+            enable = true;
+            settings.plugins."io.containerd.grpc.v1.cri".cni = {
+                bin_dir = "/opt/cni/bin";
+                conf_dir = "/var/lib/rancher/k3s/agent/etc/cni/net.d";
+            };
+            settings.plugins."io.containerd.grpc.v1.cri" = {
+                sandbox_image = "docker.io/rancher/mirrored-pause:3.6";
+            };
+        };
+
+        # Create /opt/cni/bin and symlink the default K3s CNI binaries to it.
+        systemd.tmpfiles.rules = [
+            "d /opt/cni/bin 0755 root root -"
+            
+            "L+ /opt/cni/bin/cni - - - - /var/lib/rancher/k3s/data/current/bin/cni"
+            "L+ /opt/cni/bin/bandwidth - - - - /opt/cni/bin/cni"
+            "L+ /opt/cni/bin/bridge - - - - /opt/cni/bin/cni"
+            "L+ /opt/cni/bin/firewall - - - - /opt/cni/bin/cni"
+            "L+ /opt/cni/bin/host-local - - - - /opt/cni/bin/cni"
+            "L+ /opt/cni/bin/loopback - - - - /opt/cni/bin/cni"
+            "L+ /opt/cni/bin/portmap - - - - /opt/cni/bin/cni"
+        ];
 
         environment.systemPackages = with pkgs; [
+            cni-plugins
             nfs-utils
             cifs-utils
         ];
