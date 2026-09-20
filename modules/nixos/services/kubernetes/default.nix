@@ -109,10 +109,10 @@ in {
 
         services.k3s.extraFlags = [
             "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
-            "--disable-network-policy"
         ] ++ lib.optionals (cfg.role == "primary" || cfg.role == "control") [
             "--tls-san=${cfg.vip}"
             "--flannel-backend=none"
+            "--disable-network-policy"
 	        "--disable-helm-controller"
         ];
 
