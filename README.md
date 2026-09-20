@@ -144,10 +144,10 @@ After the cluster has been created with at least one node, Flannel must be insta
 helm dependency update ./kubernetes/bootstrap/flannel
 
 # Use Helm to generate the Flannel bootstrap manifests and apply them.
-helm template flannel ./kubernetes/bootstrap/flannel --namespace kube-flannel | kubectl apply --server-side -f-
+helm template flannel ./kubernetes/bootstrap/flannel --namespace kube-flannel | sudo kubectl apply --server-side -f-
 
 # Wait and verify that Flannel is ready before continuing.
-kubectl wait --for=condition=Ready ds/kube-flannel-ds --timeout=60s -n kube-flannel
+sudo kubectl wait --for=condition=Ready ds/kube-flannel-ds --timeout=60s -n kube-flannel
 ```
 
 #### 2. ArgoCD Bootstrap
@@ -159,7 +159,7 @@ After Flannel has been installed, the next step is bootstrapping ArgoCD to start
 helm dependency update ./kubernetes/bootstrap
 
 # Use Helm to generate the ArgoCD bootstrap manifests and apply them.
-helm template argocd ./kubernetes/bootstrap --namespace argocd | kubectl apply --server-side -f-
+helm template argocd ./kubernetes/bootstrap --namespace argocd | sudo kubectl apply --server-side -f-
 ```
 
 TODO: age secret bootstrap

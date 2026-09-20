@@ -105,6 +105,7 @@ in {
             "--tls-san=${cfg.vip}"
 	        "--disable-helm-controller"
             "--flannel-backend=none"
+            "--disable-network-policy"
         ];
 
         services.k3s.clusterInit = lib.mkIf (cfg.role == "primary" && cfg.init) true;
@@ -126,7 +127,8 @@ in {
 
         environment.defaultPackages = with pkgs; [
             argocd
-	    kubevirt
+	        kubevirt
+            kubernetes-helm
         ];
 
         services.openiscsi = {
