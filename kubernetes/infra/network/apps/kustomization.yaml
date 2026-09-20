@@ -4,5 +4,6 @@ resources:
   - ../cert-manager/app.yaml
   # - ../cloudflare/app.yaml
   - ../external-dns/app.yaml
+  - ../flannel/app.yaml
   - ../metallb/app.yaml
   - ../traefik/app.yaml

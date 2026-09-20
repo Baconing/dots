@@ -7,3 +7,6 @@ dependencies:
   - name: argo-cd
     version: 10.4.0
     repository: https://argoproj.github.io/argo-helm
+  - name: flannel
+    version: v0.28.9
+    repository: https://flannel-io.github.io/flannel/

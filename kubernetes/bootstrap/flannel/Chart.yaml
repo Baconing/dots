@@ -1,0 +1,9 @@
+apiVersion: v2
+name: flannel
+description: Bootstraps Flannel and a default configuration.
+type: application
+version: 1.0.0
+dependencies:
+  - name: flannel
+    version: v0.28.9
+    repository: https://flannel-io.github.io/flannel/

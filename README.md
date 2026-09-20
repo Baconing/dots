@@ -135,13 +135,30 @@ A fresh K3s token will be created at `/var/lib/rancher/k3s/server/token`, add/re
 
 Then, install NixOS on every other node as normal. Additional control plane nodes should automatically be added to the etcd cluster.
 
+#### 2. Flannel Bootstrap
+
+After the cluster has been created with at least one node, Flannel must be installed to allow Pod networking since the default Flannel installation on K3s has been disabled.
+
+```bash
+# Pull the Flannel Helm chart.
+helm dependency update ./kubernetes/bootstrap/flannel
+
+# Use Helm to generate the Flannel bootstrap manifests and apply them.
+helm template flannel ./kubernetes/bootstrap/flannel --namespace kube-flannel | kubectl apply --server-side -f-
+
+# Wait and verify that Flannel is ready before continuing.
+kubectl wait --for=condition=Ready ds/kube-flannel-ds --timeout=60s -n kube-flannel
+```
+
 #### 2. ArgoCD Bootstrap
 
-After all (or just one) of the nodes have been setup, the next step is bootstrapping ArgoCD to start syncing resources in this GitHub repository.
+After Flannel has been installed, the next step is bootstrapping ArgoCD to start syncing resources in this GitHub repository.
 
-```
+```bash
+# Pull the ArgoCD Helm chart.
 helm dependency update ./kubernetes/bootstrap
 
+# Use Helm to generate the ArgoCD bootstrap manifests and apply them.
 helm template argocd ./kubernetes/bootstrap --namespace argocd | kubectl apply --server-side -f-
 ```
 
