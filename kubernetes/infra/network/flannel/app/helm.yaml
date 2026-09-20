@@ -10,8 +10,8 @@ spec:
 
   source:
     chart: flannel
-    repoURL: 
-    targetRevision: 
+    repoURL: https://flannel-io.github.io/flannel/
+    targetRevision: v0.28.9
     helm:
       releaseName: flannel
       valuesObject:
@@ -23,7 +23,7 @@ spec:
             tag: v0.28.9
           flannel_cni:
             image:
-              repository: ghcr.io/flannel-io/flannel-cni
+              repository: ghcr.io/flannel-io/flannel-cni-plugin
               tag: v1.9.1-flannel3
           
           cniBinDir: "/var/lib/rancher/k3s/data/cni"

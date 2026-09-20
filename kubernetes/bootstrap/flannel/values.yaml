@@ -7,7 +7,7 @@ flannel:
       tag: v0.28.9
     flannel_cni:
       image:
-        repository: ghcr.io/flannel-io/flannel-cni
+        repository: ghcr.io/flannel-io/flannel-cni-plugin
         tag: v1.9.1-flannel3
     
     cniBinDir: "/var/lib/rancher/k3s/data/cni"
