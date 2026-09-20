@@ -77,7 +77,7 @@ spec:
       - ServerSideApply=true
       - FailOnSharedResource=true
     automated:
-      prune: true
+      prune: false
       selfHeal: true
 
   
