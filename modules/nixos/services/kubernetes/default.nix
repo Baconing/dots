@@ -101,15 +101,13 @@ in {
             "traefik"
         ];
 
-        services.k3s.extraFlags = lib.mkIf (cfg.role == "primary" || cfg.role == "control") [
-            "--tls-san=${cfg.vip}"
-	        "--disable-helm-controller"
-        ];
-
         services.k3s.extraFlags = [
             "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
             "--flannel-backend=none"
             "--disable-network-policy"
+        ] ++ lib.optional (cfg.role == "primary" || cfg.role == "control") [
+            "--tls-san=${cfg.vip}"
+	        "--disable-helm-controller"
         ];
 
         services.k3s.clusterInit = lib.mkIf (cfg.role == "primary" && cfg.init) true;
