@@ -10,15 +10,15 @@ spec:
 
   source:
     chart: slskd
-    repoURL: oci://ghcr.io/alexmorbo/helm-charts/slskd
-    targetRevision: 0.3.0
+    repoURL: oci://ghcr.io/baconing/charts/slskd
+    targetRevision: 0.4.0
     helm:
       releaseName: slskd
       valuesObject:
         image:
           registry: ghcr.io
           repository: slskd/slskd
-          tag: 0.25.1
+          tag: 0.26.0
 
         app:
           timezone: "America/Detroit"
@@ -109,6 +109,9 @@ spec:
           enabled: true
           storageClass: longhorn
           size: 1Gi
+          labels:
+            recurring-job.longhorn.io/source: enabled
+            recurring-job-group.longhorn.io/backup: enabled
 
         volumes:
           - name: media
