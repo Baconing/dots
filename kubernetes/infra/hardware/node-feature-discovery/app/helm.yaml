@@ -26,7 +26,6 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
       - FailOnSharedResource=true
     automated:
       prune: true

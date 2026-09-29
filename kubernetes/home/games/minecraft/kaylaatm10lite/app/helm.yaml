@@ -93,7 +93,6 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
       - FailOnSharedResource=true
       - RespectIgnoreDifferences=true
     automated:

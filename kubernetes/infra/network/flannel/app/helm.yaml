@@ -74,7 +74,6 @@ spec:
 
   syncPolicy:
     syncOptions:
-      - ServerSideApply=true
       - FailOnSharedResource=true
     automated:
       prune: false
