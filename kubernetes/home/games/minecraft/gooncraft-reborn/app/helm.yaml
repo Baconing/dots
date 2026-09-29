@@ -57,6 +57,9 @@ spec:
               - journeymap
             downloadDependencies: required
 
+          pluginUrls:
+            - https://hangarcdn.papermc.io/plugins/VanillaChanny/JReiProxyServer/versions/26.3.0/PAPER/jreiproxyserver-26.3.0.jar
+
         persistence:
           labels:
             recurring-job.longhorn.io/source: enabled
