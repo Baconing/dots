@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - curseforge.secret.yaml
   - ../kaylaatm10lite/app.yaml
+  - ../lightweightskyblock/app.yaml
   - ../router/app.yaml
   - ../sweatysummersack/app.yaml
   - ../terrafirmagreg-modern/app.yaml
