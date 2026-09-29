@@ -52,7 +52,7 @@ spec:
           modrinth:
             projects:
               - paper:coreprotect
-              - paper:calcmod
+              # - paper:calcmod # Not 26.3 yet.
               - paper:inventoryrollbackplus
               - paper:journeymap
               - paper:pvp-clumps
