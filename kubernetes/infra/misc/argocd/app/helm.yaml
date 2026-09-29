@@ -129,7 +129,7 @@ spec:
               cpu: 250m
               memory: 2Gi
             limits:
-              cpu: 500m
+              cpu: 2
               memory: 8Gi
           
           metrics:
