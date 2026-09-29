@@ -45,7 +45,7 @@ spec:
           enableCommandBlock: true
           spawnProtection: -1
           viewDistance: 32
-          icon: https://raw.githubusercontent.com/baconing/dots/master/kubernetes/home/games/minecraft/gooncraft-reborn/icon.png
+          icon: https://github.com/Baconing/dots/blob/master/kubernetes/home/games/minecraft/gooncraft-reborn/app/icon.png?raw=true
 
           motd: "gooncraft its back its reborn it totally existed b4"
 
