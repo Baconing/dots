@@ -51,11 +51,11 @@ spec:
 
           modrinth:
             projects:
-              - coreprotect
-              - calcmod
-              - inventoryrollbackplus
-              - journeymap
-              - pvp-clumps
+              - paper:coreprotect
+              - paper:calcmod
+              - paper:inventoryrollbackplus
+              - paper:journeymap
+              - paper:pvp-clumps
             downloadDependencies: required
 
           pluginUrls:
