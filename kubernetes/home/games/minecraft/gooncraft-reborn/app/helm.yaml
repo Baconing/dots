@@ -55,6 +55,7 @@ spec:
               - calcmod
               - inventoryrollbackplus
               - journeymap
+              - pvp-clumps
             downloadDependencies: required
 
           pluginUrls:
