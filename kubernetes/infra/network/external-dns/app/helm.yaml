@@ -16,9 +16,14 @@ spec:
       releaseName: external-dns
       valuesObject:
         sources:
+          - service
           - ingress
 
+        policy: upsert_only
+
         annotationFilter: "external-dns.alpha.kubernetes.io/enabled=true"
+
+        registry: crd
 
         provider:
           name: cloudflare
