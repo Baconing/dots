@@ -19,7 +19,7 @@ spec:
           - service
           - ingress
 
-        policy: upsert_only # todo
+        policy: upsert-only # todo
 
         annotationFilter: "external-dns.alpha.kubernetes.io/enabled=true"
 
