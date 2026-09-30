@@ -56,6 +56,7 @@ spec:
               - paper:inventoryrollbackplus
               - paper:journeymap
               - paper:pvp-clumps
+              - paper:no-chat-reports
             downloadDependencies: required
 
           pluginUrls:
