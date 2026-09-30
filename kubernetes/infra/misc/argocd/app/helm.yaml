@@ -108,13 +108,13 @@ spec:
         applicationSet:
           replicas: 2
 
-          resources:
-            requests:
-              cpu: 10m
-              memory: 64Mi
-            limits:
-              cpu: 50m
-              memory: 256Mi
+          # resources:
+          #   requests:
+          #     cpu: 10m
+          #     memory: 64Mi
+          #   limits:
+          #     cpu: 50m
+          #     memory: 256Mi
 
           metrics:
             enabled: true
@@ -124,13 +124,13 @@ spec:
         controller:
           replicas: 3
 
-          resources:
-            requests:
-              cpu: 250m
-              memory: 2Gi
-            limits:
-              cpu: 2
-              memory: 8Gi
+          # resources:
+          #   requests:
+          #     cpu: 250m
+          #     memory: 2Gi
+          #   limits:
+          #     cpu: 2
+          #     memory: 8Gi
           
           metrics:
             enabled: true
@@ -145,16 +145,16 @@ spec:
         
         repoServer:
           autoscaling:
-            enabled: false
-            minReplicas: 3
+            enabled: true
+            minReplicas: 2
 
-          resources:
-            requests:
-              cpu: 250m
-              memory: 2Gi
-            limits:
-              cpu: 2
-              memory: 4Gi
+          # resources:
+          #   requests:
+          #     cpu: 250m
+          #     memory: 2Gi
+          #   limits:
+          #     cpu: 2
+          #     memory: 4Gi
 
           metrics:
             enabled: true
@@ -167,13 +167,13 @@ spec:
               securityContext:
                 runAsUser: 999
                 runAsNonRoot: true
-              resources:
-                requests:
-                  cpu: 10m
-                  memory: 32Mi
-                limits:
-                  cpu: 100m
-                  memory: 64Mi
+              # resources:
+              #   requests:
+              #     cpu: 10m
+              #     memory: 32Mi
+              #   limits:
+              #     cpu: 100m
+              #     memory: 64Mi
               env:
                 - name: ACS_KUSTOMIZE_OPTIONS
                   valueFrom:
@@ -201,13 +201,13 @@ spec:
             enabled: true
             minReplicas: 2
 
-          resources:
-            requests:
-              cpu: 50m
-              memory: 128Mi
-            limits:
-              cpu: 500m
-              memory: 512Mi
+          # resources:
+          #   requests:
+          #     cpu: 50m
+          #     memory: 128Mi
+          #   limits:
+          #     cpu: 500m
+          #     memory: 512Mi
 
           metrics:
             enabled: true
