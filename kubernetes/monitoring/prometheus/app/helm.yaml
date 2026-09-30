@@ -52,9 +52,9 @@ spec:
               gethomepage.dev/icon: alertmanager
               traefik.ingress.kubernetes.io/router.tls: "true"
               traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-              external-dns.alpha.kubernetes.io/enabled: "true"
-              external-dns.alpha.kubernetes.io/hostname: alerts.saturn.ci
-              external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
+              external-dns.kubernetes.io/enabled: "true"
+              external-dns.kubernetes.io/hostname: alerts.saturn.ci
+              external-dns.kubernetes.io/target: jupiter.saturn.ci
             hosts: ["alerts.saturn.ci"]
             paths: ["/"]
             pathType: Prefix
@@ -135,9 +135,9 @@ spec:
               gethomepage.dev/icon: prometheus
               traefik.ingress.kubernetes.io/router.tls: "true"
               traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-              external-dns.alpha.kubernetes.io/enabled: "true"
-              external-dns.alpha.kubernetes.io/hostname: prometheus.saturn.ci
-              external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
+              external-dns.kubernetes.io/enabled: "true"
+              external-dns.kubernetes.io/hostname: prometheus.saturn.ci
+              external-dns.kubernetes.io/target: jupiter.saturn.ci
             hosts: ["prometheus.saturn.ci"]
             paths: ["/"]
             pathType: Prefix
@@ -162,9 +162,9 @@ spec:
             #    gethomepage.dev/icon: simple-icons:thanos
             #   traefik.ingress.kubernetes.io/router.tls: "true"
             #   traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
-            #   external-dns.alpha.kubernetes.io/enabled: "true"
-            #   external-dns.alpha.kubernetes.io/hostname: thanos.saturn.ci
-            #   external-dns.alpha.kubernetes.io/target: jupiter.saturn.ci
+            #   external-dns.kubernetes.io/enabled: "true"
+            #   external-dns.kubernetes.io/hostname: thanos.saturn.ci
+            #   external-dns.kubernetes.io/target: jupiter.saturn.ci
             # hosts: ["thanos.saturn.ci"]
             # paths: ['/']
             # pathType: Prefix
