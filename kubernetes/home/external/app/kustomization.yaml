@@ -4,3 +4,4 @@ resources:
   - homeassistant.yaml
   - router.yaml
   - truenas.yaml
+  - ../mail/app.yaml

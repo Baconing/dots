@@ -1,0 +1,14 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSRecord
+metadata:
+  name: _dmarc.saturn.ci
+  namespace: external
+spec:
+  endpoint:
+    dnsName: _dmarc.saturn.ci
+    providerSpecific:
+      - name: external-dns.kubernetes.io/cloudflare-proxied
+        value: "false"
+    recordType: TXT
+    targets:
+      - "\"v=DMARC1; p=quarantine; sp=quarantine; fo=0; adkim=r; aspf=r; pct=100; rf=afrf; ri=86400; rua=mailto:dmarc.report@saturn.ci; ruf=mailto:dmarc.report@saturn.ci\""

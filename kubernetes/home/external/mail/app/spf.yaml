@@ -1,0 +1,14 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSRecord
+metadata:
+  name: saturn.ci-spf
+  namespace: external
+spec:
+  endpoint:
+    dnsName: saturn.ci
+    providerSpecific:
+      - name: external-dns.kubernetes.io/cloudflare-proxied
+        value: "false"
+    recordType: TXT
+    targets:
+      - "\"v=spf1 mx -all\""

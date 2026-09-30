@@ -1,0 +1,14 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSRecord
+metadata:
+  name: _domainkey.saturn.ci
+  namespace: external
+spec:
+  endpoint:
+    dnsName: "*._domainkey.saturn.ci"
+    providerSpecific:
+      - name: external-dns.kubernetes.io/cloudflare-proxied
+        value: "false"
+    recordType: TXT
+    targets:
+      - "v=DKIM1; h=sha256; k=rsa; \" \"p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtppZZ9YIxTzv1qDJhLxBSU3iOOlkIwalCEJ0SBipjounoloLC4bYo/D9/Ejpb0zQGvXXxfV0SdUnsTzza/xK1k/IgM36M+xf++tB9N0+gJ0Y9W4TGxqQ8V4wSs99iFx/DSdPxriYSlNYcHvhTuGqxtqPYntybBF6n1AqcPVPY5QO1fzrnaWq5qp/0QBBxNDWAqmtATrZFsg1Fd\" \"UVuNOayJ1kByDQ6aRV57KnjU3Fhs5S63CFsZHJcyjkpcvHinbRsWHIwcKWzswEtAVR7udBgFs2aAC28hayBtQUc5sf56rHnJKRqKVEa7BjlQpuInZg6b0dbnTcxpSDZf3LGAmvkwIDAQAB"
