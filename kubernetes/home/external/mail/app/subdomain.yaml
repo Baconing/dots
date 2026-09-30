@@ -1,0 +1,14 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSRecord
+metadata:
+  name: mail.saturn.ci
+  namespace: external
+spec:
+  endpoint:
+    dnsName: mail.saturn.ci
+    providerSpecific:
+      - name: external-dns.kubernetes.io/cloudflare-proxied
+        value: "false"
+    recordType: CNAME
+    targets:
+      - "jupiter.saturn.ci"
