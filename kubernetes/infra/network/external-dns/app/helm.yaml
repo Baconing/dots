@@ -21,8 +21,6 @@ spec:
 
         policy: upsert-only # todo
 
-        annotationFilter: "external-dns.alpha.kubernetes.io/enabled=true"
-
         registry: crd
 
         provider:
