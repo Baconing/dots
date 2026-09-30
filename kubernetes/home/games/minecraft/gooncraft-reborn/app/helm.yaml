@@ -51,7 +51,7 @@ spec:
 
           modrinth:
             projects:
-              - paper:coreprotect
+              # - paper:coreprotect # Not 26.3 yet.
               # - paper:calcmod # Not 26.3 yet.
               - paper:inventoryrollbackplus
               - paper:journeymap
