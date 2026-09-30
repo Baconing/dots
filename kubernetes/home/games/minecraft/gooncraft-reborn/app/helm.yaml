@@ -30,7 +30,7 @@ spec:
 
         extraEnv:
           INIT_MEMORY: 1024M
-          MAX_MEMORY: 4096M
+          MAX_MEMORY: 3072M
 
         workloadAsStatefulSet: true
         strategyType: OnDelete
