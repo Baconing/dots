@@ -52,17 +52,12 @@ spec:
 
           modrinth:
             projects:
-              # - paper:coreprotect # Not 26.3 yet.
-              # - paper:calcmod # Not 26.3 yet.
-              - paper:inventoryrollbackplus
-              - paper:journeymap
+              - paper:coreprotect
+              - paper:calcmod
               - paper:pvp-clumps
               - paper:viaversion
               - datapack:skyblock-void-worldgen
             downloadDependencies: required
-
-          pluginUrls:
-            - https://hangarcdn.papermc.io/plugins/VanillaChanny/JReiProxyServer/versions/26.3.0/PAPER/jreiproxyserver-26.3.0.jar
 
         persistence:
           labels:
