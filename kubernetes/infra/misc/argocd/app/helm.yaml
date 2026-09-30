@@ -145,7 +145,7 @@ spec:
         
         repoServer:
           autoscaling:
-            enabled: true
+            enabled: false
             minReplicas: 3
 
           resources:
