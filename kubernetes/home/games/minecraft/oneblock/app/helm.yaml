@@ -30,7 +30,7 @@ spec:
 
         extraEnv:
           INIT_MEMORY: 1024M
-          MAX_MEMORY: 4096M
+          MAX_MEMORY: 3712M
           DATAPACKS: "https://github.com/Seeloewen/Random-Item-Giver-Datapack/releases/download/1.6.1/random-item-giver-1-6-1-mc-26-2.zip,"
 
         workloadAsStatefulSet: true

@@ -30,10 +30,10 @@ spec:
 
         extraEnv:
           INIT_MEMORY: 1024M
-          MAX_MEMORY: 3072M
+          MAX_MEMORY: 3712M
 
         workloadAsStatefulSet: true
-        strategyType: OnDelete
+        strategyType: RollingUpdate
 
         minecraftServer:
           eula: "TRUE"
