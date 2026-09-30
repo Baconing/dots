@@ -1,0 +1,104 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minecraft-oneblock-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: minecraft
+    repoURL: https://itzg.github.io/minecraft-server-charts/
+    targetRevision: 5.1.3
+    helm:
+      releaseName: oneblock
+      valuesObject:
+        image:
+          repository: itzg/minecraft-server
+          tag: 2026.7.0-java25-jdk
+          pullPolicy: IfNotPresent
+
+        resources:
+          requests:
+            cpu: 256m
+            memory: 1024Mi
+          limits:
+            cpu: 2
+            memory: 4096Mi
+
+        extraEnv:
+          INIT_MEMORY: 1024M
+          MAX_MEMORY: 4096M
+          DATAPACKS: "https://github.com/Seeloewen/Random-Item-Giver-Datapack/releases/download/1.6.1/random-item-giver-1-6-1-mc-26-2.zip,"
+
+        workloadAsStatefulSet: true
+        strategyType: OnDelete
+
+        minecraftServer:
+          eula: "TRUE"
+          version: "26.3"
+          type: PURPUR
+          difficulty: hard
+          whitelist: "Baconing,TickleKnees"
+          ops: "Baconing"
+          enableCommandBlock: true
+          spawnProtection: -1
+          viewDistance: 32
+          icon: https://github.com/Baconing/dots/blob/master/kubernetes/home/games/minecraft/oneblock/app/icon.png?raw=true
+
+          motd: "oneblock but instead of oneblock its you get a random item yeah"
+
+          modrinth:
+            projects:
+              # - paper:coreprotect # Not 26.3 yet.
+              # - paper:calcmod # Not 26.3 yet.
+              - paper:inventoryrollbackplus
+              - paper:journeymap
+              - paper:pvp-clumps
+              - paper:viaversion
+              - datapack:skyblock-void-worldgen
+            downloadDependencies: required
+
+          pluginUrls:
+            - https://hangarcdn.papermc.io/plugins/VanillaChanny/JReiProxyServer/versions/26.3.0/PAPER/jreiproxyserver-26.3.0.jar
+
+        persistence:
+          labels:
+            recurring-job.longhorn.io/source: enabled
+            recurring-job-group.longhorn.io/backup: enabled
+          storageClass: longhorn
+          dataDir:
+            enabled: true
+            Size: 2Gi
+            accessModes:
+              - ReadWriteOnce
+
+        serviceAnnotations:
+          mc-router.itzg.me/externalServerName: oneblock.saturn.ci,oneblock.local
+          external-dns.kubernetes.io/enabled: "true"
+          external-dns.kubernetes.io/hostname: oneblock.saturn.ci
+          external-dns.kubernetes.io/target: jupiter.saturn.ci
+          external-dns.kubernetes.io/cloudflare-proxied: "false"
+
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      jsonPointers:
+        - /spec/replicas
+
+  destination:
+    name: in-cluster
+    namespace: minecraft
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

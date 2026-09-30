@@ -4,6 +4,7 @@ resources:
   - curseforge.secret.yaml
   - ../gooncraft-reborn/app.yaml
   - ../kaylaatm10lite/app.yaml
+  - ../oneblock/app.yaml
   - ../router/app.yaml
   - ../sweatysummersack/app.yaml
   - ../terrafirmagreg-modern/app.yaml
