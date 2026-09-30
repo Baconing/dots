@@ -59,9 +59,9 @@ spec:
               - ReadWriteOnce
 
         serviceAnnotations:
-          mc-router.itzg.me/externalServerName: sweatysummersack.saturn.ci,sweatysummersack.local
+          mc-router.itzg.me/externalServerName: sweatysummersack.minecraft.saturn.ci,sweatysummersack.minecraft.local
           external-dns.kubernetes.io/enabled: "true"
-          external-dns.kubernetes.io/hostname: sweatysummersack.saturn.ci
+          external-dns.kubernetes.io/hostname: sweatysummersack.minecraft.saturn.ci
           external-dns.kubernetes.io/target: jupiter.saturn.ci
           external-dns.kubernetes.io/cloudflare-proxied: "false"
 

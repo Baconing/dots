@@ -73,9 +73,9 @@ spec:
               - ReadWriteOnce
 
         serviceAnnotations:
-          mc-router.itzg.me/externalServerName: gooncraft-reborn.saturn.ci,gooncraft-reborn.local
+          mc-router.itzg.me/externalServerName: gooncraft-reborn.minecraft.saturn.ci,gooncraft-reborn.minecraft.local
           external-dns.kubernetes.io/enabled: "true"
-          external-dns.kubernetes.io/hostname: gooncraft-reborn.saturn.ci
+          external-dns.kubernetes.io/hostname: gooncraft-reborn.minecraft.saturn.ci
           external-dns.kubernetes.io/target: jupiter.saturn.ci
           external-dns.kubernetes.io/cloudflare-proxied: "false"
 

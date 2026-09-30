@@ -74,9 +74,9 @@ spec:
               - ReadWriteOnce
 
         serviceAnnotations:
-          mc-router.itzg.me/externalServerName: kaylaatm10lite.saturn.ci,kaylaatm10lite.local
+          mc-router.itzg.me/externalServerName: kaylaatm10lite.minecraft.saturn.ci,kaylaatm10lite.minecraft.local
           external-dns.kubernetes.io/enabled: "true"
-          external-dns.kubernetes.io/hostname: kaylaatm10lite.saturn.ci
+          external-dns.kubernetes.io/hostname: kaylaatm10lite.minecraft.saturn.ci
           external-dns.kubernetes.io/target: jupiter.saturn.ci
           external-dns.kubernetes.io/cloudflare-proxied: "false"
 

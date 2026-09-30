@@ -76,9 +76,9 @@ spec:
               - ReadWriteOnce
 
         serviceAnnotations:
-          mc-router.itzg.me/externalServerName: oneblock.saturn.ci,oneblock.local
+          mc-router.itzg.me/externalServerName: oneblock.minecraft.saturn.ci,oneblock.minecraft.local
           external-dns.kubernetes.io/enabled: "true"
-          external-dns.kubernetes.io/hostname: oneblock.saturn.ci
+          external-dns.kubernetes.io/hostname: oneblock.minecraft.saturn.ci
           external-dns.kubernetes.io/target: jupiter.saturn.ci
           external-dns.kubernetes.io/cloudflare-proxied: "false"
 

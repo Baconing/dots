@@ -65,9 +65,9 @@ spec:
               - ReadWriteOnce
 
         serviceAnnotations:
-          mc-router.itzg.me/externalServerName: tfgm.saturn.ci,tfgm.local
+          mc-router.itzg.me/externalServerName: tfgm.minecraft.saturn.ci,tfgm.minecraft.local
           external-dns.kubernetes.io/enabled: "true"
-          external-dns.kubernetes.io/hostname: tfgm.saturn.ci
+          external-dns.kubernetes.io/hostname: tfgm.minecraft.saturn.ci
           external-dns.kubernetes.io/target: jupiter.saturn.ci
           external-dns.kubernetes.io/cloudflare-proxied: "false"
 
