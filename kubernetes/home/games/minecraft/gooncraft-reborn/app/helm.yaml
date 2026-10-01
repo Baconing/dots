@@ -26,11 +26,11 @@ spec:
             memory: 1024Mi
           limits:
             cpu: 2
-            memory: 4096Mi
+            memory: 6144Mi
 
         extraEnv:
           INIT_MEMORY: 1024M
-          MAX_MEMORY: 3712M
+          MAX_MEMORY: 5760M
 
         workloadAsStatefulSet: true
         strategyType: RollingUpdate
