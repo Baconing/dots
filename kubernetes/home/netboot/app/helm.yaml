@@ -1,0 +1,175 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netboot-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: netboot
+    repoURL: oci://ghcr.io/baconing/charts/netboot
+    targetRevision: 1.0.0
+    helm:
+      releaseName: netboot
+      valuesObject:
+        ipxeScripts:
+          http:
+            enabled: true
+            default.ipxe: |
+              #!ipxe
+
+              :start
+              isset ${arch} || set arch x86_64
+              isset ${host} || set host https://${next-server}/${arch}
+              ntp 0.pool.ntp.org
+              set cls:hex 1b:5b:4a
+              set cls ${cls:string}
+
+              :menu
+              clear menu
+              echo ${cls}
+
+              menu Boot Menu - IP: ${ip} - MAC: ${mac:hexhyp} - next-server: ${next-server} - arch: ${arch} - host: ${host}
+              item default-host Run default script for host
+              item --gap -- Operating System Installers
+              item linux-installer Linux Installers
+              item windows-installer Windows Installers
+              item --gap -- Operating System Live Environments
+              item linux-live Linux Live Environments
+              item --gap -- Utilities
+              item memtest86 MemTest86
+              item reboot Reboot
+              item shell Drop to iPXE shell
+              item exit Exit iPXE and boot from local disk
+
+              choose --timeout 5000 --default default-host target && goto switch-target
+              
+              :switch-target
+              chain --autofree ${host}/${target} ||
+              goto failed
+
+              :failed
+              echo Failed to chainload http(s)://${next-server}/${target}
+              echo Press any key to continue...
+              goto menu
+            x86_64/default-host.ipxe: |
+              #!ipxe
+
+              :start
+              chain --autofree ${host}/hosts/${mac:hexhyp} || 
+              goto default
+
+              :default
+              exit
+            x86_64/linux-installer.ipxe: |
+              #!ipxe
+
+              :start
+              clear menu
+              echo ${cls}
+              menu Linux Installer Menu - IP: ${ip} - MAC: ${mac:hexhyp} - next-server: ${next-server} - arch: ${arch} - host: ${host}
+              # item alpine Alpine Linux
+              item arch Arch Linux
+              item artix Artix Linux
+              item debian Debian
+              item fedora Fedora
+              item gentoo Gentoo
+              item nixos NixOS
+              item ubuntu Ubuntu
+              item void Void Linux
+
+              choose target && goto switch-target
+
+              :switch-target
+              chain --autofree ${host}/linux/installer/${target} ||
+              goto failed
+
+              :failed
+              echo Failed to chainload http(s)://${next-server}/${target}
+              echo Press any key to continue...
+
+        # TODO: I don't even know if sanboot will really work with ISO images, I might just be better off booting a kernel/initrd.
+        # extraFiles:
+        #   http:
+        #     # Alpine Linux doesn't have a way to get the latest file.
+        #     # - name: x86_64/iso/alpine.iso
+        #     #   url: ...
+        #     - name: x86_64/iso/archlinux/archlinux-latest.iso
+        #       url: https://mirrors.lug.mtu.edu/archlinux/iso/latest/archlinux-x86_64.iso
+
+        #     - name: x86_64/iso/artix/artix-openrc-latest.iso
+        #       url: https://mirrors.ocf.berkeley.edu/artix-iso/artix-base-openrc-20260813-x86_64.iso
+
+        #     - name: x86_64/iso/debian/installer/debian-installer-13.7.0.iso
+        #       url: https://mirrors.lug.mtu.edu/debian-cd/13.7.0/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso
+        #     - name: x86_64/iso/debian/live/debian-live-kde-13.7.0.iso
+        #       url: https://mirrors.lug.mtu.edu/debian-cd/13.7.0-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-kde.iso
+        #     - name: x86_64/iso/debian/live/debian-live-gnome-13.7.0.iso
+        #       url: https://mirrors.lug.mtu.edu/debian-cd/13.7.0-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-gnome.iso
+            
+        #     - name: x86_64/iso/fedora/workstation/fedora-workstation-44-1.7.iso
+        #       url: https://mirrors.lug.mtu.edu/fedora/linux/releases/44/Workstation/x86_64/iso/Fedora-Workstation-Live-44-1.7.x86_64.iso
+        #     - name: x86_64/iso/fedora/kde/fedora-kde-44-1.7.iso
+        #       url: https://mirrors.lug.mtu.edu/fedora/linux/releases/44/KDE/x86_64/iso/Fedora-KDE-Desktop-Live-44-1.7.x86_64.iso
+        #     - name: x86_64/iso/fedora/silverblue/fedora-silverblue-44-1.7.iso
+        #       url: https://mirrors.lug.mtu.edu/fedora/linux/releases/44/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-44-1.7.iso
+        #     - name: x86_64/iso/fedora/kinoite/fedora-kinoite-44-1.7.iso
+        #       url: https://mirrors.lug.mtu.edu/fedora/linux/releases/44/Kinoite/x86_64/iso/Fedora-Kinoite-ostree-x86_64-44-1.7.iso
+        #     - name: x86_64/iso/fedora/server/fedora-server-44-1.7.iso
+        #       url: https://mirrors.lug.mtu.edu/fedora/linux/releases/44/Server/x86_64/iso/Fedora-Server-dvd-x86_64-44-1.7.iso
+
+        #     - name: x86_64/iso/gentoo/installer/gentoo-installer-latest.iso
+        #       url: https://mirrors.lug.mtu.edu/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal-20260913T163055Z.iso
+        #     - name: x86_64/iso/gentoo/live/gentoo-livegui-latest.iso
+        #       url: https://mirrors.lug.mtu.edu/gentoo/releases/amd64/autobuilds/current-livegui-amd64/livegui-amd64-20260913T163055Z.iso
+
+        #     - name: x86_64/iso/nixos/nixos-graphical-26.05.iso
+        #       url: https://channels.nixos.org/nixos-26.05/latest-nixos-graphical-x86_64-linux.iso
+        #     - name: x86_64/iso/nixos/nixos-minimal-26.05.iso
+        #       url: https://channels.nixos.org/nixos-26.05/latest-nixos-minimal-x86_64-linux.iso
+
+        #     - name: x86_64/iso/ubuntu/ubuntu-desktop-26.04.1.iso
+        #       url: https://mirrors.lug.mtu.edu/ubuntu-releases/26.04.1/ubuntu-26.04.1-desktop-amd64.iso
+        #     - name: x86_64/iso/ubuntu/ubuntu-server-26.04.1.iso
+        #       url: https://mirrors.lug.mtu.edu/ubuntu-releases/26.04.1/ubuntu-26.04.1-live-server-amd64.iso
+
+        #     - name: x86_64/iso/void/void-base-latest.iso
+        #       url: https://mirrors.lug.mtu.edu/voidlinux/live/current/void-live-x86_64-20250202-base.iso
+        #     - name: x86_64/iso/void/void-xfce-latest.iso
+        #       url: https://mirrors.lug.mtu.edu/voidlinux/live/current/void-live-x86_64-20250202-xfce.iso
+
+        service:
+          tftp:
+            enabled: true
+            type: LoadBalancer
+            loadBalancerIP: 10.10.254.30
+          http:
+            enabled: true
+            type: LoadBalancer
+            loadBalancerIP: 10.10.254.31
+
+        storage:
+          dataVolume:
+            type: pvc
+            enabled: true
+            accessModes:
+              - ReadWriteOnce
+            size: 1Gi
+            storageClass: longhorn
+
+  destination:
+    name: in-cluster
+    namespace: netboot
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  
