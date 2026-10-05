@@ -142,14 +142,9 @@ spec:
         #       url: https://mirrors.lug.mtu.edu/voidlinux/live/current/void-live-x86_64-20250202-xfce.iso
 
         service:
-          tftp:
-            enabled: true
-            type: LoadBalancer
-            loadBalancerIP: 10.10.254.30
-          http:
-            enabled: true
-            type: LoadBalancer
-            loadBalancerIP: 10.10.254.31
+          enabled: true
+          type: LoadBalancer
+          loadBalancerIP: 10.10.254.30
 
         storage:
           dataVolume:
