@@ -40,7 +40,7 @@ spec:
           version: "26.3"
           type: PURPUR
           difficulty: hard
-          whitelist: "Baconing,Kamieo_,Im_Breez"
+          whitelist: "Baconing,Kamieo_,Im_Breez,TickleKnees"
           ops: "Baconing"
           enableCommandBlock: true
           spawnProtection: -1
