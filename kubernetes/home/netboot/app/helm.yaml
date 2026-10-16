@@ -149,8 +149,8 @@ spec:
 
         storage:
           dataVolume:
-            type: pvc
             enabled: true
+            type: pvc
             accessModes:
               - ReadWriteOnce
             size: 1Gi
