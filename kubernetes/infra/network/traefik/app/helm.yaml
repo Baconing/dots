@@ -18,8 +18,26 @@ spec:
         service:
           spec:
             loadBalancerIP: 10.10.254.1
+
         api:
           dashboard: true
+
+        ports:
+          web:
+            http:
+              maxHeaderBytes: 4194304
+          websecure:
+            http:
+              maxHeaderBytes: 4194304
+              middlewares:
+                - traefik-forwardauth-authelia@kubernetescrd
+
+        providers:
+          kubernetesIngress:
+            allowExternalNameServices: true
+          kubernetesCRD:
+            allowExternalNameServices: true
+
         ingressRoute:
           dashboard:
             enabled: true
@@ -45,15 +63,6 @@ spec:
                 namespace: traefik
             tls:
               secretName: traefik.saturn.ci
-        ports:
-          web:
-            http:
-              maxHeaderBytes: 4194304
-          websecure:
-            http:
-              maxHeaderBytes: 4194304
-              middlewares:
-                - traefik-forwardauth-authelia@kubernetescrd
 
   destination:
     name: in-cluster

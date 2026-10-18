@@ -213,8 +213,11 @@ spec:
                   - "headlamp.saturn.ci"
                   - "kubevirt.saturn.ci"
 
-                  # external services
+                  # external services - network
                   - "router.saturn.ci"
+                  - "andromeda.sw.saturn.ci"
+
+                  # external services
                   - "nas.saturn.ci"
                   - "hass.saturn.ci"
 

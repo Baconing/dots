@@ -32,11 +32,11 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: andromeda
+    gethomepage.dev/name: Andromeda
     gethomepage.dev/group: Network
     gethomepage.dev/icon: cisco
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/andromeda.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: andromeda.sw.saturn.ci
     external-dns.kubernetes.io/target: jupiter.saturn.ci
