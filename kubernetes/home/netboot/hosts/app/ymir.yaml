@@ -5,7 +5,7 @@ metadata:
   namespace: longhorn-system
 spec:
   volumeMode: Block
-  size: 32 * 1073741924 # 32 GiB
+  size: 34359741568 # 32 * 1073741924 = 32 GiB
   numberOfReplicas: 3
   frontend: iscsi
   dataLocality: disabled
@@ -32,7 +32,7 @@ metadata:
   namespace: netboot
 subsets:
   - addresses:
-      - ip: 0.0.0.0 # This will be updated by the CronJob
+      - ip: 192.0.2.1 # This will be updated by the CronJob
     ports:
       - name: iscsi
         port: 3260
