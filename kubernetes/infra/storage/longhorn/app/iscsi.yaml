@@ -6,13 +6,12 @@ provisioner: driver.longhorn.io
 allowVolumeExpansion: true
 reclaimPolicy: Retain
 parameters:
-  backupTargetName: default
-  dataEngine: v1 # TODO: ISCSI is not a frontend type in v2, but NVME-oF is.
-  dataLocality: disabled
+  backupTargetName: "default"
+  dataEngine: "v1" # TODO: ISCSI is not a frontend type in v2, but NVME-oF is.
+  dataLocality: "disabled"
   numberOfReplicas: "3"
   staleReplicaTimeout: "5"
-  migratable: true
-  fsType: ext4 # When using longhorn-iscsi, you should set volumeMode: Block in the PVC.
+  migratable: "true"
+  fsType: "ext4" # When using longhorn-iscsi, you should set volumeMode: Block in the PVC.
   fromBackup: ""
-  # CRITICAL: Overrides the default "blockdev" option with iSCSI
   frontend: "iscsi" 
