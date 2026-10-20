@@ -5,7 +5,7 @@ metadata:
   namespace: longhorn-system
 spec:
   volumeMode: Block
-  size: 34359741568 # 32 * 1073741924 = 32 GiB
+  size: "34359741568" # 32 * 1073741924 = 32 GiB
   numberOfReplicas: 3
   frontend: iscsi
   dataLocality: disabled
