@@ -59,6 +59,10 @@ spec:
         app: ymir-iscsi-syncer
     spec:
       serviceAccountName: netboot-iscsi-syncer
+      volumes:
+        - name: ymir
+          persistentVolumeClaim:
+            claimName: ymir
       containers:
         - name: syncer
           image: bitnami/kubectl:latest
