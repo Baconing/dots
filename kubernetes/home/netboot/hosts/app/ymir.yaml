@@ -1,15 +1,16 @@
 apiVersion: longhorn.io/v1beta2
-kind: Volume
+kind: PersistentVolumeClaim
 metadata:
   name: ymir
-  namespace: longhorn-system
+  namespace: netboot
 spec:
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: longhorn-iscsi
   volumeMode: Block
-  size: "34359741568" # 32 * 1073741924 = 32 GiB
-  numberOfReplicas: 3
-  frontend: iscsi
-  dataLocality: disabled
-  accessMode: rwo
+  accessModes:
+    - ReadWriteOnce
 ---
 apiVersion: v1
 kind: Service
