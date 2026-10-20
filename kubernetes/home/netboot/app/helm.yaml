@@ -56,16 +56,25 @@ spec:
               echo Failed to chainload ${scripts}/${target}
               echo Press any key to continue...
               goto menu
-            x86_64/default-host.ipxe: |
+            x86_64_default-host.ipxe: |
               #!ipxe
 
               :start
-              chain --autofree ${scripts}/hosts/${mac:hexhyp} || 
+              chain --autofree ${scripts}/hosts_${mac:hexhyp} || 
               goto default
 
               :default
               exit
-            x86_64/linux-installer.ipxe: |
+            x86_64_hosts_31-23-213-1-23-123-.ipxe: |
+              #!ipxe
+
+              :start
+              chain --autofree ${scripts}/linux_installer_arch || 
+              goto default
+
+              :default
+              exit
+            x86_64_linux-installer.ipxe: |
               #!ipxe
 
               :start
@@ -85,7 +94,7 @@ spec:
               choose target && goto switch-target
 
               :switch-target
-              chain --autofree ${scripts}/linux/installer/${target} ||
+              chain --autofree ${scripts}/linux_installer_${target} ||
               goto failed
 
               :failed

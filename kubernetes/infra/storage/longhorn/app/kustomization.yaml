@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - backup.yaml
   - helm.yaml
+  - iscsi.yaml
   - nas.secret.yaml
   - nix.yaml
   - ssl.yaml

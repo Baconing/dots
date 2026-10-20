@@ -1,0 +1,30 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: netboot-iscsi-syncer
+rules:
+  - apiGroups: ["longhorn.io"]
+    resources: ["volumes"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: netboot-iscsi-syncer-binding
+subjects:
+  - kind: ServiceAccount
+    name: netboot-iscsi-syncer
+    namespace: netboot
+roleRef:
+  kind: ClusterRole
+  name: netboot-iscsi-syncer
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: netboot-iscsi-syncer
+  namespace: netboot

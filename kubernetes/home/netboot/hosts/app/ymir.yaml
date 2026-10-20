@@ -1,0 +1,120 @@
+apiVersion: longhorn.io/v1beta2
+kind: Volume
+metadata:
+  name: ymir
+  namespace: longhorn-system
+spec:
+  volumeMode: Block
+  size: 32 * 1073741924 # 32 GiB
+  numberOfReplicas: 3
+  frontend: iscsi
+  dataLocality: disabled
+  accessMode: rwo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ymir
+  namespace: netboot
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.10.254.200
+  ports:
+    - name: iscsi
+      protocol: TCP
+      port: 3260
+      targetPort: 3260
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: ymir
+  namespace: netboot
+subsets:
+  - addresses:
+      - ip: 0.0.0.0 # This will be updated by the CronJob
+    ports:
+      - name: iscsi
+        port: 3260
+        protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ymir-iscsi-syncer
+  namespace: netboot
+  labels:
+    app: ymir-iscsi-syncer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate # Prevents two loops from running concurrently during an upgrade
+  selector:
+    matchLabels:
+      app: ymir-iscsi-syncer
+  template:
+    metadata:
+      labels:
+        app: ymir-iscsi-syncer
+    spec:
+      serviceAccountName: netboot-iscsi-syncer
+      containers:
+        - name: syncer
+          image: bitnami/kubectl:latest
+          env:
+            - name: "PVC_NAME"
+              value: "ymir"
+            - name: "SERVICE_NAME"
+              value: "ymir"
+            - name: "NAMESPACE"
+              value: "netboot"
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -u
+
+              echo "Starting Longhorn iSCSI dynamic watcher daemon..."
+
+              # Track the last known IP to minimize unnecessary API calls to patch endpoints
+              LAST_KNOWN_IP=""
+
+              while true; do
+                VOLUME_NAME="$(kubectl get pvc -n "${NAMESPACE}" "${PVC_NAME}" -o jsonpath='{.spec.volumeName}')"
+                if [ -z "$VOLUME_NAME" ]; then
+                  echo "Warning: PVC ${PVC_NAME} has no bound volume. Is it still pending? Retrying..."
+                  sleep 3
+                  continue
+                fi
+
+                NEW_IP=$(kubectl get volumes.longhorn.io -n longhorn-system "${VOLUME_NAME}" -o jsonpath='{.status.ip}' 2>/dev/null)
+
+                if [ -z "$NEW_IP" ]; then
+                  echo "Warning: Volume ${VOLUME_NAME} has no active IP. Is it detached? Retrying..."
+                  sleep 3
+                  continue
+                fi
+
+                if [ "$NEW_IP" != "$LAST_KNOWN_IP" ]; then
+                  CURRENT_K8S_IP=$(kubectl get endpoints -n "${NAMESPACE}" "${SERVICE_NAME}" -o jsonpath='{.subsets[0].addresses[0].ip}' 2>/dev/null || echo "none")
+
+                  if [ "$NEW_IP" != "$CURRENT_K8S_IP" ]; then
+                    echo "Match discrepancy found! Target moved to ${NEW_IP}. Updating Kubernetes Endpoint..."
+                    
+                    PATCH_JSON="{\"subsets\":[{\"addresses\":[{\"ip\":\"${NEW_IP}\"}],\"ports\":[{\"name\":\"iscsi\",\"port\":3260,\"protocol\":\"TCP\"}]}]}"
+                    
+                    if kubectl patch endpoints -n "${NAMESPACE}" "${SERVICE_NAME}" -p "$PATCH_JSON"; then
+                      echo "Successfully routed LoadBalancer to new IP: ${NEW_IP}"
+                      LAST_KNOWN_IP="$NEW_IP"
+                    else
+                      echo "Error: Failed to patch endpoints object. Will retry next cycle."
+                    fi
+                  else
+                    # Memory was cold, but K8s state matches reality
+                    LAST_KNOWN_IP="$NEW_IP"
+                  fi
+                fi
+
+                sleep 3
+              done
+
