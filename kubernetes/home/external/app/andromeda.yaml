@@ -4,12 +4,27 @@ metadata:
   name: andromeda-external
   namespace: external
 spec:
-  type: ExternalName
-  externalName: andromeda.local
   ports:
   - name: http
     port: 80
     targetPort: 80
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: andromeda-external
+  namespace: external
+  labels:
+    kubernetes.io/service-name: andromeda-external
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses:
+      - "10.254.1.1"
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
