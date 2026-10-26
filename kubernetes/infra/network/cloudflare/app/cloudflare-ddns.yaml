@@ -22,7 +22,7 @@ spec:
           memory: 32Mi
       containers:
       - name: ddns
-        image: timothyjmiller/cloudflare-ddns:2.2.0
+        image: timothyjmiller/cloudflare-ddns:2.3.0
         env:
         - name: CLOUDFLARE_API_TOKEN_FILE
           value: "/run/secret/cloudflare-api/apiToken"
