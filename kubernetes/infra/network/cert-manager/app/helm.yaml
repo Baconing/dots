@@ -11,13 +11,13 @@ spec:
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
-    targetRevision: v1.21.1
+    targetRevision: v1.21.3
     helm:
       releaseName: cert-manager
       valuesObject:
         image:
           repository: quay.io/jetstack/cert-manager-controller
-          tag: v1.21.1
+          tag: v1.21.3
 
         crds:
           enabled: true
@@ -42,7 +42,7 @@ spec:
         webhook:
           image:
             repository: quay.io/jetstack/cert-manager-webhook
-            tag: v1.21.1
+            tag: v1.21.3
 
           resources:
             requests:
@@ -59,7 +59,7 @@ spec:
         cainjector:
           image:
             repository: quay.io/jetstack/cert-manager-cainjector
-            tag: v1.21.1
+            tag: v1.21.3
 
           resources:
             requests:

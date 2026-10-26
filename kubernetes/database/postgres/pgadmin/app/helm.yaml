@@ -19,14 +19,14 @@ spec:
   source:
     chart: pgadmin4
     repoURL: https://helm.runix.net/
-    targetRevision: 1.66.0
+    targetRevision: 1.70.4
     helm:
       releaseName: pgadmin4
       valuesObject:
         image:
           registry: docker.io
           repository: dpage/pgadmin4
-          tag: 9.17
+          tag: 9.18
 
         # serverDefinitions:
         #   enabled: true
