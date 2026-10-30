@@ -10,12 +10,19 @@
       enable = true;
       package = pkgs.gitFull;
       settings = {
+        user = {
+          name = "Brenden (Baconing) Freier";
+          email = "iam@baconi.ng";
+        };
         pull.rebase = false;
-        credential.helper = [
-          "oauth"
-          "libsecret"
-        ];
-      };
+        credential = {
+          helper = [
+            "cache --timeout 21600"
+            "oauth"
+            "libsecret"
+          ];
+          bitbucketAuthModes = "oauth";
+        };
       signing = {
         signByDefault = true;
       };
