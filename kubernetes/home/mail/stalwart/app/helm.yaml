@@ -50,7 +50,7 @@ spec:
             traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
             external-dns.kubernetes.io/enabled: "true"
             external-dns.kubernetes.io/hostname: stalwart.saturn.ci
-            external-dns.kubernetes.io/target: jupiter.saturn.ci
+            external-dns.kubernetes.io/target: direct.saturn.ci
           loadBalancerIP: 10.10.254.100
           hosts:
             - host: stalwart.saturn.ci

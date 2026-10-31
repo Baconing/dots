@@ -77,7 +77,7 @@ spec:
           mc-router.itzg.me/externalServerName: kaylaatm10lite.minecraft.saturn.ci,kaylaatm10lite.minecraft.local
           external-dns.kubernetes.io/enabled: "true"
           external-dns.kubernetes.io/hostname: kaylaatm10lite.minecraft.saturn.ci
-          external-dns.kubernetes.io/target: jupiter.saturn.ci
+          external-dns.kubernetes.io/target: direct.saturn.ci
           external-dns.kubernetes.io/cloudflare-proxied: "false"
 
   destination:

@@ -110,7 +110,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: lidarr.saturn.ci
-    external-dns.kubernetes.io/target: jupiter.saturn.ci
+    external-dns.kubernetes.io/target: direct.saturn.ci
 spec:
   tls:
     - secretName: lidarr.saturn.ci

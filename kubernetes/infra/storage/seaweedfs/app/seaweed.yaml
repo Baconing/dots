@@ -34,7 +34,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: seaweed.saturn.ci
-        external-dns.kubernetes.io/target: jupiter.saturn.ci
+        external-dns.kubernetes.io/target: direct.saturn.ci
       tls:
         - hosts:
             - seaweed.saturn.ci
@@ -64,7 +64,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: s3.seaweed.saturn.ci
-        external-dns.kubernetes.io/target: jupiter.saturn.ci
+        external-dns.kubernetes.io/target: direct.saturn.ci
     ingress:
       enabled: true
       className: traefik
@@ -78,7 +78,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: filer.seaweed.saturn.ci
-        external-dns.kubernetes.io/target: jupiter.saturn.ci
+        external-dns.kubernetes.io/target: direct.saturn.ci
       tls:
         - hosts:
             - filer.seaweed.saturn.ci

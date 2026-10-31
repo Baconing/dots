@@ -87,7 +87,7 @@ spec:
             traefik.ingress.kubernetes.io/router.tls: "true"
             external-dns.kubernetes.io/enabled: "true"
             external-dns.kubernetes.io/hostname: pgadmin.saturn.ci
-            external-dns.kubernetes.io/target: jupiter.saturn.ci
+            external-dns.kubernetes.io/target: direct.saturn.ci
             gethomepage.dev/enabled: "true"
             gethomepage.dev/name: pgAdmin
             gethomepage.dev/group: Database

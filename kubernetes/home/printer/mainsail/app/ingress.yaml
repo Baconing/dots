@@ -12,7 +12,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: &host printer.saturn.ci
-    external-dns.kubernetes.io/target: jupiter.saturn.ci
+    external-dns.kubernetes.io/target: direct.saturn.ci
 spec:
   rules:
     - host: *host
