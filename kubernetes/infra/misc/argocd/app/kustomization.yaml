@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - helm.yaml
   - oidc.secret.yaml
+  - ssl.yaml
