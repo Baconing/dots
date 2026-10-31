@@ -11,10 +11,10 @@
       package = pkgs.gitFull;
       lfs.enable = true;
       settings = {
-        user = {
+        user =  {
           name = "Brenden (Baconing) Freier";
-          email = "iam@baconi.ng";
-        };
+	        email = "iam@baconi.ng";
+	      };
 	      push.autoSetupRemote = true;
         pull.rebase = false;
         credential = {
@@ -25,6 +25,7 @@
           ];
           bitbucketAuthModes = "oauth";
         };
+      };
       signing = {
         signByDefault = true;
       };
