@@ -1,0 +1,83 @@
+apiVersion: seaweed.seaweedfs.com/v1
+kind: Bucket
+metadata:
+  name: netboot
+  namespace: netboot
+spec:
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs
+---
+apiVersion: seaweed.seaweedfs.com/v1
+kind: S3Identity
+metadata:
+  name: github
+  namespace: netboot
+spec:
+  name: github
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs
+---
+apiVersion: seaweed.seaweedfs.com/v1
+kind: S3Credentials
+metadata:
+  name: github
+  namespace: netboot
+spec:
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs
+  identityRef:
+    name: github
+  secretRef:
+    name: s3-github
+    namespace: netboot
+    accessKeyField: accessKey
+    secretKeyField: secretKey
+---
+apiVersion: seaweed.seaweedfs.com/v1
+kind: S3Policy
+metadata:
+  name: github
+  namespace: netboot
+spec:
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs
+  name: github
+  policyDocument: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": [
+            "s3:AbortMultipartUpload",
+            "s3:ListBucketMultipartUploads",
+            "s3:ListMultipartUploadParts",
+            "s3:PutObject"
+          ],
+          "Resource": [
+            "arn:aws:s3:::netboot",
+            "arn:aws:s3:::netboot/*"
+          ]
+        }
+      ]
+    }
+---
+apiVersion: seaweed.seaweedfs.com/v1
+kind: S3PolicyBinding
+metadata:
+  name: github
+  namespace: netboot
+spec:
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs
+  policyRef:
+    name: github
+  subjects:
+    - kind: S3Identity
+      name: github

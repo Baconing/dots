@@ -83,6 +83,14 @@
       };
 
       nixosConfigurations = {
+        ymir = helper.makeConsoleNixOS {
+          hostname = "ymir";
+          clustered = true;
+          clusterRole = "node";
+          clusterIP = "10.10.6.1";
+          netboot = true;
+        };
+
         skoll = helper.makeConsoleNixOS {
             hostname = "skoll";
             clustered = true;
@@ -195,6 +203,15 @@
           deployment.targetHost = "iocaste.local";
           deployment.targetUser = "bacon";
           nixosConfiguration = self.nixosConfigurations.iocaste;
+        };
+      };
+
+      # TODO: could we expose this on something like "nixosConfigurations.ymir.netboot"?
+      packages.${system}.netboot = {
+        ymir = {
+          kernel = self.nixosConfigurations.ymir.config.system.build.kernel;
+          initrd = self.nixosConfigurations.ymir.config.system.build.netbootRamdisk;
+          ipxe = self.nixosConfigurations.ymir.config.system.build.netbootIpxeScript;
         };
       };
 

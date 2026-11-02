@@ -119,6 +119,16 @@ Cloud backup is currently needed until a "buddy-backup" system with friends and/
 
 ## Setup
 
+### Netboot
+
+Netboot artifacts are exposed for every netbootable machine in the cluster:
+
+- `.#netboot.<hostname>.kernel`
+- `.#netboot.<hostname>.initrd`
+- `.#netboot.<hostname>.ipxe`
+
+iSCSI drives are currently on `phoebe` but should be moved to clustered SSD storage in the future.
+
 ### Kubernetes
 
 #### 1. NixOS Installation

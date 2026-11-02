@@ -165,21 +165,21 @@ spec:
           access_control:
             default_policy: deny
             rules:
-              # Bypass Always: Secured & Authentication Related
+              # Bypass (always): Secured & Authentication Related
               - domain: 
                   - "sso.saturn.ci"
                   - "ldap.saturn.ci"
                   - "vault.saturn.ci"
                 policy: bypass
 
-              # Bypass Always: Webfinger
+              # Bypass (always): Webfinger
               - domain_regex:
                   - 'saturn.ci$'
                 policy: bypass
                 resources:
                   - "^/.well-known(/.*)?$"
 
-              # Bypass Always: Zipline Uploads
+              # Bypass (always): Zipline Uploads
               - domain: "file.baconi.ng"
                 policy: bypass
                 resources:
@@ -315,7 +315,7 @@ spec:
                   - "navidrome.saturn.ci"
 
                   # storage
-                  - "s3.seaweed.saturn.ci"
+                  - "s3.seaweed.saturn.ci" # Authentication is handled by S3, not Authelia. This might be changed in the future.
 
                   # other
                   - "file.baconi.ng"
