@@ -187,14 +187,6 @@ spec:
                   - "^/raw(/.*)?$"
                   - "^/view(/.*)?$"
 
-              # Bypass (private net): Netboot clients
-              - domain: "s3.seaweed.saturn.ci"
-                networks:
-                  - private
-                resources:
-                  - "^/netboot(/.*)?$"
-                policy: bypass
-
               # Two Factor: Vaultwarden Admin Dashboard
               - domain: "vault.saturn.ci"
                 resources:
@@ -321,6 +313,9 @@ spec:
                   - "seerr.saturn.ci"
                   - "jellyfin.saturn.ci"
                   - "navidrome.saturn.ci"
+
+                  # storage
+                  - "s3.seaweed.saturn.ci" # Authentication is handled by S3, not Authelia. This might be changed in the future.
 
                   # other
                   - "file.baconi.ng"

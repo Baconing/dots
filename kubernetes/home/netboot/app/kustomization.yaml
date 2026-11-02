@@ -4,4 +4,5 @@ resources:
   - helm.yaml
   # - rbac.yaml # TODO
   - s3.yaml
+  - s3.secret.yaml
   - ../hosts/app.yaml

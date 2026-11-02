@@ -1,0 +1,64 @@
+name: Publish netboot artifacts
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: netboot
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build and publish netboot artifacts
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.SEAWEEDFS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.SEAWEEDFS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: us-east-1
+      S3_ENDPOINT: https://s3.seaweed.saturn.ci
+      S3_BUCKET: netboot
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install AWS CLI
+        run: |
+          set -euo pipefail
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --no-cache-dir awscli
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v17
+
+      - name: Build and publish netboot artifacts
+        run: |
+          set -euo pipefail
+
+          hosts="$(nix eval --json .#packages.x86_64-linux.netboot --apply builtins.attrNames | jq -r '.[]')"
+          if [ -z "${hosts}" ]; then
+            echo "No netboot hosts were exported by the flake."
+            exit 1
+          fi
+
+          while IFS= read -r host; do
+            echo "Building ${host} netboot artifacts..."
+            nix build ".#netboot.${host}.kernel" --out-link "result-${host}-kernel"
+            nix build ".#netboot.${host}.initrd" --out-link "result-${host}-initrd"
+            nix build ".#netboot.${host}.ipxe" --out-link "result-${host}-ipxe"
+
+            mkdir -p "netboot-artifacts/${host}"
+            cp -L "result-${host}-kernel/bzImage" "netboot-artifacts/${host}/bzImage"
+            cp -L "result-${host}-initrd/initrd" "netboot-artifacts/${host}/initrd"
+            cp -L "result-${host}-ipxe/netboot.ipxe" "netboot-artifacts/${host}/netboot.ipxe"
+
+            aws s3 cp "netboot-artifacts/${host}/" "s3://${S3_BUCKET}/${host}/" \
+              --recursive \
+              --only-show-errors \
+              --endpoint-url "${S3_ENDPOINT}"
+          done <<< "${hosts}"
