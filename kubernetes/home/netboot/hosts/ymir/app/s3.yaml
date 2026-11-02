@@ -45,3 +45,4 @@ spec:
   subjects:
     - kind: Bucket
       name: netboot
+      namespace: netboot
