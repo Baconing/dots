@@ -65,6 +65,7 @@ spec:
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: s3.seaweed.saturn.ci
         external-dns.kubernetes.io/target: direct.saturn.ci
+        external-dns.kubernetes.io/cloudflare-proxied: "false"
     ingress:
       enabled: true
       className: traefik
@@ -79,6 +80,7 @@ spec:
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: filer.seaweed.saturn.ci
         external-dns.kubernetes.io/target: direct.saturn.ci
+        external-dns.kubernetes.io/cloudflare-proxied: "false"
       tls:
         - hosts:
             - filer.seaweed.saturn.ci

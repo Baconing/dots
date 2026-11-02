@@ -55,6 +55,7 @@ metadata:
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: andromeda.sw.saturn.ci
     external-dns.kubernetes.io/target: direct.saturn.ci
+    external-dns.kubernetes.io/cloudflare-proxied: "false"
 spec:
   tls:
     - secretName: andromeda.sw.saturn.ci
