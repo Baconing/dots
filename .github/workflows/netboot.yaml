@@ -17,8 +17,8 @@ jobs:
     name: Build and publish netboot artifacts
     runs-on: ubuntu-latest
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.SEAWEEDFS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.SEAWEEDFS_SECRET_ACCESS_KEY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.S3_NETBOOT_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_NETBOOT_SECRET_KEY }}
       AWS_DEFAULT_REGION: us-east-1
       S3_ENDPOINT: https://s3.seaweed.saturn.ci
       S3_BUCKET: netboot
