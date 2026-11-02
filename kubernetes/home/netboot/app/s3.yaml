@@ -14,7 +14,6 @@ metadata:
   name: github
   namespace: netboot
 spec:
-  name: github
   seaweedRef:
     name: seaweedfs
     namespace: seaweedfs
@@ -45,7 +44,6 @@ spec:
   seaweedRef:
     name: seaweedfs
     namespace: seaweedfs
-  name: github
   policyDocument: |
     {
       "Version": "2012-10-17",
