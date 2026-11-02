@@ -5,7 +5,7 @@ resources:
   - ../external/app.yaml
   - ../games/app.yaml
   - ../homepage/app.yaml
-  - ../mail/app.yaml
+  # - ../mail/app.yaml # TODO: Need to find a new system for mail
   - ../media/app.yaml
   - ../netboot/app.yaml
   - ../paperless/app.yaml
