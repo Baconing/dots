@@ -42,8 +42,6 @@ spec:
     namespace: seaweedfs
   policyRef:
     name: ymir
-    namespace: netboot
   subjects:
     - kind: Bucket
       name: netboot
-      namespace: netboot
