@@ -165,27 +165,35 @@ spec:
           access_control:
             default_policy: deny
             rules:
-              # Bypass Always: Secured & Authentication Related
+              # Bypass (always): Secured & Authentication Related
               - domain: 
                   - "sso.saturn.ci"
                   - "ldap.saturn.ci"
                   - "vault.saturn.ci"
                 policy: bypass
 
-              # Bypass Always: Webfinger
+              # Bypass (always): Webfinger
               - domain_regex:
                   - 'saturn.ci$'
                 policy: bypass
                 resources:
                   - "^/.well-known(/.*)?$"
 
-              # Bypass Always: Zipline Uploads
+              # Bypass (always): Zipline Uploads
               - domain: "file.baconi.ng"
                 policy: bypass
                 resources:
                   - "^/u(/.*)?$"
                   - "^/raw(/.*)?$"
                   - "^/view(/.*)?$"
+
+              # Bypass (private net): Netboot clients
+              - domain: "s3.seaweed.saturn.ci"
+                networks:
+                  - private
+                resources:
+                  - "^/netboot(/.*)?$"
+                policy: bypass
 
               # Two Factor: Vaultwarden Admin Dashboard
               - domain: "vault.saturn.ci"
@@ -313,9 +321,6 @@ spec:
                   - "seerr.saturn.ci"
                   - "jellyfin.saturn.ci"
                   - "navidrome.saturn.ci"
-
-                  # storage
-                  - "s3.seaweed.saturn.ci"
 
                   # other
                   - "file.baconi.ng"

@@ -5,6 +5,7 @@
   inputs,
   lib,
   modulesPath,
+  netboot,
   outputs,
   pkgs,
   platform,
@@ -15,7 +16,10 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     ./user.nix
-  ] ++ lib.optional (builtins.pathExists ./hosts/${hostname}) ./hosts/${hostname} ++ lib.optional (clustered) ./cluster;
+  ]
+  ++ lib.optional netboot "${modulesPath}/installer/netboot/netboot.nix"
+  ++ lib.optional (builtins.pathExists ./hosts/${hostname}) ./hosts/${hostname}
+  ++ lib.optional (clustered) ./cluster;
 
   boot = {
     consoleLogLevel = lib.mkDefault 0;

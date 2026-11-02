@@ -16,7 +16,7 @@
     };
 
     # Makes a console-only NixOS configuration (e.g servers).
-    makeConsoleNixOS = { hostname, clustered ? false, clusterRole ? "", clusterTemplate ? "", clusterIP ? "", platform ? "x86_64-linux" }: inputs.nixpkgs.lib.nixosSystem {
+    makeConsoleNixOS = { hostname, clustered ? false, clusterRole ? "", clusterTemplate ? "", clusterIP ? "", netboot ? false, platform ? "x86_64-linux" }: inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
             inherit
             hostname
@@ -25,6 +25,7 @@
             clusterRole
             clusterTemplate
             clusterIP
+            netboot
             stateVersion
             inputs
             outputs;

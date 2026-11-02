@@ -65,11 +65,12 @@ spec:
 
               :default
               exit
-            x86_64_hosts_31-23-213-1-23-123-.ipxe: |
+            x86_64_hosts_00-25-90-62-8a-2a.ipxe: |
               #!ipxe
 
               :start
-              chain --autofree ${scripts}/linux_installer_arch || 
+              isset ymir_base || set ymir_base https://s3.seaweed.saturn.ci/netboot/ymir
+              chain --autofree ${ymir_base}/netboot.ipxe ||
               goto default
 
               :default

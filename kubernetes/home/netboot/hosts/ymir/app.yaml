@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netboot-ymir
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/baconing/dots.git
+    targetRevision: master
+    path: kubernetes/home/netboot/hosts/ymir/app
+
+  destination:
+    name: in-cluster
+    namespace: netboot
+
+  ignoreDifferences:
+    - group: apps
+      kind: Endpoints
+      jsonPointers:
+        - /subnets/0/addresses/0/ip
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

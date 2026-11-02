@@ -18,6 +18,7 @@ spec:
         service:
           spec:
             loadBalancerIP: 10.10.254.1
+            externalTrafficPolicy: Local
 
         api:
           dashboard: true

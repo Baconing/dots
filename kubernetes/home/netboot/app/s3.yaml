@@ -1,0 +1,9 @@
+apiVersion: seaweed.seaweedfs.com/v1
+kind: Bucket
+metadata:
+  name: netboot
+  namespace: netboot
+spec:
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs

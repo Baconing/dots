@@ -1,0 +1,49 @@
+apiVersion: seaweed.seaweedfs.com/v1
+kind: S3Policy
+metadata:
+  name: ymir
+  namespace: netboot
+spec:
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs
+  policyDocument: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": ["s3:GetObject"],
+          "Condition": {
+            "IpAddress": {
+              "aws:SourceIp": [
+                "10.10.6.1/32"
+              ]
+            }
+          },
+          "Resource": [
+            "arn:aws:s3:::netboot/ymir/netboot.ipxe",
+            "arn:aws:s3:::netboot/ymir/bzImage",
+            "arn:aws:s3:::netboot/ymir/initrd"
+          ]
+        }
+      ]
+    }
+---
+apiVersion: seaweed.seaweedfs.com/v1
+kind: S3PolicyBinding
+metadata:
+  name: ymir
+  namespace: netboot
+spec:
+  seaweedRef:
+    name: seaweedfs
+    namespace: seaweedfs
+  policyRef:
+    name: ymir
+    namespace: netboot
+  subjects:
+    - kind: Bucket
+      name: netboot
+      namespace: netboot
