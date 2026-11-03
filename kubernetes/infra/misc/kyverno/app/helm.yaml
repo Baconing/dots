@@ -51,6 +51,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - FailOnSharedResource=true
+      - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
