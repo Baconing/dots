@@ -1,7 +1,7 @@
 apiVersion: seaweed.seaweedfs.com/v1
 kind: S3Policy
 metadata:
-  name: ymir
+  name: netboot-ymir
   namespace: netboot
 spec:
   seaweedRef:
@@ -34,14 +34,14 @@ spec:
 apiVersion: seaweed.seaweedfs.com/v1
 kind: S3PolicyBinding
 metadata:
-  name: ymir
+  name: netboot-ymir
   namespace: netboot
 spec:
   seaweedRef:
     name: seaweedfs
     namespace: seaweedfs
   policyRef:
-    name: ymir
+    name: netboot-ymir
   subjects:
     - kind: Bucket
       name: netboot
