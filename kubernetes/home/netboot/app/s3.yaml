@@ -27,7 +27,7 @@ spec:
 apiVersion: seaweed.seaweedfs.com/v1
 kind: S3Identity
 metadata:
-  name: github
+  name: netboot-github
   namespace: netboot
 spec:
   seaweedRef:
@@ -37,14 +37,14 @@ spec:
 apiVersion: seaweed.seaweedfs.com/v1
 kind: S3Credentials
 metadata:
-  name: github
+  name: netboot-github
   namespace: netboot
 spec:
   seaweedRef:
     name: seaweedfs
     namespace: seaweedfs
   identityRef:
-    name: github
+    name: netboot-github
   secretRef:
     name: s3-github
     namespace: netboot
@@ -54,7 +54,7 @@ spec:
 apiVersion: seaweed.seaweedfs.com/v1
 kind: S3Policy
 metadata:
-  name: github
+  name: netboot-github
   namespace: netboot
 spec:
   seaweedRef:
@@ -84,14 +84,14 @@ spec:
 apiVersion: seaweed.seaweedfs.com/v1
 kind: S3PolicyBinding
 metadata:
-  name: github
+  name: netboot-github
   namespace: netboot
 spec:
   seaweedRef:
     name: seaweedfs
     namespace: seaweedfs
   policyRef:
-    name: github
+    name: netboot-github
   subjects:
     - kind: S3Identity
-      name: github
+      name: netboot-github
