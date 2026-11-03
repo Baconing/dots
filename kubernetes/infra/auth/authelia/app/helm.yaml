@@ -197,6 +197,9 @@ spec:
 
               # Two Factor: Secured Resources
               - domain:
+                  # ai
+                  - "localai.saturn.ci"
+                  
                   # network
                   - "traefik.saturn.ci"
 

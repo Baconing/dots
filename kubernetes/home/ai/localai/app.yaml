@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: open-webui
+  name: localai
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/baconing/dots.git
     targetRevision: master
-    path: kubernetes/home/ai/open-webui/app
+    path: kubernetes/home/ai/localai/app
 
   destination:
     name: in-cluster
