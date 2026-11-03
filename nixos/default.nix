@@ -2,6 +2,7 @@
   config,
   hostname,
   clustered,
+  desktop,
   inputs,
   lib,
   modulesPath,
@@ -16,24 +17,23 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     ./user.nix
+    ./packages.nix
   ]
   ++ lib.optional netboot "${modulesPath}/installer/netboot/netboot.nix"
   ++ lib.optional (builtins.pathExists ./hosts/${hostname}) ./hosts/${hostname}
+  ++ lib.optional (desktop) ./desktop
   ++ lib.optional (clustered) ./cluster;
 
   boot = {
     consoleLogLevel = lib.mkDefault 0;
     initrd.verbose = false;
     kernelModules = [ "vhost_vsock" ];
-    kernelPackages = lib.mkForce pkgs.linuxPackages;
 
-    # Don't install bootloader on ISO images.
     loader = {
       systemd-boot.enable = false;
 
-      efi = {
-        canTouchEfiVariables = true;
-      };
+      efi.canTouchEfiVariables = true;
+
       grub = {
         enable = true;
         useOSProber = true;
@@ -59,25 +59,6 @@
   };
 
   # todo same as above
-  environment = {
-    defaultPackages = with pkgs; lib.mkForce [
-	      killall
-        coreutils-full
-        vim
-        git
-      ];
-
-    systemPackages = with pkgs; [
-        sops
-        colmena
-      ];
-
-    variables = {
-      EDITOR = "vim";
-      SYSTEMD_EDITOR = "vim";
-      VISUAL = "vim";
-    };
-  };
 
   sops.age = {
     keyFile = "/var/lib/private/sops/age/keys.txt";
@@ -91,6 +72,8 @@
       PermitRootLogin = "no";
     };
   };
+
+  hardware.enableRedistributableFirmware = true;
 
   nix =
     let

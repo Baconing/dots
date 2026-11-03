@@ -1,7 +1,6 @@
-_: {
+{ desktop, lib, ... }: 
+{
     imports = [
-        ./git
-        ./gpg
-        ./neovim
-    ];
+        ./console
+    ] ++ lib.optional (desktop) ./desktop;
 }
