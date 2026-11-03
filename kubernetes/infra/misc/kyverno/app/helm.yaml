@@ -14,12 +14,28 @@ spec:
     targetRevision: 3.9.2
     helm:
       releaseName: kyverno
+      # TODO: Actually look through values.yaml upstream
       valuesObject:
         admissionController:
           replicas: 3
-        
+          rbac:
+            clusterRole:
+              extraResources:
+                - apiGroups: [""]
+                  resources: ["secrets"]
+                  verbs: ["get", "list", "watch"]
+
         backgroundController:
           replicas: 3
+          rbac:
+            clusterRole:
+              extraResources:
+                - apiGroups: [""]
+                  resources: ["secrets"]
+                  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+                - apiGroups: ["batch"]
+                  resources: ["cronjobs"]
+                  verbs: ["create", "update", "patch", "delete"]
         
         cleanupController:
           replicas: 3
