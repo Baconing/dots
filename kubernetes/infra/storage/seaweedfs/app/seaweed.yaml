@@ -43,8 +43,6 @@ spec:
     replicas: 3
   volume:
     replicas: 1
-    extraArgs:
-      - "-disk=ssd"
     requests:
       storage: 10Gi
     storageClassName: longhorn
