@@ -21,10 +21,8 @@ spec:
             tag: v4.12.1-gpu-intel
 
           env:
-            - name: MODELS_PRELOAD_KEEP_ALIVE
-              value: "300"
-            - name: COMPEL_SYCL
-              value: "1"
+            MODELS_PRELOAD_KEEP_ALIVE: 300
+            COMPEL_SYCL: 1
 
         resources:
           requests:
