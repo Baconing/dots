@@ -32,6 +32,12 @@ spec:
               maxHeaderBytes: 4194304
               middlewares:
                 - traefik-forwardauth-authelia@kubernetescrd
+            forwardedHeaders:
+              insecure: false
+              trustedIPs:
+                - "10.42.0.0/16" # Pod CIDR in Flannel.
+                - "10.10.254.1/32" # LoadBalancer IP for Traefik.
+                - "10.10.0.0/16" # Node subnet on network.
 
         providers:
           kubernetesIngress:
