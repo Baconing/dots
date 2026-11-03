@@ -32,6 +32,10 @@ spec:
               maxHeaderBytes: 4194304
               middlewares:
                 - traefik-forwardauth-authelia@kubernetescrd
+            transport:
+              respondingTimeouts:
+                readTimeout: 3600s # For large file uploads to S3 and others.
+                idleTimeout: 3600s
             forwardedHeaders:
               insecure: false
               trustedIPs:
