@@ -1,0 +1,39 @@
+# TODO: Helm chart, database for HA/scaling, declarative.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: termix
+  namespace: termix
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: termix
+  template:
+    metadata:
+      labels:
+        app: termix
+    spec:
+      containers:
+        - name: termix
+          image: ghcr.io/termix-ssh/termix:26.11.0-full
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 20
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: termix-data
