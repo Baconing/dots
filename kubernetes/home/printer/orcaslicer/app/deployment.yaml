@@ -27,7 +27,7 @@ spec:
                       - "true"
       containers:
         - name: *appName
-          image: ghcr.io/linuxserver/orcaslicer:2.4.2
+          image: ghcr.io/linuxserver/orcaslicer:2.5.0
           resources:
             requests:
               cpu: 500m
