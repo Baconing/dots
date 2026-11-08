@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &appName isley
+  namespace: printer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: *appName
+  template:
+    metadata:
+      labels:
+        app: *appName
+    spec:
+      containers:
+        - name: *appName
+          image: 
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: ISLEY_PORT
+              value: "8080"
+            - name: ISLEY_DB_DRIVER
+              value: "postgres"
+            - name: ISLEY_DB_HOST
+              value: "postgres-rw.database.svc.cluster.local"
+            - name: ISLEY_DB_PORT
+              value: "5432"
+            - name: ISLEY_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: isley
+                  key: db.name
+            - name: ISLEY_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: isley
+                  key: db.user
+            - name: ISLEY_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: isley
+                  key: db.password
+            - name: ISLEY_SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: isley
+                  key: session.secret
+              
+          volumeMounts:
+            - mountPath: /app/uploads
+              name: uploads
+          ports:
+            - containerPort: &httpPort 8080
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: *httpPort
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: *httpPort
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: isley-uploads
