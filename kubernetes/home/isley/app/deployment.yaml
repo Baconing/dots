@@ -15,9 +15,36 @@ spec:
       labels:
         app: *appName
     spec:
+
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.database.svc.cluster.local
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-superuser
+                  key: password
+            - name: INIT_POSTGRES_DBNAME
+              valueFrom:
+                secretKeyRef:
+                  name: isley
+                  key: db.name
+            - name: INIT_POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: isley
+                  key: db.user
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: isley
+                  key: db.password
       containers:
         - name: *appName
-          image: 
+          image: dwot/isley:2.5.3
           resources:
             requests:
               cpu: 50m
@@ -54,7 +81,6 @@ spec:
                 secretKeyRef:
                   name: isley
                   key: session.secret
-              
           volumeMounts:
             - mountPath: /app/uploads
               name: uploads
