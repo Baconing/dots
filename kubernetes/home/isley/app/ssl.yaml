@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: isley.saturn.ci
-  namespace: printer
+  namespace: isley
 spec:
   secretName: isley.saturn.ci
   issuerRef:

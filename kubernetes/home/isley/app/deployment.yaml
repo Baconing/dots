@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: &appName isley
-  namespace: printer
+  namespace: isley
 spec:
   replicas: 1
   strategy:
