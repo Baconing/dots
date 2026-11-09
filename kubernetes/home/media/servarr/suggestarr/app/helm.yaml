@@ -1,0 +1,73 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: suggestarr-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: suggestarr
+    repoURL: https://helm.charliemaiors.dev
+    targetRevision: 0.4.4 
+    helm:
+      releaseName: suggestarr
+      valuesObject:
+        image:
+          registry: ciuse99/suggestarr
+          tag: v3.3.0
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+
+        persistence:
+          labels:
+            recurring-job.longhorn.io/source: enabled
+            recurring-job-group.longhorn.io/backup: enabled
+          storageClass: longhorn
+          size: 128Mi
+
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          annotations:
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: suggestarr
+            gethomepage.dev/group: Servarr
+            gethomepage.dev/icon: suggestarr
+            gethomepage.dev/weight: "1"
+            traefik.ingress.kubernetes.io/router.tls: "true"
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            external-dns.kubernetes.io/enabled: "true"
+            external-dns.kubernetes.io/hostname: suggestarr.saturn.ci
+            external-dns.kubernetes.io/target: direct.saturn.ci
+          hosts:
+            - host: suggestarr.saturn.ci
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - secretName: suggestarr.saturn.ci
+              hosts:
+                - suggestarr.saturn.ci
+
+  destination:
+    name: in-cluster
+    namespace: media
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  

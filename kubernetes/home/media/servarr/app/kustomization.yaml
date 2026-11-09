@@ -9,3 +9,4 @@ resources:
   - radarr.yaml
   - seerr.yaml
   - sonarr.yaml
+  - ../suggestarr/app.yaml
