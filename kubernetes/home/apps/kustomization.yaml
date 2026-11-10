@@ -12,4 +12,5 @@ resources:
   - ../paperless/app.yaml
   - ../printer/app.yaml
   - ../syncthing/app.yaml
+  - ../termix/app.yaml
   - ../vaultwarden/app.yaml

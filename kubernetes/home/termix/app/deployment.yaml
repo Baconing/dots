@@ -1,0 +1,106 @@
+# TODO: Helm chart, database for HA/scaling, declarative.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: termix
+  namespace: termix
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: termix
+  template:
+    metadata:
+      labels:
+        app: termix
+    spec:
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:17.4
+          env:
+            - name: INIT_POSTGRES_HOST
+              value: postgres-rw.database.svc.cluster.local
+            - name: INIT_POSTGRES_DBNAME
+              value: termix
+            - name: INIT_POSTGRES_SUPER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-superuser
+                  key: password
+            - name: INIT_POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: username
+            - name: INIT_POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: password
+      containers:
+        - name: termix
+          image: ghcr.io/termix-ssh/termix:26.11.0-full
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "8080"
+            - name: TRUSTED_PROXIES
+              value: "10.42.0.0/16"
+
+            - name: DATABASE_DILECT
+              value: "postgres"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: url
+
+            - name: ALLOW_PASSWORD_LOGIN
+              value: "false"
+            - name: ALLOW_REGISTRATION
+              value: "false"
+            - name: ALLOW_PASSWORD_RESET
+              value: "false"
+            - name: EXTERNAL_ALLOW_REGISTRATION
+              value: "true"
+            - name: OIDC_ENV_OVERRIDE
+              value: "true"
+            - name: OIDC_CLIENT_ID
+              value: "termix"
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oidc
+                  key: client.secret
+            - name: OIDC_ISSUER_URL
+              value: "https://sso.saturn.ci"
+            - name: OIDC_AUTHORIZATION_URL
+              value: "https://sso.saturn.ci/api/oidc/auth"
+            - name: OIDC_TOKEN_URL
+              value: "https://sso.saturn.ci/api/oidc/token"
+            - name: OIDC_USERINFO_URL
+              value: "https://sso.saturn.ci/api/oidc/userinfo"
+            - name: OIDC_SCOPES
+              value: "openid groups profile email"
+            - name: OIDC_GROUP_CLAIM
+              value: "groups"
+            - name: OIDC_ADMIN_GROUP
+              value: "administrators"
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 20
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: termix-data

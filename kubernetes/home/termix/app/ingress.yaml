@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: termix
+  namespace: termix
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Termix
+    gethomepage.dev/group: Servarr
+    gethomepage.dev/icon: termix
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    external-dns.kubernetes.io/enabled: "true"
+    external-dns.kubernetes.io/hostname: termix.saturn.ci
+    external-dns.kubernetes.io/target: direct.saturn.ci
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: termix.saturn.ci
+      hosts:
+        - termix.saturn.ci
+  rules:
+    - host: "termix.saturn.ci"
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: termix
+                port:
+                  number: 8080
