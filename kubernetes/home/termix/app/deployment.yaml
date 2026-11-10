@@ -42,7 +42,7 @@ spec:
                   key: password
       containers:
         - name: termix
-          image: ghcr.io/termix-ssh/termix:26.11.0-full
+          image: ghcr.io/termix-ssh/termix:26.11.1-full
           ports:
             - containerPort: 8080
               name: http
