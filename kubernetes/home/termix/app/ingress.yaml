@@ -1,65 +1,36 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name: termix-web
+  name: termix-routes
   namespace: termix
   annotations:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Termix
     gethomepage.dev/group: Dev
     gethomepage.dev/icon: termix
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.priority: "1"
-    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: termix.saturn.ci
     external-dns.kubernetes.io/target: direct.saturn.ci
 spec:
-  ingressClassName: traefik
+  entryPoints:
+    - websecure
   tls:
-    - secretName: termix.saturn.ci
-      hosts:
-        - termix.saturn.ci
-  rules:
-    - host: "termix.saturn.ci"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: termix
-                port:
-                  number: 8080
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: termix-basic
-  namespace: termix
-  annotations:
-    gethomepage.dev/enabled: "false"
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.priority: "10"
-    traefik.ingress.kubernetes.io/router.rule: "Host(`termix.saturn.ci`) && HeadersRegexp(`Authorization`, `Basic .*`)"
-    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-basic@kubernetescrd'
-    external-dns.kubernetes.io/enabled: "true"
-    external-dns.kubernetes.io/hostname: termix.saturn.ci
-    external-dns.kubernetes.io/target: direct.saturn.ci
-spec:
-  ingressClassName: traefik
-  tls:
-    - secretName: termix.saturn.ci
-      hosts:
-        - termix.saturn.ci
-  rules:
-    - host: "termix.saturn.ci"
-      http:
-        paths:
-          - path: "/"
-            pathType: "Prefix"
-            backend:
-              service:
-                name: termix
-                port:
-                  number: 8080
+    secretName: termix.saturn.ci
+  routes:
+    - match: Host(`termix.saturn.ci`) && HeadersRegexp(`Authorization`, `Basic .*`)
+      priority: 10
+      kind: Rule
+      middlewares:
+        - name: authelia-basic
+          namespace: traefik
+      services:
+        - name: termix
+          port: 8080
+    - match: Host(`termix.saturn.ci`)
+      priority: 1
+      kind: Rule
+      middlewares:
+        - name: authelia-web
+      services:
+        - name: termix
+          port: 8080
