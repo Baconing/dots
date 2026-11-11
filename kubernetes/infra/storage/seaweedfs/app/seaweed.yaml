@@ -29,7 +29,7 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: "true"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: SeaweedFS
-        gethomepage.dev/group: Infrastructure
+        gethomepage.dev/group: Storage
         gethomepage.dev/icon: seaweedfs
         traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
@@ -76,7 +76,7 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: "true"
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: SeaweedFS Filer
-        gethomepage.dev/group: Infrastructure
+        gethomepage.dev/group: Storage
         gethomepage.dev/icon: seaweedfs
         traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
