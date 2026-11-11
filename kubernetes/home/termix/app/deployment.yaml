@@ -77,7 +77,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: oidc
-                  key: client.secret
+                  key: oidc.client_secret
             - name: OIDC_ISSUER_URL
               value: "https://sso.saturn.ci"
             - name: OIDC_AUTHORIZATION_URL
