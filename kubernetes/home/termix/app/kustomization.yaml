@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - database.secret.yaml
   - deployment.yaml
-  - ingress.aml
+  - ingress.yaml
   - oidc.secret.yaml
   - pvc.yaml
   - secret.yaml
