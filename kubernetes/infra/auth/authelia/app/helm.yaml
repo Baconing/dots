@@ -86,25 +86,30 @@ spec:
                 - key: oidc.jwk.RS256.pem
                   path: oidc.jwk.RS256.pem
             oidc-argocd:
-                path: oidc/argocd
-                items:
-                  - key: oidc.client_secret_digest
-                    path: client_secret_digest
+              path: oidc/argocd
+              items:
+                - key: oidc.client_secret_digest
+                  path: client_secret_digest
             oidc-database-pgadmin:
-                path: oidc/pgadmin
-                items:
-                  - key: oidc.client_secret_digest
-                    path: client_secret_digest
+              path: oidc/pgadmin
+              items:
+                - key: oidc.client_secret_digest
+                  path: client_secret_digest
             oidc-monitoring-grafana:
-                path: oidc/grafana
-                items:
-                  - key: oidc.client_secret_digest
-                    path: client_secret_digest
+              path: oidc/grafana
+              items:
+                - key: oidc.client_secret_digest
+                  path: client_secret_digest
             oidc-mail-stalwart:
-                path: oidc/stalwart
-                items:
-                  - key: oidc.client_secret_digest
-                    path: client_secret_digest
+              path: oidc/stalwart
+              items:
+                - key: oidc.client_secret_digest
+                  path: client_secret_digest
+            oidc-termix:
+              path: oidc/termix
+              items:
+                - key: oidc.client_secret_digest
+                  path: client_secret_digest
 
         configMap:
           disabled: false
@@ -229,6 +234,9 @@ spec:
 
                   # mail
                   - "stalwart.saturn.ci"
+
+                  # dev
+                  - "termix.saturn.ci"
 
                   # games
                   - "asf.saturn.ci"
@@ -507,6 +515,25 @@ spec:
                     - "authorization_code"
                   token_endpoint_auth_method: "client_secret_basic"
                   require_pkce: true
+
+                - client_name: Termix
+                  client_id: termix
+                  client_secret:
+                    path: /secrets/oidc/termix/client_secret_digest
+                  authorization_policy: admin # todo: two_factor after i setup email notifiactions to allow two factor sources
+                  redirect_uris:
+                    - "https://termix.saturn.ci/oauth/callback"
+                  scopes:
+                    - "openid"
+                    - "groups"
+                    - "profile"
+                    - "email"
+                  response_types:
+                    - "code"
+                  grant_types:
+                    - "authorization_code"
+                  pre_configured_consent_duration: "1 month"
+                  token_endpoint_auth_method: "client_secret_basic"
 
   destination:
     name: in-cluster
