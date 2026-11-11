@@ -522,7 +522,7 @@ spec:
                     path: /secrets/oidc/termix/client_secret_digest
                   authorization_policy: admin # todo: two_factor after i setup email notifiactions to allow two factor sources
                   redirect_uris:
-                    - "https://termix.saturn.ci/oauth/callback"
+                    - "https://termix.saturn.ci/users/oidc/callback"
                   scopes:
                     - "openid"
                     - "groups"
