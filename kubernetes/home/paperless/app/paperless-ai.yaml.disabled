@@ -78,7 +78,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: paperai.saturn.ci
     external-dns.kubernetes.io/target: direct.saturn.ci

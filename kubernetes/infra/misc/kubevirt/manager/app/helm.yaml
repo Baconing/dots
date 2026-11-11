@@ -29,7 +29,7 @@ spec:
             gethomepage.dev/name: KubeVirt Manager
             gethomepage.dev/group: Infrastructure
             gethomepage.dev/icon: kubevirt
-            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
             external-dns.kubernetes.io/enabled: "true"
             external-dns.kubernetes.io/hostname: kubevirt.saturn.ci
             external-dns.kubernetes.io/target: direct.saturn.ci

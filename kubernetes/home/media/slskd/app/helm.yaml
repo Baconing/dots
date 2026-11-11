@@ -161,7 +161,7 @@ spec:
             gethomepage.dev/widget.url: http://slskd.media.svc.cluster.local:5030
             gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SLSKD_API_KEY}}"
             traefik.ingress.kubernetes.io/router.tls: "true"
-            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
             external-dns.kubernetes.io/enabled: "true"
             external-dns.kubernetes.io/hostname: slskd.saturn.ci
             external-dns.kubernetes.io/target: direct.saturn.ci

@@ -107,7 +107,7 @@ metadata:
     gethomepage.dev/widget.url: http://lidarr.media.svc.cluster.local:8686
     gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: lidarr.saturn.ci
     external-dns.kubernetes.io/target: direct.saturn.ci

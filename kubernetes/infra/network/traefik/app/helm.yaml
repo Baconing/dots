@@ -31,7 +31,7 @@ spec:
             http:
               maxHeaderBytes: 4194304
               middlewares:
-                - traefik-forwardauth-authelia@kubernetescrd
+                - traefik-authelia-web@kubernetescrd
             transport:
               respondingTimeouts:
                 readTimeout: 3600s # For large file uploads to S3 and others.
@@ -70,7 +70,7 @@ spec:
             entryPoints: 
               - "websecure"
             middlewares:
-              - name: forwardauth-authelia
+              - name: authelia-web
                 namespace: traefik
             tls:
               secretName: traefik.saturn.ci

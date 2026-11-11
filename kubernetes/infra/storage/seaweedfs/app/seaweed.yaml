@@ -31,7 +31,7 @@ spec:
         gethomepage.dev/name: SeaweedFS
         gethomepage.dev/group: Storage
         gethomepage.dev/icon: seaweedfs
-        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: seaweed.saturn.ci
         external-dns.kubernetes.io/target: direct.saturn.ci
@@ -59,7 +59,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
         gethomepage.dev/enabled: "false"
-        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: s3.seaweed.saturn.ci
         external-dns.kubernetes.io/target: direct.saturn.ci
@@ -78,7 +78,7 @@ spec:
         gethomepage.dev/name: SeaweedFS Filer
         gethomepage.dev/group: Storage
         gethomepage.dev/icon: seaweedfs
-        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+        traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
         external-dns.kubernetes.io/enabled: "true"
         external-dns.kubernetes.io/hostname: filer.seaweed.saturn.ci
         external-dns.kubernetes.io/target: direct.saturn.ci

@@ -59,7 +59,7 @@ spec:
             gethomepage.dev/icon: localai
             gethomepage.dev/weight: "1"
             traefik.ingress.kubernetes.io/router.tls: "true"
-            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+            traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
             external-dns.kubernetes.io/enabled: "true"
             external-dns.kubernetes.io/hostname: localai.saturn.ci
             external-dns.kubernetes.io/target: direct.saturn.ci

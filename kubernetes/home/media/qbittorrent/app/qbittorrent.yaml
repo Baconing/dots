@@ -136,7 +136,7 @@ metadata:
     gethomepage.dev/widget.enableLeechProgress: "true"
     gethomepage.dev/widget.enableLeechSize: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-authelia-web@kubernetescrd'
     external-dns.kubernetes.io/enabled: "true"
     external-dns.kubernetes.io/hostname: torrent.saturn.ci
     external-dns.kubernetes.io/target: direct.saturn.ci
