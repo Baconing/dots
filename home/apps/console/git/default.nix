@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   home.packages = with pkgs;
     [
@@ -13,9 +13,9 @@
       settings = {
         user =  {
           name = "Brenden (Baconing) Freier";
-	        email = "iam@baconi.ng";
-	      };
-	      push.autoSetupRemote = true;
+	  email = if username == "bkfreier" then "bkfreier@mtu.edu" else "iam@baconi.ng";
+	};
+	push.autoSetupRemote = true;
         pull.rebase = false;
         credential = {
           helper = [

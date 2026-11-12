@@ -8,6 +8,6 @@
 
     home.packages = with pkgs; [
 	logisim-evolution
-	quartus-prime-lite
+	# quartus-prime-lite
     ];
 }
