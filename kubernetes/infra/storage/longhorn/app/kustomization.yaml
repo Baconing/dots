@@ -6,4 +6,5 @@ resources:
   - iscsi.yaml
   - nas.secret.yaml
   - nix.yaml
+  - snapshot-backup.yaml
   - ssl.yaml
