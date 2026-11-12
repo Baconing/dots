@@ -16,8 +16,16 @@ spec:
       releaseName: external-dns
       valuesObject:
         sources:
+          - crd
+          - pod
           - service
+          - gateway-grpcroute
+          - gateway-httproute
+          - gateway-tcproute
+          - gateway-tlsroute
+          - gateway-udproute
           - ingress
+          - traefik-proxy
 
         policy: sync
 
