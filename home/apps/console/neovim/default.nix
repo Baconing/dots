@@ -120,6 +120,8 @@
 		'';
 	    };
 
+	    guess-indent.enable = true;
+
 	    lspconfig.enable = true;
 	    
             mini-cursorword.enable = true;
