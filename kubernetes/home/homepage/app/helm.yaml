@@ -115,6 +115,7 @@ spec:
             mode: cluster
             ingress: true
             traefik: true
+            gateway: true
         env:
           - name: HOMEPAGE_ALLOWED_HOSTS
             value: "saturn.ci"
