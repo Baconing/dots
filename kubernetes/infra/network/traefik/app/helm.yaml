@@ -47,6 +47,7 @@ spec:
           kubernetesIngress:
             allowExternalNameServices: true
           kubernetesCRD:
+            allowCrossNamespace: true
             allowExternalNameServices: true
 
         ingressRoute:
