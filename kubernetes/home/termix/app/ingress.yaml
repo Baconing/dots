@@ -31,6 +31,7 @@ spec:
       kind: Rule
       middlewares:
         - name: authelia-web
+          namespace: traefik
       services:
         - name: termix
           port: 8080
