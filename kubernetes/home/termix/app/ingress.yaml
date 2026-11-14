@@ -17,7 +17,7 @@ spec:
   tls:
     secretName: termix.saturn.ci
   routes:
-    - match: Host(`termix.saturn.ci`) && HeadersRegexp(`Authorization`, `Basic .*`)
+    - match: Host(`termix.saturn.ci`) && HeaderRegexp(`Authorization`, `Basic .*`)
       priority: 10
       kind: Rule
       middlewares:
