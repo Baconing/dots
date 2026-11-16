@@ -25,7 +25,7 @@ metadata:
     app.kubernetes.io/name: authelia
 spec:
   forwardAuth:
-    address: http://authelia.auth.svc.cluster.local/api/verify?auth=basic
+    address: http://authelia.auth.svc.cluster.local/api/authz/forward-auth/basic
     authResponseHeaders:
       - Remote-User
       - Remote-Groups
