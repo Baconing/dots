@@ -4,7 +4,7 @@ flannel:
   flannel:
     image:
       repository: ghcr.io/flannel-io/flannel
-      tag: v0.28.10
+      tag: v0.28.11
     flannel_cni:
       image:
         repository: ghcr.io/flannel-io/flannel-cni-plugin
