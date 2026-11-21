@@ -1,0 +1,122 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: immich-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    chart: immich
+    repoURL: oci://ghcr.io/immich-app/immich-charts/immich
+    targetRevision: 0.13.4
+    helm:
+      releaseName: immich
+      valuesObject:
+        immich:
+          metrics:
+            enabled: true
+          persistence:
+            library:
+              existingClaim: immich-library
+          # configuration: # TODO
+
+        server:
+          enabled: true
+          controllers:
+            main:
+              containers:
+                main:
+                  image:
+                    repository: ghcr.io/immich-app/immich-server
+                    tag: v3.3.5
+                    pullPolicy: IfNotPresent
+          ingress:
+            main:
+              enabled: true
+              className: traefik
+              annotations:
+                gethomepage.dev/enabled: "true"
+                gethomepage.dev/name: Immich
+                gethomepage.dev/group: Home
+                gethomepage.dev/icon: immich
+                gethomepage.dev/weight: 1
+                gethomepage.dev/widget.type: immich
+                gethomepage.dev/widget.url: http://immich.immich.svc.cluster.local:2283
+                gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_IMMICH_API_KEY}}"
+                traefik.ingress.kubernetes.io/router.tls: "true"
+                traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd'
+                external-dns.kubernetes.io/enabled: "true"
+                external-dns.kubernetes.io/hostname: immich.saturn.ci
+                external-dns.kubernetes.io/target: direct.saturn.ci
+              hosts:
+                - host: immich.saturn.ci
+                  paths:
+                    - path: "/"
+                      service:
+                        identifier: main
+              tls:
+                - secretName: immich.saturn.ci
+                  hosts:
+                    - immich.saturn.ci
+
+        machine-learning:
+          enabled: true
+          controllers:
+            main:
+              resources:
+                requests:
+                  gpu.intel.com/i915: "1"
+                limits:
+                  gpu.intel.com/i915: "1"
+              nodeSelector:
+                "feature.node.kubernetes.io/arc-a750": "true"
+              containers:
+                main:
+                  image:
+                    repository: ghcr.io/immich-app/immich-machine-learning
+                    tag: v3.3.5-openvino
+                    pullPolicy: IfNotPresent
+                  env:
+                    TRANSFORMERS_CACHE: /cache
+                    HF_XET_CACHE: /cache/huggingface-xet
+                    MPLCONFIGDIR: /cache/matplotlib-config
+          persistence:
+            cache:
+              enabled: true
+              type: persistentVolumeClaim
+              size: 8Gi
+              accessMode: ReadWriteMany
+              storageClass: longhorn
+              labels:
+                backup.kyverno.io/exclude: "true"
+
+        valkey:
+          enabled: true
+          controllers:
+            main:
+              containers:
+                main:
+                  image:
+                    repository: docker.io/valkey/valkey
+                    tag: 9.1.2-alpine
+          persistence:
+            data:
+              enabled: true
+              type: emptyDir
+
+  destination:
+    name: in-cluster
+    namespace: immich
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
+
+  
