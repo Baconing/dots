@@ -12,4 +12,7 @@ spec:
       metadata:
         labels:
           backup.kyverno.io/exclude: "true"
+  backup:
+    volumeSnapshot:
+      className: longhorn-backup-vsc
   enableSuperuserAccess: true
