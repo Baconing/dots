@@ -18,7 +18,7 @@ spec:
         deployment:
           image:
             repository: quay.io/go-skynet/local-ai
-            tag: v4.12.1-gpu-intel
+            tag: v5.0.1-gpu-intel
 
           env:
             MODELS_PRELOAD_KEEP_ALIVE: 300
