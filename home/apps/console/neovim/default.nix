@@ -26,6 +26,8 @@
 	    relativenumber = true;
 	    statuscolumn = "%=%{v:relnum} %l%s";
 
+	    wrap = false;
+
 	    undofile = true;
 
 	    showcmd = true;
